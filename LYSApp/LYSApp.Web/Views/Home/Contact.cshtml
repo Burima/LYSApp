@@ -1,7 +1,8 @@
 ﻿@{
     ViewBag.Title = "Contact Us";
 }
-<link href="~/Content/Custom/Home/Contact.css" rel="stylesheet" />
+<link href='@Url.Content("~/Content/Custom/Home/Contact.css")' rel="stylesheet" />
+
 <div class="ContactUs body_div text-left">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
@@ -55,7 +56,11 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
+@section scripts{
+    <script>
+    $(document).ready(function () {
+        $('.home-header').css("background-color", "#0eaaa6");
+    });
+    </script>
+}

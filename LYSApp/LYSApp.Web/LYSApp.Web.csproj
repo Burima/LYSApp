@@ -185,6 +185,7 @@
     <Content Include="Content\fullscreen-slider.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.tagsinput.css" />
+    <Content Include="Content\lockyourstay.css" />
     <Content Include="Content\simple-line-icons.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
