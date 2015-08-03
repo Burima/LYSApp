@@ -1,0 +1,36 @@
+﻿.about-container
+{
+    margin-top:5%; 
+    margin-bottom:5%;
+    font-size: 130%;
+}
+.jobs-content{
+    align-content:left;
+    font-size:12px;
+}
+.career-position {
+    list-style: none;
+    padding: 1em 0 0.75em 0;
+    border-top: 1px solid #b6c3cd;
+    border-bottom: 1px solid #b6c3cd;
+    overflow: auto;
+    font-size: 80%;
+}
+
+.career-info {
+    text-align: left;
+    margin-left:5%; 
+    font-size: 130%;
+}
+.career-botton{
+    margin-top:2%; 
+    font-size: 130%;
+}
+.job-button {
+    font-weight: 700;
+    font-size: 0.865em;
+    background: #1ab394;
+    border-radius: 3px;
+    color: #fff;
+    padding: 7px 15px 8px 15px;
+}
