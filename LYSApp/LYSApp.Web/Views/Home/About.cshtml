@@ -3,10 +3,10 @@
 }
 
 <link href='@Url.Content("~/Content/Custom/Home/About.css")' rel="stylesheet" />
-<div class="container about-container" @*style="margin-top:5%; margin-bottom:5%"*@>
+<div class="container about-container text-center" @*style="margin-top:5%; margin-bottom:5%"*@>
     @*<font size="3">*@
     <div class="align-center"><h2>About Us</h2></div>
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 align-left">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
         India is one of the world’s fastest growing economies. With a consistent GDP growth rate of around 7%, it is gradually moving towards being one of the biggest economies. Couple that with the Make in India campaign, a lot of employment opportunities are about to come up. This will see a good number of people moving from towns and villages to cities like Mumbai, Chennai and Kolkata(to name a few) where they may move to pursue their dreams.<br />
         Moving to these three economic powerhouses of our country comes with a big struggle of finding an accommodation !<br />
         Finding a place to stay in three of the biggest and most populous metropolitan cities of India, can never be easy.<br /><br />
@@ -93,3 +93,11 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        $('.home-header').css("background-color", "white");
+    });
+</script>
+}
