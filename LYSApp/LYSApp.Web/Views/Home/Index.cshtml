@@ -1,0 +1,328 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+<link href="~/Content/Custom/Home/Index.css" rel="stylesheet" />
+<!-- Hero -->
+
+<div id="hero-container">
+    <ul class="cb-slideshow">
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+    </ul>
+    <div class="home-caption">
+        <div class="home-title">Now it's easy to find your future home</div>
+        <div class="home-subtitle">With lockyourstay - one-stop store for your Dream Stay</div>
+        <a href="" class="btn btn-lg btn-black">Learn More</a>
+    </div>
+    <div class="search-panel">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="city" placeholder="City" autocomplete="on">
+            </div>
+            <div class="form-group hidden-xs adv">
+                <a href="#" data-toggle="dropdown" class="btn btn-white dropdown-toggle">
+                    <span class="dropdown-label">Bedrooms</span> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-select">
+                    <li class="active"><input type="radio" name="bedno" checked="checked"><a href="#">Bedrooms</a></li>
+                    <li><input type="radio" name="bedno"><a href="#">1</a></li>
+                    <li><input type="radio" name="bedno"><a href="#">2</a></li>
+                    <li><input type="radio" name="bedno"><a href="#">3</a></li>
+                    <li><input type="radio" name="bedno"><a href="#">4</a></li>
+                    <li><input type="radio" name="bedno"><a href="#">5</a></li>
+                    <li><input type="radio" name="bedno"><a href="#">6</a></li>
+                </ul>
+            </div>
+            <div class="form-group hidden-xs adv">
+                <a href="#" data-toggle="dropdown" class="btn btn-white dropdown-toggle">
+                    <span class="dropdown-label">Bathrooms</span> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-select">
+                    <li class="active"><input type="radio" name="bathno" checked="checked"><a href="#">Bathrooms</a></li>
+                    <li><input type="radio" name="bathno"><a href="#">1</a></li>
+                    <li><input type="radio" name="bathno"><a href="#">2</a></li>
+                    <li><input type="radio" name="bathno"><a href="#">3</a></li>
+                    <li><input type="radio" name="bathno"><a href="#">4</a></li>
+                    <li><input type="radio" name="bathno"><a href="#">5</a></li>
+                    <li><input type="radio" name="bathno"><a href="#">6</a></li>
+                </ul>
+            </div>
+            <div class="form-group hidden-xs adv">
+                <div class="input-group">
+                    <div class="input-group-addon">Rs</div>
+                    <input class="form-control price" type="text" placeholder="From">
+                </div>
+            </div>
+            <div class="form-group hidden-xs adv">
+                <div class="input-group">
+                    <div class="input-group-addon">Rs</div>
+                    <input class="form-control price" type="text" placeholder="To">
+                </div>
+            </div>
+            <div class="form-group">
+                <a href="#" class="btn btn-green">Search</a>
+                <a href="#" class="btn btn-o btn-white pull-right visible-xs" id="advanced">Advanced Search <span class="fa fa-angle-up"></span></a>
+            </div>
+        </form>
+    </div>
+</div> <!-- End Hero-->
+<!-- Highlight -->
+<div class="highlight">
+    <div class="h-title osLight">Find your new place with Reales</div>
+    <div class="h-text osLight">Fusce risus metus, placerat in consectetur eu, porttitor a est sed sed dolor lorem cras adipiscing</div>
+</div><!-- End Highlight -->
+<!-- Main Content -->
+
+<div class="home-content">
+    <br /><br />
+    <h2 class="osLight">Our Services</h2>
+    <div class="row pb40 padding-index">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 s-menu-item ">
+            <a href="#">
+                <span class="icon-pointer s-icon"></span>
+                <div class="s-content">
+                    <h2 class="s-main osLight">Find places anywhere in the world</h2>
+                    <h3 class="s-sub osLight">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 s-menu-item">
+            <a href="#">
+                <span class="icon-users s-icon"></span>
+                <div class="s-content">
+                    <h2 class="s-main osLight">We have agents with experience</h2>
+                    <h3 class="s-sub osLight">Nulla convallis egestas rhoncus consectetur adipiscing elit</h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 s-menu-item">
+            <a href="#">
+                <span class="icon-home s-icon"></span>
+                <div class="s-content">
+                    <h2 class="s-main osLight">Buy or rent beautiful properties</h2>
+                    <h3 class="s-sub osLight">Donec facilisis fermentum sem, ac viverra ante luctus vel</h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 s-menu-item">
+            <a href="#">
+                <span class="icon-cloud-upload s-icon"></span>
+                <div class="s-content">
+                    <h2 class="s-main osLight">With agent account you can list properties</h2>
+                    <h3 class="s-sub osLight">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row pb40">
+        <h2 class="osLight">Recently Listed Properties</h2><br />
+        <div class="row padding-index">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <a href="#" class="propWidget-2">
+                    <div class="fig">
+                        <img src='@Url.Content("~/Images/prop/1-1.png")' alt="Modern Residence in New York">
+                        <img class="blur" src='@Url.Content("~/Images/prop/1-1.png")' alt="Modern Residence in New York">
+                        <div class="opac"></div>
+                        <div class="priceCap osLight"><span>$1,750,000</span></div>
+                        <div class="figType">FOR SALE</div>
+                        <h3 class="osLight">Modern Residence in New York</h3>
+                        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
+                        <ul class="rating">
+                            <li><span class="fa fa-star star-1"></span></li>
+                            <li><span class="fa fa-star star-2"></span></li>
+                            <li><span class="fa fa-star star-3"></span></li>
+                            <li><span class="fa fa-star star-4"></span></li>
+                            <li><span class="fa fa-star-o star-5"></span></li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <a href="#" class="propWidget-2">
+                    <div class="fig">
+                        <img src='@Url.Content("~/Images/prop/2-1.png")' alt="Hauntingly Beautiful Estate">
+                        <img class="blur" src='@Url.Content("~/Images/prop/2-1.png")' alt="Hauntingly Beautiful Estate">
+                        <div class="opac"></div>
+                        <div class="priceCap osLight"><span>$1,550,000</span></div>
+                        <div class="figType">FOR RENT</div>
+                        <h3 class="osLight">Hauntingly Beautiful Estate</h3>
+                        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
+                        <ul class="rating">
+                            <li><span class="fa fa-star star-1"></span></li>
+                            <li><span class="fa fa-star star-2"></span></li>
+                            <li><span class="fa fa-star star-3"></span></li>
+                            <li><span class="fa fa-star star-4"></span></li>
+                            <li><span class="fa fa-star star-5"></span></li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <a href="#" class="propWidget-2">
+                    <div class="fig">
+                        <img src='@Url.Content("~/Images/prop/3-1.png")' alt="Luxury Mansion">
+                        <img class="blur" src='@Url.Content("~/Images/prop/3-1.png")' alt="Luxury Mansion">
+                        <div class="opac"></div>
+                        <div class="priceCap osLight"><span>$2,350,000</span></div>
+                        <div class="figType">FOR SALE</div>
+                        <h3 class="osLight">Luxury Mansion</h3>
+                        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
+                        <ul class="rating">
+                            <li><span class="fa fa-star star-1"></span></li>
+                            <li><span class="fa fa-star star-2"></span></li>
+                            <li><span class="fa fa-star star-3"></span></li>
+                            <li><span class="fa fa-star star-4"></span></li>
+                            <li><span class="fa fa-star star-5"></span></li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <a href="#" class="propWidget-2">
+                    <div class="fig">
+                        <img src='@Url.Content("~/Images/prop/4-1.png")' alt="Sophisticated Residence">
+                        <img class="blur" src='@Url.Content("~/Images/prop/4-1.png")' alt="Sophisticated Residence">
+                        <div class="opac"></div>
+                        <div class="priceCap osLight"><span>$1,340,000</span></div>
+                        <div class="figType">FOR RENT</div>
+                        <h3 class="osLight">Sophisticated Residence</h3>
+                        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
+                        <ul class="rating">
+                            <li><span class="fa fa-star star-1"></span></li>
+                            <li><span class="fa fa-star star-2"></span></li>
+                            <li><span class="fa fa-star star-3"></span></li>
+                            <li><span class="fa fa-star star-4"></span></li>
+                            <li><span class="fa fa-star star-5"></span></li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <a href="#" class="propWidget-2">
+                    <div class="fig">
+                        <img src='@Url.Content("~/Images/prop/5-1.png")' alt="House With a Lovely Glass">
+                        <img class="blur" src='@Url.Content("~/Images/prop/5-1.png")' alt="House With a Lovely Glass">
+                        <div class="opac"></div>
+                        <div class="priceCap osLight"><span>$1,930,000</span></div>
+                        <div class="figType">FOR SALE</div>
+                        <h3 class="osLight">House With a Lovely Glass</h3>
+                        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
+                        <ul class="rating">
+                            <li><span class="fa fa-star star-1"></span></li>
+                            <li><span class="fa fa-star star-2"></span></li>
+                            <li><span class="fa fa-star star-3"></span></li>
+                            <li><span class="fa fa-star star-4"></span></li>
+                            <li><span class="fa fa-star star-5"></span></li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <a href="#" class="propWidget-2">
+                    <div class="fig">
+                        <img src='@Url.Content("~/Images/prop/1-1.png")' alt="Modern Residence in New York">
+                        <img class="blur" src='@Url.Content("~/Images/prop/1-1.png")' alt="Modern Residence in New York">
+                        <div class="opac"></div>
+                        <div class="priceCap osLight"><span>$1,750,000</span></div>
+                        <div class="figType">FOR SALE</div>
+                        <h3 class="osLight">Modern Residence in New York</h3>
+                        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
+                        <ul class="rating">
+                            <li><span class="fa fa-star star-1"></span></li>
+                            <li><span class="fa fa-star star-2"></span></li>
+                            <li><span class="fa fa-star star-3"></span></li>
+                            <li><span class="fa fa-star star-4"></span></li>
+                            <li><span class="fa fa-star-o star-5"></span></li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row pb40 padding-index">
+        <div class="twitter-heading col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h2 class="osLight">lockyourstay On Twitter</h2>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 twitter-cell">
+            <blockquote class="twitter-tweet" lang="en-gb"><p lang="en" dir="ltr">The world bids farewell to one of the greatest souls who have ever lived.&#10;You will always be remembered <p></p><a href="https://twitter.com/APJAbdulKalam">@@APJAbdulKalam</a> <a href="https://twitter.com/hashtag/RIPKalam?src=hash">#RIPKalam</a></p>&mdash; Lock Your Stay (@@lockyourstay) <a href="https://twitter.com/lockyourstay/status/626652870092263424">July 30, 2015</a></blockquote>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 twitter-cell">
+            <blockquote class="twitter-tweet" lang="en-gb"><p lang="en" dir="ltr">Go digital. Go green.&#10;<p></p><a href="https://twitter.com/hashtag/godigital?src=hash">#godigital</a> <a href="https://twitter.com/hashtag/digitalindia?src=hash">#digitalindia</a> <a href="https://twitter.com/hashtag/DigitalLockers?src=hash">#DigitalLockers</a> <a href="https://twitter.com/hashtag/eSignFramework?src=hash">#eSignFramework</a> <a href="https://twitter.com/hashtag/BharatNet?src=hash">#BharatNet</a> <a href="https://twitter.com/hashtag/lockyourstay?src=hash">#lockyourstay</a>&#10;<a href="http://t.co/O0hGab2LXy">http://t.co/O0hGab2LXy</a></p>&mdash; Lock Your Stay (@@lockyourstay) <a href="https://twitter.com/lockyourstay/status/617408949881454592">July 4, 2015</a></blockquote>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 twitter-cell">
+            <blockquote class="twitter-tweet" lang="en-gb"><p lang="und" dir="ltr">A friend in need.A friend indeed.&#10;<p></p><a href="https://twitter.com/hashtag/HappyFriendshipDay?src=hash">#HappyFriendshipDay</a> <a href="http://t.co/Us4TxFkZ77">pic.twitter.com/Us4TxFkZ77</a></p>&mdash; Lock Your Stay (@@lockyourstay) <a href="https://twitter.com/lockyourstay/status/627780380934828032">August 2, 2015</a></blockquote>
+        </div>
+    </div>
+
+    
+        <div class="row">
+            <div id="vision-container">
+                <div class="vision">
+                    <div class=" col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+                        Quotes Inspiring Us...
+                        <br><br><br>
+                        To be successful in real estate, you must always and consistently put your clients' best interests first.
+                        When you do, your personal needs will be realized beyond your greatest expectations.
+                        <div class="col-lg-offset-9 col-md-offset-9 col-sm-offset-9 col-xs-offset-9">- Anthony Hitt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pb40 padding-index" style="padding-bottom:40px">
+            <br /><br />
+            <h2 class="osLight">Testimonials</h2>
+            <div id="home-testimonials" class="carousel slide carousel-wb m50 " data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#home-testimonials" data-slide-to="0" class="active"></li>
+                    <li data-target="#home-testimonials" data-slide-to="1" class=""></li>
+                    <li data-target="#home-testimonials" data-slide-to="2" class=""></li>
+                    <li data-target="#home-testimonials" data-slide-to="3" class=""></li>
+                    <li data-target="#home-testimonials" data-slide-to="4" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src='@Url.Content("~/Images/avatar-2.png")' class="home-testim-avatar" alt="Jane Smith">
+                        <div class="home-testim">
+                            <div class="home-testim-text">I never thought booking a pg would be so easy. Everything under a single window.</br> Hats off to lock your stay for their amazing work.</br></br></div>
+                            <div class="home-testim-name align-right">Virang</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='@Url.Content("~/Images/avatar-2.png")' class="home-testim-avatar" alt="Jane Smith">
+                        <div class="home-testim">
+                            <div class="home-testim-text">Thank you Lock your stay for this amazing website. booking an acoomodation in an unknown city was never so cool.</br></br></br></div>
+                            <div class="home-testim-name align-right">Virang</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='@Url.Content("~/Images/avatar-2.png")' class="home-testim-avatar" alt="Jane Smith">
+                        <div class="home-testim">
+                            <div class="home-testim-text">I was just about to book my stay in a hotel and go through the pg's I had found on the web the next day I land but then I came across LockYourStay</br>Thanks to lockyourstay, it saved my time and money and energy. I'm grateful to you guys.</div>
+                            <div class="home-testim-name align-right">Virang</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='@Url.Content("~/Images/avatar-2.png")' class="home-testim-avatar" alt="Jane Smith">
+                        <div class="home-testim">
+                            <div class="home-testim-text">There's nothing better than this out there. It's just made finding an accomodation a lot simpler.<br />I'd like to thank lockyourstay from the very bottom of my heart.</br></br></div>
+                            <div class="home-testim-name align-right">Virang</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='@Url.Content("~/Images/avatar-2.png")' class="home-testim-avatar" alt="Jane Smith">
+                        <div class="home-testim">
+                            <div class="home-testim-text">Now I know what to say to my friends who are moving in another city when they ask me how to find a pg/hostel there.</br></br></br></div>
+                            <div class="home-testim-name align-right">Virang</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- End Main Content -->

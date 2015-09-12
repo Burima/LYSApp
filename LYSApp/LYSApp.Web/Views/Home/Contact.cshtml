@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Contact Us";
+}
+<link href='@Url.Content("~/Content/Custom/Home/Contact.css")' rel="stylesheet" />
+
+<div class="ContactUs body_div text-left">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
+            <h3>Need our Service ?</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-top:15px;">
+                    @*<u>Address : </u>
+                    <p style="padding-left: 20px;">
+                        1/3 Besant Nagar, Sabarmam Street
+                        <br>
+                        Chennai- 600054.
+                    </p>
+                    <u>Phone : </u>
+                    <p style="padding-left: 20px;">
+                        9962100000
+                    </p>
+
+                    <strong><u></u></strong>*@
+                    <p>Just drop in a few information ! We will get back to you</p>
+                    <form action="contacts_form" method="post" class="form">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="dAvybywWYhivGb2BjgPXZe7tXEqOiLR8">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <input class="form-control" id="name" name="name" placeholder="Name" type="text" required="">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input class="form-control" id="emailaddress" name="emailaddress" placeholder="Email" type="email" required="">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input class="form-control" id="subject" name="subject" placeholder="Subject" type="text" required="">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5" style="resize:none;"></textarea>
+                                <button class="ContactButton" type="submit">Send Message</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                    <div class="row">
+                        <iframe class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height:350px;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.60318497824!2d80.236094!3d12.933206499999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525cf9dc2e90c1%3A0x3183d8f313690ad5!2sPTC+Bus+Stop!5e0!3m2!1sen!2sin!4v1438366246207"></iframe>
+                        @*<br>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><a href="https://maps.google.co.in/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Techwoods+Circle+,++Cincinnati,++OH+45242.&amp;aq=&amp;sll=39.257363,-84.379892&amp;sspn=0.006638,0.009645&amp;ie=UTF8&amp;hq=&amp;hnear=Techwoods+Cir,+Blue+Ash,+Hamilton,+Ohio+45242,+United+States&amp;t=m&amp;ll=39.265487,-84.376116&amp;spn=0.023258,0.036478&amp;z=14&amp;iwloc=A" style="color: #0000FF; " target="_blank">View Larger Map</a></div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+    $(document).ready(function () {
+        $('.home-header').css("background-color", "#0eaaa6");
+    });
+    </script>
+}

@@ -1,0 +1,17 @@
+﻿
+.ContactUs{
+    min-height: 571.714px;
+    padding-top: 5%;
+    padding: 5%
+}
+
+.ContactButton{   
+    font-weight: 1000;
+    font-size: 18px;
+    margin-top: 30px;
+    background-color: #1ab394;
+    color: #fff;
+    /*border: 0;
+    border-radius: 0;*/
+    float: left !important;
+}
