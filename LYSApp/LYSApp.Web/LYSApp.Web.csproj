@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9162114E-F1F7-45E6-8198-34D6FCD210D4}</ProjectGuid>
+    <ProjectGuid>{F7731E38-45CF-4CB6-9343-45D6C30404BC}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -158,6 +158,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -168,105 +169,26 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\app-blue.css" />
-    <Content Include="Content\app-magenta.css" />
-    <Content Include="Content\app-red.css" />
-    <Content Include="Content\app-yellow.css" />
-    <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\Custom\Home\About.css" />
-    <Content Include="Content\Custom\Home\Contact.css" />
-    <Content Include="Content\Custom\Home\Index.css" />
-    <Content Include="Content\Custom\Home\Jobs.css" />
-    <Content Include="Content\Custom\Home\TermsAndConditions.css" />
-    <Content Include="Content\datepicker.css" />
-    <Content Include="Content\fileinput.min.css" />
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\fullscreen-slider.css" />
-    <Content Include="Content\jquery-ui.css" />
-    <Content Include="Content\jquery.tagsinput.css" />
-    <Content Include="Content\lockyourstay.css" />
-    <Content Include="Content\simple-line-icons.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\OpenSans-Light-webfont.svg" />
-    <Content Include="fonts\OpenSans-Regular-webfont.svg" />
-    <Content Include="fonts\Simple-Line-Icons.dev.svg" />
-    <Content Include="fonts\Simple-Line-Icons.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Images\avatar-1.png" />
-    <Content Include="Images\avatar-2.png" />
-    <Content Include="Images\avatar-3.png" />
-    <Content Include="Images\avatar-4.png" />
-    <Content Include="Images\avatar-5.png" />
-    <Content Include="Images\bg-1.jpg" />
-    <Content Include="Images\bg-2.jpg" />
-    <Content Include="Images\bg-3.jpg" />
-    <Content Include="Images\bg-4.jpg" />
-    <Content Include="Images\bg-5.jpg" />
-    <Content Include="Images\bg-6.jpg" />
-    <Content Include="Images\blog-1.jpg" />
-    <Content Include="Images\blog-2.jpg" />
-    <Content Include="Images\blog-3.jpg" />
-    <Content Include="Images\blog-4.jpg" />
-    <Content Include="Images\blur.svg" />
-    <Content Include="Images\infobox-bg.png" />
-    <Content Include="Images\loading.gif" />
-    <Content Include="Images\marker-blue.png" />
-    <Content Include="Images\marker-green.png" />
-    <Content Include="Images\marker-magenta.png" />
-    <Content Include="Images\marker-new.png" />
-    <Content Include="Images\marker-red.png" />
-    <Content Include="Images\marker-yellow.png" />
-    <Content Include="Images\post-1.jpg" />
-    <Content Include="Images\post-2.jpg" />
-    <Content Include="Images\post-3.jpg" />
-    <Content Include="Images\post-4.jpg" />
-    <Content Include="Images\post-5.jpg" />
-    <Content Include="Images\post-6.jpg" />
-    <Content Include="Images\prop\1-1-thmb.png" />
-    <Content Include="Images\prop\1-1.png" />
-    <Content Include="Images\prop\2-1-thmb.png" />
-    <Content Include="Images\prop\2-1.png" />
-    <Content Include="Images\prop\3-1-thmb.png" />
-    <Content Include="Images\prop\3-1.png" />
-    <Content Include="Images\prop\4-1-thmb.png" />
-    <Content Include="Images\prop\4-1.png" />
-    <Content Include="Images\prop\4-2-thmb.png" />
-    <Content Include="Images\prop\4-2.png" />
-    <Content Include="Images\prop\4-3-thmb.png" />
-    <Content Include="Images\prop\4-3.png" />
-    <Content Include="Images\prop\4-4-thmb.png" />
-    <Content Include="Images\prop\4-4.png" />
-    <Content Include="Images\prop\5-1-thmb.png" />
-    <Content Include="Images\prop\5-1.png" />
-    <Content Include="Scripts\app.js" />
-    <Content Include="Scripts\blog.js" />
-    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\calendar.js" />
-    <Content Include="Scripts\clndr.js" />
-    <Content Include="Scripts\fileinput.min.js" />
-    <Content Include="Scripts\home.js" />
-    <Content Include="Scripts\infobox.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
-    <Content Include="Scripts\jquery-ui-touch-punch.js" />
-    <Content Include="Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\jquery.mjs.nestedSortable.js" />
-    <Content Include="Scripts\jquery.placeholder.js" />
-    <Content Include="Scripts\jquery.slimscroll.min.js" />
-    <Content Include="Scripts\jquery.tagsinput.min.js" />
-    <Content Include="Scripts\jquery.touchSwipe.min.js" />
-    <Content Include="Scripts\jquery.visible.js" />
-    <Content Include="Scripts\json2.js" />
-    <Content Include="Scripts\moment-2.5.1.js" />
-    <Content Include="Scripts\signin.js" />
-    <Content Include="Scripts\signup.js" />
-    <Content Include="Scripts\sortable.js" />
-    <Content Include="Scripts\table.js" />
-    <Content Include="Scripts\tablesorter.js" />
-    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -278,38 +200,35 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\OpenSans-Light-webfont.eot" />
-    <Content Include="fonts\OpenSans-Light-webfont.ttf" />
-    <Content Include="fonts\OpenSans-Light-webfont.woff" />
-    <Content Include="fonts\OpenSans-Regular-webfont.eot" />
-    <Content Include="fonts\OpenSans-Regular-webfont.ttf" />
-    <Content Include="fonts\OpenSans-Regular-webfont.woff" />
-    <Content Include="fonts\Simple-Line-Icons.eot" />
-    <Content Include="fonts\Simple-Line-Icons.ttf" />
-    <Content Include="fonts\Simple-Line-Icons.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Home\Jobs.cshtml" />
-    <Content Include="Views\Home\TermsAndCondition.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -327,9 +246,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>23485</DevelopmentServerPort>
+          <DevelopmentServerPort>29335</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:23485/</IISUrl>
+          <IISUrl>http://localhost:26497/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

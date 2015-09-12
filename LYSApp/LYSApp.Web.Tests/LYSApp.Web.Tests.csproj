@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7CF6AD6B-9B98-4943-B7E7-41AB1AA14FF7}</ProjectGuid>
+    <ProjectGuid>{72BAA474-7164-4B1D-BF89-75037228D0B8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LYSApp.Web.Tests</RootNamespace>
@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LYSApp.Web\LYSApp.Web.csproj">
-      <Project>{9162114E-F1F7-45E6-8198-34D6FCD210D4}</Project>
+      <Project>{F7731E38-45CF-4CB6-9343-45D6C30404BC}</Project>
       <Name>LYSApp.Web</Name>
     </ProjectReference>
   </ItemGroup>

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B094F1CA-8355-4D70-909A-71C8DB6D256F}</ProjectGuid>
+    <ProjectGuid>{BD54AFF9-A65A-48D7-AC9D-1410E5112340}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LYSApp.Domain</RootNamespace>
