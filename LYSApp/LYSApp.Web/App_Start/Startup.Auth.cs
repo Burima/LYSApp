@@ -8,6 +8,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using System;
 using LYSApp.Web.Models;
+using LYSApp.Model;
 
 namespace LYSApp.Web
 {
@@ -18,7 +19,7 @@ namespace LYSApp.Web
         {
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<UserManager>(UserManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
@@ -29,9 +30,11 @@ namespace LYSApp.Web
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
-                        validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                    OnValidateIdentity =
+                               SecurityStampValidator.OnValidateIdentity<UserManager, User, long>(
+                                   TimeSpan.FromMinutes(30),
+                                   (manager, user) => user.GenerateUserIdentityAsync(manager),
+                                   identity => long.Parse(identity.GetUserId()))
                 }
             });
             

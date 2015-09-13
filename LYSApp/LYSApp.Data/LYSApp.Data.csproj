@@ -30,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,7 +48,105 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBEntity\Apartment.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\Area.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\Bed.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\Block.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\City.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\Country.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\C__MigrationHistory.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\House.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\HouseAmenity.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\HouseImage.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\HouseReview.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\LYSDemo.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LYSDemo.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\LYSDemo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\LYSDemo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LYSDemo.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\PGDetail.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\Role.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\Room.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sysdiagram.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\User.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\UserClaim.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\UserDetail.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\UserLogin.cs">
+      <DependentUpon>LYSDemo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DBEntity\LYSDemo.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LYSDemo.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="DBEntity\LYSDemo.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LYSDemo.edmx</DependentUpon>
+      <LastGenOutput>LYSDemo.Context.cs</LastGenOutput>
+    </None>
+    <None Include="DBEntity\LYSDemo.edmx.diagram">
+      <DependentUpon>LYSDemo.edmx</DependentUpon>
+    </None>
+    <None Include="DBEntity\LYSDemo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LYSDemo.edmx</DependentUpon>
+      <LastGenOutput>LYSDemo.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
