@@ -26,5 +26,13 @@ namespace LYSApp.Web.Controllers
 
             return View();
         }
+        public ActionResult Jobs()
+        {
+            return View();
+        }
+        public ActionResult TermsAndCondition()
+        {
+            return View();
+        }
     }
 }
