@@ -78,12 +78,12 @@ namespace LYSApp.Web.Controllers
         }
 
         //
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View("Index");
-        }
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public ActionResult Register()
+        //{
+        //    return View("Index");
+        //}
 
         //
         // POST: /Account/Register
@@ -117,7 +117,7 @@ namespace LYSApp.Web.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    await mandrillMailer.SendEmailForUser(model.RegisterViewModel.Email, callbackUrl, "Activate Your Account", "Lockyourstay | Activate Your Account");
+                    mandrillMailer.SendEmailForUser(model.RegisterViewModel.Email, callbackUrl, "Activate Your Account", "Lockyourstay | Activate Your Account");
 
                     return RedirectToAction("Index", "Home");
                 }

@@ -1,0 +1,14 @@
+*.dll
+*.pdb
+LYSApp/LYSApp.Domain/bin/Debug/LYSApp.Domain.dll.config
+LYSApp/LYSApp.Domain/bin/Debug/Newtonsoft.Json.xml
+LYSApp/LYSApp.Domain/bin/Debug/ServiceStack.Text.xml
+LYSApp/LYSApp.Domain/obj/Debug/LYSApp.Domain.csproj.FileListAbsolute.txt
+LYSApp/LYSApp.Domain/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+LYSApp/LYSApp.Domain/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+LYSApp/LYSApp.Web/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+LYSApp/LYSApp.Web/obj/Debug/LYSApp.Web.csprojResolveAssemblyReference.cache
+LYSApp/LYSApp.Web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+LYSApp/LYSApp.Web/obj/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+LYSApp/LYSApp.Web/obj/Debug/LYSApp.Web.csproj.FileListAbsolute.txt
+LYSApp/LYSApp.Web/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
