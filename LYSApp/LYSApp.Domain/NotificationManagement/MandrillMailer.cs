@@ -14,7 +14,7 @@ namespace LYSApp.Domain.NotificationManagement
     public class MandrillMailer
     {
         //email to reset password, Reset user, user activation
-        public void SendEmailForUser(string emailID, string url, string templateName, string subject)
+        public async Task SendEmailForUser(string emailID, string url, string templateName, string subject)
         {
             var key = ConfigurationManager.AppSettings["MandrillKey"];
             var m = new MandrillApi(key);

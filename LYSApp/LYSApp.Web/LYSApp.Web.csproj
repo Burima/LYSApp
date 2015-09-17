@@ -169,6 +169,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custom\Home\About.css" />
+    <Content Include="Content\Custom\Home\Contact.css" />
+    <Content Include="Content\Custom\Home\Index.css" />
+    <Content Include="Content\Custom\Home\Jobs.css" />
+    <Content Include="Content\Custom\Home\TermsAndConditions.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -224,7 +229,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Custom\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
