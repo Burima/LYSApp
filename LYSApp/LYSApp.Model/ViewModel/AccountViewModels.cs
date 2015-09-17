@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LYSApp.Web.Models
+namespace LYSApp.Model
 {
     public class ExternalLoginConfirmationViewModel
     {
@@ -109,5 +109,7 @@ namespace LYSApp.Web.Models
         public RegisterViewModel RegisterViewModel { get; set; }
 
         public LoginViewModel LoginViewModel { get; set; }
+
+       
     }
 }

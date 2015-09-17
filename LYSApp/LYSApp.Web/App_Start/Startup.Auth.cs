@@ -34,7 +34,7 @@ namespace LYSApp.Web
                                SecurityStampValidator.OnValidateIdentity<UserManager, User, long>(
                                    TimeSpan.FromMinutes(30),
                                    (manager, user) => user.GenerateUserIdentityAsync(manager),
-                                   identity => long.Parse(identity.GetUserId()))
+                                   identity => long.Parse(identity.GetUserId().Trim()))
                 }
             });
             

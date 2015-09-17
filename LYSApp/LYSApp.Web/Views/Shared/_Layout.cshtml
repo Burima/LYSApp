@@ -20,6 +20,8 @@
     <![endif]-->
 </head>
 <body class="notransition no-hidden">
+
+   
     <!-- Header -->
     @Html.Partial("_Header")
 
@@ -78,51 +80,55 @@
         </div>
     </div>
 
-    <div class="modal fade" id="signup" role="dialog" aria-labelledby="signupLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="signupLabel">Sign Up</h4>
-                </div>
-                <div class="modal-body">
-                    <form role="form">
-                        <div class="form-group">
-                            <div class="btn-group-justified">
-                                <a href="explore.html" class="btn btn-lg btn-facebook"><span class="fa fa-facebook pull-left"></span>Sign Up with Facebook</a>
+  
+        @*<div class="modal fade" id="signup" role="dialog" aria-labelledby="signupLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="signupLabel">Sign Up</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <form role="form" action="@Url.Action("Register","Account")" method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <div class="btn-group-justified">
+                                    <a href="explore.html" class="btn btn-lg btn-facebook"><span class="fa fa-facebook pull-left"></span>Sign Up with Facebook</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="btn-group-justified">
-                                <a href="explore.html" class="btn btn-lg btn-google"><span class="fa fa-google-plus pull-left"></span>Sign Up with Google</a>
+                            <div class="form-group">
+                                <div class="btn-group-justified">
+                                    <a href="explore.html" class="btn btn-lg btn-google"><span class="fa fa-google-plus pull-left"></span>Sign Up with Google</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="signOr">OR</div>
-                        <div class="form-group">
-                            <input type="text" placeholder="First Name" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Last Name" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Email Address" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="Password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="Confirm Password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <div class="btn-group-justified">
-                                <a href="@Url.Action("Register","Account")" class="btn btn-lg btn-green">Sign Up</a>
+                            <div class="signOr">OR</div>
+                            <div class="form-group">
+                                <input type="text" placeholder="First Name" class="form-control">
                             </div>
-                        </div>
-                        <p class="help-block">Already a Reales member? <a href="#" class="modal-si text-green">Sign In</a></p>
-                    </form>
+                            <div class="form-group">
+                                <input type="text" placeholder="Last Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Email Address" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Confirm Password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <div class="btn-group-justified">
+                                    <input type="submit" class="btn btn-lg btn-green" value="Sign Up">
+                                </div>
+                            </div>
+                            <p class="help-block">Already a Reales member? <a href="#" class="modal-si text-green">Sign In</a></p>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>*@
+
 
     <script src='@Url.Content("~/Scripts/jquery-2.1.1.min.js")'></script>
     <script src='@Url.Content("~/Scripts/jquery-ui.min.js")'></script>

@@ -10,7 +10,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
-using LYSApp.Web.Models;
 using LYSApp.Model;
 
 
@@ -20,7 +19,7 @@ namespace LYSApp.Web.Controllers
     public class AccountController : Controller
     {
         private UserManager _userManager;
-
+        AccountViewModel accountViewModel = new AccountViewModel();
         public AccountController()
         {
         }
@@ -76,11 +75,11 @@ namespace LYSApp.Web.Controllers
         }
 
         //
-        // GET: /Account/Register
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View(new RegisterViewModel());
         }
 
         //

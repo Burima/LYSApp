@@ -96,6 +96,7 @@
     <Compile Include="User.cs" />
     <Compile Include="UserClaim.cs" />
     <Compile Include="UserDetail.cs" />
+    <Compile Include="ViewModel\AccountViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
