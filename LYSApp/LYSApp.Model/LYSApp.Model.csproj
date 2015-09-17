@@ -78,6 +78,7 @@
     <Compile Include="Bed.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="EntityModel\ApplicationDbContext.cs" />
     <Compile Include="EntityModel\EmailService.cs" />

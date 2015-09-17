@@ -105,9 +105,6 @@
     <Compile Include="DBEntity\Room.cs">
       <DependentUpon>LYSDemo.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntity\sysdiagram.cs">
-      <DependentUpon>LYSDemo.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBEntity\User.cs">
       <DependentUpon>LYSDemo.tt</DependentUpon>
     </Compile>

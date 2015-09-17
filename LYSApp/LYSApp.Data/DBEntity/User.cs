@@ -30,7 +30,7 @@ namespace LYSApp.Data.DBEntity
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }
-        public bool Status { get; set; }
+        public int Status { get; set; }
         public int ManagerID { get; set; }
         public string ProfilePicture { get; set; }
         public Nullable<int> Gender { get; set; }

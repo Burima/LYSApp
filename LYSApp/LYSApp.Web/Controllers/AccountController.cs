@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using LYSApp.Model;
+using LYSApp.Domain.NotificationManagement;
 
 
 namespace LYSApp.Web.Controllers
@@ -20,6 +21,7 @@ namespace LYSApp.Web.Controllers
     {
         private UserManager _userManager;
         AccountViewModel accountViewModel = new AccountViewModel();
+        MandrillMailer mandrillMailer = new MandrillMailer();
         public AccountController()
         {
         }
@@ -29,7 +31,8 @@ namespace LYSApp.Web.Controllers
             UserManager = userManager;
         }
 
-        public UserManager UserManager {
+        public UserManager UserManager
+        {
             get
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>();
@@ -79,7 +82,7 @@ namespace LYSApp.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View(new RegisterViewModel());
+            return View("Index");
         }
 
         //
@@ -87,21 +90,34 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(AccountViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new User() { UserName = model.Email, Email = model.Email };
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                var user = new User()
+                {
+                    FirstName = model.RegisterViewModel.FirstName,
+                    LastName = model.RegisterViewModel.LastName,
+                    UserName = model.RegisterViewModel.Email.ToUpper(),
+                    Email = model.RegisterViewModel.Email.ToUpper(),
+                    CreatedOn=DateTime.Now,
+                    LastUpdatedOn=DateTime.Now,
+                    Status=1,
+                    LockoutEndDateUtc=DateTime.Now.AddDays(60),
+                    LockoutEnabled=true
+                };
+                IdentityResult result = await UserManager.CreateAsync(user, model.RegisterViewModel.Password);
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    mandrillMailer.SendEmailForUser(model.RegisterViewModel.Email, callbackUrl, "Activate Your Account", "Lockyourstay | Activate Your Account");
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -120,7 +136,7 @@ namespace LYSApp.Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(long userId, string code)
         {
-            if (userId == null || code == null) 
+            if (userId == null || code == null)
             {
                 return View("Error");
             }
@@ -180,13 +196,13 @@ namespace LYSApp.Web.Controllers
         {
             return View();
         }
-	
+
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            if (code == null) 
+            if (code == null)
             {
                 return View("Error");
             }
@@ -239,7 +255,7 @@ namespace LYSApp.Web.Controllers
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
             ManageMessageId? message = null;
-             var result = await UserManager.RemoveLoginAsync(long.Parse(User.Identity.GetUserId()), new UserLoginInfo(loginProvider, providerKey));
+            var result = await UserManager.RemoveLoginAsync(long.Parse(User.Identity.GetUserId()), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
                 var user = await UserManager.FindByIdAsync(long.Parse(User.Identity.GetUserId()));
@@ -414,13 +430,13 @@ namespace LYSApp.Web.Controllers
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
-                        
+
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-                        
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -530,7 +546,8 @@ namespace LYSApp.Web.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 

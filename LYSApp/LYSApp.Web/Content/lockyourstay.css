@@ -2,3 +2,76 @@
     background-color: #1ab394;
     color: #fff;
 }
+
+.full-width{
+    width:100% !important;
+}
+
+/*make the input large*/
+.input-large {
+  font-size: 1.1em;
+  padding-top: 4%;
+  padding-bottom: 4%;
+}
+
+/*auto savinf */
+.saving-progress{
+  float: right;
+  color: #3fb34f;  
+}
+/*remove bold for label inside form-group*/
+.form-group label{
+    font-weight:300;
+    font-size: 1.1em;
+    padding-left:0px;
+}
+
+/*row space*/
+.row-space-top-1 {
+  margin-top: 1%;
+}
+
+/*validation error*/
+.error {
+  /*color: #ff5a5f;*/
+  border: 1px solid red;
+}
+.input-validation-error{
+    border: 1px solid red;
+}
+
+.has-error{
+    border: 1px solid red;
+}
+
+/* maximum character for a control*/
+.max-character-entered{
+    float:right;
+    color:#82888a;
+    font-size:1.1em;
+}
+
+/*row padding 5pc*/
+.row-padding-top-5{
+    padding-top:5%;
+}
+
+/*error*/
+input.error,
+textarea.error,.form-control.error {
+    border: 1px solid red;
+}
+label.error {
+    display:none !important;
+}
+/*------------- radio button------------*/
+.margin-left-2pc{
+    margin-left:2% !important;
+}
+
+
+.standard-font{
+     font-weight: 500 !important;
+    font-size: 1.2em !important;
+}
+

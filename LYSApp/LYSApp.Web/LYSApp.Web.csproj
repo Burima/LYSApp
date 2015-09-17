@@ -176,6 +176,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Custom\lockyourstay.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -217,17 +218,13 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Account\_Register.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-=======
-    <Content Include="Views\Home\Jobs.cshtml" />
-    <Content Include="Views\Home\TermsAndCondition.cshtml" />
->>>>>>> origin/dev0.1
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Custom\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -237,6 +234,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LYSApp.Domain\LYSApp.Domain.csproj">
+      <Project>{bd54aff9-a65a-48d7-ac9d-1410e5112340}</Project>
+      <Name>LYSApp.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LYSApp.Model\LYSApp.Model.csproj">
       <Project>{5448af25-9919-4fdf-9a50-15fa70a924ce}</Project>
       <Name>LYSApp.Model</Name>
@@ -256,7 +257,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>29335</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
