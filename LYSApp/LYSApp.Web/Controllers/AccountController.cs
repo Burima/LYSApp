@@ -49,7 +49,7 @@ namespace LYSApp.Web.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View("Index");
         }
 
         //
@@ -57,14 +57,14 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(AccountViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
+                var user = await UserManager.FindAsync(model.LoginViewModel.Email, model.LoginViewModel.Password);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
+                    await SignInAsync(user, model.LoginViewModel.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
                 else
