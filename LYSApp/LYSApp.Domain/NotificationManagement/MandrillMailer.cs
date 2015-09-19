@@ -13,6 +13,43 @@ namespace LYSApp.Domain.NotificationManagement
 {
     public class MandrillMailer
     {
+        /// <summary>
+        /// This function will add user to Mailchimp Subscription List
+        /// </summary>
+        /// <param name="emailId">EmailId of the user</param>
+        /// <param name="firstName">First Name of the user</param>
+        /// <param name="LastName">Last Name of the User</param>
+        /// <returns></returns>
+        public bool SaveToMailChimpList(string emailId, string firstName, string LastName)
+        {
+            Boolean result = false;
+
+            MCApi api = new MCApi(ConfigurationManager.AppSettings["MailChimpApiKey"], false);
+
+            List.Filter lf = new List.Filter();
+            lf.ListName = ConfigurationManager.AppSettings["MailChimpListName"];
+            List.Lists lists = api.Lists(lf);
+
+            if (lists.Total > 0)
+            {
+                string listId = lists.Data[0].ListID;
+
+                List.SubscribeOptions so = new List.SubscribeOptions();
+                so.DoubleOptIn = false;
+
+                List.Merges merges = new List.Merges();
+                merges.Add("FNAME", firstName);
+                merges.Add("LNAME", LastName);
+
+                result = api.ListSubscribe(listId, emailId, merges, so);
+            }
+
+            return result;
+        }
+
+
+
+
         //email to reset password, Reset user, user activation
         public void SendEmailForUser(string emailID, string url, string templateName, string subject)
         {

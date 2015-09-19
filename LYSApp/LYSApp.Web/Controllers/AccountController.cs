@@ -12,7 +12,9 @@ using Microsoft.Owin.Security;
 using Owin;
 using LYSApp.Model;
 using LYSApp.Domain.NotificationManagement;
-
+using LYSApp.Web.Services.Security;
+using System.Configuration;
+using LYSApp.Web.Services.Common;
 
 namespace LYSApp.Web.Controllers
 {
@@ -22,6 +24,7 @@ namespace LYSApp.Web.Controllers
         private UserManager _userManager;
         AccountViewModel accountViewModel = new AccountViewModel();
         MandrillMailer mandrillMailer = new MandrillMailer();
+        TripleDES tripleDES = new TripleDES();        
         public AccountController()
         {
         }
@@ -114,10 +117,19 @@ namespace LYSApp.Web.Controllers
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = tripleDES.Encrypt((user.Id).ToString(), LYSConfig.EncryptionKey), code = tripleDES.Encrypt(code, LYSConfig.EncryptionKey) }, protocol: Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    
+                    //save to mailchimp subscription list
+                    //enables for production only
+                    if (LYSConfig.EnvironmentName == "Production")
+                    {
+                        mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName);
+                    }
+                    
 
-                    mandrillMailer.SendEmailForUser(model.RegisterViewModel.Email, callbackUrl, "Activate Your Account", "Lockyourstay | Activate Your Account");
+                    //send email activation link
+                    mandrillMailer.SendEmailForUser(model.RegisterViewModel.Email, callbackUrl, "Activate Your Account", "Activate Your Account | Lockyourstay");
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -134,23 +146,34 @@ namespace LYSApp.Web.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(long userId, string code)
+        public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
+            if (userId == null || userId==String.Empty || code == null ||  code==String.Empty)
             {
                 return View("Error");
             }
-
-            IdentityResult result = await UserManager.ConfirmEmailAsync(userId, code);
-            if (result.Succeeded)
+            try
             {
-                return View("ConfirmEmail");
+                IdentityResult result = await UserManager.ConfirmEmailAsync(Convert.ToInt64(tripleDES.Decrypt(userId, LYSConfig.EncryptionKey).Trim()), tripleDES.Decrypt(code, LYSConfig.EncryptionKey).Trim());
+                if (result.Succeeded)
+                {
+                    //once UserManagement is ready we need to upate User Staus here
+                    //return View("ConfirmEmail");
+                }
+                else
+                {
+                    AddErrors(result);
+                    ViewBag.Error = "Invalid Token! ";
+                   // return View();
+                }
             }
-            else
+            catch(Exception ex)
             {
-                AddErrors(result);
-                return View();
+                //Incorrect Token
+                ViewBag.Error = "Invalid Token! ";
+                //return View();
             }
+            return View(); 
         }
 
         //
@@ -471,7 +494,7 @@ namespace LYSApp.Web.Controllers
             var linkedAccounts = UserManager.GetLogins(long.Parse(User.Identity.GetUserId()));
             ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
             return (ActionResult)PartialView("_RemoveAccountPartial", linkedAccounts);
-        }
+        }          
 
         protected override void Dispose(bool disposing)
         {
@@ -482,6 +505,8 @@ namespace LYSApp.Web.Controllers
             }
             base.Dispose(disposing);
         }
+
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins
