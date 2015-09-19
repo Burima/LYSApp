@@ -51,10 +51,7 @@
     font-size:1.1em;
 }
 
-/*row padding 5pc*/
-.row-padding-top-5{
-    padding-top:5%;
-}
+
 
 /*error*/
 input.error,
@@ -75,3 +72,33 @@ label.error {
     font-size: 1.2em !important;
 }
 
+/*------------- Row Spacer -------------*/
+.row-spacer {
+    height: 4.725em;
+}
+.row-spacer-small {
+    height: 2em;
+}
+.row-spacer-mini{
+    height:1.25em;
+}
+
+/*------------------------ Padding -------------------------*/
+.row-padding-top-1{
+    padding-top:1%;
+}
+
+.row-padding-top-5{
+    padding-top:5%;
+}
+
+/*------------------------- Anchor ------------------------------*/
+a {
+        color: #428BCA;
+        text-decoration: none;
+    }
+
+        a:hover, a:focus {
+            color: #2A6496;
+            text-decoration: underline;
+        }
