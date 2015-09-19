@@ -38,11 +38,9 @@ namespace LYSApp.Model.Constants
         }
 
         public enum UserStatus
-        {
-            PendingActivation = 1,
-            Active = 2,
-            Inactive = 3,
-            AwaitingApproval = 4
+        {            
+            Active = 1,
+            Inactive = 2,           
         }
 
     }
