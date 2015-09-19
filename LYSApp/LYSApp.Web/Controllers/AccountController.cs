@@ -496,6 +496,22 @@ namespace LYSApp.Web.Controllers
             return (ActionResult)PartialView("_RemoveAccountPartial", linkedAccounts);
         }          
 
+        //Email Subscribe
+        [AllowAnonymous]
+        [HttpPost]        
+        public async Task<ActionResult> EmailSubscribe(string email)
+        {
+            if (email != null && email.ToString().Trim() != String.Empty)
+            {
+                if (mandrillMailer.SaveToMailChimpList(email, "", ""))
+                {
+                    return Content("Success");
+                }
+            }
+            //return Content("Whoops! That didn't go so well did it?");
+            return Content("Error");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && UserManager != null)
