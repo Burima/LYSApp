@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 //using LYSApp.Domain.StaticContentManagement;
 
-namespace LYSAdmin.Web
+namespace LYSApp.Web
 {
     public class StaticContentConfig
     {

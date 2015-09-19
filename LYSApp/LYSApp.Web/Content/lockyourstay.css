@@ -102,3 +102,8 @@ a {
             color: #2A6496;
             text-decoration: underline;
         }
+
+/*-------------------- text -----------------*/
+.text-red{
+    color:red;
+}
