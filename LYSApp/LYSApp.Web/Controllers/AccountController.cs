@@ -46,6 +46,12 @@ namespace LYSApp.Web.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
