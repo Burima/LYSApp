@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MN = MailChimp.Types.Mandrill;
 
+
 namespace LYSApp.Domain.NotificationManagement
 {
     public class MandrillMailer
