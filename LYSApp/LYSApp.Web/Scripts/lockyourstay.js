@@ -84,3 +84,7 @@ function inputkeyup() {
 };
 //END: Number and character validation parts
 
+/* Change height of the page based on the window height*/
+var windowheight = $(document).height();
+$(".body_div").css("min-height", (windowheight - (windowheight / 4)));
+$(".body_div").css("padding-top", "5%");
