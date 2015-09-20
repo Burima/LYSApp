@@ -56,6 +56,10 @@ namespace LYSApp.Web
             // LockYourStay script
             bundles.Add(new ScriptBundle("~/bundles/lockyourstay").Include(
                       "~/Scripts/lockyourstay.js"));
+
+            // Layout script
+            bundles.Add(new ScriptBundle("~/bundles/layout").Include(
+                      "~/Scripts/Shared/layout.js"));
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;
