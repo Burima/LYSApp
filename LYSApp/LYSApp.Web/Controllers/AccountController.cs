@@ -235,12 +235,17 @@ namespace LYSApp.Web.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        //public ActionResult ResetPassword(string code)
+        //{
+        //    if (code == null)
+        //    {
+        //        return View("Error");
+        //    }
+        //    return View();
+        //}
+
+        public ActionResult ResetPassword()
         {
-            if (code == null)
-            {
-                return View("Error");
-            }
             return View();
         }
 
