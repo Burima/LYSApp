@@ -9,7 +9,8 @@ namespace LYSApp.Web.Services.Security
 {
     public class TripleDES
     {
-        public string Encrypt(string input, string key)
+        string key = LYSApp.Web.Services.Common.LYSConfig.EncryptionKey;
+        public string Encrypt(string input)
         {
             byte[] inputArray = UTF8Encoding.UTF8.GetBytes(input);
             TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
@@ -22,7 +23,7 @@ namespace LYSApp.Web.Services.Security
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
 
-        public string Decrypt(string input, string key)
+        public string Decrypt(string input)
         {
             byte[] inputArray = Convert.FromBase64String(input.Replace(" ", "+"));
             TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
