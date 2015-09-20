@@ -1,60 +1,249 @@
 ﻿@{
-    ViewBag.Title = "Jobs";
+    ViewBag.Title = "Jobs | Lockyourstay";
 }
 
 <link href='@Url.Content("~/Content/Custom/Home/Jobs.css")' rel="stylesheet" />
+<style>
+    .no-margin {
+        margin: 0px !important;
+    }
+
+    .no-padding {
+        padding: 0px !important;
+    }
+</style>
 <div class="container about-container" @*style="margin-top:5%; margin-bottom:5%"*@>
     @*<font size="3">*@
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 align-center">
         <div class="row">
             <div class="title"><h2>Join our Team...</h2></div>
-            <br /><br />
+            <br />
             <div class="jobs-content">
-                <p>
-                    FILL DATA FOR JOBS   ***16 LINES APPROX***<br />
-                    FILL INSPIRING DATA FOR JOBS<br />
-                    FILL DATA FOR JOBS<br />
-                    FILL INSPIRING DATA FOR JOBS<br />
-                    FILL DATA FOR JOBS<br />
-                    FILL INSPIRING DATA FOR JOBS<br />
-                    FILL DATA FOR JOBS<br />
-                    FILL INSPIRING DATA FOR JOBS<br />
-                    FILL DATA FOR JOBS<br />
-                    FILL INSPIRING DATA FOR JOBS<br />
-                    FILL DATA FOR JOBS<br />
-                    FILL INSPIRING DATA FOR JOBS<br />
-                    FILL DATA FOR JOBS<br />
-                    FILL INSPIRING DATA FOR JOBS<br />
-                    FILL DATA FOR JOBS<br />
-                    FILL INSPIRING DATA FOR JOBS<br />
+                <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-2">
+                    lockyourstay.com is unique portal from where you can search your Dream-stay.<br>
+                    We put our best of efforts to bring forward the best houses or paying-guest that Customer wants.<br>
+                    We value our Customers.<br><br>
 
-                </p><br/><br/>
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                    Our motto is to provide the best authenticated houses, which our customer Wants.<br>
+
+                    Lets join hands and progress to provide the best Service that the customer wants.<br><br /><br />
+                </div>
+
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 ">
                     <div class="title career-info"><strong>Careers :</strong> Just mail us with your Resume, we would get back to you</div>
                     <div class="row">
                         <ul>
                             <li class="career-position ">
-                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 career-info">
-                                    <div class="career-title navy">Product Manager - LockYourStay</div>
-                                    <p class="sub-tite">Chennai, IND</p>
+                                <div class="row no-margin no-padding">
+                                    <div class="col-lg-6 col-md-6 career-info align-left">
+                                        <div class="career-title navy">Software Developer - LockYourStay</div>
+                                        <p class="sub-tite">Chennai, IND</p>
+                                    </div>
+                                    <div class="col-lg-2  col-md-2 career-details-botton">
+                                        <!-- Trigger Button HTML -->
+                                        <input type="button" class="btn-know-more" data-toggle="collapse"
+                                               data-target="#toggleDemo_1" value="Know More">
+                                    </div>
+                                    <div class="col-lg-1 col-lg-offset-1 col-md-2 col-md-offset-1 career-botton">
+                                        <a href="mailto:contact@lockyourstay.com?subject=Job LockYourStay JobID-LYS2015092001" target="_top">
+                                            <span class="job-button">Apply</span>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 career-botton">
-                                    <a href="mailto:contact@lockyourstay.com?subject=Job LockYourStay" target="_top"><span class="job-button">Apply</span></a>
+                                <div class="row no-margin no-padding">
+                                    <div id="toggleDemo_1" class="collapse out">
+                                        <div class="col-lg-11 col-md-11 col-sm-9 col-xs-9 job-details">
+                                            <table class="table">
+                                                <tbody class="full-width">
+                                                    <tr class="full-width">
+                                                        <td class="full-width">
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Job ID</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    LYS2015092001
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Designation</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    Front End Developer
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Job Description</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    Skill : Java Script, J Query, Bootstrap<br>
+                                                                    Relevant Exp - 2 to 4 Years<br>
+                                                                    Mandatory Knowledge of the following:<br>
+                                                                    - HTML<br>
+                                                                    - CSS
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Total Experience</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    2 - 5 Years
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Functional Area</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    IT Software - Application Programming, Maintenance
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Education</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    UG - Any Graduate - Any Specialization<br />
+                                                                    PG - Any Postgraduate - Any Specialization, Post Graduation Not Required<br />
+                                                                    Doctorate - Any Doctorate - Any Specialization, Doctorate Not Required
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Job Posted</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    2015-09-20 12:38:00.0
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                               
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
+                            @*<li class="career-position ">
+                                    <div class="row no-margin no-padding">
+                                        <div class="col-lg-6 col-md-6 career-info">
+                                            <div class="career-title navy">Software Developer - LockYourStay</div>
+                                            <p class="sub-tite">Chennai, IND</p>
+                                        </div>
+                                        <div class="col-lg-2  col-md-2 career-details-botton">
+                                             Trigger Button HTML
+                                            <input type="button" class="btn-know-more" data-toggle="collapse"
+                                                   data-target="#toggleDemo_2" value="Know More">
+                                        </div>
+                                        <div class="col-lg-1 col-lg-offset-1 col-md-2 col-md-offset-1 career-botton">
+
+                                            <a href="mailto:contact@lockyourstay.com?subject=Job LockYourStay JobID-BX2106" target="_top">
+                                                <span class="job-button">Apply</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row no-margin no-padding">
+                                        <div id="toggleDemo_2" class="collapse out">
+                                            <div class="col-lg-11 col-md-11 col-sm-9 col-xs-9 job-details">
+                                                <table class="table">
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Job ID</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    BX2106
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Designation</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    C (sybase) Developer
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Job Description</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    Skill : C++, Unix (IBM AIX), SQL<br>
+                                                                    Exp - 4 to 7 Years
+                                                                    Mandatory Knowledge of the following:<br>
+                                                                    Expert in C++<br>
+                                                                    Expert in Unix (IBM AIX)<br>
+                                                                    Proficient in SQL (Sybase or other relational database)
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Experience</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    4 - 5 Years
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Functional Area</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    IT Software - Application Programming, Maintenance
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Education</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    UG - Any Graduate - Any Specialization<br>
+                                                                    PG - Any Postgraduate - Any Specialization, Post Graduation Not Required<br>
+                                                                    Doctorate - Any Doctorate - Any Specialization, Doctorate Not Required
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-lg-2 col-md-4 align-left">
+                                                                    <b>Job Posted</b>
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 align-left">
+                                                                    2015-09-19 14:53:45.0
+                                                                </div>
+                                                            </div>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>*@
                         </ul>
                     </div>
                 </div>
             </div>
             <br /><br />
-                
+
         </div>
     </div>
 </div>
 @section scripts{
     <script>
-    $(document).ready(function () {
-        $('.home-header').css("background-color", "#0eaaa6");
-    });
+        $(document).ready(function () {
+            $('.home-header').css("background-color", "#0eaaa6");
+        });
     </script>
 }
