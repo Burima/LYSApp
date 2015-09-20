@@ -9,7 +9,6 @@ namespace LYSApp.Model
 {
     public class Apartment
     {
-
         public int ApartmentID { get; set; }
         public string ApartmentName { get; set; }
         public string HouseNo { get; set; }
@@ -22,9 +21,11 @@ namespace LYSApp.Model
         public Nullable<int> DeletedBy { get; set; }
         public Nullable<System.DateTime> DeletedOn { get; set; }
         public Nullable<int> CreatedBy { get; set; }
-        public int OwnerID { get; set; }
+        public long OwnerID { get; set; }
 
         public virtual Area Area { get; set; }
+        public virtual User User { get; set; }
         public virtual ICollection<Block> Blocks { get; set; }
+
     }
 }

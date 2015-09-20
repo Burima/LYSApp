@@ -8,7 +8,6 @@ namespace LYSApp.Model
 {
     public class Country
     {
-
         public int CountryID { get; set; }
         public string CountryName { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }

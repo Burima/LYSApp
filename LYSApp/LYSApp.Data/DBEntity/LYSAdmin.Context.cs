@@ -13,10 +13,10 @@ namespace LYSApp.Data.DBEntity
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LYSDemoEntities : DbContext
+    public partial class LYSAdminEntities : DbContext
     {
-        public LYSDemoEntities()
-            : base("name=LYSDemoEntities")
+        public LYSAdminEntities()
+            : base("name=LYSAdminEntities")
         {
         }
     
@@ -39,6 +39,7 @@ namespace LYSApp.Data.DBEntity
         public virtual DbSet<PGDetail> PGDetails { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserClaim> UserClaims { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }

@@ -19,7 +19,7 @@ namespace LYSApp.Model
         #region constructors and destructors
 
         public ApplicationDbContext()
-            : base("LYSDemoEntities")
+            : base("LYSAdminEntities")
         {
         }
 
@@ -36,11 +36,11 @@ namespace LYSApp.Model
         {
             base.OnModelCreating(modelBuilder);
             // Map Entities to their tables.
-            modelBuilder.Entity<User>().ToTable("User").Property(p => p.Id).HasColumnName("UserID");
-            modelBuilder.Entity<UserRole>().ToTable("UserRole");
-            modelBuilder.Entity<UserLogin>().ToTable("UserLogin");
-            modelBuilder.Entity<UserClaim>().ToTable("UserClaim").Property(p => p.Id).HasColumnName("UserClaimID");
-            modelBuilder.Entity<Role>().ToTable("Role").Property(p => p.Id).HasColumnName("RoleID"); ;
+            modelBuilder.Entity<User>().ToTable("Users").Property(p => p.Id).HasColumnName("UserID");
+            modelBuilder.Entity<UserRole>().ToTable("UserRoles");
+            modelBuilder.Entity<UserLogin>().ToTable("UserLogins");
+            modelBuilder.Entity<UserClaim>().ToTable("UserClaims").Property(p => p.Id).HasColumnName("UserClaimID");
+            modelBuilder.Entity<Role>().ToTable("Roles").Property(p => p.Id).HasColumnName("RoleID"); ;
             
         }
 

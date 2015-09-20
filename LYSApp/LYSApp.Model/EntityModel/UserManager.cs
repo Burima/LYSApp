@@ -4,6 +4,7 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
 
+
 namespace LYSApp.Model
 {
     public class UserManager : UserManager<User, long>

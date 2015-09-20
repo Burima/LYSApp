@@ -31,9 +31,10 @@ namespace LYSApp.Data.DBEntity
         public Nullable<int> DeletedBy { get; set; }
         public Nullable<System.DateTime> DeletedOn { get; set; }
         public Nullable<int> CreatedBy { get; set; }
-        public int OwnerID { get; set; }
+        public long OwnerID { get; set; }
     
         public virtual Area Area { get; set; }
+        public virtual User User { get; set; }
         public virtual ICollection<Block> Blocks { get; set; }
     }
 }

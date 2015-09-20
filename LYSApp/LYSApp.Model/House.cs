@@ -8,6 +8,7 @@ namespace LYSApp.Model
 {
     public class House
     {
+
         public int HouseID { get; set; }
         public string HouseName { get; set; }
         public string Description { get; set; }

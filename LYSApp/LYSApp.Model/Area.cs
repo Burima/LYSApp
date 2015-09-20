@@ -8,6 +8,7 @@ namespace LYSApp.Model
 {
     public class Area
     {
+
         public int AreaID { get; set; }
         public string AreaName { get; set; }
         public Nullable<int> CityID { get; set; }

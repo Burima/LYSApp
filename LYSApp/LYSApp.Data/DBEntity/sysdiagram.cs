@@ -12,20 +12,12 @@ namespace LYSApp.Data.DBEntity
     using System;
     using System.Collections.Generic;
     
-    public partial class PGDetail
+    public partial class sysdiagram
     {
-        public PGDetail()
-        {
-            this.Houses = new HashSet<House>();
-        }
-    
-        public int PGDetailID { get; set; }
-        public string PGName { get; set; }
-        public int AreaID { get; set; }
-        public long OwnerID { get; set; }
-    
-        public virtual Area Area { get; set; }
-        public virtual ICollection<House> Houses { get; set; }
-        public virtual User User { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

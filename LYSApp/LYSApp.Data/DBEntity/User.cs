@@ -16,22 +16,23 @@ namespace LYSApp.Data.DBEntity
     {
         public User()
         {
+            this.Apartments = new HashSet<Apartment>();
             this.Beds = new HashSet<Bed>();
+            this.HouseReviews = new HashSet<HouseReview>();
+            this.PGDetails = new HashSet<PGDetail>();
             this.UserClaims = new HashSet<UserClaim>();
-            this.UserLogins = new HashSet<UserLogin>();
             this.UserDetails = new HashSet<UserDetail>();
+            this.UserLogins = new HashSet<UserLogin>();
             this.Roles = new HashSet<Role>();
         }
     
         public long UserID { get; set; }
+        public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool IsBackGroundVerified { get; set; }
-        public int CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }
-        public int Status { get; set; }
-        public int ManagerID { get; set; }
         public string ProfilePicture { get; set; }
         public Nullable<int> Gender { get; set; }
         public string Email { get; set; }
@@ -44,12 +45,15 @@ namespace LYSApp.Data.DBEntity
         public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
-        public string UserName { get; set; }
+        public int Status { get; set; }
     
+        public virtual ICollection<Apartment> Apartments { get; set; }
         public virtual ICollection<Bed> Beds { get; set; }
+        public virtual ICollection<HouseReview> HouseReviews { get; set; }
+        public virtual ICollection<PGDetail> PGDetails { get; set; }
         public virtual ICollection<UserClaim> UserClaims { get; set; }
-        public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<UserDetail> UserDetails { get; set; }
+        public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
     }
 }

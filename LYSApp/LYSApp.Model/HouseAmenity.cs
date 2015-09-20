@@ -10,6 +10,7 @@ namespace LYSApp.Model
     public class HouseAmenity
     {
         [Key]
+
         public int AminityID { get; set; }
         public int HouseID { get; set; }
         public bool AC { get; set; }

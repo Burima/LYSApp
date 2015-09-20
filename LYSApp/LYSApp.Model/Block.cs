@@ -9,7 +9,6 @@ namespace LYSApp.Model
 {
     public class Block
     {
-
         public int BlockID { get; set; }
         public string BlockName { get; set; }
         public string Description { get; set; }
