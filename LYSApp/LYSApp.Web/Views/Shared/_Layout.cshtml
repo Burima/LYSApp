@@ -221,7 +221,9 @@
 
             //forgot password modal
             $('.modal-fp').click(function () {
-                $('#signin').modal('hide');
+                $('#signin').modal('hide');               
+                //get email id from sign in modal email field (if any)
+                $('#txtForgotPasswordEmail').val($('#LoginViewModel_Email').val());
                 $('#forgotpassword').modal('show');
             });
 
