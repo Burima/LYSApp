@@ -123,7 +123,7 @@ namespace LYSApp.Web.Controllers
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = tripleDES.Encrypt((user.Id).ToString(), LYSConfig.EncryptionKey), code = tripleDES.Encrypt(code, LYSConfig.EncryptionKey) }, protocol: Request.Url.Scheme);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = tripleDES.Encrypt((user.Id).ToString()), code = tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     
                     //save to mailchimp subscription list
@@ -135,7 +135,7 @@ namespace LYSApp.Web.Controllers
                     
 
                     //send email activation link
-                    mandrillMailer.SendEmailForUser(model.RegisterViewModel.Email, callbackUrl, "Activate Your Account", "Activate Your Account | Lockyourstay");
+                    mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Activate Your Account | Lockyourstay");
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -160,7 +160,7 @@ namespace LYSApp.Web.Controllers
             }
             try
             {
-                IdentityResult result = await UserManager.ConfirmEmailAsync(Convert.ToInt64(tripleDES.Decrypt(userId, LYSConfig.EncryptionKey).Trim()), tripleDES.Decrypt(code, LYSConfig.EncryptionKey).Trim());
+                IdentityResult result = await UserManager.ConfirmEmailAsync(Convert.ToInt64(tripleDES.Decrypt(userId).Trim()), tripleDES.Decrypt(code));
                 if (result.Succeeded)
                 {
                     //once UserManagement is ready we need to upate User Staus here
@@ -194,28 +194,34 @@ namespace LYSApp.Web.Controllers
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        //[ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPassword(string email)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && email!=String.Empty)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await UserManager.FindByNameAsync(email);
+                if (user == null)
                 {
-                    ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
-                    return View();
+                    return Content("The email id "+email+" does not exist");
+                }
+                else if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                {
+                    return Content("The email id " + email + " is not confirmed.");
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId =tripleDES.Encrypt(user.Id.ToString()), code =tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
+                //send Reset Password link
+                mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Reset Your Password | Lockyourstay");
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                // return RedirectToAction("ForgotPasswordConfirmation", "Account");                
+                return Content("A link to reset your password has been sent to " + email);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return Content("Something went wrong! Please contact support@lockyourstay.com.");
         }
 
         //

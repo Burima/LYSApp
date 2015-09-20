@@ -26,10 +26,9 @@
 
     <!-- Header -->
     @Html.Partial("_Header")
-
+    
     <!-- Content -->
     @RenderBody()
-
 
     <!-- Footer -->
     @Html.Partial("_Footer")
@@ -43,47 +42,46 @@
                 </div>
                 <div class="modal-body">
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", id = "form-SignIn", autocomplete = "off" }))
-                  {
+                    {
 
-                    @Html.AntiForgeryToken();
+                        @Html.AntiForgeryToken();
 
-                    <div class="form-group">
-                        <div class="btn-group-justified">
-                            <a href="explore.html" class="btn btn-lg btn-facebook"><span class="fa fa-facebook pull-left"></span>Sign In with Facebook</a>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="btn-group-justified">
-                            <a href="explore.html" class="btn btn-lg btn-google"><span class="fa fa-google-plus pull-left"></span>Sign In with Google</a>
-                        </div>
-                    </div>
-                    <div class="signOr">OR</div>
-                    <div class="form-group">
-                        @*<input type="text" placeholder="Email Address" class="form-control">*@
-                        @Html.TextBoxFor(model => model.LoginViewModel.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email", tabIndex = "1" })
-                    </div>
-                    <div class="form-group">
-                        @*<input type="password" placeholder="Password" class="form-control">*@
-                        @Html.PasswordFor(model => model.LoginViewModel.Password, new { @class = "form-control", maxlength = "50", placeholder = "Password", tabIndex = "2" })
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div class="checkbox custom-checkbox"><label><input type="checkbox"><span class="fa fa-check"></span> Remember me</label></div>
-                            </div>
-                            <div class="col-xs-6 align-right">
-                                <p class="help-block"><a href="@Url.Action("ForgotPassword", "Account")" class="text-green">Forgot password?</a></p>
+                        <div class="form-group">
+                            <div class="btn-group-justified">
+                                <a href="explore.html" class="btn btn-lg btn-facebook"><span class="fa fa-facebook pull-left"></span>Sign In with Facebook</a>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="btn-group-justified">
-                            <input type="submit" class="btn btn-lg btn-green full-width" value="Sign In">
+                        <div class="form-group">
+                            <div class="btn-group-justified">
+                                <a href="explore.html" class="btn btn-lg btn-google"><span class="fa fa-google-plus pull-left"></span>Sign In with Google</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="help-block">Don't have an account? <a href="@Url.Action("Register","Account")" class="modal-su text-green">Sign Up</a></p>
-
-                     }
+                        <div class="signOr">OR</div>
+                        <div class="form-group">
+                            @*<input type="text" placeholder="Email Address" class="form-control">*@
+                            @Html.TextBoxFor(model => model.LoginViewModel.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email", tabIndex = "1" })
+                        </div>
+                        <div class="form-group">
+                            @*<input type="password" placeholder="Password" class="form-control">*@
+                            @Html.PasswordFor(model => model.LoginViewModel.Password, new { @class = "form-control", maxlength = "50", placeholder = "Password", tabIndex = "2" })
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="checkbox custom-checkbox"><label><input type="checkbox"><span class="fa fa-check"></span> Remember me</label></div>
+                                </div>
+                                <div class="col-xs-6 align-right">
+                                    <p class="help-block"><a href="javascript:void(0)" class="modal-fp text-green">Forgot password?</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group-justified">
+                                <input type="submit" class="btn btn-lg btn-green full-width" value="Sign In">
+                            </div>
+                        </div>
+                    }
+                    <p class="help-block">Don't have an account? <a href="javascript:void(0)" class="modal-su text-green">Sign Up</a></p>
                 </div>
             </div>
         </div>
@@ -136,13 +134,56 @@
                             <input type="submit" class="btn btn-lg btn-green full-width" value="Sign Up">
                         </div>
                     </div>
-                    <p class="help-block">Already a Reales member? <a href="@Url.Action("Login","Account")" class="modal-si text-green">Sign In</a></p>
-
                     }
+                    <p class="help-block">Already a Lockyourstay member? <a href="javascript:void(0)" class="modal-si text-green">Sign In</a></p>
                 </div>
             </div>
         </div>
     </div> <!-- End Sign Up Modal -->
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotpassword" role="dialog" aria-labelledby="forgotpasswordLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="forgotpasswordLabel">Forgot Password</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" id="form-ForgotPassword">
+                        @*@Html.AntiForgeryToken()*@
+                        <div class="form-group">
+                            @*@Html.TextBoxFor(model => model.ForgotPasswordViewModel.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email", tabIndex = "1" })*@
+                            <input type="email" class="form-control" placeholder="Email Address" id="txtForgotPasswordEmail" name="txtForgotPasswordEmail" required tabindex="1">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="btn-group-justified">
+                                <input type="button" id="btnForgotPassword" class="btn btn-lg btn-green full-width" value="Send Reset Link" tabindex="2">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Forgot Password Modal -->
+    <!-- Message Modal -->
+    <div class="modal fade in" id="modal-message" role="dialog" aria-labelledby="modal-messageLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modal-messageLabel">Message</h4>
+                </div>*@
+                <div class="modal-body">  
+                    <div class="alert alert-success" style="font-size: 1.2em;margin-bottom: 0px;font-weight: 300;">
+                        <i class="fa fa-comments-o"></i><span style="margin:0% 1% 0% 1%;" id="spnMessage" class="text-justify"></span><i data-dismiss="modal" class="fa fa-times pull-right"></i>
+                </div>
+               </div>
+                @*<div class="modal-footer">
+                    <input type="button" class="btn btn-green" data-dismiss="modal" value="Okey" />
+                </div>*@
+            </div>
+        </div>
+    </div> <!-- End Message Modal -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jqueryuitouchpunch")
@@ -158,8 +199,12 @@
 
     <script>
         var EmailSubscribeURL = '@Url.Action("EmailSubscribe","Account")'
+        var ForgotPasswordURL = '@Url.Action("ForgotPassword", "Account")'
+
 
         $(document).ready(function () {
+            
+
             //char alone
             //$(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
 
@@ -170,9 +215,49 @@
             //        }
             //    }
             //});
+
+            //message timeout
+           // window.setTimeout(function () { $("#modal-message").alert('close'); }, 5000);
+
+            //forgot password modal
+            $('.modal-fp').click(function () {
+                $('#signin').modal('hide');
+                $('#forgotpassword').modal('show');
+            });
+
+            $('#btnForgotPassword').click(function () {
+                if ($('#form-ForgotPassword').valid()) {
+                    var jmodel = { email: $("#txtForgotPasswordEmail").val() };
+                    //alert(jmodel);
+                    $.ajax({
+                        url: ForgotPasswordURL,
+                        type: 'POST',
+                        data: jmodel,
+                        dataType: 'html',
+                        success: function (data, textStatus, XMLHttpRequest) {
+                            $('#forgotpassword').modal('hide');
+                            $('#spnMessage').html(data);
+                            $('#modal-message').modal('show');
+                            //hide message modal after 5sec
+                            window.setTimeout(function () { $('#modal-message').modal('hide'); }, 5000);
+                            
+                            
+                        },
+                        error: function (xhr, status) {
+                            //alert('e')
+                        }
+                    })//ajax end
+                } else {
+                    return false;
+                }
+
+            });
+
+          
+            //subscribe email function
             $('.btnSubscribe').click(function () {
                 if ($('#form-Subscribe').valid()) {
-                    var jmodel = { email: $("#txtEmailForSubscribe").val()};                  
+                    var jmodel = { email: $("#txtEmailForSubscribe").val() };
                     $.ajax({
                         url: EmailSubscribeURL,
                         type: 'POST',
@@ -189,10 +274,10 @@
                             }, 5000);
                         },
                         error: function (xhr, status) {
-                           alert('e')
+                            alert('e')
                         }
                     })//ajax end
-                    }else{
+                } else {
                     return false;
                 }
             });
