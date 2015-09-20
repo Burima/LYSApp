@@ -77,10 +77,9 @@ namespace LYSApp.Model
 
     public class ResetPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+       
+        public string UserID { get; set; }
+        public string Code { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -93,7 +92,7 @@ namespace LYSApp.Model
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public string Code { get; set; }
+        
     }
 
     public class ForgotPasswordViewModel
@@ -107,8 +106,8 @@ namespace LYSApp.Model
     public class AccountViewModel
     {
         public RegisterViewModel RegisterViewModel { get; set; }
-
         public LoginViewModel LoginViewModel { get; set; }
+        public ResetPasswordViewModel ResetPasswordViewModel { get; set; }
 
        
     }

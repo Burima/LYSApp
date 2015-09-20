@@ -111,3 +111,17 @@ a {
 .home-header{
     background-color:rgb(14, 170, 166);
 }
+
+.home-container{
+    margin-top:5%;     
+    font-size: 1em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+.no-left-margin{
+    margin-left:0px !important;
+}
+.no-right-margin{
+    margin-right:0px !important;
+}

@@ -197,7 +197,7 @@ namespace LYSApp.Web.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(string email)
         {
-            if (ModelState.IsValid && email!=String.Empty)
+            if (ModelState.IsValid || email!=String.Empty)
             {
                 var user = await UserManager.FindByNameAsync(email);
                 if (user == null)
@@ -212,9 +212,9 @@ namespace LYSApp.Web.Controllers
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId =tripleDES.Encrypt(user.Id.ToString()), code =tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId =tripleDES.Encrypt((user.Id).ToString()), code =tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
                 //send Reset Password link
-                mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Reset Your Password | Lockyourstay");
+                mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Reset Your Password");
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");                
                 return Content("A link to reset your password has been sent to " + email);
@@ -235,18 +235,20 @@ namespace LYSApp.Web.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        //public ActionResult ResetPassword(string code)
-        //{
-        //    if (code == null)
-        //    {
-        //        return View("Error");
-        //    }
-        //    return View();
-        //}
-
-        public ActionResult ResetPassword()
+        public ActionResult ResetPassword(string userId, string code)
         {
-            return View();
+            if (code == null || code==String.Empty || userId==null || userId==String.Empty)
+            {
+                return View("Error");
+            }
+            AccountViewModel accountViewModel = new AccountViewModel();
+            accountViewModel.ResetPasswordViewModel = new ResetPasswordViewModel()
+            {
+                Code = code,
+                UserID = userId
+            };    
+            //TempData.Keep("Message");
+            return View(accountViewModel);
         }
 
         //
@@ -254,25 +256,25 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        public async Task<ActionResult> ResetPassword(AccountViewModel model)
         {
             if (ModelState.IsValid)
-            {
-                var user = await UserManager.FindByNameAsync(model.Email);
+            {                
+                var user = await UserManager.FindByIdAsync(Convert.ToInt64(tripleDES.Decrypt(model.ResetPasswordViewModel.UserID).Trim()));
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "No user found.");
-                    return View();
+                    TempData["Message"] = "No user found! ";
+                    return RedirectToAction("ResetPassword", "Account", new { userId = model.ResetPasswordViewModel.UserID, code = model.ResetPasswordViewModel.Code });
                 }
-                IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+                IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, tripleDES.Decrypt(model.ResetPasswordViewModel.Code.Trim()), model.ResetPasswordViewModel.Password);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("ResetPasswordConfirmation", "Account");
                 }
                 else
                 {
-                    AddErrors(result);
-                    return View();
+                    TempData["Message"] =  result.Errors.FirstOrDefault();
+                    return RedirectToAction("ResetPassword", "Account", new { userId=model.ResetPasswordViewModel.UserID,code=model.ResetPasswordViewModel.Code });
                 }
             }
 
