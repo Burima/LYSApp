@@ -126,6 +126,10 @@
     <Compile Include="DBEntity\UserLogin.cs">
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBRepository\BaseRepository.cs" />
+    <Compile Include="DBRepository\IBaseRepository.cs" />
+    <Compile Include="DBRepository\IUnitOfWork.cs" />
+    <Compile Include="DBRepository\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
