@@ -64,7 +64,7 @@ namespace LYSApp.Web.Controllers
             if (count > 0)
             {
                 var user = (User)Session["User"];
-                user.ProfilePicture = userViewModel.User.ProfilePicture;
+                user.ProfilePicture = userViewModel.ProfilePicture;
                 TempData["message"] = "Profile updated successfully!";
             }
             else
