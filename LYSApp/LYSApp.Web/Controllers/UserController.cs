@@ -18,6 +18,11 @@ namespace LYSApp.Web.Controllers
         {
             this.userManagement = userManagement;//Initializing UserManageManagement
         }
+
+        public UserController()
+        {
+
+        }
         // GET: User
         public ActionResult ViewProfile()
         {
