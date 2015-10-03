@@ -76,7 +76,7 @@ function readURL(input) {
             $("#hdnImageSource").val(e.target.result);
             $('.jcrop-holder').replaceWith('');
             $("#divCropResizeImage .modal-body").empty();
-            $("#divCropResizeImage .modal-body").append("<div class=\"row\" style=\"margin:5%;\">  <div class=\"col-lg-2\"></div><div class=\"col-lg-4\"><img id=\"demo3\" alt=\"Jcrop Example\" style=\"width: 100%\" /></div>");
+            $("#divCropResizeImage .modal-body").append("<div class=\"row\" style=\"margin:5%;\">  <div class=\"col-lg-4\"><img id=\"demo3\" alt=\"Jcrop Example\" /></div>");
             $("#divCropResizeImage .modal-body").append("</div></div></div></div>");
             $('#demo3').replaceWith('<img id="demo3" src="' + e.target.result + '"/>');
             FormImageCrop.init();

@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 using LYSApp.Model;
-using LYSApp.Data;
 using LYSApp.Domain.UserManagement;
 using LYSApp.Domain;
 
