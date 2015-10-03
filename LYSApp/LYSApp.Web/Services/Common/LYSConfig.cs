@@ -25,5 +25,11 @@ namespace LYSApp.Web.Services.Common
         //Security
         public static string EncryptionKey = ConfigurationManager.AppSettings.Get("EncryptionKey").ToString();
 
+        //owin keys
+        public static string GoogleClientId = ConfigurationManager.AppSettings.Get("GoogleClientId").ToString();
+        public static string GoogleClientSecret = ConfigurationManager.AppSettings.Get("GoogleClientSecret").ToString();
+
+        public static string FacebookAppId = ConfigurationManager.AppSettings.Get("FacebookAppId").ToString();
+        public static string FacebookAppSecret = ConfigurationManager.AppSettings.Get("FacebookAppSecret").ToString();
     }
 }
