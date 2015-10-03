@@ -42,6 +42,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,12 +51,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="ImageHelper.cs" />
     <Compile Include="NotificationManagement\MandrillMailer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserManagement\IUserManagement.cs" />
+    <Compile Include="UserManagement\UserManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LYSApp.Data\LYSApp.Data.csproj">
+      <Project>{4cce9be0-4948-46c2-9be7-5d07b9461308}</Project>
+      <Name>LYSApp.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LYSApp.Model\LYSApp.Model.csproj">
+      <Project>{5448af25-9919-4fdf-9a50-15fa70a924ce}</Project>
+      <Name>LYSApp.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

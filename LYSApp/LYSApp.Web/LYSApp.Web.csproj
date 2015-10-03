@@ -162,6 +162,7 @@
     <Compile Include="App_Start\StaticContentConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -180,6 +181,8 @@
     <Content Include="Content\Custom\Account\Index.css" />
     <Content Include="Content\Custom\Home\Jobs.css" />
     <Content Include="Content\Custom\Home\TermsAndConditions.css" />
+    <Content Include="Content\Custom\User\profile.css" />
+    <Content Include="Content\Custom\User\style.css" />
     <Content Include="Content\lockyourstay.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -236,6 +239,7 @@
     <Content Include="Images\prop\4-4.png" />
     <Content Include="Images\prop\5-1-thmb.png" />
     <Content Include="Images\prop\5-1.png" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -252,6 +256,10 @@
     <Content Include="fonts\Simple-Line-Icons.ttf" />
     <Content Include="fonts\Simple-Line-Icons.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Custom\User\form-image-crop.js" />
+    <Content Include="Scripts\Custom\User\jquery.Jcrop.js" />
+    <Content Include="Scripts\Custom\User\jquery.Jcrop.min.js" />
+    <Content Include="Scripts\Custom\User\ViewProfile.js" />
     <Content Include="Scripts\lockyourstay.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -299,6 +307,9 @@
     <Content Include="Views\Home\Jobs.cshtml" />
     <Content Include="Views\Home\TermsAndCondition.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\User\ViewProfile.cshtml" />
+    <Content Include="Views\User\_ProfilePicture.cshtml" />
+    <Content Include="Views\User\_EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -311,6 +322,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LYSApp.Data\LYSApp.Data.csproj">
+      <Project>{4cce9be0-4948-46c2-9be7-5d07b9461308}</Project>
+      <Name>LYSApp.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LYSApp.Domain\LYSApp.Domain.csproj">
       <Project>{bd54aff9-a65a-48d7-ac9d-1410e5112340}</Project>
       <Name>LYSApp.Domain</Name>
