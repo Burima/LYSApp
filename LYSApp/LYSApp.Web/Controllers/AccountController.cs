@@ -415,6 +415,8 @@ namespace LYSApp.Web.Controllers
             if (user != null)
             {
                 await SignInAsync(user, isPersistent: false);
+                //sessionize user
+                SessionManager.SessionizeUser(user);
                 return RedirectToLocal(returnUrl);
             }
             else
@@ -422,7 +424,8 @@ namespace LYSApp.Web.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new AccountViewModel { Email = loginInfo.Email });
+                
+                return View("ExternalLoginConfirmation", new AccountViewModel { ExternalLoginConfirmationViewModel = new ExternalLoginConfirmationViewModel() { Email = loginInfo.Email } });
             }
         }
 
@@ -458,7 +461,7 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<ActionResult> ExternalLoginConfirmation(AccountViewModel model, string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -473,7 +476,7 @@ namespace LYSApp.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User() { UserName = model.Email, Email = model.Email };
+                var user = new User() { UserName = model.ExternalLoginConfirmationViewModel.Email, Email = model.ExternalLoginConfirmationViewModel.Email };
                 IdentityResult result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -481,7 +484,8 @@ namespace LYSApp.Web.Controllers
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
-
+                        //sessionize user
+                        SessionManager.SessionizeUser(user);
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -505,7 +509,8 @@ namespace LYSApp.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            SessionManager.DeSessionizeUser();            
+            return RedirectToAction("Index", "Account");
         }
 
         //
