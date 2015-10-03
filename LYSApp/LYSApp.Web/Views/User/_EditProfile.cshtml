@@ -17,7 +17,7 @@
                 </div>
 
             @*---Last Name---*@
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     Last Name
                 </div>
@@ -27,7 +27,7 @@
                 </div>
 
             @*---Gender---*@
-            <div class="row padd">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     I am
                 </div>
@@ -37,10 +37,10 @@
                         new SelectListItem{ Text="Female", Value="Female"}
                         }, "--- Select ---")
                 </div>
-                </div>
+            </div>
 
             @*---Email Address---*@
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     Email Address
                 </div>
@@ -50,27 +50,27 @@
             </div>
 
             @*---Phone Number---*@
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
-                Phone Number
+                    Phone Number
                 </div>
                 <div class="col-md-9">
-                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", maxlength = "50", placeholder = "LastName", tabIndex = "1" })
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", maxlength = "50", placeholder = "Phone Number", tabIndex = "1" })
                 </div>
-             </div>
+            </div>
 
             @*---Present Address---*@
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
-                     Present Address
+                    Present Address
                 </div>
                 <div class="col-md-9">
                     @Html.TextBoxFor(model => model.PresentAddress, new { @class = "form-control", maxlength = "50", placeholder = "Present Address", tabIndex = "1" })
                 </div>
-             </div>
+            </div>
 
             @*---Permanent Address---*@
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     Permanent Address
                 </div>
@@ -80,7 +80,7 @@
             </div>
 
             @*---Govt ID Type---*@
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     Govt ID Type
                 </div>
@@ -96,14 +96,14 @@
             </div>
 
             @*---Govt ID Number----*@
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     Govt ID Number
-                    </div>
-                    <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.GovtID, new { @class = "form-control", maxlength = "50", placeholder = "ID Number", tabIndex = "1" })
-                    </div>
                 </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.GovtID, new { @class = "form-control", maxlength = "50", placeholder = "ID Number", tabIndex = "1" })
+                </div>
+            </div>
         </div>
     </div>
 
@@ -124,50 +124,50 @@
                     </div>
                 </div>
 
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     Office Address
-                    </div>
-                    <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.OfficeLocation, new { @class = "form-control", maxlength = "50", placeholder = "ID Number", tabIndex = "1" })
-                    </div>
                 </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.OfficeLocation, new { @class = "form-control", maxlength = "50", placeholder = "Office Address", tabIndex = "1" })
+                </div>
+            </div>
 
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     Current Employer
-                    </div>
-                    <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.CurrentEmployer, new { @class = "form-control", maxlength = "50", placeholder = "ID Number", tabIndex = "1" })
-                    </div>
                 </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.CurrentEmployer, new { @class = "form-control", maxlength = "50", placeholder = " Current Employer", tabIndex = "1" })
+                </div>
+            </div>
 
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     Employee ID
-                    </div>
-                    <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.EmployeeID, new { @class = "form-control", maxlength = "50", placeholder = "ID Number", tabIndex = "1" })
-                    </div>
                 </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.EmployeeID, new { @class = "form-control", maxlength = "50", placeholder = "Employee ID", tabIndex = "1" })
+                </div>
+            </div>
 
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     Highest Education
-                    </div>
-                    <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.HighestEducation, new { @class = "form-control", maxlength = "50", placeholder = "ID Number", tabIndex = "1" })
-                    </div>
                 </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.HighestEducation, new { @class = "form-control", maxlength = "50", placeholder = "Highest Education", tabIndex = "1" })
+                </div>
+            </div>
 
-            <div class="row row-padding-top-1">
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                     Institution Name
-                    </div>
-                    <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.InstitutionName, new { @class = "form-control", maxlength = "50", placeholder = "ID Number", tabIndex = "1" })
-                    </div>
                 </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.InstitutionName, new { @class = "form-control", maxlength = "50", placeholder = "Institution Name", tabIndex = "1" })
+                </div>
+            </div>
         </div>
     </div>
 

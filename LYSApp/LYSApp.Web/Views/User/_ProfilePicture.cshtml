@@ -1,0 +1,91 @@
+﻿@model LYSApp.Model.UserViewModel
+
+@**---Modal for Image Cropping---*@
+<div id="divCropResizeImage" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" id="btnCropClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Crop Image</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+
+                    </div>
+                    <div class="col-lg-4">
+                        <img id="demo3" alt="Jcrop Example" />
+                    </div>
+                    <div class="col-lg-4">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" id="btnSkipCropping" type="button" aria-hidden="true" value="Skip Cropping" />
+                <input class="btn btn-primary" id="btnCrop" type="button" value="Crop" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="tab-3" class="tab-pane">
+    <div class="row form-group">
+        <div class="col-md-12">
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div id="divFile" class="col-lg-8 col-md-8 col-sm-12 col-xs-12 row-padding-top-5">
+                    <label for="fileProfile" id="fileLabel">
+                        <input class="txtFile" id="fileProfile" name="fileProfile" type="file" style="display:none">
+                        <p class="btn btn-primary">Choose File</p>
+                    </label>
+                    <div><div id="photoFilePath" class="filePath pull-left">No File Chosen</div><span id="spnRemove" onclick="fnRemove()" style="cursor:pointer; color:gray; display:none">x</span></div>
+                    <br />
+                    <img draggable="false" id="imgProfile" style="display:inline-block; height:100px; width:100px; margin: 0 5px 0 10px;" src="@Url.Action(Model.ProfilePicture)" />
+                    <input type="hidden" id="profilePic" name="User.ProfilePicture" />
+                </div>
+            </div>
+            <div id="divErrorFileFormatIMG" style="display:none" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <span id="spnErrorFileFormatIMG" class="error" style="display:none;color:red;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="hdnImageCropWidth" name="ImageCropWidth" />
+<input type="hidden" id="hdnImageCropHeight" name="ImageCropHeight" />
+<input type="hidden" id="hdnCropPointX" name="CropPointX" />
+<input type="hidden" id="hdnCropPointY" name="CropPointY" />
+<input type="hidden" id="hdnCropPointX2" name="CropPointX2" />
+<input type="hidden" id="hdnCropPointY2" name="CropPointY2" />
+<input type="hidden" id="hdnFileName" name="ImgFileName" />
+<input type="hidden" id="hdnImageSource" name="ImageSource" />
+
+
+@section scripts{
+
+    <script>
+        var message = '@TempData["message"]';
+        var CropImageUrl = '@Url.Action("CropImage","User")';
+        document.getElementById("fileProfile").onchange = function () {
+
+            $("#photoFilePath").html(this.value.split('\\').pop());
+            $("#photoFilePath").attr("title", this.value.split('\\').pop());
+            $("#hdnFileName").val('@Model.UserID' + '_' + this.value.split('\\').pop());
+
+        };
+    </script>
+    @*@Scripts.Render("~/plugins/imagecropper")*@
+
+
+    <!--Custom Script for Apartment-->
+    <script src='@Url.Content("~/Scripts/Custom/User/ViewProfile.js")'></script>
+    <script src='@Url.Content("~/Scripts/Custom/User/jquery.Jcrop.min.js")'></script>
+    <script src='@Url.Content("~/Scripts/Custom/User/form-image-crop.js")'></script>
+
+
+
+}
