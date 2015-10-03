@@ -105,10 +105,11 @@ namespace LYSApp.Model
     }
 
     public class AccountViewModel
-    {
+    {        
         public RegisterViewModel RegisterViewModel { get; set; }
         public LoginViewModel LoginViewModel { get; set; }
         public ResetPasswordViewModel ResetPasswordViewModel { get; set; }
+        public ExternalLoginConfirmationViewModel ExternalLoginConfirmationViewModel { get; set; }
 
        
     }
@@ -140,4 +141,5 @@ namespace LYSApp.Model
         public int Status { get; set; }
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }
     }
+
 }

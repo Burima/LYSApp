@@ -7,8 +7,8 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using System;
-using LYSApp.Web.Models;
 using LYSApp.Model;
+using LYSApp.Web.Services.Common;
 
 namespace LYSApp.Web
 {
@@ -49,14 +49,21 @@ namespace LYSApp.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "768508273261526",
-               appSecret: "7ddf95e54a6ee523dcda86c55cda3f40");
+            //app.UseFacebookAuthentication(
+            //   appId: "768508273261526",
+            //   appSecret: "a595985c05972859ed573217bdc2a82c");
+            var facebookOptions = new Microsoft.Owin.Security.Facebook.FacebookAuthenticationOptions()
+            {
+                AppId = LYSConfig.FacebookAppId,
+                AppSecret = LYSConfig.FacebookAppSecret
+            };
+            facebookOptions.Scope.Add("email"); //We want to get user's email information by adding it in scope.
+            app.UseFacebookAuthentication(facebookOptions);
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "952926633768-2v8co79vcd8feea45jlpmvicuuq6njbg.apps.googleusercontent.com",
-                ClientSecret = "1U6uIhwDMBHjP29lCMBYKCSb"
+                ClientId = LYSConfig.GoogleClientId,
+                ClientSecret = LYSConfig.GoogleClientSecret
             });
         }
     }
