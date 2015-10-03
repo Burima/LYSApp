@@ -49,15 +49,15 @@ namespace LYSApp.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "768508273261526",
+               appSecret: "7ddf95e54a6ee523dcda86c55cda3f40");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "952926633768-2v8co79vcd8feea45jlpmvicuuq6njbg.apps.googleusercontent.com",
+                ClientSecret = "1U6uIhwDMBHjP29lCMBYKCSb"
+            });
         }
     }
 }

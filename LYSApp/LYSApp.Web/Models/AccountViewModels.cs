@@ -10,11 +10,11 @@ namespace LYSApp.Web.Models
         public string Email { get; set; }
     }
 
-    public class ExternalLoginListViewModel
-    {
-        public string Action { get; set; }
-        public string ReturnUrl { get; set; }
-    }
+    //public class ExternalLoginListViewModel
+    //{
+    //    public string Action { get; set; }
+    //    public string ReturnUrl { get; set; }
+    //}
 
     public class ManageUserViewModel
     {
