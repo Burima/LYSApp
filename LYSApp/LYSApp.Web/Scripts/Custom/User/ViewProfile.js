@@ -3,13 +3,14 @@ $(document).ready(function () {
     $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
     $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
     //if message show in  modal
-    if (message != "") {
-        $('#modalShowMessage').modal('show');               
-    }
+    //if (message != "") {
+    //    $('#modalShowMessage').modal('show');               
+    //}
+    
+   
     $(".jcrop-holder").find("div").eq(0).addClass("formatDiv");
            
     $("#fileProfile").change(function (e) {
-               
         var file = $(this).val();
         var ext = file.split('.').pop();
         if (ext.toLowerCase() == "gif" || ext.toLowerCase() == "jpeg" || ext.toLowerCase() == "jpg" || ext.toLowerCase() == "png") {
@@ -70,7 +71,7 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-
+          
             $("#divCropResizeImage").modal('show');
             $("#hdnImageSource").val(e.target.result);
             $('.jcrop-holder').replaceWith('');
@@ -99,7 +100,7 @@ function fnLoadImage() {
         alert("Please select crop area.");
         return;
     }
-    
+    alert($("#hdnFileName").val());
     $.ajax({
         url: CropImageUrl,
         type: 'POST',
@@ -116,8 +117,8 @@ function fnLoadImage() {
             $("#fileProfile").files = data.PhotoPath;
             $("#imgProfile").attr("src", data.PhotoPath);
             $('#hdnFileName').val(data.filename);
-            $('#profilePic').val(data.PhotoPath);
-            document.getElementById("profile").src = data.PhotoPath;
+            //$('#profilePic').val(data.PhotoPath);
+            //document.getElementById("profile").src = data.PhotoPath;
         },
         error: function (data) { }
     });

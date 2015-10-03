@@ -24,7 +24,8 @@ namespace LYSApp.Web.Controllers
         private UserManager _userManager;
         AccountViewModel accountViewModel = new AccountViewModel();
         MandrillMailer mandrillMailer = new MandrillMailer();
-        TripleDES tripleDES = new TripleDES();        
+        TripleDES tripleDES = new TripleDES();  
+       
         public AccountController()
         {
         }
@@ -49,6 +50,7 @@ namespace LYSApp.Web.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            
             return View();
         }
 
@@ -57,6 +59,7 @@ namespace LYSApp.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+         
             ViewBag.ReturnUrl = returnUrl;
             return View("Index");
         }
@@ -116,6 +119,7 @@ namespace LYSApp.Web.Controllers
                     LockoutEnabled=true
                 };
                 IdentityResult result = await UserManager.CreateAsync(user, model.RegisterViewModel.Password);
+                
                 if (result.Succeeded)
                 {
                     //await SignInAsync(user, isPersistent: false);
@@ -296,10 +300,12 @@ namespace LYSApp.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
+          
             ManageMessageId? message = null;
             var result = await UserManager.RemoveLoginAsync(long.Parse(User.Identity.GetUserId()), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
+                
                 var user = await UserManager.FindByIdAsync(long.Parse(User.Identity.GetUserId()));
                 await SignInAsync(user, isPersistent: false);
                 message = ManageMessageId.RemoveLoginSuccess;
@@ -596,11 +602,12 @@ namespace LYSApp.Web.Controllers
         {
             if (Url.IsLocalUrl(returnUrl))
             {
-                return Redirect(returnUrl);
+                //return Redirect(returnUrl);
+                return RedirectToAction("ViewProfile", "User");
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ViewProfile", "User");
             }
         }
 
