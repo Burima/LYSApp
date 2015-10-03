@@ -17,7 +17,8 @@
                         if (p.AuthenticationType == "Facebook") { 
                         <div class="form-group">
                             <div class="btn-group-justified">
-                                <button type="submit" class="btn btn-lg btn-facebook full-width" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="fa fa-facebook pull-left"></span>Sign Up with Facebook</button>
+                                <button type="submit" class="btn btn-lg btn-facebook full-width" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="fa fa-facebook pull-left"></span><span class="action">Sign Up</span> with Facebook</button>
+                                <!-- based on the action class the inner text will be changed as Sign In or Sign Up  -->
                             </div>
                         </div>
                         }
@@ -25,7 +26,8 @@
                         {
                             <div class="form-group">
                                 <div class="btn-group-justified">
-                                    <button type="submit" class="btn btn-lg btn-google full-width" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="fa fa-google-plus pull-left"></span>Sign Up with Google</button>
+                                    <button type="submit" class="btn btn-lg btn-google full-width" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="fa fa-google-plus pull-left"></span><span class="action">Sign Up</span> with Google</button>
+                                    <!-- based on the action class the inner text will be changed as Sign In or Sign Up  -->
                                 </div>
                             </div>
                         }

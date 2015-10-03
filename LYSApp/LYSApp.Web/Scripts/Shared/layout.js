@@ -1,6 +1,10 @@
 ﻿$(document).ready(function () {
 
-
+    //set external login test as Sign UP/Sign In based on the modal header text
+    $('.modal-body .action').each(function (index, element) {
+        //alert($(this).closest('div.modal-content').find('h4').html());
+        $(this).html($(this).closest('div.modal-content').find('h4').html());
+    });
     //char alone
     //$(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
 
