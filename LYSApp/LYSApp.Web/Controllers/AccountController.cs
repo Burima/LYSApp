@@ -15,6 +15,7 @@ using LYSApp.Domain.NotificationManagement;
 using LYSApp.Web.Services.Security;
 using System.Configuration;
 using LYSApp.Web.Services.Common;
+using LYSApp.Web.Services;
 
 namespace LYSApp.Web.Controllers
 {
@@ -77,6 +78,8 @@ namespace LYSApp.Web.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.LoginViewModel.RememberMe);
+                    //sessionize user
+                    SessionManager.SessionizeUser(user);
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -419,7 +422,7 @@ namespace LYSApp.Web.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                return View("ExternalLoginConfirmation", new AccountViewModel { Email = loginInfo.Email });
             }
         }
 
