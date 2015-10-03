@@ -125,24 +125,7 @@ namespace LYSApp.Web.Controllers
                 
                 if (result.Succeeded)
                 {
-                    //await SignInAsync(user, isPersistent: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = tripleDES.Encrypt((user.Id).ToString()), code = tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
-                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    
-                    //save to mailchimp subscription list
-                    //enables for production only
-                    if (LYSConfig.EnvironmentName == "Production")
-                    {
-                        mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName);
-                    }
-                    
-
-                    //send email activation link
-                    mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Activate Your Account | Lockyourstay");
+                    await CompleteRegistration(user);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -476,21 +459,27 @@ namespace LYSApp.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User() { UserName = model.ExternalLoginConfirmationViewModel.Email, Email = model.ExternalLoginConfirmationViewModel.Email };
+                
+                var user = new User()
+                {
+                    FirstName = "Guest",
+                    LastName = String.Empty,
+                    UserName = model.ExternalLoginConfirmationViewModel.Email.ToUpper(),
+                    Email = model.ExternalLoginConfirmationViewModel.Email.ToUpper(),
+                    CreatedOn=DateTime.Now,
+                    LastUpdatedOn=DateTime.Now,
+                    Status=1,
+                    LockoutEndDateUtc=DateTime.Now.AddDays(60),
+                    LockoutEnabled=true
+                };
+                
                 IdentityResult result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await SignInAsync(user, isPersistent: false);
-                        //sessionize user
-                        SessionManager.SessionizeUser(user);
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
+                        await CompleteRegistration(user);
 
                         return RedirectToLocal(returnUrl);
                     }
@@ -555,8 +544,31 @@ namespace LYSApp.Web.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// if Coplete Task including save to mailchimp and sending mails.
+        /// </summary>
+        /// <param name="user">currently registed user</param>
+        /// <returns></returns>
 
+        private async Task CompleteRegistration(User user)
+        {
+            await SignInAsync(user, isPersistent: false);
 
+            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+            // Send an email with this link
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = tripleDES.Encrypt((user.Id).ToString()), code = tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
+            
+            //save to mailchimp subscription list
+            //enables for production only
+            if (LYSConfig.EnvironmentName == "Production")
+            {
+                mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName);
+            }
+
+            //send email activation link
+            mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Activate Your Account | Lockyourstay");
+        }
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
