@@ -125,7 +125,6 @@ namespace LYSApp.Model
         public Nullable<int> Gender { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
-        public string PasswordHash { get; set; }
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public string PresentAddress { get; set; }
@@ -140,6 +139,23 @@ namespace LYSApp.Model
         public string InstitutionName { get; set; }
         public int Status { get; set; }
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string OldPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
     }
 
 }

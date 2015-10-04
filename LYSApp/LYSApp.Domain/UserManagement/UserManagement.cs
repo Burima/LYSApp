@@ -32,7 +32,7 @@ namespace LYSApp.Domain.UserManagement
             dbUser.LastName = userViewModel.LastName;
             dbUser.Gender = userViewModel.Gender;
             dbUser.ProfilePicture = userViewModel.ProfilePicture;
-            dbUser.PasswordHash = userViewModel.PasswordHash;
+            dbUser.PasswordHash = userViewModel.Password;
             dbUser.Email = userViewModel.Email;
             
             dbUser.UserDetails.FirstOrDefault().PresentAddress = userViewModel.PresentAddress;

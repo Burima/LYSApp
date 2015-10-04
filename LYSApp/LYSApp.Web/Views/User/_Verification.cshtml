@@ -1,5 +1,6 @@
 ﻿@model LYSApp.Model.UserViewModel
 
+@*---Mobile Verification Modal---*@
 <div id="divMobileVerification" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content bounceInRight">
@@ -23,6 +24,8 @@
         </div>
     </div>
 </div>
+
+@*---Email Verification Modal---*@
 <div id="divEmailVerification" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content bounceInRight">
@@ -40,6 +43,50 @@
         </div>
     </div>
 </div>
+
+@*---Change Password*@
+<div id="divChangePassword" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bounceInRight">
+            <div class="modal-header">
+                <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Change Password</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        Current Password
+                    </div>
+                    <div class="col-lg-9">
+                       @Html.PasswordFor(model => model.OldPassword, new { @class = "form-control", placeholder = "Current Password" })
+                    </div>
+                </div>
+
+                <div class="row row-padding-top-5">
+                    <div class="col-lg-3">
+                        New Password
+                    </div>
+                    <div class="col-lg-9">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "New Password" })
+                    </div>
+                </div>
+
+                <div class="row row-padding-top-5">
+                    <div class="col-lg-3">
+                        Current Password
+                    </div>
+                    <div class="col-lg-9">
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" id="btnChange" type="button" aria-hidden="true" value="Change" />
+            </div>
+        </div>
+    </div>
+</div>
+@*---Content---*@
 <div class="col-md-9">
     <div class="panel content">
         <div class="panel-heading">
@@ -71,7 +118,7 @@
                    Email ID
                 </div>
                 <div class="col-md-9">
-                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email ID ", tabIndex = "2" })
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email ID ", tabIndex = "2" ,id = "textEmail"})
                 </div>
                 <div class="col-md-12 align-right ">
                     @if (Model.EmailConfirmed)
@@ -85,11 +132,13 @@
                 </div>
             </div>
             @*---Change Password---*@
-            <div class="col-md-3">
-               Password
-            </div>
-            <div class="col-md-9">
-                <a href="#" id="linkChangePassword" class="form-control">Verify</a>s
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Password
+                </div>
+                <div class="col-md-9">
+                    <a href="#" id="linkChangePassword">Change</a>
+                </div>
             </div>
         </div>
     </div>
@@ -100,6 +149,7 @@
 <script>
 
     var mobileVerificationURL = '@Url.Action("Verification", "User")';
+    var emailVerificationURL = '@Url.Action("EmailVerification", "User")';
     $('#linkVerify').click(function () {
         $("#divMobileVerification").modal('show');
     });
@@ -119,17 +169,26 @@
     //});
 
     $('#linkVerifyEmail').click(function () {
-       
+        alert(emailVerificationURL);
         $.ajax({
-            url: mobileVerificationURL,
+            url: emailVerificationURL,
             type: 'POST',
             data: {
-               
+                email: $('#textEmail').val()
             },
-           success: function (data) {
+           success: function () {
                $("#divEmailVerification").modal('show');
             },
             error: function (data) { }
         });
+    });
+
+    $('#linkChangePassword').click(function () {
+
+        $("#divChangePassword").modal('show');
+    });
+
+    $('#btnChange').click(function () {
+
     });
 </script>

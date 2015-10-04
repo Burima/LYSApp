@@ -8,6 +8,7 @@ using LYSApp.Model;
 using LYSApp.Domain.UserManagement;
 using LYSApp.Domain;
 using LYSApp.Web.Services;
+using System.Threading.Tasks;
 
 namespace LYSApp.Web.Controllers
 {
@@ -37,18 +38,21 @@ namespace LYSApp.Web.Controllers
                 userViewModel.LastName = user.LastName;
                 userViewModel.Gender = user.Gender;
                 userViewModel.ProfilePicture = user.ProfilePicture;
-                userViewModel.PasswordHash = user.PasswordHash;
+                userViewModel.Password = user.PasswordHash;
                 userViewModel.Email = user.Email;
-                userViewModel.PresentAddress = user.UserDetails.FirstOrDefault().PresentAddress;
-                userViewModel.PermanentAddress = user.UserDetails.FirstOrDefault().PermanentAddress;
-                userViewModel.GovtIDType = user.UserDetails.FirstOrDefault().GovtIDType;
-                userViewModel.GovtID = user.UserDetails.FirstOrDefault().GovtID;
-                userViewModel.UserProfession = user.UserDetails.FirstOrDefault().UserProfession;
-                userViewModel.OfficeLocation = user.UserDetails.FirstOrDefault().OfficeLocation;
-                userViewModel.CurrentEmployer = user.UserDetails.FirstOrDefault().CurrentEmployer;
-                userViewModel.EmployeeID = user.UserDetails.FirstOrDefault().EmployeeID;
-                userViewModel.HighestEducation = user.UserDetails.FirstOrDefault().HighestEducation;
-                userViewModel.InstitutionName = user.UserDetails.FirstOrDefault().InstitutionName;
+                if (user.UserDetails.Count != 0)
+                {
+                    userViewModel.PresentAddress = user.UserDetails.FirstOrDefault().PresentAddress;
+                    userViewModel.PermanentAddress = user.UserDetails.FirstOrDefault().PermanentAddress;
+                    userViewModel.GovtIDType = user.UserDetails.FirstOrDefault().GovtIDType;
+                    userViewModel.GovtID = user.UserDetails.FirstOrDefault().GovtID;
+                    userViewModel.UserProfession = user.UserDetails.FirstOrDefault().UserProfession;
+                    userViewModel.OfficeLocation = user.UserDetails.FirstOrDefault().OfficeLocation;
+                    userViewModel.CurrentEmployer = user.UserDetails.FirstOrDefault().CurrentEmployer;
+                    userViewModel.EmployeeID = user.UserDetails.FirstOrDefault().EmployeeID;
+                    userViewModel.HighestEducation = user.UserDetails.FirstOrDefault().HighestEducation;
+                    userViewModel.InstitutionName = user.UserDetails.FirstOrDefault().InstitutionName;
+                }
             }
             return View(userViewModel);
         }
@@ -70,7 +74,7 @@ namespace LYSApp.Web.Controllers
             int count = userManagement.UpdateUser(userViewModel);
             if (count > 0)
             {
-                var user = (User)Session["User"];
+                var user = SessionManager.GetSessionUser();
                 user.ProfilePicture = userViewModel.ProfilePicture;
                 TempData["message"] = "Profile updated successfully!";
             }
@@ -110,6 +114,17 @@ namespace LYSApp.Web.Controllers
             {
                 return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
             }
+        }
+
+        [HttpPost]
+
+        public async Task<ActionResult> EmailVerification(string email)
+        {
+            var  user = SessionManager.GetSessionUser();
+            user.Email = email;
+            AccountController accountController = new AccountController();
+            await accountController.SendEmailActivationMail(user);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }
