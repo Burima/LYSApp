@@ -80,7 +80,10 @@ namespace LYSApp.Web.Controllers
                     await SignInAsync(user, model.LoginViewModel.RememberMe);
                     //sessionize user
                     SessionManager.SessionizeUser(user);
+                                     
                     return RedirectToLocal(returnUrl);
+                    
+                    
                 }
                 else
                 {
@@ -89,7 +92,7 @@ namespace LYSApp.Web.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View("Index");
+            return View("Index",model);
         }
 
         //
@@ -663,12 +666,11 @@ namespace LYSApp.Web.Controllers
         {
             if (Url.IsLocalUrl(returnUrl))
             {
-                //return Redirect(returnUrl);
-                return RedirectToAction("ViewProfile", "User");
+                return Redirect(returnUrl);                
             }
             else
             {
-                return RedirectToAction("ViewProfile", "User");
+                return View("Index");
             }
         }
 
