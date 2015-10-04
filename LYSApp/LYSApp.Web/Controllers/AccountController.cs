@@ -136,7 +136,7 @@ namespace LYSApp.Web.Controllers
                     }
 
                     //Send Activation emai
-                    await SendEmailActivationMail(user);
+                    await SendAccountActivationMail(user);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -502,7 +502,7 @@ namespace LYSApp.Web.Controllers
                         }
 
                         //send Email Action emai
-                        await SendEmailActivationMail(user);
+                        await SendAccountActivationMail(user);
 
                         return RedirectToLocal(returnUrl);
                     }
@@ -573,15 +573,42 @@ namespace LYSApp.Web.Controllers
         /// <param name="user">currently registed user</param>
         /// <returns></returns>
 
-        public async Task SendEmailActivationMail(User user)
-        { 
-            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-            // Send an email with this link
-            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = tripleDES.Encrypt((user.Id).ToString()), code = tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
-            
-            //send email activation link
-            mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Activate Your Account | Lockyourstay");
+        private async Task<bool> SendAccountActivationMail(User user)
+        {
+            try
+            {
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = tripleDES.Encrypt((user.Id).ToString()), code = tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
+
+                //send email activation link
+                mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Activate Your Account | Lockyourstay");
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }            
+        }
+
+        /// <summary>
+        /// Will send verification mai for existing user
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> SendAccountActivationMailForExistingUser()
+        {
+            bool result = await SendAccountActivationMail(SessionManager.GetSessionUser());
+            if (result)
+            {
+                return Content("Success");
+            }
+            else
+            {
+                return Content("Failed");
+            }
         }
         #region Helpers
         // Used for XSRF protection when adding external logins
