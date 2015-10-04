@@ -125,7 +125,18 @@ namespace LYSApp.Web.Controllers
                 
                 if (result.Succeeded)
                 {
-                    await CompleteRegistration(user);
+                    await SignInAsync(user, isPersistent: false);
+                    //sessionize user
+                    SessionManager.SessionizeUser(user);
+                    //save to mailchimp subscription list
+                    //enables for production only
+                    if (LYSConfig.EnvironmentName == "Production")
+                    {
+                        mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName);
+                    }
+
+                    //Send Activation emai
+                    await SendEmailActivationMail(user);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -462,7 +473,7 @@ namespace LYSApp.Web.Controllers
                 
                 var user = new User()
                 {
-                    FirstName = "Guest",
+                    FirstName = String.Empty,
                     LastName = String.Empty,
                     UserName = model.ExternalLoginConfirmationViewModel.Email.ToUpper(),
                     Email = model.ExternalLoginConfirmationViewModel.Email.ToUpper(),
@@ -479,7 +490,19 @@ namespace LYSApp.Web.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await CompleteRegistration(user);
+                        await SignInAsync(user, isPersistent: false);
+
+                        //sessionize user
+                        SessionManager.SessionizeUser(user);
+                        //save to mailchimp subscription list
+                        //enables for production only
+                        if (LYSConfig.EnvironmentName == "Production")
+                        {
+                            mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName);
+                        }
+
+                        //send Email Action emai
+                        await SendEmailActivationMail(user);
 
                         return RedirectToLocal(returnUrl);
                     }
@@ -550,22 +573,13 @@ namespace LYSApp.Web.Controllers
         /// <param name="user">currently registed user</param>
         /// <returns></returns>
 
-        private async Task CompleteRegistration(User user)
-        {
-            await SignInAsync(user, isPersistent: false);
-
+        public async Task SendEmailActivationMail(User user)
+        { 
             // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
             // Send an email with this link
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = tripleDES.Encrypt((user.Id).ToString()), code = tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
             
-            //save to mailchimp subscription list
-            //enables for production only
-            if (LYSConfig.EnvironmentName == "Production")
-            {
-                mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName);
-            }
-
             //send email activation link
             mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Activate Your Account | Lockyourstay");
         }
