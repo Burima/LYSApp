@@ -822,20 +822,27 @@ a.notifySettings {
     float: right;
     height: 46px;
     margin-top:-10px;
+    color:white !important;     
+}
+.headerUserWraper:hover{
+    color:black !important;
 }
 a.headerUser {
     display: block;
     height: 56px;
     text-align: center;
     padding: 0 20px;
+    color:white;
 }
 .no-touch a.headerUser:hover, .headerUserWraper.open a.headerUser {
     background-color: #f3f3f3;
+    color:black;
 }
 .headerUserWraper .dropdown-menu {
     border-radius: 3px;
     border: 1px solid #dfdfdf;
 }
+
 .headerAvatar {
     margin-top: 10px;
 }
@@ -843,12 +850,7 @@ a.headerUser {
     margin: 20px 0 0 7px;
     font-size: 13px;
 }
-.headerUserName{
-    color:white;
-}
-.headerUserName:hover{
-    color:black;
-}
+
 .userMenu {
     width: 190px;
     background-color:whitesmoke;
