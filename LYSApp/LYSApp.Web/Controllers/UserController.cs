@@ -29,9 +29,11 @@ namespace LYSApp.Web.Controllers
         // GET: User
         public ActionResult ViewProfile()
         {
-            if (Session["User"] != null)
+
+            var user = SessionManager.GetSessionUser();
+            if (user != null)
             {
-                var user = SessionManager.GetSessionUser();
+              
                 userViewModel.UserID = user.Id;
                 userViewModel.PhoneNumber = user.PhoneNumber;
                 userViewModel.FirstName = user.FirstName;
@@ -40,7 +42,7 @@ namespace LYSApp.Web.Controllers
                 userViewModel.ProfilePicture = user.ProfilePicture;
                 userViewModel.Password = user.PasswordHash;
                 userViewModel.Email = user.Email;
-                if (user.UserDetails.Count != 0)
+                if (user.UserDetails != null && user.UserDetails.Count > 0)
                 {
                     userViewModel.PresentAddress = user.UserDetails.FirstOrDefault().PresentAddress;
                     userViewModel.PermanentAddress = user.UserDetails.FirstOrDefault().PermanentAddress;
@@ -52,6 +54,11 @@ namespace LYSApp.Web.Controllers
                     userViewModel.EmployeeID = user.UserDetails.FirstOrDefault().EmployeeID;
                     userViewModel.HighestEducation = user.UserDetails.FirstOrDefault().HighestEducation;
                     userViewModel.InstitutionName = user.UserDetails.FirstOrDefault().InstitutionName;
+                }
+
+                if (user.HouseReviews != null && user.HouseReviews.Count > 0)
+                {
+                    userViewModel.houseReviews = user.HouseReviews.ToList();
                 }
             }
             return View(userViewModel);
@@ -116,15 +123,5 @@ namespace LYSApp.Web.Controllers
             }
         }
 
-        [HttpPost]
-
-        public async Task<ActionResult> EmailVerification(string email)
-        {
-            var  user = SessionManager.GetSessionUser();
-            user.Email = email;
-            AccountController accountController = new AccountController();
-            await accountController.SendEmailActivationMail(user);
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-        }
     }
 }
