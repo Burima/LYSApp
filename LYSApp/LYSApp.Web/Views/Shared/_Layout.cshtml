@@ -1,6 +1,20 @@
 ﻿@using LYSApp.Model;
 @model LYSApp.Model.AccountViewModel
-
+@{
+    //if error in log in
+    string loginError = String.Empty; 
+    if (Model != null && Model.LoginViewModel != null && Model.LoginViewModel.LoginError != null && Model.LoginViewModel.LoginError != String.Empty)
+    {
+        loginError = Model.LoginViewModel.LoginError;
+    }
+    //if error in  signup
+    string registerError = String.Empty;
+    if (Model != null && Model.RegisterViewModel != null && Model.RegisterViewModel.RegisterError != null && Model.RegisterViewModel.RegisterError != String.Empty)
+    {
+        registerError = Model.RegisterViewModel.RegisterError;
+    }
+    
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +41,7 @@
 
     <!-- Header -->
     @Html.Partial("_Header")
-    
+
     <!-- Content -->
     @RenderBody()
 
@@ -42,13 +56,25 @@
                     <h4 class="modal-title" id="signinLabel">Sign In</h4>
                 </div>
                 <div class="modal-body">
+                    <div class="errorblock form-group hidden">                       
+                        <div class="alert alert-success modal-alert">
+                            <div class="row no-margin">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                    <span class="errormessage"></span>
+                                </div>                               
+                            </div>
+                        </div>
+                    </div>
                     @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
-                    
+
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", id = "form-SignIn", autocomplete = "off" }))
                     {
 
-                        @Html.AntiForgeryToken();                        
-                        
+                        @Html.AntiForgeryToken();
+
                         <div class="form-group">
                             @*<input type="text" placeholder="Email Address" class="form-control">*@
                             @Html.TextBoxFor(model => model.LoginViewModel.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email", tabIndex = "1" })
@@ -60,7 +86,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <div class="checkbox custom-checkbox"><label><input type="checkbox"><span class="fa fa-check"></span> Remember me</label></div>
+                                    <div class="checkbox custom-checkbox hidden"><label><input type="checkbox"><span class="fa fa-check"></span> Remember me</label></div>
                                 </div>
                                 <div class="col-xs-6 align-right">
                                     <p class="help-block"><a href="javascript:void(0)" class="modal-fp text-green">Forgot password?</a></p>
@@ -86,38 +112,50 @@
                     <h4 class="modal-title" id="signupLabel">Sign Up</h4>
                 </div>
                 <div class="modal-body">
+                    <div class="errorblock form-group hidden">
+                        <div class="alert alert-success modal-alert">
+                            <div class="row no-margin">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                    <span class="errormessage"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
 
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form", id = "form-SignUp", autocomplete = "off" }))
                     {
 
-                    @Html.AntiForgeryToken();
-                    
-                    <div class="form-group">
-                        @*<input type="text" id="registerFirstName" placeholder="First Name" class="form-control required charAlone" name="RegisterViewModel.FirstName">*@
-                        @Html.TextBoxFor(model => model.RegisterViewModel.FirstName, new { @class = "form-control", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
-                    </div>
-                    <div class="form-group">
-                        @*<input type="text" id="registerLastName" placeholder="Last Name" class="form-control required charAlone" name="RegisterViewModel.LastName">*@
-                        @Html.TextBoxFor(model => model.RegisterViewModel.LastName, new { @class = "form-control", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })
-                    </div>
-                    <div class="form-group">
-                        @*<input type="email" id="registerEmail" placeholder="Email Address" class="form-control required" name="RegisterViewModel.Email">*@
-                        @Html.TextBoxFor(model => model.RegisterViewModel.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email", tabIndex = "3" })
-                    </div>
-                    <div class="form-group">
-                        @*<input type="password" id="registerPassword" placeholder="Password" class="form-control required" name="RegisterViewModel.Password">*@
-                        @Html.PasswordFor(model => model.RegisterViewModel.Password, new { @class = "form-control", maxlength = "50", placeholder = "Password", tabIndex = "4" })
-                    </div>
-                    <div class="form-group">
-                        @*<input type="password" id="registerConfirmPassword" placeholder="Confirm Password" class="form-control required" name="RegisterViewModel.ConfirmPassword">*@
-                        @Html.PasswordFor(model => model.RegisterViewModel.ConfirmPassword, new { @class = "form-control", maxlength = "50", placeholder = "Confirm Password", tabIndex = "5" })
-                    </div>
-                    <div class="form-group">
-                        <div class="btn-group-justified">
-                            <input type="submit" class="btn btn-lg btn-green full-width" value="Sign Up">
+                        @Html.AntiForgeryToken();
+
+                        <div class="form-group">
+                            @*<input type="text" id="registerFirstName" placeholder="First Name" class="form-control required charAlone" name="RegisterViewModel.FirstName">*@
+                            @Html.TextBoxFor(model => model.RegisterViewModel.FirstName, new { @class = "form-control", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
                         </div>
-                    </div>
+                        <div class="form-group">
+                            @*<input type="text" id="registerLastName" placeholder="Last Name" class="form-control required charAlone" name="RegisterViewModel.LastName">*@
+                            @Html.TextBoxFor(model => model.RegisterViewModel.LastName, new { @class = "form-control", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })
+                        </div>
+                        <div class="form-group">
+                            @*<input type="email" id="registerEmail" placeholder="Email Address" class="form-control required" name="RegisterViewModel.Email">*@
+                            @Html.TextBoxFor(model => model.RegisterViewModel.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email", tabIndex = "3" })
+                        </div>
+                        <div class="form-group">
+                            @*<input type="password" id="registerPassword" placeholder="Password" class="form-control required" name="RegisterViewModel.Password">*@
+                            @Html.PasswordFor(model => model.RegisterViewModel.Password, new { @class = "form-control", maxlength = "50", placeholder = "Password", tabIndex = "4" })
+                        </div>
+                        <div class="form-group">
+                            @*<input type="password" id="registerConfirmPassword" placeholder="Confirm Password" class="form-control required" name="RegisterViewModel.ConfirmPassword">*@
+                            @Html.PasswordFor(model => model.RegisterViewModel.ConfirmPassword, new { @class = "form-control", maxlength = "50", placeholder = "Confirm Password", tabIndex = "5" })
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group-justified">
+                                <input type="submit" class="btn btn-lg btn-green full-width" value="Sign Up">
+                            </div>
+                        </div>
                     }
                     <p class="help-block">Already a Lockyourstay member? <a href="javascript:void(0)" class="modal-si text-green">Sign In</a></p>
                 </div>
@@ -154,17 +192,17 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 @*<div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="modal-messageLabel">Message</h4>
-                </div>*@
-                <div class="modal-body">  
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modal-messageLabel">Message</h4>
+                    </div>*@
+                <div class="modal-body">
                     <div class="alert alert-success" style="font-size: 1.2em;margin-bottom: 0px;font-weight: 300;">
                         <i class="fa fa-comments-o"></i><span style="margin:0% 1% 0% 1%;" id="spnMessage" class="text-justify"></span><i data-dismiss="modal" class="fa fa-times pull-right"></i>
+                    </div>
                 </div>
-               </div>
                 @*<div class="modal-footer">
-                    <input type="button" class="btn btn-green" data-dismiss="modal" value="Okey" />
-                </div>*@
+                        <input type="button" class="btn btn-green" data-dismiss="modal" value="Okey" />
+                    </div>*@
             </div>
         </div>
     </div> <!-- End Message Modal -->
@@ -183,7 +221,9 @@
 
     <script>
         var EmailSubscribeURL = '@Url.Action("EmailSubscribe","Account")'
-        var ForgotPasswordURL = '@Url.Action("ForgotPassword", "Account")'       
+        var ForgotPasswordURL = '@Url.Action("ForgotPassword", "Account")'
+        var loginError = '@loginError'
+        var registerError='@registerError'
     </script>
     @Scripts.Render("~/bundles/layout")
     <!--custom scripts for childs-->

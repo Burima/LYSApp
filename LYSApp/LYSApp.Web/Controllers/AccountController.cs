@@ -88,6 +88,7 @@ namespace LYSApp.Web.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Invalid username or password.");
+                    model.LoginViewModel.LoginError = "Invalid username or password.";
                 }
             }
 
@@ -141,10 +142,11 @@ namespace LYSApp.Web.Controllers
                     //Send Activation emai
                     await SendAccountActivationMail(user);
 
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
                 }
                 else
                 {
+                    model.RegisterViewModel.RegisterError = result.Errors.FirstOrDefault();
                     AddErrors(result);
                 }
             }
