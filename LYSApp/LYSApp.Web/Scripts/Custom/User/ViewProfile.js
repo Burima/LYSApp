@@ -117,7 +117,7 @@ function fnLoadImage() {
             $("#fileProfile").files = data.PhotoPath;
             $("#imgProfile").attr("src", data.PhotoPath);
             $('#hdnFileName').val(data.filename);
-            //$('#profilePic').val(data.PhotoPath);
+            $('#profilePic').val(data.PhotoPath);
             //document.getElementById("profile").src = data.PhotoPath;
         },
         error: function (data) { }

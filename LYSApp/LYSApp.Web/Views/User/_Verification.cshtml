@@ -1,11 +1,52 @@
 ﻿@model LYSApp.Model.UserViewModel
 
+<div id="divMobileVerification" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bounceInRight">
+            <div class="modal-header">
+                <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Verify Mobile Number</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-10">
+                        Verification code has been sent to your mobile number
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" id="textVerficationCode" placeholder="Enter code" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" id="btnVerfiy" type="button" aria-hidden="true" value="Verify" />
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divEmailVerification" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bounceInRight">
+            <div class="modal-header">
+                <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Verify Email</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-10">
+                        Verification code has been sent to your provided Email ID.Please check you email id.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="col-md-9">
     <div class="panel content">
         <div class="panel-heading">
             Verification
         </div>
         <div class="panel-body">
+            @*---Mobile Number---*@
             <div class="row">
                 <div class="col-md-3">
                     Phone Number
@@ -13,23 +54,82 @@
                 <div class="col-md-9">
                     @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", maxlength = "50", placeholder = "Phone " , tabIndex = "1" })
                 </div>
-            </div>
-            <div class="col-md-12">
-                if(model.PhoneNumberConfirmed)
-                    @Html.Label("Verified")
-                else
-                    <a href="#">Verify</a>
+                <div class="col-md-12 align-right ">
+                    @if (Model.PhoneNumberConfirmed)
+                    {
+                        @Html.Label("Verified")
+                    }
+                    else
+                    {
+                        <a href="#" id="linkVerify">Verify</a>
+                    }
                 </div>
-            <div class="row">
+            </div>
+            @*---Email ID---*@
+            <div class="row row-padding-top-5">
                 <div class="col-md-3">
                    Email ID
                 </div>
                 <div class="col-md-9">
-                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email ID ", tabIndex = "1" })
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email ID ", tabIndex = "2" })
+                </div>
+                <div class="col-md-12 align-right ">
+                    @if (Model.EmailConfirmed)
+                    {
+                        @Html.Label("Verified")
+                    }
+                    else
+                    {
+                        <a href="#" id="linkVerifyEmail">Verify</a>
+                    }
                 </div>
             </div>
-
-
+            @*---Change Password---*@
+            <div class="col-md-3">
+               Password
+            </div>
+            <div class="col-md-9">
+                <a href="#" id="linkChangePassword" class="form-control">Verify</a>s
+            </div>
         </div>
     </div>
 </div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script>
+
+    var mobileVerificationURL = '@Url.Action("Verification", "User")';
+    $('#linkVerify').click(function () {
+        $("#divMobileVerification").modal('show');
+    });
+
+    //$('#btnVerfiy').click(function () {
+    //    $.ajax({
+    //        url: mobileVerificationURL,
+    //        type: 'POST',
+    //        data: {
+               
+    //        },
+    //        success: function (data) {
+                
+    //        },
+    //        error: function (data) { }
+    //    });
+    //});
+
+    $('#linkVerifyEmail').click(function () {
+       
+        $.ajax({
+            url: mobileVerificationURL,
+            type: 'POST',
+            data: {
+               
+            },
+           success: function (data) {
+               $("#divEmailVerification").modal('show');
+            },
+            error: function (data) { }
+        });
+    });
+</script>

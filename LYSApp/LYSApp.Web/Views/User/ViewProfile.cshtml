@@ -2,7 +2,7 @@
 @model LYSApp.Model.UserViewModel
 
 @{
-    
+    Layout = null;
     ViewBag.Title = "Profile";
 }
 
@@ -45,7 +45,14 @@
         </div>
     </div>
 
-    
+<input type="hidden" id="hdnImageCropWidth" name="ImageCropWidth" />
+<input type="hidden" id="hdnImageCropHeight" name="ImageCropHeight" />
+<input type="hidden" id="hdnCropPointX" name="CropPointX" />
+<input type="hidden" id="hdnCropPointY" name="CropPointY" />
+<input type="hidden" id="hdnCropPointX2" name="CropPointX2" />
+<input type="hidden" id="hdnCropPointY2" name="CropPointY2" />
+<input type="hidden" id="hdnFileName" name="ImgFileName" />
+<input type="hidden" id="hdnImageSource" name="ImageSource" />
     <div class="wrapper">
 
         <!--=== Profile ===-->
@@ -77,8 +84,9 @@
                 <!-- Profile Content -->
                 <div class="col-md-9">
                  
-                      @Html.Partial("_EditProfile",Model)
+                    @Html.Partial("_EditProfile",Model)
                     @Html.Partial("_ProfilePicture", Model)
+                    @Html.Partial("_Verification",Model)
                 </div>
                 <!-- End Profile Content -->
             </div>
@@ -87,21 +95,17 @@
 
     </div>
     <!--/wrapper-->
-    <input type="hidden" id="hdnImageCropWidth" name="ImageCropWidth" />
-    <input type="hidden" id="hdnImageCropHeight" name="ImageCropHeight" />
-    <input type="hidden" id="hdnCropPointX" name="CropPointX" />
-    <input type="hidden" id="hdnCropPointY" name="CropPointY" />
-    <input type="hidden" id="hdnCropPointX2" name="CropPointX2" />
-    <input type="hidden" id="hdnCropPointY2" name="CropPointY2" />
-    <input type="hidden" id="hdnFileName" name="ImgFileName" />
-    <input type="hidden" id="hdnImageSource" name="ImageSource" />
-   
+  
+
 @section scripts{
 <script>
     var CropImageUrl = '@Url.Action("CropImage", "User")';
 </script>
-<script src='@Url.Content("~/Scripts/Custom/User/ViewProfile.js")'></script>
-<script src='@Url.Content("~/Scripts/Custom/User/jquery.Jcrop.min.js")'></script>
-<script src='@Url.Content("~/Scripts/Custom/User/form-image-crop.js")'></script>
+
 }
     
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src='@Url.Content("~/Scripts/Custom/User/ViewProfile.js")'></script>
+<script src='@Url.Content("~/Scripts/Custom/User/jquery.Jcrop.min.js")'></script>
+<script src='@Url.Content("~/Scripts/Custom/User/form-image-crop.js")'></script>  

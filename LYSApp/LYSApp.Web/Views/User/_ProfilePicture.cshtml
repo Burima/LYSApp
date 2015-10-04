@@ -12,7 +12,7 @@
                     <div><div id="photoFilePath" class="filePath pull-left">No File Chosen</div><span id="spnRemove" onclick="fnRemove()" style="cursor:pointer; color:gray; display:none">x</span></div>
                     <br />
                     <img draggable="false" id="imgProfile" style="display:inline-block; height:100px; width:100px; margin: 0 5px 0 10px;" src="@Url.Action(Model.ProfilePicture)" />
-                    <input type="hidden" id="profilePic" name="User.ProfilePicture" />
+                    @Html.HiddenFor(model => model.ProfilePicture)
                 </div>
             </div>
             <div id="divErrorFileFormatIMG" style="display:none" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -32,8 +32,7 @@
 @section scripts{
 
     <script>
-        var message = '@TempData["message"]';
-        
+               
         document.getElementById("fileProfile").onchange = function () {
 
             $("#photoFilePath").html(this.value.split('\\').pop());
