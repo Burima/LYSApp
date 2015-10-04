@@ -7,6 +7,7 @@ using System.Net;
 using LYSApp.Model;
 using LYSApp.Domain.UserManagement;
 using LYSApp.Domain;
+using LYSApp.Web.Services;
 
 namespace LYSApp.Web.Controllers
 {
@@ -29,8 +30,8 @@ namespace LYSApp.Web.Controllers
         {
             if (Session["User"] != null)
             {
-                var user = (LYSApp.Data.DBEntity.User)Session["User"];
-                userViewModel.UserID = user.UserID;
+                var user = SessionManager.GetSessionUser();
+                userViewModel.UserID = user.Id;
                 userViewModel.PhoneNumber = user.PhoneNumber;
                 userViewModel.FirstName = user.FirstName;
                 userViewModel.LastName = user.LastName;

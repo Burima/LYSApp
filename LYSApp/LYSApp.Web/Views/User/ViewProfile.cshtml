@@ -96,14 +96,12 @@
     <input type="hidden" id="hdnFileName" name="ImgFileName" />
     <input type="hidden" id="hdnImageSource" name="ImageSource" />
    
-
+@section scripts{
 <script>
     var CropImageUrl = '@Url.Action("CropImage", "User")';
 </script>
-
-   @Scripts.Render("~/bundles/jquery")
-   @Scripts.Render("~/bundles/bootstrap")
-    <script src='@Url.Content("~/Scripts/Custom/User/ViewProfile.js")'></script>
-    <script src='@Url.Content("~/Scripts/Custom/User/jquery.Jcrop.min.js")'></script>
-    <script src='@Url.Content("~/Scripts/Custom/User/form-image-crop.js")'></script>
+<script src='@Url.Content("~/Scripts/Custom/User/ViewProfile.js")'></script>
+<script src='@Url.Content("~/Scripts/Custom/User/jquery.Jcrop.min.js")'></script>
+<script src='@Url.Content("~/Scripts/Custom/User/form-image-crop.js")'></script>
+}
     
