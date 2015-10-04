@@ -820,11 +820,12 @@ a.notifySettings {
 }
 .headerUserWraper {
     float: right;
-    height: 60px;
+    height: 46px;
+    margin-top:-10px;
 }
 a.headerUser {
     display: block;
-    height: 60px;
+    height: 56px;
     text-align: center;
     padding: 0 20px;
 }
@@ -842,8 +843,15 @@ a.headerUser {
     margin: 20px 0 0 7px;
     font-size: 13px;
 }
+.headerUserName{
+    color:white;
+}
+.headerUserName:hover{
+    color:black;
+}
 .userMenu {
     width: 190px;
+    background-color:whitesmoke;
 }
 .userMenu ul {
     list-style-type: none;
