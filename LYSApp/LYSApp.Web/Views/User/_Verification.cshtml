@@ -10,10 +10,10 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-10">
+                    <div class="col-md-10">
                         Verification code has been sent to your mobile number
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-md-10">
                         <input type="text" id="textVerficationCode" placeholder="Enter code" class="form-control" />
                     </div>
                 </div>
@@ -35,7 +35,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-10">
+                    <div class="col-md-10">
                         Verification code has been sent to your provided Email ID.Please check you email id.
                     </div>
                 </div>
@@ -54,28 +54,28 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-md-3">
                         Current Password
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-md-9">
                        @Html.PasswordFor(model => model.OldPassword, new { @class = "form-control", placeholder = "Current Password" })
                     </div>
                 </div>
 
                 <div class="row row-padding-top-5">
-                    <div class="col-lg-3">
+                    <div class="col-md-3">
                         New Password
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-md-9">
                         @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "New Password" })
                     </div>
                 </div>
 
                 <div class="row row-padding-top-5">
-                    <div class="col-lg-3">
+                    <div class="col-md-3">
                         Current Password
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-md-9">
                         @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
                     </div>
                 </div>
@@ -104,6 +104,7 @@
                 <div class="col-md-12 align-right ">
                     @if (Model.PhoneNumberConfirmed)
                     {
+                        <span class="fa fa-check"></span>
                         @Html.Label("Verified")
                     }
                     else
@@ -149,7 +150,7 @@
 <script>
 
     var mobileVerificationURL = '@Url.Action("Verification", "User")';
-    var emailVerificationURL = '@Url.Action("EmailVerification", "User")';
+    var emailVerificationURL = '@Url.Action("SendAccountActivationMailForExistingUser", "Account")';
     $('#linkVerify').click(function () {
         $("#divMobileVerification").modal('show');
     });
@@ -173,13 +174,12 @@
         $.ajax({
             url: emailVerificationURL,
             type: 'POST',
-            data: {
-                email: $('#textEmail').val()
+            success: function () {
+                $("#divEmailVerification").modal('show');
             },
-           success: function () {
-               $("#divEmailVerification").modal('show');
-            },
-            error: function (data) { }
+            error: function (data) {
+                alert(data);
+            }
         });
     });
 

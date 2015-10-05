@@ -1,4 +1,5 @@
-﻿@model LYSApp.Model.UserViewModel
+﻿@using Newtonsoft.Json
+@model LYSApp.Model.UserViewModel
 
 <div class="col-md-9">
     <div class="panel content">
@@ -171,5 +172,31 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-large">Save</button>
+    <button id="btnSubmit"type="submit" class="btn btn-primary btn-large" onclick="fnSubmitProfile()">Save</button>
 </div>
+
+<script>
+    var updateProfile = '@Url.Action("ViewProfile", "User")'
+    @*function fnSubmitProfile() {
+        var check = @JsonConvert.SerializeObject(Model, Formatting.None,
+                        new JsonSerializerSettings()
+                        { 
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        })
+        
+        $.ajax({
+            url: updateProfile,
+            type: 'POST',
+            data: {
+                userViewModel: Json.stringify(check)
+            },
+            success: function () {
+                $("#divEmailVerification").modal('show');
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    }*@
+
+</script>

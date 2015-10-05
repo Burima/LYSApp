@@ -1,0 +1,75 @@
+﻿@model LYSApp.Model.UserViewModel
+
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+<div class="col-md-9">
+    <div class="panel content">
+        <div class="panel-heading">
+            Past Comments by you
+        </div>
+        <div class="panel-body">
+          @if (Model.houseReviews != null && Model.houseReviews.Count == 0)
+          {
+            <div class="row">
+                <div class="col-md-9">
+                    No comments provided by you.
+                </div>
+            </div>
+          }
+          else
+          {
+             foreach (var houseReview in Model.houseReviews)
+              {
+                <div class="row row-padding-top-1">
+                    <div class="col-md-3">
+                        @houseReview.CommentTime
+                    </div>
+                    <div class="col-md-9">
+                        @houseReview.Comments
+                    </div>
+                </div>
+              }
+          }
+        </div>
+    </div>
+    <div class="col-md-9 align-right">
+        <input type="button" id="btnComment" value="Add Comment" class="btn btn-primary" onclick="fnDisplayBlock()"/>
+    </div>
+
+    <div id="divComment" class="col-md-9 row-padding-top-5" style="display:none">
+        <div class="row">
+            <div class="col-md-3">
+                Comments
+            </div>
+            <div class="col-md-9">
+                <textarea id="textComment" cols="40" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9 align-right">
+                <input type="button" id="btnSubmit" value="Submit" class="btn btn-primary" onclick="fnSubmitComment()" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var submitCommentUrl = '@Url.Action("AddComment", "User")';
+    function fnDisplayBlock() {
+        document.getElementById('divComment').style.display = 'block';
+    }
+
+    function fnSubmitComment() {
+        $.ajax({
+            url: submitCommentUrl,
+            type: 'POST',
+            success: function () {
+             
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    }
+</script>
