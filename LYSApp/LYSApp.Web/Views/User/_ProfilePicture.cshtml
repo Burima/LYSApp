@@ -1,5 +1,6 @@
 ﻿@model LYSApp.Model.UserViewModel
-
+@using (Ajax.BeginForm("ViewProfile", "User", new AjaxOptions { UpdateTargetId = "tab-3" }))
+{
 <div id="tab-3" class="tab-pane">
     <div class="row form-group">
         <div class="col-md-12">
@@ -7,7 +8,7 @@
                 <div id="divFile" class="col-lg-8 col-md-8 col-sm-12 col-xs-12 row-padding-top-5">
                     <label for="fileProfile" id="fileLabel">
                         <input class="txtFile" id="fileProfile" name="fileProfile" type="file" style="display:none">
-                        <p class="btn btn-primary">Choose File</p>
+                        <p class="btn btn-green btn-lg" >Choose File</p>
                     </label>
                     <div><div id="photoFilePath" class="filePath pull-left">No File Chosen</div><span id="spnRemove" onclick="fnRemove()" style="cursor:pointer; color:gray; display:none">x</span></div>
                     <br />
@@ -26,9 +27,6 @@
     </div>
 </div>
 
-
-
-
 @section scripts{
 
     <script>
@@ -41,9 +39,5 @@
 
         };
     </script>
-   
-  
-    
-
-
+   }
 }

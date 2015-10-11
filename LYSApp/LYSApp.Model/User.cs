@@ -11,6 +11,88 @@ namespace LYSApp.Model
 {
    public class User:IdentityUser<long,UserLogin,UserRole,UserClaim>
     {
+       public override long Id
+       {
+           get
+           {
+               return base.Id;
+           }
+           set
+           {
+               base.Id = value;
+           }
+       }
+
+       public override string UserName
+       {
+           get
+           {
+               return base.UserName;
+           }
+           set
+           {
+               base.UserName = value;
+           }
+       }
+       public override string PasswordHash
+       {
+           get
+           {
+               return base.PasswordHash;
+           }
+           set
+           {
+               base.PasswordHash = value;
+           }
+       }
+
+       public override string Email
+       {
+           get
+           {
+               return base.Email;
+           }
+           set
+           {
+               base.Email = value;
+           }
+       }
+
+       public override bool EmailConfirmed
+       {
+           get
+           {
+               return base.EmailConfirmed;
+           }
+           set
+           {
+               base.EmailConfirmed = value;
+           }
+       }
+
+       public override string PhoneNumber
+       {
+           get
+           {
+               return base.PhoneNumber;
+           }
+           set
+           {
+               base.PhoneNumber = value;
+           }
+       }
+
+       public override bool PhoneNumberConfirmed
+       {
+           get
+           {
+               return base.PhoneNumberConfirmed;
+           }
+           set
+           {
+               base.PhoneNumberConfirmed = value;
+           }
+       }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool IsBackGroundVerified { get; set; }

@@ -1,12 +1,20 @@
 ﻿@using Newtonsoft.Json
 @model LYSApp.Model.UserViewModel
 
-<div class="col-md-9">
+@using (Ajax.BeginForm("ViewProfile", "User", new AjaxOptions { UpdateTargetId = "divMain" }))
+{
+<div class="col-md-9" id="divMain">
     <div class="panel content">
         <div class="panel-heading">
             Required
         </div>
         <div class="panel-body">
+            @*---User ID---*@
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.HiddenFor(model=>model.UserID)
+                </div>
+            </div>
             @*---First Name---*@
             <div class="row">
                 <div class="col-md-3">
@@ -172,24 +180,25 @@
         </div>
     </div>
 
-    <button id="btnSubmit"type="submit" class="btn btn-primary btn-large" onclick="fnSubmitProfile()">Save</button>
+    <button id="btnSubmit"type="submit" class="btn btn-green btn-lg">Save</button>
 </div>
-
-<script>
+}
+@*<script>
     var updateProfile = '@Url.Action("ViewProfile", "User")'
-    @*function fnSubmitProfile() {
-        var check = @JsonConvert.SerializeObject(Model, Formatting.None,
+    function fnSubmitProfile() {
+        var check = @Html.Raw(JsonConvert.SerializeObject(Model, Formatting.None,
                         new JsonSerializerSettings()
-                        { 
-                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                        })
-        
+                        {
+                            PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                        }))
         $.ajax({
             url: updateProfile,
             type: 'POST',
             data: {
-                userViewModel: Json.stringify(check)
-            },
+                userViewModel: JSON.stringify(check)           
+                },
+            contentType: 'application/json',
+            dataType: 'json',
             success: function () {
                 $("#divEmailVerification").modal('show');
             },
@@ -197,6 +206,6 @@
                 alert(data);
             }
         });
-    }*@
+    }
 
-</script>
+</script>*@

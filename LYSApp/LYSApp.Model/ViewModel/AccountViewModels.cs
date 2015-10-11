@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace LYSApp.Model
 {
@@ -118,6 +119,7 @@ namespace LYSApp.Model
        
     }
 
+    [JsonObject(MemberSerialization.OptIn)]
     public class UserViewModel
     {
         public long UserID { get; set; }

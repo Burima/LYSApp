@@ -9,6 +9,7 @@ using LYSApp.Domain.UserManagement;
 using LYSApp.Domain;
 using LYSApp.Web.Services;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace LYSApp.Web.Controllers
 {
@@ -17,19 +18,17 @@ namespace LYSApp.Web.Controllers
 
         private IUserManagement userManagement;
         UserViewModel userViewModel = new UserViewModel();
+
+        
         public UserController(UserManagement userManagement)
         {
             this.userManagement = userManagement;//Initializing UserManageManagement
         }
 
-        public UserController()
-        {
-
-        }
         // GET: User
         public ActionResult ViewProfile()
         {
-
+           
             var user = SessionManager.GetSessionUser();
             if (user != null)
             {
@@ -42,6 +41,10 @@ namespace LYSApp.Web.Controllers
                 userViewModel.ProfilePicture = user.ProfilePicture;
                 userViewModel.Password = user.PasswordHash;
                 userViewModel.Email = user.Email;
+                userViewModel.EmailConfirmed = user.EmailConfirmed;
+                userViewModel.PhoneNumber = user.PhoneNumber;
+                userViewModel.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
+                userViewModel.UserName = user.UserName;
                 if (user.UserDetails != null && user.UserDetails.Count > 0)
                 {
                     userViewModel.PresentAddress = user.UserDetails.FirstOrDefault().PresentAddress;
@@ -67,9 +70,10 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         public ActionResult ViewProfile(UserViewModel userViewModel)
         {
+            
             userViewModel.Status = 1;
             userViewModel.LastUpdatedOn = DateTime.Now;
-            userViewModel.UserID = TempData["UserID"] != null ? Convert.ToInt32(TempData["UserID"]) : 0;
+           
 
             if (userViewModel.UserID == 0)
             {
