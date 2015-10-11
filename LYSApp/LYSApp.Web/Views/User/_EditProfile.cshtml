@@ -14,6 +14,9 @@
                 <div class="col-md-9">
                     @Html.HiddenFor(model=>model.UserID)
                 </div>
+                <div class="col-md-9">
+                    @Html.HiddenFor(model => model.UserName)
+                </div>
             </div>
             @*---First Name---*@
             <div class="row">
@@ -42,8 +45,8 @@
                 </div>
                 <div class="col-md-9">
                     @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>{
-                        new SelectListItem{ Text="Male", Value="Male"},
-                        new SelectListItem{ Text="Female", Value="Female"}
+                        new SelectListItem{ Text="Male", Value="1"},
+                        new SelectListItem{ Text="Female", Value="2"}
                         }, "--- Select ---", new { @class = "form-control", maxlength = "50", placeholder = "LastName", tabIndex = "3" })
                 </div>
             </div>
@@ -180,7 +183,7 @@
         </div>
     </div>
 
-    <button id="btnSubmit"type="submit" class="btn btn-green btn-lg">Save</button>
+    <input id="btnSubmit" type="submit" class="btn btn-lg btn-green center-block" value="Save">
 </div>
 }
 @*<script>
