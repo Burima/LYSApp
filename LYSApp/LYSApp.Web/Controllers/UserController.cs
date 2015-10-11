@@ -92,8 +92,9 @@ namespace LYSApp.Web.Controllers
             else
             {
                 TempData["message"] = "Error in updating your profile.Please try again later";
+                
             }
-            return View(userViewModel);
+            return PartialView("_EditProfile", userViewModel);
         }
 
 
