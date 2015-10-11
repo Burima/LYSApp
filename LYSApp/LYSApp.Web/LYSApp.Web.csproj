@@ -186,6 +186,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\app-blue.css" />
+    <Content Include="Content\app-magenta.css" />
+    <Content Include="Content\app-red.css" />
+    <Content Include="Content\app-yellow.css" />
     <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -196,7 +200,15 @@
     <Content Include="Content\Custom\Home\TermsAndConditions.css" />
     <Content Include="Content\Custom\User\profile.css" />
     <Content Include="Content\Custom\User\style.css" />
+    <Content Include="Content\Custom\User\ViewProfile.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\fileinput.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\fullscreen-slider.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery.tagsinput.css" />
     <Content Include="Content\lockyourstay.css" />
+    <Content Include="Content\simple-line-icons.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -253,6 +265,8 @@
     <Content Include="Images\prop\5-1-thmb.png" />
     <Content Include="Images\prop\5-1.png" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\blog.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -269,11 +283,26 @@
     <Content Include="fonts\Simple-Line-Icons.ttf" />
     <Content Include="fonts\Simple-Line-Icons.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\calendar.js" />
+    <Content Include="Scripts\clndr.js" />
     <Content Include="Scripts\Custom\User\form-image-crop.js" />
     <Content Include="Scripts\Custom\User\jquery.Jcrop.js" />
     <Content Include="Scripts\Custom\User\jquery.Jcrop.min.js" />
     <Content Include="Scripts\Custom\User\ViewProfile.js" />
+    <Content Include="Scripts\fileinput.min.js" />
+    <Content Include="Scripts\home.js" />
+    <Content Include="Scripts\infobox.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-ui-touch-punch.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.mjs.nestedSortable.js" />
+    <Content Include="Scripts\jquery.placeholder.js" />
+    <Content Include="Scripts\jquery.slimscroll.min.js" />
+    <Content Include="Scripts\jquery.tagsinput.min.js" />
+    <Content Include="Scripts\jquery.touchSwipe.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.visible.js" />
+    <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\lockyourstay.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -283,9 +312,16 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-2.5.1.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Shared\layout.js" />
+    <Content Include="Scripts\signin.js" />
+    <Content Include="Scripts\signup.js" />
+    <Content Include="Scripts\sortable.js" />
+    <Content Include="Scripts\table.js" />
+    <Content Include="Scripts\tablesorter.js" />
+    <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -300,7 +336,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
