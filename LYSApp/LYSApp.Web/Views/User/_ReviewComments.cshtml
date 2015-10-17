@@ -7,13 +7,13 @@
             Past Comments by you
         </div>
         <div class="panel-body">
-          @if (Model.houseReviews != null && Model.houseReviews.Count == 0)
+            @if (Model.houseReviews != null && Model.houseReviews.Count == 0)
           {
-            <div class="row">
-                <div class="col-md-9">
-                    No comments provided by you.
+                <div class="row">
+                    <div class="col-md-9">
+                        No comments provided by you.
+                    </div>
                 </div>
-            </div>
           }
           else if (Model.houseReviews != null)
           {
@@ -32,44 +32,36 @@
         </div>
     </div>
     <div class="col-md-9 align-right">
-        <input type="button" id="btnComment" value="Add Comment" class="btn btn-primary" onclick="fnDisplayBlock()"/>
+        <input type="button" id="btnComment" value="Add Comment" class="btn btn-primary" onclick="fnDisplayBlock()" />
     </div>
+    @using (Ajax.BeginForm("AddComment", "User", new AjaxOptions { UpdateTargetId = "divComment" }))
+    {
+        <div id="divComment" class="col-md-9 row-padding-top-5" style="display:none">
+            <div class="row">
+                <div class="col-md-3">
+                    <b>Comments</b>
+                </div>
+                <div class="col-md-9">
+                    @Html.TextAreaFor(m => m.HouseReviewModel.Comments, new { @class = "form-control", maxlength = "50", placeholder = "FirstName", tabIndex = "1" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 align-right">
+                    <input type="submit" id="btnSubmit" value="Submit" class="btn btn-primary" />
+                </div>
+            </div>
+            <div>@Html.HiddenFor(model => model.HouseReviewModel.HouseID)</div>
+            <div>@Html.HiddenFor(model => model.UserID)</div>
+        </div>
 
-    <div id="divComment" class="col-md-9 row-padding-top-5" style="display:none">
-        <div class="row">
-            <div class="col-md-3">
-                Comments
-            </div>
-            <div class="col-md-9">
-                <textarea id="textComment" cols="40" rows="5"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-9 align-right">
-                <input type="button" id="btnSubmit" value="Submit" class="btn btn-primary" onclick="fnSubmitComment()" />
-            </div>
-        </div>
-    </div>
+        <script>
+        function fnDisplayBlock() {
+            document.getElementById('divComment').style.display = 'block';
+        }
+         </script>
+    }
 </div>
+@section scripts{
 
-
-
-<script>
-    var submitCommentUrl = '@Url.Action("AddComment", "User")';
-    function fnDisplayBlock() {
-        document.getElementById('divComment').style.display = 'block';
-    }
-
-    function fnSubmitComment() {
-        $.ajax({
-            url: submitCommentUrl,
-            type: 'POST',
-            success: function () {
-             
-            },
-            error: function (data) {
-                alert(data);
-            }
-        });
-    }
-</script>
+   
+}

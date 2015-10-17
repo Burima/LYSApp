@@ -10,5 +10,9 @@ namespace LYSApp.Domain.UserManagement
     {
 
         int UpdateUser(LYSApp.Model.UserViewModel userViewModel);
+
+        int GetHouseID(long userID);
+
+        int UpdateComment(LYSApp.Model.UserViewModel userviewModel);
     }
 }

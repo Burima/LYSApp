@@ -33,6 +33,7 @@ namespace LYSApp.Web.Controllers
             if (user != null)
             {
                 userViewModel.ManageUserViewModel = new ManageUserViewModel();
+                userViewModel.HouseReviewModel = new HouseReviewModel();
                 userViewModel.UserID = user.Id;
                 userViewModel.PhoneNumber = user.PhoneNumber;
                 userViewModel.FirstName = user.FirstName;
@@ -45,6 +46,7 @@ namespace LYSApp.Web.Controllers
                 userViewModel.PhoneNumber = user.PhoneNumber;
                 userViewModel.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
                 userViewModel.UserName = user.UserName;
+                userViewModel.HouseReviewModel.HouseID = userManagement.GetHouseID(user.Id);
                 if (user.UserDetails != null && user.UserDetails.Count > 0)
                 {
                     userViewModel.PresentAddress = user.UserDetails.FirstOrDefault().PresentAddress;
@@ -59,8 +61,7 @@ namespace LYSApp.Web.Controllers
                     userViewModel.InstitutionName = user.UserDetails.FirstOrDefault().InstitutionName;
                 }
 
-                if (user.HouseReviews != null && user.HouseReviews.Count > 0)
-                {
+                if (user.HouseReviews != null && user.HouseReviews.Count > 0){
                     userViewModel.houseReviews = user.HouseReviews.ToList();
                 }
             }
@@ -128,7 +129,13 @@ namespace LYSApp.Web.Controllers
             }
         }
 
-
+        [HttpPost]
+        public ActionResult AddComment(UserViewModel userViewModel)
+        {
+            var user = SessionManager.GetSessionUser();
+            userManagement.UpdateComment(userViewModel);
+            return PartialView("_ReviewComments", userViewModel);
+        }
        
     }
 }

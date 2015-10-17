@@ -14,11 +14,18 @@ namespace LYSApp.Domain.UserManagement
         private IUnitOfWork unitOfWork = null;
         private IBaseRepository<Data.DBEntity.User> userRepository = null;
         private IBaseRepository<Data.DBEntity.UserDetail> userDetailsRepository = null;
+        private IBaseRepository<Data.DBEntity.HouseReview> houseReviewRepository = null;
+        private IBaseRepository<Data.DBEntity.Bed> bedRepository = null;
+        private IBaseRepository<Data.DBEntity.House> houseRepository = null;
+        private IBaseRepository<Data.DBEntity.Room> roomRepository = null;
         public UserManagement()
         {
             unitOfWork = new UnitOfWork();
             userRepository = new BaseRepository<Data.DBEntity.User>(unitOfWork);//Initializing userRepository through BaseRepository
             userDetailsRepository = new BaseRepository<Data.DBEntity.UserDetail>(unitOfWork);
+            bedRepository = new BaseRepository<Data.DBEntity.Bed>(unitOfWork);
+            roomRepository = new BaseRepository<Data.DBEntity.Room>(unitOfWork);
+            houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
         }
 
         public int UpdateUser(UserViewModel userViewModel)
@@ -48,11 +55,37 @@ namespace LYSApp.Domain.UserManagement
             //    dbUser.UserDetails.FirstOrDefault().InstitutionName = userViewModel.InstitutionName;
             //    dbUser.UserDetails.FirstOrDefault().LastUpdatedOn = DateTime.Now;
             //}
-           
+            
             userRepository.Update(dbUser);
            
             return unitOfWork.SaveChanges();
         }
+
+        public int UpdateComment(UserViewModel userviewModel)
+        {
+            LYSApp.Data.DBEntity.HouseReview houseReview = new LYSApp.Data.DBEntity.HouseReview();
+            houseReview.UserID = userviewModel.UserID;
+            houseReview.Comments = userviewModel.HouseReviewModel.Comments;
+            houseReview.CommentTime = DateTime.Now;
+            houseReview.Rating = userviewModel.HouseReviewModel.Rating;
+            houseReview.HouseID = userviewModel.HouseReviewModel.HouseID;
+            houseReviewRepository.Insert(houseReview);
+            return unitOfWork.SaveChanges();
+        }
+
+        public int GetHouseID(long userID)
+        {
+
+            IList<int> roomIDList = (from b in bedRepository
+                                     where b.UserID == userID
+                                      select b.RoomID).ToList();
+            IList<int> houseIDList = (from r in roomRepository
+                                      where roomIDList.Contains(r.RoomID)
+                                     select r.HouseID).ToList();
+            return houseIDList.First();
+        }
+
+      
     
     }
 }

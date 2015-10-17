@@ -146,8 +146,21 @@ namespace LYSApp.Model
         public int Status { get; set; }
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }  
         public IList<HouseReview> houseReviews { get; set; }
-
+        public HouseReviewModel HouseReviewModel { get; set; }
         public ManageUserViewModel ManageUserViewModel { get; set; }
+    }
+
+    public class HouseReviewModel
+    {
+        public string Comments { get; set; }
+
+        public decimal Rating { get; set; }
+
+        public int HouseID { get; set; }
+
+        public House house { get; set; }
+
+        public User user { get; set; }
     }
 
 }
