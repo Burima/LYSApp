@@ -45,47 +45,53 @@
 </div>
 
 @*---Change Password*@
-<div id="divChangePassword" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content bounceInRight">
-            <div class="modal-header">
-                <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Change Password</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        Current Password
-                    </div>
-                    <div class="col-md-9">
-                       @Html.PasswordFor(model => model.OldPassword, new { @class = "form-control", placeholder = "Current Password" })
-                    </div>
-                </div>
 
-                <div class="row row-padding-top-5">
-                    <div class="col-md-3">
-                        New Password
-                    </div>
-                    <div class="col-md-9">
-                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "New Password" })
-                    </div>
+    <div id="divChangePassword" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bounceInRight">
+                <div class="modal-header">
+                    <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Change Password</h4>
                 </div>
+                @using (Ajax.BeginForm("ChangePassword", "Account", FormMethod.Post, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnPasswordChange", OnFailure = "OnPasswordChange" }))
+                {
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            Current Password
+                        </div>
+                        <div class="col-md-9">
+                           @Html.PasswordFor(model => model.ManageUserViewModel.OldPassword, new { @class = "form-control", placeholder = "Current Password" })
+                        </div>
+                    </div>
 
-                <div class="row row-padding-top-5">
-                    <div class="col-md-3">
-                        Current Password
+                    <div class="row row-padding-top-5">
+                        <div class="col-md-3">
+                            New Password
+                        </div>
+                        <div class="col-md-9">
+                            @Html.PasswordFor(model => model.ManageUserViewModel.NewPassword, new { @class = "form-control", placeholder = "New Password" })
+                        </div>
                     </div>
-                    <div class="col-md-9">
-                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+
+                    <div class="row row-padding-top-5">
+                        <div class="col-md-3">
+                            Current Password
+                        </div>
+                        <div class="col-md-9">
+                            @Html.PasswordFor(model => model.ManageUserViewModel.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <input class="btn btn-primary" id="btnChange" type="button" aria-hidden="true" value="Change" />
+                <div class="modal-footer">
+                    <input class="btn btn-green" id="btnChange" type="submit" aria-hidden="true" value="Change" />
+                </div>
+                }
             </div>
         </div>
     </div>
-</div>
+
 @*---Content---*@
 <div class="col-md-9">
     <div class="panel content">
@@ -95,50 +101,61 @@
         <div class="panel-body">
             @*---Mobile Number---*@
             <div class="row">
-                <div class="col-md-3">
-                    Phone Number
+                <div class="col-md-12">
+                    <b>Phone Number</b>
                 </div>
-                <div class="col-md-9">
-                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", maxlength = "50", placeholder = "Phone " , tabIndex = "1" })
-                </div>
-                <div class="col-md-12 align-right ">
+                <div class="col-md-12">
                     @if (Model.PhoneNumberConfirmed)
                     {
-                        <span class="fa fa-check"></span>
-                        @Html.Label("Verified")
-                    }
-                    else
+                        <p>Your mobile number @Model.PhoneNumber is verfied</p>
+                    }else
                     {
-                        <a href="#" id="linkVerify">Verify</a>
+                        <p>Make it easier to communicate with a verified phone number. We’ll send you a code by SMS or read it to you over the phone. 
+                        Enter the code below to confirm that you’re the person on the other end.</p>
+                        <br />
+                        if (Model.PhoneNumber != null)
+                         {
+                             <p>Your mobile number @Model.PhoneNumber is not verified.Please click the <a href="#" id="linkVerify">link</a> to get verification message</p>
+                         }else
+                         {
+                             <p>No mobile number is added</p>
+                         }
                     }
                 </div>
+                
             </div>
             @*---Email ID---*@
             <div class="row row-padding-top-5">
-                <div class="col-md-3">
-                   Email ID
+                <div class="col-md-12">
+                    <b>Email Address</b>
                 </div>
-                <div class="col-md-9">
-                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email ID ", tabIndex = "2" ,id = "textEmail"})
-                </div>
-                <div class="col-md-12 align-right ">
-                    @if (Model.EmailConfirmed)
+                <div class="col-md-12">
+                    @if (@Model.EmailConfirmed)
                     {
-                        @Html.Label("Verified")
+                        <p>Your Email ID @Model.Email is verified successfully</p>
                     }
                     else
                     {
-                        <a href="#" id="linkVerifyEmail">Verify</a>
+                        <p>Make it easier to communicate with a verified Email ID.Verify your email id to get attractive offers and updates from our side.
+                            <br />
+                            <br />
+                            Your email id @Model.Email is not verified yet.Please click <a href="#" id="linkVerifyEmail">here</a> to verify your email id.<br />
+                            You will recieve message from <b><i>LockYourStay</i></b>.With just one click on the link given in the mail you can verify.
+                            <br />
+                            <br />
+                            Cant find our message? Please check spam folder or <a href="#" id="linkVerifyEmail">Resend Confirmtion Email</a> </p>
                     }
+                   
                 </div>
+               
             </div>
             @*---Change Password---*@
             <div class="row row-padding-top-5">
-                <div class="col-md-3">
-                    Password
+                <div class="col-md-12">
+                    <b>Password</b>
                 </div>
                 <div class="col-md-9">
-                    <a href="#" id="linkChangePassword">Change</a>
+                    To change your current password please click <a href="#" id="linkChangePassword">here</a>
                 </div>
             </div>
         </div>
@@ -147,10 +164,13 @@
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/validate")
+
 <script>
 
     var mobileVerificationURL = '@Url.Action("Verification", "User")';
     var emailVerificationURL = '@Url.Action("SendAccountActivationMailForExistingUser", "Account")';
+    var passwordChangeURL = '@Url.Action("Manage", "Account")'
     $('#linkVerify').click(function () {
         $("#divMobileVerification").modal('show');
     });
@@ -170,7 +190,6 @@
     //});
 
     $('#linkVerifyEmail').click(function () {
-        alert(emailVerificationURL);
         $.ajax({
             url: emailVerificationURL,
             type: 'POST',
@@ -188,7 +207,22 @@
         $("#divChangePassword").modal('show');
     });
 
-    $('#btnChange').click(function () {
+    @*$('#btnChange').click(function () {
+        $.ajax({
+            url: passwordChangeURL,
+            type: 'POST',
+            data: $('form.contact').serialize(),
+            success: function () {
+                alert(@ViewBag.StatusMessage);
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    });*@
+    function OnPasswordChange() {
+        $("#divChangePassword").modal('hide');
+        alert(@ViewBag.StatusMessage);
+    }
 
-    });
 </script>

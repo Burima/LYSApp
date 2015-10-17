@@ -359,6 +359,8 @@
     <Content Include="Views\User\ViewProfile.cshtml" />
     <Content Include="Views\User\_ProfilePicture.cshtml" />
     <Content Include="Views\User\_EditProfile.cshtml" />
+    <Content Include="Views\User\_Verification.cshtml" />
+    <Content Include="Views\User\_ReviewComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

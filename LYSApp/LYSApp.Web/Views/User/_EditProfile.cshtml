@@ -1,8 +1,12 @@
 ﻿@using Newtonsoft.Json
 @model LYSApp.Model.UserViewModel
 
-@using (Ajax.BeginForm("ViewProfile", "User", new AjaxOptions { UpdateTargetId = "divMain" ,OnSuccess = "OnSuccess"}))
+
+@using (Ajax.BeginForm("ViewProfile", "User", new AjaxOptions { UpdateTargetId = "divMain" ,OnSuccess = "OnSuccess",OnFailure = "OnFailure"}))
 {
+<!-- Show message -->
+
+    
 <div class="col-md-9" id="divMain">
     <div class="panel content">
         <div class="panel-heading">
@@ -191,4 +195,7 @@
        alert("Success")
     }
 
+    function OnFailure(data) {
+        alert("Failure")
+    }
 </script>

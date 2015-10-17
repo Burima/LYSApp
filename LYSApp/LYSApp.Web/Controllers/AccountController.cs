@@ -387,6 +387,33 @@ namespace LYSApp.Web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(UserViewModel userViewModel)
+        {
+            bool hasPassword = HasPassword();
+            ViewBag.HasLocalPassword = hasPassword;
+            ViewBag.StatusMessage = "An error has occurred.";
+            if (hasPassword)
+            {
+                if (ModelState.IsValid)
+                {
+                    var result = await UserManager.ChangePasswordAsync(long.Parse(User.Identity.GetUserId()),
+                        userViewModel.ManageUserViewModel.OldPassword, userViewModel.ManageUserViewModel.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        var user = await UserManager.FindByIdAsync(long.Parse(User.Identity.GetUserId()));
+                        await SignInAsync(user, isPersistent: false);
+                        ViewBag.StatusMessage = "Your password has been changed.";
+                        return Content("Success");   
+                    }
+                   
+                }
+            }
+
+            return Content("Error");
+        }
+
         //
         // POST: /Account/ExternalLogin
         [HttpPost]

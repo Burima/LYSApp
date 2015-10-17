@@ -18,7 +18,7 @@ namespace LYSApp.Web.Controllers
 
         private IUserManagement userManagement;
         UserViewModel userViewModel = new UserViewModel();
-
+       
         
         public UserController(UserManagement userManagement)
         {
@@ -32,14 +32,14 @@ namespace LYSApp.Web.Controllers
             var user = SessionManager.GetSessionUser();
             if (user != null)
             {
-              
+                userViewModel.ManageUserViewModel = new ManageUserViewModel();
                 userViewModel.UserID = user.Id;
                 userViewModel.PhoneNumber = user.PhoneNumber;
                 userViewModel.FirstName = user.FirstName;
                 userViewModel.LastName = user.LastName;
                 userViewModel.Gender = user.Gender;
                 userViewModel.ProfilePicture = user.ProfilePicture;
-                userViewModel.Password = user.PasswordHash;
+                userViewModel.ManageUserViewModel.OldPassword = user.PasswordHash;
                 userViewModel.Email = user.Email;
                 userViewModel.EmailConfirmed = user.EmailConfirmed;
                 userViewModel.PhoneNumber = user.PhoneNumber;
