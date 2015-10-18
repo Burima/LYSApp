@@ -1,4 +1,4 @@
-﻿a:hover {
+﻿/*a:hover {
    color: #72c02c;
 }
 
@@ -7,7 +7,7 @@ a:focus,
 a:hover, 
 a:active {
    outline: 0 !important;
-}
+}*/
 
 
 body { 
@@ -24,13 +24,19 @@ body {
     padding-top: 10%;
     padding-bottom: 40px;
 }
-
-.list-group-item.active{
-    background-color : rgb(14, 170, 166);
-    color : white;
-}
-
 .content{
     box-sizing: border-box;
     display:block;
 }
+/*---- left menu css -----*/
+#leftMenu .list-group-item.active{
+    background-color : rgb(14, 170, 166);
+}
+#leftMenu .list-group-item.active a{    
+    color : white !important;
+}
+
+
+
+
+

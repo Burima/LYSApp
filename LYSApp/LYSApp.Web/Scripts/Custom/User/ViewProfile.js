@@ -2,6 +2,25 @@
 $(document).ready(function () {
     $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
     $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
+
+    //effect on left menu click
+    $('.list-group-item a').click(function () {
+        $(".list-group-item").removeClass("active");//remove active class from all the li
+        $(this).parent().addClass("active");//make active clicked one
+        var target = $(this).attr('target-section');//get target section name
+        $('#RightContent section').each(function () {//loop throug each section
+            if ($(this).attr('id').toUpperCase() == target.toUpperCase()) {
+                $(this).removeClass('hidden');//if id matches the target one remove hidden class
+            } else {
+                $(this).addClass('hidden');//else add hidden class to the section
+            }
+        });
+        
+        
+    });
+
+
+
     //if message show in  modal
     //if (message != "") {
     //    $('#modalShowMessage').modal('show');               

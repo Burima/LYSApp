@@ -6,62 +6,72 @@
     ViewBag.Title = "Profile";
 }
 
-    <!-- custom css  -->    
-    <link href='@Url.Content("~/Content/Custom/User/ViewProfile.css")' rel="stylesheet" />   
+<!-- custom css  -->
+<link href='@Url.Content("~/Content/Custom/User/ViewProfile.css")' rel="stylesheet" />
 
-    <div class="wrapper">
+<div class="wrapper">
 
-        <!--=== Profile ===-->
-        <div class="container content profile">
-            <div class="row">
-                <!--Left Sidebar-->
-                <div class="col-md-3 md-margin-bottom-40">
-                    <img class="img-responsive profile-img margin-bottom-20" src="" alt="ProfilePic">
+    <!--=== Profile ===-->
+    <div class="container content profile">
+        <div class="row">
+            <!--Left Sidebar-->
+            <div id="leftMenu" class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" src="" alt="ProfilePic">
 
-                    <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
-                        <li class="list-group-item active">
-                            <a href="javascript:void(0)"id="linkEditProfile"><i class="fa fa-bar-chart-o"></i> Edit Profile</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="page_profile_me.html"><i class="fa fa-user"></i> Upload Photo</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="page_profile_users.html"><i class="fa fa-group"></i> Trust and Verification</a>
-                        </li>
-                        @*<li class="list-group-item">
+                <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+                    <li class="list-group-item active">
+                        <a target-section="secEditProfile"><i class="fa fa-bar-chart-o"></i> Edit Profile</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a target-section="secProfilePicture"><i class="fa fa-user"></i> Upload Photo</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a target-section="secVerification"><i class="fa fa-group"></i> Trust and Verification</a>
+                    </li>
+                    @*<li class="list-group-item">
                             <a href="page_profile_projects.html"><i class="fa fa-cubes"></i> View Profile</a>
                         </li>*@
-                        <li class="list-group-item">
-                            <a href="page_profile_comments.html"><i class="fa fa-comments"></i> Comments/Reviews</a>
-                        </li>
-                     </ul>
-                </div>
-                <!--End Left Sidebar-->
-                <!-- Profile Content -->
-                <div class="col-md-9">
-                 
-                    @Html.Partial("_EditProfile",Model)
-                     @Html.Partial("_ProfilePicture", Model)
-                    @Html.Partial("_Verification",Model)
-                    @Html.Partial("_ReviewComments",Model)
-                </div>
-                <!-- End Profile Content -->
+                    <li class="list-group-item">
+                        <a target-section="secReviewComments"><i class="fa fa-comments"></i> Comments/Reviews</a>
+                    </li>
+                </ul>
             </div>
+            <!--End Left Sidebar-->
+            <!-- Profile Content -->
+            <div id="RightContent" class="col-md-9">
+                <section id="secEditProfile">
+                    @Html.Partial("_EditProfile", Model)
+                </section>
+                <section id="secProfilePicture" class="hidden">
+                    @Html.Partial("_ProfilePicture", Model)
+                </section>
+                <section id="secVerification" class="hidden">
+                    @Html.Partial("_Verification", Model)
+                </section>
+                <section id="secReviewComments" class="hidden">
+                    @Html.Partial("_ReviewComments", Model)
+                </section>
+
+
+
+
+
+            </div>
+            <!-- End Profile Content -->
         </div>
-        <!--=== End Profile ===-->
-
     </div>
-    <!--/wrapper-->
-  
+    <!--=== End Profile ===-->
 
+</div>
+<!--/wrapper-->
 @section scripts{
-<script>
-    var CropImageUrl = '@Url.Action("CropImage", "User")';
-</script>
+    <script>
+        var CropImageUrl = '@Url.Action("CropImage", "User")';
+    </script>
 
 }
- 
+
 <script src='@Url.Content("~/Scripts/Custom/User/ViewProfile.js")'></script>
 <script src='@Url.Content("~/Scripts/Custom/User/jquery.Jcrop.min.js")'></script>
-<script src='@Url.Content("~/Scripts/Custom/User/form-image-crop.js")'></script>  
+<script src='@Url.Content("~/Scripts/Custom/User/form-image-crop.js")'></script>
 <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")'></script>
