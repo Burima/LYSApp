@@ -42,6 +42,7 @@ namespace LYSApp.Domain.UserManagement
             dbUser.Gender = userViewModel.Gender;
             dbUser.ProfilePicture = String.Empty;
             dbUser.Email = userViewModel.Email;
+            //Have to update/insert user details based on the requirement
             //if (dbUser != null && dbUser.UserDetails != null && dbUser.UserDetails.Count > 0)
             //{
 

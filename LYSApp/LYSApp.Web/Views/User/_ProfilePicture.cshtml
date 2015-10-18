@@ -42,7 +42,7 @@
                     <div class="row row-padding-top-5">
                         <input type="submit" class="btn btn-green" value="Submit" id="tnSubmitProfilePicture" />
                     </div>
-                    @Html.HiddenFor(model => model.ProfilePicture)
+                    @Html.HiddenFor(model => model.ProfilePicture)@*model.ProfilePicture is not updating*@
                     @Html.HiddenFor(model => model.UserID)
                 </div>
             </div>
