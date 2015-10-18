@@ -27,7 +27,7 @@ namespace LYSApp.Domain.UserManagement
             bedRepository = new BaseRepository<Data.DBEntity.Bed>(unitOfWork);
             roomRepository = new BaseRepository<Data.DBEntity.Room>(unitOfWork);
             houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
-           
+            houseReviewRepository = new BaseRepository<Data.DBEntity.HouseReview>(unitOfWork);
         }
 
         public int UpdateUser(UserViewModel userViewModel)
