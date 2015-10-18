@@ -2,26 +2,12 @@
 @model LYSApp.Model.UserViewModel
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
     ViewBag.Title = "Profile";
 }
 
-<!DOCTYPE html>
-
-
-
-    <!-- Web Fonts -->
-    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
-
-    <!-- CSS Global Compulsory -->
-
-   
-    <link href="~/Content/app.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/lockyourstay.css" rel="stylesheet" />
-    <link href="~/Content/Custom/User/ViewProfile.css" rel="stylesheet" />
-
-   
+    <!-- custom css  -->    
+    <link href='@Url.Content("~/Content/Custom/User/ViewProfile.css")' rel="stylesheet" />   
 
     <div class="wrapper">
 
@@ -68,15 +54,13 @@
     <!--/wrapper-->
   
 
-@*@section scripts{
+@section scripts{
 <script>
     var CropImageUrl = '@Url.Action("CropImage", "User")';
 </script>
 
-}*@
-    
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
+}
+ 
 <script src='@Url.Content("~/Scripts/Custom/User/ViewProfile.js")'></script>
 <script src='@Url.Content("~/Scripts/Custom/User/jquery.Jcrop.min.js")'></script>
 <script src='@Url.Content("~/Scripts/Custom/User/form-image-crop.js")'></script>  
