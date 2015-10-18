@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="col-md-9 align-right">
-        <input type="button" id="btnComment" value="Add Comment" class="btn btn-primary" onclick="fnDisplayBlock()" />
+        <input type="button" id="btnComment" value="Add Comment" class="btn btn-green" onclick="fnDisplayBlock()" />
     </div>
     @using (Ajax.BeginForm("AddComment", "User", new AjaxOptions { UpdateTargetId = "divComment" }))
     {
@@ -42,12 +42,12 @@
                     <b>Comments</b>
                 </div>
                 <div class="col-md-9">
-                    @Html.TextAreaFor(m => m.HouseReviewModel.Comments, new { @class = "form-control", maxlength = "50", placeholder = "FirstName", tabIndex = "1" })
+                    @Html.TextAreaFor(m => m.HouseReviewModel.Comments, new { @class = "form-control", maxlength = "50", placeholder = "Comments", tabIndex = "1" })
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-9 align-right">
-                    <input type="submit" id="btnSubmit" value="Submit" class="btn btn-primary" />
+            <div class="row row-padding-top-5">
+                <div class="col-md-12 align-right">
+                    <input type="submit" id="btnSubmitComment" value="Submit" class="btn btn-green" />
                 </div>
             </div>
             <div>@Html.HiddenFor(model => model.HouseReviewModel.HouseID)</div>
@@ -61,7 +61,3 @@
          </script>
     }
 </div>
-@section scripts{
-
-   
-}

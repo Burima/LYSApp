@@ -7,6 +7,7 @@ using LYSApp.Data.DBRepository;
 using LYSApp.Model;
 
 
+
 namespace LYSApp.Domain.UserManagement
 {
     public class UserManagement: IUserManagement
@@ -26,6 +27,7 @@ namespace LYSApp.Domain.UserManagement
             bedRepository = new BaseRepository<Data.DBEntity.Bed>(unitOfWork);
             roomRepository = new BaseRepository<Data.DBEntity.Room>(unitOfWork);
             houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
+           
         }
 
         public int UpdateUser(UserViewModel userViewModel)
@@ -69,6 +71,8 @@ namespace LYSApp.Domain.UserManagement
             houseReview.CommentTime = DateTime.Now;
             houseReview.Rating = userviewModel.HouseReviewModel.Rating;
             houseReview.HouseID = userviewModel.HouseReviewModel.HouseID;
+            houseReview.User = userRepository.FirstOrDefault(m => m.UserID == userviewModel.UserID);
+            houseReview.House = houseRepository.FirstOrDefault(m => m.HouseID == userviewModel.HouseReviewModel.HouseID);
             houseReviewRepository.Insert(houseReview);
             return unitOfWork.SaveChanges();
         }
@@ -85,7 +89,6 @@ namespace LYSApp.Domain.UserManagement
             return houseIDList.First();
         }
 
-      
-    
+
     }
 }

@@ -132,7 +132,6 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         public ActionResult AddComment(UserViewModel userViewModel)
         {
-            var user = SessionManager.GetSessionUser();
             userManagement.UpdateComment(userViewModel);
             return PartialView("_ReviewComments", userViewModel);
         }

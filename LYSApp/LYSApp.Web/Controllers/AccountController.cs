@@ -405,13 +405,13 @@ namespace LYSApp.Web.Controllers
                         var user = await UserManager.FindByIdAsync(long.Parse(User.Identity.GetUserId()));
                         await SignInAsync(user, isPersistent: false);
                         ViewBag.StatusMessage = "Your password has been changed.";
-                        return Content("Success");   
+                           
                     }
                    
                 }
             }
 
-            return Content("Error");
+            return PartialView("_Verification", userViewModel);
         }
 
         //
