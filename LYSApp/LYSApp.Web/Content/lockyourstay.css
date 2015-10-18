@@ -152,3 +152,7 @@ a {
 .modal-alert span{
     display:block;
 }
+/*------ for all anchor which don't have any href-----------*/
+a{
+    cursor:pointer;
+}
