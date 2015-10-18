@@ -135,6 +135,12 @@ namespace LYSApp.Web.Controllers
             userManagement.UpdateComment(userViewModel);
             return PartialView("_ReviewComments", userViewModel);
         }
-       
+
+        public ActionResult UpdateProfilePicture(UserViewModel userViewModel)
+        {
+            int count = userManagement.UpdateProfilePicture(userViewModel);
+            return PartialView("_ProfilePicture", userViewModel);
+
+        }
     }
 }

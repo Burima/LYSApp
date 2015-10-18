@@ -16,5 +16,7 @@ namespace LYSApp.Domain.UserManagement
 
         int UpdateComment(UserViewModel userviewModel);
 
+        int UpdateProfilePicture(UserViewModel userviewModel);
+
     }
 }

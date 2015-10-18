@@ -89,6 +89,13 @@ namespace LYSApp.Domain.UserManagement
             return houseIDList.First();
         }
 
+        public int UpdateProfilePicture(UserViewModel userViewModel)
+        {
+            var dbUser = userRepository.FirstOrDefault(m => m.UserID == userViewModel.UserID);
+            dbUser.ProfilePicture = userViewModel.ProfilePicture;
 
+            userRepository.Update(dbUser);
+            return unitOfWork.SaveChanges();
+        }
     }
 }
