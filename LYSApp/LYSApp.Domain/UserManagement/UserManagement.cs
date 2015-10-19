@@ -78,23 +78,6 @@ namespace LYSApp.Domain.UserManagement
                 }
             }
 
-            //Have to update/insert user details based on the requirement
-            //if (dbUser != null && dbUser.UserDetails != null && dbUser.UserDetails.Count > 0)
-            //{
-
-            //    dbUser.UserDetails.FirstOrDefault().PresentAddress = userViewModel.PresentAddress;
-            //    dbUser.UserDetails.FirstOrDefault().PermanentAddress = userViewModel.PermanentAddress;
-            //    dbUser.UserDetails.FirstOrDefault().GovtIDType = userViewModel.GovtIDType;
-            //    dbUser.UserDetails.FirstOrDefault().GovtID = userViewModel.GovtID;
-            //    dbUser.UserDetails.FirstOrDefault().UserProfession = userViewModel.UserProfession;
-            //    dbUser.UserDetails.FirstOrDefault().OfficeLocation = userViewModel.OfficeLocation;
-            //    dbUser.UserDetails.FirstOrDefault().CurrentEmployer = userViewModel.CurrentEmployer;
-            //    dbUser.UserDetails.FirstOrDefault().EmployeeID = userViewModel.EmployeeID;
-            //    dbUser.UserDetails.FirstOrDefault().HighestEducation = userViewModel.HighestEducation;
-            //    dbUser.UserDetails.FirstOrDefault().InstitutionName = userViewModel.InstitutionName;
-            //    dbUser.UserDetails.FirstOrDefault().LastUpdatedOn = DateTime.Now;
-            //}
-            
             userRepository.Update(dbUser);
            
             return unitOfWork.SaveChanges();

@@ -16,7 +16,7 @@
         <div class="row">
             <!--Left Sidebar-->
             <div id="leftMenu" class="col-md-3 md-margin-bottom-40">
-                <img class="img-responsive profile-img margin-bottom-20" src="" alt="ProfilePic">
+                <img class="img-responsive profile-img margin-bottom-20" src="" alt="ProfilePic" id="imgProfilePicture">
 
                 <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
                     <li class="list-group-item active">
@@ -52,7 +52,14 @@
                     @Html.Partial("_ReviewComments", Model)
                 </section>
 
-
+                <input type="hidden" id="hdnImageCropWidth" name="ImageCropWidth" />
+                <input type="hidden" id="hdnImageCropHeight" name="ImageCropHeight" />
+                <input type="hidden" id="hdnCropPointX" name="CropPointX" />
+                <input type="hidden" id="hdnCropPointY" name="CropPointY" />
+                <input type="hidden" id="hdnCropPointX2" name="CropPointX2" />
+                <input type="hidden" id="hdnCropPointY2" name="CropPointY2" />
+                <input type="hidden" id="hdnFileName" name="ImgFileName" />
+                <input type="hidden" id="hdnImageSource" name="ImageSource" />
 
 
 
@@ -67,11 +74,17 @@
 @section scripts{
     <script>
         var CropImageUrl = '@Url.Action("CropImage", "User")';
+        document.getElementById("fileProfile").onchange = function () {
+
+            $("#photoFilePath").html(this.value.split('\\').pop());
+            $("#photoFilePath").attr("title", this.value.split('\\').pop());
+            $("#hdnFileName").val('@Model.UserID' + '_' + this.value.split('\\').pop());
+
+        };
     </script>
-
-}
-
 <script src='@Url.Content("~/Scripts/Custom/User/ViewProfile.js")'></script>
 <script src='@Url.Content("~/Scripts/Custom/User/jquery.Jcrop.min.js")'></script>
 <script src='@Url.Content("~/Scripts/Custom/User/form-image-crop.js")'></script>
 <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")'></script>
+}
+
