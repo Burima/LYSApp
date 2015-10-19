@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LYSApp.Data.DBRepository;
 using LYSApp.Model;
+using System.Collections;
 
 
 
@@ -35,13 +36,48 @@ namespace LYSApp.Domain.UserManagement
             //getting the lates data from DB
           
             var dbUser = userRepository.FirstOrDefault(m => m.UserID == userViewModel.UserID);
-            dbUser.UserName = userViewModel.UserName;
-            dbUser.PhoneNumber = userViewModel.PhoneNumber;
-            dbUser.FirstName = userViewModel.FirstName;
-            dbUser.LastName = userViewModel.LastName;
-            dbUser.Gender = userViewModel.Gender;
-            dbUser.ProfilePicture = String.Empty;
-            dbUser.Email = userViewModel.Email;
+            if (dbUser != null){
+                    dbUser.UserName = userViewModel.UserName;
+                    dbUser.PhoneNumber = userViewModel.PhoneNumber;
+                    dbUser.FirstName = userViewModel.FirstName;
+                    dbUser.LastName = userViewModel.LastName;
+                    dbUser.Gender = userViewModel.Gender;
+                    dbUser.ProfilePicture = String.Empty;
+                    dbUser.Email = userViewModel.Email;
+
+                if(dbUser.UserDetails != null && dbUser.UserDetails.Count > 0){
+                    dbUser.UserDetails.FirstOrDefault().PresentAddress = userViewModel.PresentAddress;
+                    dbUser.UserDetails.FirstOrDefault().PermanentAddress = userViewModel.PermanentAddress;
+                    dbUser.UserDetails.FirstOrDefault().GovtIDType = userViewModel.GovtIDType;
+                    dbUser.UserDetails.FirstOrDefault().GovtID = userViewModel.GovtID;
+                    dbUser.UserDetails.FirstOrDefault().UserProfession = userViewModel.UserProfession;
+                    dbUser.UserDetails.FirstOrDefault().OfficeLocation = userViewModel.OfficeLocation;
+                    dbUser.UserDetails.FirstOrDefault().CurrentEmployer = userViewModel.CurrentEmployer;
+                    dbUser.UserDetails.FirstOrDefault().EmployeeID = userViewModel.EmployeeID;
+                    dbUser.UserDetails.FirstOrDefault().HighestEducation = userViewModel.HighestEducation;
+                    dbUser.UserDetails.FirstOrDefault().InstitutionName = userViewModel.InstitutionName;
+                    dbUser.UserDetails.FirstOrDefault().LastUpdatedOn = DateTime.Now;
+                }
+                else
+                {
+                    LYSApp.Data.DBEntity.UserDetail userDetail = new LYSApp.Data.DBEntity.UserDetail();
+                    userDetail.PresentAddress = userViewModel.PresentAddress;
+                    userDetail.PermanentAddress = userViewModel.PermanentAddress;
+                    userDetail.GovtIDType = userViewModel.GovtIDType;
+                    userDetail.GovtID = userViewModel.GovtID;
+                    userDetail.UserProfession = userViewModel.UserProfession;
+                    userDetail.OfficeLocation = userViewModel.OfficeLocation;
+                    userDetail.CurrentEmployer = userViewModel.CurrentEmployer;
+                    userDetail.EmployeeID = userViewModel.EmployeeID;
+                    userDetail.HighestEducation = userViewModel.HighestEducation;
+                    userDetail.InstitutionName = userViewModel.InstitutionName;
+                    userDetail.CreatedOn = DateTime.Now;
+                    dbUser.UserDetails = new List<LYSApp.Data.DBEntity.UserDetail>();
+                    dbUser.UserDetails.Add(userDetail);
+                    userDetailsRepository.Insert(userDetail);
+                }
+            }
+
             //Have to update/insert user details based on the requirement
             //if (dbUser != null && dbUser.UserDetails != null && dbUser.UserDetails.Count > 0)
             //{
