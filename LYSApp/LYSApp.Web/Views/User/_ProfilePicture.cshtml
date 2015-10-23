@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-md-12">
                             <img id="demo3" alt="Jcrop Example" />
                         </div>
 
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-@Ajax.BeginForm("UpdateProfilePicture", "User", FormMethod.Post, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnPictureChange", OnFailure = "OnPictureChange" })){
+@using(Ajax.BeginForm("UpdateProfilePicture", "User", FormMethod.Post, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnPictureChange", OnFailure = "OnPictureChange" })){
     <div id="tab-3" class="tab-pane">
         <div class="row form-group">
             <div class="col-md-12">
@@ -39,8 +39,8 @@
                         <div class="row row-padding-top-5">
                             <input type="submit" class="btn btn-green" value="Submit" id="tnSubmitProfilePicture" />
                         </div>
-                        <input type="hidden"  id="hdnProfilePic" name="Model.ProfilePicture" />
-                        @Html.HiddenFor(model => model.UserID)
+                      @Html.HiddenFor(model => model.UserID)
+                      @Html.HiddenFor(model => model.ProfilePicture)
                     </div>
                 </div>
                 <div id="divErrorFileFormatIMG" style="display:none" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

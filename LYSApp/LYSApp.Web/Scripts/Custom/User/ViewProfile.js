@@ -85,7 +85,7 @@ function fnLoadImage() {
             $("#fileProfile").files = data.PhotoPath;
             $("#imgProfile").attr("src", data.PhotoPath);
             $('#hdnFileName').val(data.filename);
-            $('#hdnProfilePic').val(data.PhotoPath);
+            $('#ProfilePicture').val(data.PhotoPath);
             $('#imgProfilePicture').attr("src", data.PhotoPath)
            
         },
@@ -100,7 +100,7 @@ function fnDismissModal() {
     $("#hdnIsImageCropped").val("0");
     $("#imgProfile").attr("src", $("#hdnImageSource").val());
     $("#divCropResizeImage .modal-body").empty();
-    $("#divCropResizeImage .modal-body").append("<div class=\"row\"><div class=\"col-md-6\"><img id=\"demo3\" max-width=\"500px\" max-height=\"500px\" alt=\"Jcrop Example\" style=\"width: 100%\" /></div>");
+    $("#divCropResizeImage .modal-body").append("<div class=\"row\"><div class=\"col-md-6\"><img id=\"demo3\" max-width=\"200px\" max-height=\"200px\" alt=\"Jcrop Example\" style=\"width: 100%\" /></div>");
     $("#divCropResizeImage .modal-body").append("<div class=\"col-md-6\"><div id=\"preview-pane\"><div class=\"preview-container\"><img id=\"imgPreview\" max-width=\"500px\" max-height=\"500px\" class=\"jcrop-preview\" alt=\"Preview\" />");
     $("#divCropResizeImage .modal-body").append("</div></div></div></div>");
 }
