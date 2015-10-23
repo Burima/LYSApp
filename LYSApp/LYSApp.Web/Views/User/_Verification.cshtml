@@ -175,20 +175,6 @@
         $("#divMobileVerification").modal('show');
     });
 
-    //$('#btnVerfiy').click(function () {
-    //    $.ajax({
-    //        url: mobileVerificationURL,
-    //        type: 'POST',
-    //        data: {
-               
-    //        },
-    //        success: function (data) {
-                
-    //        },
-    //        error: function (data) { }
-    //    });
-    //});
-
     $('#linkVerifyEmail').click(function () {
         $.ajax({
             url: emailVerificationURL,
@@ -207,19 +193,7 @@
         $("#divChangePassword").modal('show');
     });
 
-    @*$('#btnChange').click(function () {
-        $.ajax({
-            url: passwordChangeURL,
-            type: 'POST',
-            data: $('form.contact').serialize(),
-            success: function () {
-                alert(@ViewBag.StatusMessage);
-            },
-            error: function (data) {
-                alert(data);
-            }
-        });
-    });*@
+   
     function OnPasswordChange() {
         $("#divChangePassword").modal('hide');
         alert(@ViewBag.StatusMessage);
