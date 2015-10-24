@@ -10,9 +10,11 @@ using LYSApp.Domain;
 using LYSApp.Web.Services;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using LYSApp.Web.Utilities;
 
 namespace LYSApp.Web.Controllers
 {
+    [LYSUserAuthorize]
     public class UserController : Controller
     {
 
