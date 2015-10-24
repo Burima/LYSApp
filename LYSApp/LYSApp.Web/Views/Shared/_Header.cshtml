@@ -33,11 +33,12 @@
                     name = "Guest";
                 }
             }
+           
             @Html.AntiForgeryToken()
             <div class="headerUserWraper">
                 <a  class="userHandler dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span></a>
                 <a  class="headerUser dropdown-toggle" data-toggle="dropdown">
-                    <img class="avatar headerAvatar pull-left" src='@Url.Content(SessionManager.GetSessionUser().ProfilePicture)' alt="avatar">
+                    <img class="avatar headerAvatar pull-left" src='@Url.Content(user.ProfilePicture != null && user.ProfilePicture != String.Empty ? user.ProfilePicture : "~/Images/default_profile_pic.jpg")' alt="avatar">
                     <div class="userTop pull-left">
                         <span class="headerUserName">@name</span> <span class="fa fa-angle-down"></span>
                     </div>
