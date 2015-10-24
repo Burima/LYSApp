@@ -91,16 +91,10 @@ LYSApp/LYSApp.Data/obj/Debug/edmxResourcesToEmbed/DBEntity/LYSAdmin.msl
 /LYSApp/LYSApp.Domain/bin/Debug/Microsoft.Owin.xml
 /LYSApp/LYSApp.Web.Tests/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /LYSApp/LYSApp.Data/obj/Debug/edmxResourcesToEmbed/DBEntity/LYSAdmin.ssdl
-LYSApp/LYSApp.Web/LYSApp.Web.csproj.user
-LYSApp/LYSApp.Web/LYSApp.Web.csproj.user
-LYSApp/LYSApp.Web/LYSApp.Web.csproj.user
 *.cache
 LYSApp/LYSApp.Web.Tests/obj/Debug/build.force
 LYSApp/LYSApp.Web/bin/Ninject.Web.Common.xml
 LYSApp/LYSApp.Web/bin/Ninject.Web.Mvc.xml
 LYSApp/LYSApp.Web/bin/Ninject.xml
-LYSApp/LYSApp.Web/LYSApp.Web.csproj.user
 LYSApp/packages/*
 
-
-LYSApp/LYSApp.Web/LYSApp.Web.csproj.user
