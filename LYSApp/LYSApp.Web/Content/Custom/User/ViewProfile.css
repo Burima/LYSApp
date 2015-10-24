@@ -36,6 +36,16 @@ body {
     color : white !important;
 }
 
+.panel{
+    border: 1px solid #dce0e0;
+
+}
+
+.panel-heading{
+    background-color: #edefed;
+}
+
+
 
 
 
