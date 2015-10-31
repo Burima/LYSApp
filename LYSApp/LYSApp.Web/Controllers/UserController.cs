@@ -102,7 +102,8 @@ namespace LYSApp.Web.Controllers
 
 
         [HttpPost]
-        public virtual ActionResult CropImage(string imagePath, decimal? cropPointX, decimal? cropPointY, decimal? imageCropWidth, decimal? imageCropHeight, string fileName)
+        public virtual ActionResult CropImage(string imagePath, decimal? cropPointX, decimal? cropPointY, decimal? imageCropWidth, 
+            decimal? imageCropHeight, string fileName, long UserID)
         {
             if (string.IsNullOrEmpty(imagePath) || !cropPointX.HasValue || !cropPointY.HasValue || !imageCropWidth.HasValue || !imageCropHeight.HasValue)
             {
@@ -123,7 +124,19 @@ namespace LYSApp.Web.Controllers
                 FileHelper.SaveFile(croppedImage, tempFolderName, filename);
 
                 string photoPath = string.Concat("../files/croppedImages/", "/" + getID[0], "/" + filename + ".png");
-                return Json(new { PhotoPath = photoPath, filename = filename + ".png" }, JsonRequestBehavior.AllowGet);
+                UserViewModel viewModel = new UserViewModel();
+                viewModel.UserID = UserID;
+                viewModel.ProfilePicture = photoPath;
+                int count = userManagement.UpdateProfilePicture(viewModel);
+                if (count > 0)
+                {
+                   
+                    return Json(new { PhotoPath = photoPath, filename = filename + ".png" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
+                }
             }
             else
             {

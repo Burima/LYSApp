@@ -45,6 +45,12 @@ body {
     background-color: #edefed;
 }
 
+ div.jcrop-holder input[type=radio] {
+            display: none !important;
+ }
+
+
+
 
 
 

@@ -19,8 +19,7 @@ $(document).ready(function () {
         
     });
 
-    $(".jcrop-holder").find("div").eq(0).addClass("formatDiv");
-      
+         
     $("#fileProfile").change(function (e) {
         var file = $(this).val();
         var ext = file.split('.').pop();
@@ -63,34 +62,43 @@ function fnLoadImage() {
     var imageCropHeight = $("#hdnImageCropHeight").val();
     var cropPointX = $("#hdnCropPointX").val();
     var cropPointY = $("#hdnCropPointY").val();
-
+   
     if (imageCropWidth == 0 && imageCropHeight == 0) {
         alert("Please select crop area.");
         return;
     }
-    alert($("#hdnFileName").val());
+    
+    var test = { ID: $('#UserID').val(), ProfilePicture: $("#hdnFileName").val() };
+
+    jQuery.ajaxSettings.traditional = true;
     $.ajax({
+       
         url: CropImageUrl,
         type: 'POST',
+
         data: {
             imagePath: $("#demo3").attr("src"),
             cropPointX: cropPointX,
             cropPointY: cropPointY,
             imageCropWidth: imageCropWidth,
             imageCropHeight: imageCropHeight,
-            fileName: $("#hdnFileName").val()
+            fileName: $("#hdnFileName").val(),
+            userID: $('#UserID').val()
         },
+       
         success: function (data) {
             $("#divCropResizeImage").modal('hide');
             $("#fileProfile").files = data.PhotoPath;
             $("#imgProfile").attr("src", data.PhotoPath);
             $('#hdnFileName').val(data.filename);
             $('#ProfilePicture').val(data.PhotoPath);
-            $('#imgProfilePicture').attr("src", data.PhotoPath)
-           
+            $('#imgProfilePicture').attr("src", data.PhotoPath);            
+            $('#hdrProfilePicture').attr("src", data.PhotoPath);
         },
         error: function (data) { }
+        
     });
+    jQuery.ajaxSettings.traditional = false;
 }
 
 
@@ -119,6 +127,5 @@ $('#btnCrop').click(function () {
 
 function fnRemove() {
     $('#fileProfile').val("");
-    $('#spnRemove').hide();
     $("#photoFilePath").html("No File Chosen");//
 }
