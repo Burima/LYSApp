@@ -1,48 +1,49 @@
 ﻿@model LYSApp.Model.UserViewModel
-    @**---Modal for Image Cropping---*@
-    <div id="divCropResizeImage" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content  bounceInRight">
-                <div class="modal-header">
-                    <button type="button" id="btnCropClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Crop Image</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img id="demo3" alt="Jcrop Example" />
-                        </div>
-
+@**---Modal for Image Cropping---*@
+<div id="divCropResizeImage" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content  bounceInRight">
+            <div class="modal-header">
+                <button type="button" id="btnCropClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Crop Image</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" >
+                    <div class="col-md-12">
+                        <img id="demo3" alt="Jcrop Example" />
                     </div>
+
                 </div>
-                <div class="modal-footer">
-                    <input class="btn btn-primary" id="btnSkipCropping" type="submit" aria-hidden="true" value="Skip Cropping" />
-                    <input class="btn btn-primary" id="btnCrop" type="submit" value="Crop" />
-                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-green" id="btnSkipCropping" type="submit" aria-hidden="true" value="Skip Cropping" />
+                <input class="btn btn-green" id="btnCrop" type="submit" value="Crop" />
             </div>
         </div>
     </div>
-@using(Ajax.BeginForm("UpdateProfilePicture", "User", FormMethod.Post, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnPictureChange", OnFailure = "OnPictureChange" })){
-    <div id="tab-3" class="tab-pane">
-        <div class="row form-group">
-            <div class="col-md-12">
-                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div id="divFile" class="col-lg-8 col-md-8 col-sm-12 col-xs-12 row-padding-top-5">
-                    
-                        <label for="fileProfile" id="fileLabel">
-                            <input class="txtFile" id="fileProfile" name="fileProfile" type="file" style="display:none">
-                            <a>Choose File</a>
-                        </label>
-                        <div><div id="photoFilePath" class="filePath pull-left">No File Chosen</div><span id="spnRemove" onclick="fnRemove()" style="cursor:pointer; color:gray; display:none">x</span></div>
-                        <br />
-                        <img draggable="false" id="imgProfile" style="display:inline-block; height:250px; width:250px; margin: 0 5px 0 10px;" src="@Url.Action(Model.ProfilePicture)" alt="" />
-                        <div class="row row-padding-top-5">
-                            <input type="submit" class="btn btn-green" value="Submit" id="tnSubmitProfilePicture" />
-                        </div>
-                      @Html.HiddenFor(model => model.UserID)
-                      @Html.HiddenFor(model => model.ProfilePicture)
-                    </div>
-                </div>
+</div>
+
+<div class="col-md-9">
+<div class="panel content">
+    <div class="panel-heading">
+        Profile Picture
+    </div>
+    <div class="panel-body">
+        <div id="tab-3" class="tab-pane">
+            <div class="row form-group">
+            <div class="col-md-7">
+                    <img draggable="false" id="imgProfile" style="display:inline-block; height:250px; width:250px; margin: 0 5px 0 10px;" src="@Url.Action(Model.ProfilePicture)" alt="" />
+             </div>
+            <div class="col-md-5 row-padding-top-5">
+                <p>Upload your cool profile pictures to complete your profile.We ensure that your profile picture is confidential and will not be share with anyone. </p>
+                <label for="fileProfile" id="fileLabel">
+                    <input id="fileProfile" name="fileProfile" type="file" style="display:none">
+                    <a class="btn btn-green">Upload Photo</a>
+                </label>
+                <div id="photoFilePath" style="display:none" class="filePath pull-left">No File Chosen</div>
+                         
+                @Html.HiddenFor(model => model.UserID)
+                @Html.HiddenFor(model => model.ProfilePicture)
                 <div id="divErrorFileFormatIMG" style="display:none" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                     </div>
@@ -50,13 +51,13 @@
                         <span id="spnErrorFileFormatIMG" class="error" style="display:none;color:red;"></span>
                     </div>
                 </div>
-           
             </div>
-       
+        </div>
         </div>
     </div>
+    </div>
+</div>
 
-}
 
 
 
