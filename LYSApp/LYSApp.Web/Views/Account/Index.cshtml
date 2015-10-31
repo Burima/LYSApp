@@ -21,57 +21,59 @@
         <div class="home-subtitle">With lockyourstay - one-stop store for your Dream Stay</div>
         <a href="" class="btn btn-lg btn-black">Learn More</a>
     </div>
-    <div class="search-panel">
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <input type="text" class="form-control" id="city" placeholder="City" autocomplete="on">
-            </div>
-            <div class="form-group hidden-xs adv">
-                <a  data-toggle="dropdown" class="btn btn-white dropdown-toggle">
-                    <span class="dropdown-label">Bedrooms</span> <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-select">
-                    <li class="active"><input type="radio" name="bedno" checked="checked"><a >Bedrooms</a></li>
-                    <li><input type="radio" name="bedno"><a >1</a></li>
-                    <li><input type="radio" name="bedno"><a >2</a></li>
-                    <li><input type="radio" name="bedno"><a >3</a></li>
-                    <li><input type="radio" name="bedno"><a >4</a></li>
-                    <li><input type="radio" name="bedno"><a >5</a></li>
-                    <li><input type="radio" name="bedno"><a >6</a></li>
-                </ul>
-            </div>
-            <div class="form-group hidden-xs adv">
-                <a  data-toggle="dropdown" class="btn btn-white dropdown-toggle">
-                    <span class="dropdown-label">Bathrooms</span> <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-select">
-                    <li class="active"><input type="radio" name="bathno" checked="checked"><a >Bathrooms</a></li>
-                    <li><input type="radio" name="bathno"><a >1</a></li>
-                    <li><input type="radio" name="bathno"><a >2</a></li>
-                    <li><input type="radio" name="bathno"><a >3</a></li>
-                    <li><input type="radio" name="bathno"><a >4</a></li>
-                    <li><input type="radio" name="bathno"><a >5</a></li>
-                    <li><input type="radio" name="bathno"><a >6</a></li>
-                </ul>
-            </div>
-            <div class="form-group hidden-xs adv">
-                <div class="input-group">
-                    <div class="input-group-addon">Rs</div>
-                    <input class="form-control price" type="text" placeholder="From">
+
+   <div class="search-panel">
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="city" placeholder="City" autocomplete="on">
                 </div>
-            </div>
-            <div class="form-group hidden-xs adv">
-                <div class="input-group">
-                    <div class="input-group-addon">Rs</div>
-                    <input class="form-control price" type="text" placeholder="To">
+                <div class="form-group hidden-xs adv">
+                    <a data-toggle="dropdown" class="btn btn-white dropdown-toggle">
+                        <span class="dropdown-label">Bedrooms</span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-select">
+                        <li class="active"><input type="radio" name="bedno" checked="checked"><a>Bedrooms</a></li>
+                        <li><input type="radio" name="bedno"><a>1</a></li>
+                        <li><input type="radio" name="bedno"><a>2</a></li>
+                        <li><input type="radio" name="bedno"><a>3</a></li>
+                        <li><input type="radio" name="bedno"><a>4</a></li>
+                        <li><input type="radio" name="bedno"><a>5</a></li>
+                        <li><input type="radio" name="bedno"><a>6</a></li>
+                    </ul>
                 </div>
-            </div>
-            <div class="form-group">
-                <a  class="btn btn-green">Search</a>
-                <a  class="btn btn-o btn-white pull-right visible-xs" id="advanced">Advanced Search <span class="fa fa-angle-up"></span></a>
-            </div>
-        </form>
-    </div>
+                <div class="form-group hidden-xs adv">
+                    <a data-toggle="dropdown" class="btn btn-white dropdown-toggle">
+                        <span class="dropdown-label">Bathrooms</span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-select">
+                        <li class="active"><input type="radio" name="bathno" checked="checked"><a>Bathrooms</a></li>
+                        <li><input type="radio" name="bathno"><a>1</a></li>
+                        <li><input type="radio" name="bathno"><a>2</a></li>
+                        <li><input type="radio" name="bathno"><a>3</a></li>
+                        <li><input type="radio" name="bathno"><a>4</a></li>
+                        <li><input type="radio" name="bathno"><a>5</a></li>
+                        <li><input type="radio" name="bathno"><a>6</a></li>
+                    </ul>
+                </div>
+                <div class="form-group hidden-xs adv">
+                    <div class="input-group">
+                        <div class="input-group-addon">Rs</div>
+                        <input class="form-control price" type="text" placeholder="From">
+                    </div>
+                </div>
+                <div class="form-group hidden-xs adv">
+                    <div class="input-group">
+                        <div class="input-group-addon">Rs</div>
+                        <input class="form-control price" type="text" placeholder="To">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a class="btn btn-green" id="btnSearchHome" href="@Url.Action("Index", "Search")">Search</a>
+                    <a class="btn btn-o btn-white pull-right visible-xs" id="advanced">Advanced Search <span class="fa fa-angle-up"></span></a>
+                </div>
+            </form>
+        </div>
+
 </div> <!-- End Hero-->
 <!-- Highlight -->
 <div class="highlight">

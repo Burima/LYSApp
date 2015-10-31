@@ -175,6 +175,7 @@
     <Compile Include="App_Start\StaticContentConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -294,6 +295,7 @@
     <Content Include="Scripts\Custom\User\form-image-crop.js" />
     <Content Include="Scripts\Custom\User\jquery.Jcrop.js" />
     <Content Include="Scripts\Custom\User\jquery.Jcrop.min.js" />
+    <Content Include="Scripts\Custom\User\SearchHome.js" />
     <Content Include="Scripts\Custom\User\ViewProfile.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\home.js" />
@@ -368,6 +370,7 @@
     <Content Include="Views\User\_Verification.cshtml" />
     <Content Include="Views\User\_ReviewComments.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
