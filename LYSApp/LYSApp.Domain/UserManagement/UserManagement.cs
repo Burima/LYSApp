@@ -109,10 +109,10 @@ namespace LYSApp.Domain.UserManagement
             return houseIDList.First();
         }
 
-        public int UpdateProfilePicture(UserViewModel userViewModel)
+        public int UpdateProfilePicture(long UserID, string ProfilePicture)
         {
-            var dbUser = userRepository.FirstOrDefault(m => m.UserID == userViewModel.UserID);
-            dbUser.ProfilePicture = userViewModel.ProfilePicture;
+            var dbUser = userRepository.FirstOrDefault(m => m.UserID == UserID);
+            dbUser.ProfilePicture = ProfilePicture;
 
             userRepository.Update(dbUser);
             return unitOfWork.SaveChanges();

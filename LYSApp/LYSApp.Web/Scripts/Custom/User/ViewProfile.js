@@ -83,8 +83,7 @@ function fnLoadImage() {
             imageCropWidth: imageCropWidth,
             imageCropHeight: imageCropHeight,
             fileName: $("#hdnFileName").val(),
-            userID: $('#UserID').val()
-        },
+         },
        
         success: function (data) {
             $("#divCropResizeImage").modal('hide');

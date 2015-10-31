@@ -103,7 +103,7 @@ namespace LYSApp.Web.Controllers
 
         [HttpPost]
         public virtual ActionResult CropImage(string imagePath, decimal? cropPointX, decimal? cropPointY, decimal? imageCropWidth, 
-            decimal? imageCropHeight, string fileName, long UserID)
+            decimal? imageCropHeight, string fileName)
         {
             if (string.IsNullOrEmpty(imagePath) || !cropPointX.HasValue || !cropPointY.HasValue || !imageCropWidth.HasValue || !imageCropHeight.HasValue)
             {
@@ -124,10 +124,8 @@ namespace LYSApp.Web.Controllers
                 FileHelper.SaveFile(croppedImage, tempFolderName, filename);
 
                 string photoPath = string.Concat("../files/croppedImages/", "/" + getID[0], "/" + filename + ".png");
-                UserViewModel viewModel = new UserViewModel();
-                viewModel.UserID = UserID;
-                viewModel.ProfilePicture = photoPath;
-                int count = userManagement.UpdateProfilePicture(viewModel);
+                
+                int count = userManagement.UpdateProfilePicture(SessionManager.GetSessionUser().Id, photoPath);
                 if (count > 0)
                 {
                    
@@ -151,11 +149,5 @@ namespace LYSApp.Web.Controllers
             return PartialView("_ReviewComments", userViewModel);
         }
 
-        public ActionResult UpdateProfilePicture(UserViewModel userViewModel)
-        {
-            int count = userManagement.UpdateProfilePicture(userViewModel);
-            return PartialView("_ProfilePicture", userViewModel);
-
-        }
     }
 }
