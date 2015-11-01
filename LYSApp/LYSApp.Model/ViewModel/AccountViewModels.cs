@@ -178,7 +178,8 @@ namespace LYSApp.Model
 
         public int Sharing { get; set; }
 
-        public IList<House> houseList { get; set; }
     }
+
+    
 
 }

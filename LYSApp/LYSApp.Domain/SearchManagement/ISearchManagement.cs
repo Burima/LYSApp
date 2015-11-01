@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LYSApp.Model;
 
 namespace LYSApp.Domain.SearchManagement
 {
-    interface ISearchManagement
+    public interface ISearchManagement
     {
+        IList<House> getHouses(SerchViewModel serchViewModel);
     }
+
 }
