@@ -163,4 +163,22 @@ namespace LYSApp.Model
         public User user { get; set; }
     }
 
+    public class SerchViewModel
+    {
+        [Required]
+        public string City { get; set; }
+        [Required]
+        public string Area { get; set; }
+
+        public int Gender { get; set; }
+
+        public int MinPrice { get; set; }
+
+        public int MaxPrice { get; set; }
+
+        public int Sharing { get; set; }
+
+        public IList<House> houseList { get; set; }
+    }
+
 }
