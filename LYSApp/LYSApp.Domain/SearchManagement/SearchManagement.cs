@@ -26,8 +26,8 @@ namespace LYSApp.Domain.SearchManagement
         {
             IList<House> houseList = new List<House>();
 
-            var city = cityRepository.FirstOrDefault(m => m.CityName.Equals(searchViewModel.City));
-            var area = areaRepository.FirstOrDefault(m => m.CityID == city.CityID && m.AreaName.Equals(searchViewModel.Area));
+            var city = cityRepository.FirstOrDefault(m => m.CityID == searchViewModel.CityID);
+            var area = areaRepository.FirstOrDefault(m => m.CityID == city.CityID && m.AreaID == searchViewModel.AreaID);
             return null;
         }
     }

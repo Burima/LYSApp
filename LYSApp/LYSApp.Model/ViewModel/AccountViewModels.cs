@@ -166,9 +166,9 @@ namespace LYSApp.Model
     public class SerchViewModel
     {
         [Required]
-        public string City { get; set; }
+        public int CityID { get; set; }
         [Required]
-        public string Area { get; set; }
+        public int AreaID { get; set; }
 
         public int Gender { get; set; }
 
