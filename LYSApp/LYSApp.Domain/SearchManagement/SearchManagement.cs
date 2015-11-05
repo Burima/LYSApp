@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LYSApp.Model;
 using LYSApp.Data.DBRepository;
+using System.Web;
 
 namespace LYSApp.Domain.SearchManagement
 {
@@ -22,13 +23,29 @@ namespace LYSApp.Domain.SearchManagement
             houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
         }
 
-        public IList<House> getHouses(SerchViewModel searchViewModel)
+        public IList<House> getHouses(SearchViewModel searchViewModel)
         {
             IList<House> houseList = new List<House>();
 
             var city = cityRepository.FirstOrDefault(m => m.CityID == searchViewModel.CityID);
             var area = areaRepository.FirstOrDefault(m => m.CityID == city.CityID && m.AreaID == searchViewModel.AreaID);
             return null;
+        }
+
+        public IList<SearchAreaViewModel> getAreaList(string term)
+        {
+            IList<SearchAreaViewModel> areaList = new List<SearchAreaViewModel>();
+            IList<Model.Area> areas = HttpContext.Current.Application["Areas"] as IList<Model.Area>;
+            IList<Model.City> cities = HttpContext.Current.Application["Cities"] as IList<Model.City>;
+            areaList = (from a in areas
+                        where a.AreaName.StartsWith(term)
+                        select new LYSApp.Model.SearchAreaViewModel
+                        {
+                            AreaID = a.AreaID,
+                            AreaName = a.AreaName,
+                            CityName = cities.Where(x => x.CityID == a.CityID).FirstOrDefault().CityName
+                        }).ToList();
+            return areaList;
         }
     }
 }

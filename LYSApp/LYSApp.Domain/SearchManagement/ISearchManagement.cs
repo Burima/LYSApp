@@ -9,7 +9,9 @@ namespace LYSApp.Domain.SearchManagement
 {
     public interface ISearchManagement
     {
-        IList<House> getHouses(SerchViewModel serchViewModel);
+        IList<House> getHouses(SearchViewModel serchViewModel);
+
+        IList<SearchAreaViewModel> getAreaList(string term);
     }
 
 }

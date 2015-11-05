@@ -163,7 +163,7 @@ namespace LYSApp.Model
         public User user { get; set; }
     }
 
-    public class SerchViewModel
+    public class SearchViewModel
     {
         [Required]
         public int CityID { get; set; }
@@ -180,6 +180,13 @@ namespace LYSApp.Model
 
     }
 
-    
+    public class SearchAreaViewModel
+    {
+        public int AreaID { get; set; }
+
+        public string AreaName { get; set; }
+
+        public string CityName { get; set; }
+    }
 
 }
