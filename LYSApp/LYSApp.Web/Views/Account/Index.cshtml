@@ -1,4 +1,5 @@
-﻿@{
+﻿@model LYSApp.Model.SearchViewModel
+@{
     ViewBag.Title = "Home";
 }
 
@@ -25,7 +26,7 @@
    <div class="search-panel">
             <form class="form-inline" role="form">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="area" placeholder="Area">
+                    <input type="text" class="form-control" id="txtArea" placeholder="Area">
                 </div>
                 <div class="form-group hidden-xs adv">
                     <select class="form-control">
@@ -310,3 +311,43 @@
 
 
 <!-- End Main Content -->
+@section scripts{
+    <script>
+        var searchURL='@Url.Action("getArea", "Search")';
+    </script>
+    <script src='@Url.Content("~/Scripts/jquery-ui.min.js")'></script>
+    <script>
+        $("#txtArea").autocomplete({
+            source: function (request, response) {
+
+                $.ajax({
+                    url: searchURL,
+                    dataType: "json",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (res) {
+                       res = JSON.parse(res);
+                       return response($.map(res, function (data, id) {
+                            return {
+                                label: data.AreaName + "," + data.CityName,
+                                value: data.AreaID,
+                                category: data.AreaID
+                            };
+                        }));
+
+                    },
+                    error: function (message) {
+                        response([]);
+                    }
+                });
+            },
+            minLength: 2,
+            select: function (event, ui) {
+               
+                return false;
+            }
+
+        });
+    </script>
+}

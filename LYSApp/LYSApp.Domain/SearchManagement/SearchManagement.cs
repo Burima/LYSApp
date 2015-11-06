@@ -37,14 +37,13 @@ namespace LYSApp.Domain.SearchManagement
             IList<SearchAreaViewModel> areaList = new List<SearchAreaViewModel>();
             IList<Model.Area> areas = HttpContext.Current.Application["Areas"] as IList<Model.Area>;
             IList<Model.City> cities = HttpContext.Current.Application["Cities"] as IList<Model.City>;
-            areaList = (from a in areas
-                        where a.AreaName.StartsWith(term)
-                        select new LYSApp.Model.SearchAreaViewModel
-                        {
-                            AreaID = a.AreaID,
-                            AreaName = a.AreaName,
-                            CityName = cities.Where(x => x.CityID == a.CityID).FirstOrDefault().CityName
-                        }).ToList();
+            
+            areaList = areas.Select(area => new LYSApp.Model.SearchAreaViewModel
+            {
+                AreaID = area.AreaID,
+                AreaName = area.AreaName,
+                CityName = cities.Where(x => x.CityID == area.CityID).FirstOrDefault().CityName
+            }).Where(area => area.AreaName.ToLower().StartsWith(term.ToLower())).ToList();
             return areaList;
         }
     }

@@ -27,7 +27,7 @@ namespace LYSApp.Web.Controllers
 
        public JsonResult getArea(string term)
        {
-           IList<SearchAreaViewModel> searchAreaList = searchManagement
+           IList<SearchAreaViewModel> searchAreaList = searchManagement.getAreaList(term);
            string result = JsonConvert.SerializeObject(searchAreaList); 
            return Json(result, JsonRequestBehavior.AllowGet);
 
