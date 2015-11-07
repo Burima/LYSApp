@@ -25,7 +25,7 @@ namespace LYSApp.Web.Controllers
             return View();
         }
 
-       public JsonResult getArea(string term)
+       public JsonResult GetArea(string term)
        {
            IList<SearchAreaViewModel> searchAreaList = searchManagement.getAreaList(term);
            string result = JsonConvert.SerializeObject(searchAreaList); 
@@ -33,9 +33,9 @@ namespace LYSApp.Web.Controllers
 
        }
 
-       public void getHouses(SearchViewModel searchViewModel)
+       public void GetHouses(AccountViewModel accountViewModel)
        {
-           searchManagement.getHouseList(searchViewModel);
+           searchManagement.getHouseList(accountViewModel.SearchViewModel);
        }
     }
 }

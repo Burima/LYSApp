@@ -52,8 +52,7 @@ namespace LYSApp.Web.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-
-            return View(accountViewModel.SearchViewModel);
+            return View(accountViewModel);
         }
 
         //
