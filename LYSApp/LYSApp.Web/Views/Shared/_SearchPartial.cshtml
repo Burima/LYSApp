@@ -1,0 +1,36 @@
+﻿@model LYSApp.Model.SearchViewModel
+
+
+<div class="search-panel">
+    @*<form class="form-inline" role="form">*@
+    @using (Html.BeginForm("GetHouses", "Search", FormMethod.Post, new { role = "form", id = "form-Search-pg",  @class = "form-inline" }))
+    {
+        <div class="form-group">
+            <input type="text" class="form-control area"  id="txtArea" placeholder="Area" tabindex="1">   
+           @Html.HiddenFor(model => model.AreaID)      
+        </div>
+        <div class="form-group hidden-xs adv">
+            @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>{
+                        new SelectListItem{ Text="Male", Value="1"},
+                        new SelectListItem{ Text="Female", Value="2"}
+                        }, "Gender", new { @class = "form-control", maxlength = "50", placeholder = "Gender", tabIndex = "2" })
+        </div>
+        <div class="form-group hidden-xs adv">
+            <div class="input-group">
+                <div class="input-group-addon">Rs</div>
+                @Html.TextBoxFor(model => model.MinPrice, new { @class = "form-control price", maxlength = "10", placeholder = "From", tabIndex = "3" })
+            </div>
+        </div>
+        <div class="form-group hidden-xs adv">
+            <div class="input-group">
+                <div class="input-group-addon">Rs</div>
+                @Html.TextBoxFor(model => model.MaxPrice, new { @class = "form-control price", maxlength = "10", placeholder = "To", tabIndex = "4" })
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-green" id="btnSearchHome" value="Search" tabindex="5" />
+            <a class="btn btn-o btn-white pull-right visible-xs" id="advanced">Advanced Search <span class="fa fa-angle-up"></span></a>
+        </div>
+        @*</form>*@
+    }
+</div>

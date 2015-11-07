@@ -23,7 +23,7 @@ namespace LYSApp.Domain.SearchManagement
             houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
         }
 
-        public IList<House> getHouseList(SearchViewModel searchViewModel)
+        public IList<House> GetHouses(SearchViewModel searchViewModel)
         {
             IList<House> houseList = new List<House>();
 
@@ -31,7 +31,7 @@ namespace LYSApp.Domain.SearchManagement
             return null;
         }
 
-        public IList<SearchAreaViewModel> getAreaList(string term)
+        public IList<SearchAreaViewModel> GetAreas(string term)
         {
             IList<SearchAreaViewModel> areaList = new List<SearchAreaViewModel>();
             IList<Model.Area> areas = HttpContext.Current.Application["Areas"] as IList<Model.Area>;

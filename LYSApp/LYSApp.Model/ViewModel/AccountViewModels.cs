@@ -115,7 +115,7 @@ namespace LYSApp.Model
         public LoginViewModel LoginViewModel { get; set; }
         public ResetPasswordViewModel ResetPasswordViewModel { get; set; }
         public ExternalLoginConfirmationViewModel ExternalLoginConfirmationViewModel { get; set; }
-        public SearchViewModel SearchViewModel { get; set; }
+        
     }
 
     [JsonObject(MemberSerialization.OptIn)]

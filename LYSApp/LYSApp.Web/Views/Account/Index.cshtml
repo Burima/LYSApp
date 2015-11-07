@@ -1,11 +1,6 @@
-﻿@model LYSApp.Model.AccountViewModel
-@{
-    ViewBag.Title = "Home";
-    var vm = Json.Encode(Model);
+﻿@{
+    ViewBag.Title = "Home";   
 }
-
-
-
 <link href="~/Content/Custom/Account/Index.css" rel="stylesheet" />
 
 <!-- Hero -->
@@ -25,38 +20,9 @@
         <a href="" class="btn btn-lg btn-black">Learn More</a>
     </div>
 
-   <div class="search-panel">
-            <form class="form-inline" role="form">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="txtArea" placeholder="Area">
-                    @Html.HiddenFor(model => model.SearchViewModel.AreaID)
-                </div>
-                <div class="form-group hidden-xs adv">
-                   
-                    @Html.DropDownListFor(model => model.SearchViewModel.Gender, new List<SelectListItem>{
-                        new SelectListItem{ Text="Male", Value="1"},
-                        new SelectListItem{ Text="Female", Value="2"}
-                        }, "--- Select---", new { @class = "form-control", maxlength = "50", placeholder = "Gender", tabIndex = "3" })
-                </div>
-                <div class="form-group hidden-xs adv">
-                    <div class="input-group">
-                        <div class="input-group-addon">Rs</div>
-                        @Html.TextBoxFor(model => model.SearchViewModel.MinPrice, new { @class = "form-control price", maxlength = "6", placeholder = "From" })
-                    </div>
-                </div>
-                <div class="form-group hidden-xs adv">
-                    <div class="input-group">
-                        <div class="input-group-addon">Rs</div>
-                       @Html.TextBoxFor(model => model.SearchViewModel.MaxPrice, new { @class = "form-control price", maxlength = "6", placeholder = "To" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-green" id="btnSearchHome" value="Search" />
-                    <a class="btn btn-o btn-white pull-right visible-xs" id="advanced">Advanced Search <span class="fa fa-angle-up"></span></a>
-                </div>
-            </form>
-        </div>
-
+   <!-- Search -->
+   @Html.Partial("_SearchPartial", new LYSApp.Model.SearchViewModel {MinPrice=0})
+   <!-- end Search -->
 </div> <!-- End Hero-->
 
 <!-- Highlight -->
@@ -336,7 +302,8 @@
                        return response($.map(res, function (data, id) {
                             return {
                                 label: data.AreaName + "," + data.CityName,
-                                value: data.AreaID,
+                                value: data.AreaName + "," + data.CityName,                              
+                                AreaID: data.AreaID,
                                 category: data.AreaID
                             };
                         }));
@@ -348,15 +315,14 @@
                 });
             },
             minLength: 2,
-            select: function (event, ui) {
-                $('#txtArea').val(ui.item.label);
-                $('#AreaID').val(ui.item.value)
+            select: function (event, ui) {                
+                $('#AreaID').val(ui.item.AreaID)
                 return false;
             }
 
         });
 
-        $("#btnSearchHome").click(function () {
+        @*$("#btnSearchHome").click(function () {
             var check = @Html.Raw(vm)
            
             $.ajax({
@@ -368,6 +334,6 @@
                 }
             })
 
-        });
+        });*@
     </script>
 }

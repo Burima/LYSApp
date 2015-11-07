@@ -271,6 +271,7 @@
     <Content Include="Images\prop\4-4.png" />
     <Content Include="Images\prop\5-1-thmb.png" />
     <Content Include="Images\prop\5-1.png" />
+    <Content Include="Images\signup-lite-dropdown.png" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\blog.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -371,6 +372,7 @@
     <Content Include="Views\User\_ReviewComments.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shared\_SearchPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

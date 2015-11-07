@@ -3,20 +3,24 @@
     margin-bottom: 5%;
     font-size: 130%;
 }
-.twitter-heading{
-    text-align:center;
-    line-height:1.2em
+
+.twitter-heading {
+    text-align: center;
+    line-height: 1.2em;
 }
+
 .quote-info {
     text-align: center;
-    width: 65%!important;
+    width: 65% !important;
     margin: 0 auto;
     float: none;
     padding: 170px 0 150px;
 }
+
 .twelve {
     width: 100%;
 }
+
 .columns {
     float: left;
     min-height: 1px;
@@ -69,25 +73,27 @@
 }*/
 
 #vision-container {
-
 }
+
 .vision {
     background-color: #676a6c;
     height: 200px;
-    width:100%;
+    width: 100%;
     position: relative;
-    color:white;
+    color: white;
     padding: 20px 20px 0px 20px;
     text-align: left;
     font-size: 16px;
     font-style: italic;
-    color:white;
-    padding-bottom:5%;
+    color: white;
+    padding-bottom: 5%;
 }
+
 .testimoials {
     height: 150px;
     text-align: left;
 }
+
 .testimoials-head {
     margin: 0;
     padding: 25px 0 30px 0;
@@ -95,14 +101,32 @@
     line-height: 22px;
     text-align: center;
 }
+
 .padding-index {
     width: 85%;
     margin: 0 auto;
-    padding-left:20px;
-    padding-right:20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.home-header{
-    background-color:transparent;
+.home-header {
+    background-color: transparent;
 }
 
+/*search form*/
+@media only screen and (max-width: 400px) {
+    #form-Search-pg .form-group .area {
+        width: 250px !important;
+    }
+}
+
+@media only screen and (min-width: 401px) {
+    #form-Search-pg .form-group .area {
+        width: 400px !important;
+    }
+}
+
+.form-group select {
+    background: url(../../../Images/signup-lite-dropdown.png) right 7px top 12px no-repeat #fff;
+}
+/*end search form*/

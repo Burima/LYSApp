@@ -27,15 +27,15 @@ namespace LYSApp.Web.Controllers
 
        public JsonResult GetArea(string term)
        {
-           IList<SearchAreaViewModel> searchAreaList = searchManagement.getAreaList(term);
+           IList<SearchAreaViewModel> searchAreaList = searchManagement.GetAreas(term);
            string result = JsonConvert.SerializeObject(searchAreaList); 
            return Json(result, JsonRequestBehavior.AllowGet);
 
        }
 
-       public void GetHouses(AccountViewModel accountViewModel)
+       public void GetHouses(SearchViewModel searchViewModel)
        {
-           searchManagement.getHouseList(accountViewModel.SearchViewModel);
+           searchManagement.GetHouses(searchViewModel);
        }
     }
 }
