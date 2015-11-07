@@ -32,5 +32,10 @@ namespace LYSApp.Web.Controllers
            return Json(result, JsonRequestBehavior.AllowGet);
 
        }
+
+       public void getHouses(SearchViewModel searchViewModel)
+       {
+           searchManagement.getHouseList(searchViewModel);
+       }
     }
 }

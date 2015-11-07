@@ -115,8 +115,7 @@ namespace LYSApp.Model
         public LoginViewModel LoginViewModel { get; set; }
         public ResetPasswordViewModel ResetPasswordViewModel { get; set; }
         public ExternalLoginConfirmationViewModel ExternalLoginConfirmationViewModel { get; set; }
-
-       
+        public SearchViewModel SearchViewModel { get; set; }
     }
 
     [JsonObject(MemberSerialization.OptIn)]
@@ -166,8 +165,6 @@ namespace LYSApp.Model
     public class SearchViewModel
     {
         [Required]
-        public int CityID { get; set; }
-        [Required]
         public int AreaID { get; set; }
 
         public int Gender { get; set; }
@@ -176,7 +173,7 @@ namespace LYSApp.Model
 
         public int MaxPrice { get; set; }
 
-        public int Sharing { get; set; }
+        public int SharingType { get; set; }
 
     }
 

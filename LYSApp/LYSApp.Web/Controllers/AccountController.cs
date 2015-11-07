@@ -26,7 +26,7 @@ namespace LYSApp.Web.Controllers
         AccountViewModel accountViewModel = new AccountViewModel();
         MandrillMailer mandrillMailer = new MandrillMailer();
         TripleDES tripleDES = new TripleDES();
-        SearchViewModel searchViewModel = new SearchViewModel();
+
        
         public AccountController()
         {
@@ -53,7 +53,7 @@ namespace LYSApp.Web.Controllers
         public ActionResult Index()
         {
 
-            return View(searchViewModel);
+            return View(accountViewModel.SearchViewModel);
         }
 
         //

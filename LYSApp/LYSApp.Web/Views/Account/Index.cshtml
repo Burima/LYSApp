@@ -1,6 +1,7 @@
 ﻿@model LYSApp.Model.SearchViewModel
 @{
     ViewBag.Title = "Home";
+    var vm = Json.Encode(Model);
 }
 
 
@@ -8,6 +9,7 @@
 <link href="~/Content/Custom/Account/Index.css" rel="stylesheet" />
 
 <!-- Hero -->
+
 <div id="hero-container">
     <ul class="cb-slideshow">
         <li><span></span></li>
@@ -27,34 +29,36 @@
             <form class="form-inline" role="form">
                 <div class="form-group">
                     <input type="text" class="form-control" id="txtArea" placeholder="Area">
+                    @Html.HiddenFor(model => model.AreaID)
                 </div>
                 <div class="form-group hidden-xs adv">
-                    <select class="form-control">
-                        <option selected="selected" disabled>--Gender--</option>
-                        <option value="Male">Boys</option>
-                        <option value="Female">Girls</option>
-                    </select>
+                   
+                    @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>{
+                        new SelectListItem{ Text="Male", Value="1"},
+                        new SelectListItem{ Text="Female", Value="2"}
+                        }, "--- Select---", new { @class = "form-control", maxlength = "50", placeholder = "Gender", tabIndex = "3" })
                 </div>
                 <div class="form-group hidden-xs adv">
                     <div class="input-group">
                         <div class="input-group-addon">Rs</div>
-                        <input class="form-control price" type="text" placeholder="From">
+                        @Html.TextBoxFor(model => model.MinPrice, new { @class = "form-control price", maxlength = "6", placeholder = "From" })
                     </div>
                 </div>
                 <div class="form-group hidden-xs adv">
                     <div class="input-group">
                         <div class="input-group-addon">Rs</div>
-                        <input class="form-control price" type="text" placeholder="To">
+                       @Html.TextBoxFor(model => model.MaxPrice, new { @class = "form-control price", maxlength = "6", placeholder = "To"})
                     </div>
                 </div>
                 <div class="form-group">
-                    <a class="btn btn-green" id="btnSearchHome" href="@Url.Action("Index", "Search")">Search</a>
+                    <input type="submit" class="btn btn-green" id="btnSearchHome" value="Search" />
                     <a class="btn btn-o btn-white pull-right visible-xs" id="advanced">Advanced Search <span class="fa fa-angle-up"></span></a>
                 </div>
             </form>
         </div>
 
 </div> <!-- End Hero-->
+
 <!-- Highlight -->
 <div class="highlight">
     <div class="h-title osLight">Find your new place with Lockyourstay</div>
@@ -313,7 +317,8 @@
 <!-- End Main Content -->
 @section scripts{
     <script>
-        var searchURL='@Url.Action("getArea", "Search")';
+    var getAreaListURL = '@Url.Action("getArea", "Search")';
+    var searchURL = '@Url.Action("getHouses", "Search")';
     </script>
     <script src='@Url.Content("~/Scripts/jquery-ui.min.js")'></script>
     <script>
@@ -321,7 +326,7 @@
             source: function (request, response) {
 
                 $.ajax({
-                    url: searchURL,
+                    url: getAreaListURL,
                     dataType: "json",
                     data: {
                         term: request.term
@@ -344,9 +349,24 @@
             },
             minLength: 2,
             select: function (event, ui) {
-               
+                $('#txtArea').val(ui.item.label);
+                $('#AreaID').val(ui.item.value)
                 return false;
             }
+
+        });
+
+        $("#btnSearchHome").click(function () {
+            var check = @Html.Raw(vm)
+           
+            $.ajax({
+              
+                url: searchURL,
+                type: 'POST',
+                data: {
+                    searchViewModel: JSON.stringify(check)
+                }
+            })
 
         });
     </script>

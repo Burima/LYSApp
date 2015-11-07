@@ -23,12 +23,11 @@ namespace LYSApp.Domain.SearchManagement
             houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
         }
 
-        public IList<House> getHouses(SearchViewModel searchViewModel)
+        public IList<House> getHouseList(SearchViewModel searchViewModel)
         {
             IList<House> houseList = new List<House>();
 
-            var city = cityRepository.FirstOrDefault(m => m.CityID == searchViewModel.CityID);
-            var area = areaRepository.FirstOrDefault(m => m.CityID == city.CityID && m.AreaID == searchViewModel.AreaID);
+            var area = areaRepository.FirstOrDefault(m => m.AreaID == searchViewModel.AreaID);
             return null;
         }
 
