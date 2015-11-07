@@ -37,5 +37,10 @@ namespace LYSApp.Web.Controllers
        {
            searchManagement.GetHouses(searchViewModel);
        }
+
+       public ActionResult PropertyDetails()
+       {
+           return View();
+       }
     }
 }

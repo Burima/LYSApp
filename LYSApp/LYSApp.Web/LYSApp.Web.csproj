@@ -200,6 +200,7 @@
     <Content Include="Content\Custom\Account\Index.css" />
     <Content Include="Content\Custom\Home\Jobs.css" />
     <Content Include="Content\Custom\Home\TermsAndConditions.css" />
+    <Content Include="Content\Custom\Search\Search.css" />
     <Content Include="Content\Custom\Shared\_Header.css" />
     <Content Include="Content\Custom\User\profile.css" />
     <Content Include="Content\Custom\User\style.css" />
@@ -373,6 +374,7 @@
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Views\Search\PropertyDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
