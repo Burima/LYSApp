@@ -186,4 +186,25 @@ namespace LYSApp.Model
         public string CityName { get; set; }
     }
 
+    public class PropertyDetailsViewModel
+    {
+        public int PGDetailsID { get; set; }
+
+        public string PGName { get; set; }
+
+        public string Address { get; set; }
+
+        public string Description { get; set; }
+
+        public int StartingPrice { get; set; }
+
+        public int Gender { get; set; }
+
+        public decimal Latitude { get; set; }
+
+        public decimal Longitude { get; set; }
+
+        public IList<House> houseList { get; set; }
+
+    }
 }

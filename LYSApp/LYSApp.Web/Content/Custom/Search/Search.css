@@ -5,7 +5,12 @@
 .tabcontent{
     height : 100%;
 }
-
-.mapPlaceholder{
-    padding-top : 1%;
+.tabsContainer{
+    padding-top :5%;
+}
+.map{
+    padding: 20px 20px 0 20px;
+}
+.table{
+    padding: 20px 20px 0 20px;
 }
