@@ -241,6 +241,7 @@
     <Content Include="Images\blog-3.jpg" />
     <Content Include="Images\blog-4.jpg" />
     <Content Include="Images\blur.svg" />
+    <Content Include="Images\calendar.gif" />
     <Content Include="Images\default_profile_pic.jpg" />
     <Content Include="Images\infobox-bg.png" />
     <Content Include="Images\loading.gif" />
@@ -326,6 +327,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Shared\layout.js" />
+    <Content Include="Scripts\Shared\search.js" />
     <Content Include="Scripts\signin.js" />
     <Content Include="Scripts\signup.js" />
     <Content Include="Scripts\sortable.js" />

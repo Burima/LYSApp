@@ -16,16 +16,22 @@
                         }, "Gender", new { @class = "form-control", maxlength = "50", placeholder = "Gender", tabIndex = "2" })
         </div>
         <div class="form-group hidden-xs adv">
-            <div class="input-group">
-                <div class="input-group-addon">Rs</div>
-                @Html.TextBoxFor(model => model.MinPrice, new { @class = "form-control price", maxlength = "10", placeholder = "From", tabIndex = "3" })
+            <div class='input-group'>
+                <input type="text" name="Model.BookingFromDate" class="form-control" id='txtBookingFromDate' tabindex="3" readonly />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
             </div>
+                      
         </div>
-        <div class="form-group hidden-xs adv">
-            <div class="input-group">
-                <div class="input-group-addon">Rs</div>
-                @Html.TextBoxFor(model => model.MaxPrice, new { @class = "form-control price", maxlength = "10", placeholder = "To", tabIndex = "4" })
-            </div>
+        <div class="form-group hidden-xs adv">            
+            <div class='input-group'>
+                <input type="text" name="Model.BookingToDate" class="form-control" id='txtBookingToDate' tabindex="4" readonly />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>   
+            <div id="divSelectFromDateWarning" style="display:none">Please select From date</div>    
         </div>
         <div class="form-group">
             <input type="submit" class="btn btn-green" id="btnSearchHome" value="Search" tabindex="5" />

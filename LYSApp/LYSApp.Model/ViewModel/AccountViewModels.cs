@@ -169,9 +169,9 @@ namespace LYSApp.Model
 
         public int Gender { get; set; }
 
-        public int MinPrice { get; set; }
+        public int BookingFromDate { get; set; }
 
-        public int MaxPrice { get; set; }
+        public int BookingToDate { get; set; }
 
         public int SharingType { get; set; }
 

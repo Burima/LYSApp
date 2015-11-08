@@ -1,7 +1,9 @@
 ﻿@{
     ViewBag.Title = "Home";   
 }
-<link href="~/Content/Custom/Account/Index.css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href='@Url.Content("~/Content/jquery-ui.css")' rel="stylesheet" />
+<link href='@Url.Content("~/Content/Custom/Account/Index.css")' rel="stylesheet" />
 
 <!-- Hero -->
 
@@ -21,7 +23,7 @@
     </div>
 
    <!-- Search -->
-   @Html.Partial("_SearchPartial", new LYSApp.Model.SearchViewModel {MinPrice=0})
+   @Html.Partial("_SearchPartial", new LYSApp.Model.SearchViewModel {AreaID=0})
    <!-- end Search -->
 </div> <!-- End Hero-->
 
@@ -213,7 +215,7 @@
         </div>
     </div>
 
-    
+
         <div class="row">
             <div id="vision-container">
                 <div class="vision">
@@ -302,7 +304,7 @@
                        return response($.map(res, function (data, id) {
                             return {
                                 label: data.AreaName + "," + data.CityName,
-                                value: data.AreaName + "," + data.CityName,                              
+                                value: data.AreaName + "," + data.CityName,
                                 AreaID: data.AreaID,
                                 category: data.AreaID
                             };
@@ -315,7 +317,7 @@
                 });
             },
             minLength: 2,
-            select: function (event, ui) {                
+            select: function (event, ui) {
                 $('#AreaID').val(ui.item.AreaID)
                 return false;
             }
@@ -324,9 +326,9 @@
 
         @*$("#btnSearchHome").click(function () {
             var check = @Html.Raw(vm)
-           
+
             $.ajax({
-              
+
                 url: searchURL,
                 type: 'POST',
                 data: {
@@ -336,4 +338,6 @@
 
         });*@
     </script>
+
+<script src='@Url.Content("~/Scripts/Shared/search.js")'></script>
 }
