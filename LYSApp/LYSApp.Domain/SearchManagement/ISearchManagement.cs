@@ -12,6 +12,8 @@ namespace LYSApp.Domain.SearchManagement
         IList<House> GetHouses(SearchViewModel serchViewModel);
 
         IList<SearchAreaViewModel> GetAreas(string term);
+
+        PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID);
     }
 
 }

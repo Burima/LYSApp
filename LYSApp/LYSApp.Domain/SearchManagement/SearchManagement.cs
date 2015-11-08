@@ -45,5 +45,12 @@ namespace LYSApp.Domain.SearchManagement
             }).Where(area => area.AreaName.ToLower().StartsWith(term.ToLower())).ToList();
             return areaList;
         }
+
+        PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID)
+        {
+            PropertyDetailsViewModel propertyDetailsViewModel = new PropertyDetailsViewModel();
+
+            return propertyDetailsViewModel;
+        }
     }
 }

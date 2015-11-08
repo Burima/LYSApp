@@ -204,7 +204,9 @@ namespace LYSApp.Model
 
         public decimal Longitude { get; set; }
 
-        public IList<House> houseList { get; set; }
+        public IList<House> HouseList { get; set; }
+
+        public Dictionary<string,byte> AmenityList { get; set; }
 
     }
 }
