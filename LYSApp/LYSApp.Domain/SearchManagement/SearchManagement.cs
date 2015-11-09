@@ -15,12 +15,14 @@ namespace LYSApp.Domain.SearchManagement
         private IBaseRepository<Data.DBEntity.City> cityRepository = null;
         private IBaseRepository<Data.DBEntity.Area> areaRepository = null;
         private IBaseRepository<Data.DBEntity.House> houseRepository = null;
+        private IBaseRepository<Data.DBEntity.Room> roomRepository = null;
         public SearchManagement()
         {
             unitOfWork = new UnitOfWork();
             cityRepository = new BaseRepository<Data.DBEntity.City>(unitOfWork);
             areaRepository = new BaseRepository<Data.DBEntity.Area>(unitOfWork);
             houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
+            roomRepository = new BaseRepository<Data.DBEntity.Room>(unitOfWork);
         }
 
         public IList<House> GetHouses(SearchViewModel searchViewModel)
@@ -46,10 +48,26 @@ namespace LYSApp.Domain.SearchManagement
             return areaList;
         }
 
-        PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID)
+        public PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID)
         {
             PropertyDetailsViewModel propertyDetailsViewModel = new PropertyDetailsViewModel();
 
+            IList<House> houseList = (from h in houseRepository.Where(h => h.PGDetailID == PGDetailsID)
+                                      select new LYSApp.Model.House
+                                      {
+
+                                      }).ToList();
+            IList<Room> roomList = (from r in roomRepository.Where(r=> r.RoomID != 0)
+                                    select new LYSApp.Model.Room{
+                                        RoomID = r.RoomID,
+                                        HouseID = r.HouseID,
+                                        RoomNumber = r.RoomNumber,
+                                        MonthlyRent = r.MonthlyRent,
+                                        Deposit = r.Deposit,
+                                        NoOfBeds = r.NoOfBeds,
+                                        Status = r.Status
+                                    }).Distinct().ToList();
+            
             return propertyDetailsViewModel;
         }
     }
