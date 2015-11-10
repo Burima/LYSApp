@@ -52,22 +52,7 @@ namespace LYSApp.Domain.SearchManagement
         {
             PropertyDetailsViewModel propertyDetailsViewModel = new PropertyDetailsViewModel();
 
-            IList<House> houseList = (from h in houseRepository.Where(h => h.PGDetailID == PGDetailsID)
-                                      select new LYSApp.Model.House
-                                      {
-
-                                      }).ToList();
-            IList<Room> roomList = (from r in roomRepository.Where(r=> r.RoomID != 0)
-                                    select new LYSApp.Model.Room{
-                                        RoomID = r.RoomID,
-                                        HouseID = r.HouseID,
-                                        RoomNumber = r.RoomNumber,
-                                        MonthlyRent = r.MonthlyRent,
-                                        Deposit = r.Deposit,
-                                        NoOfBeds = r.NoOfBeds,
-                                        Status = r.Status
-                                    }).Distinct().ToList();
-            
+                     
             return propertyDetailsViewModel;
         }
     }
