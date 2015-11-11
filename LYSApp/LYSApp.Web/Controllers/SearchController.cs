@@ -41,7 +41,7 @@ namespace LYSApp.Web.Controllers
        public ActionResult PropertyDetails()
        {
 
-           return View(searchManagement.GetPropertyDetails(1));//default value passed as 1 to avoid error as of now
+           return View(searchManagement.GetPropertyDetails(2));//default value passed as 1 to avoid error as of now
        }
     }
 }

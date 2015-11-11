@@ -12,6 +12,8 @@ namespace LYSApp.Data.DBEntity
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class LYSAdminEntities : DbContext
     {
@@ -44,5 +46,14 @@ namespace LYSApp.Data.DBEntity
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<User> Users { get; set; }
+    
+        public virtual ObjectResult<GetHouseListByPGDetailsID_Result> GetHouseListByPGDetailsID(Nullable<int> pgDetailsId)
+        {
+            var pgDetailsIdParameter = pgDetailsId.HasValue ?
+                new ObjectParameter("pgDetailsId", pgDetailsId) :
+                new ObjectParameter("pgDetailsId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetHouseListByPGDetailsID_Result>("GetHouseListByPGDetailsID", pgDetailsIdParameter);
+        }
     }
 }

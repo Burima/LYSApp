@@ -134,5 +134,10 @@ namespace LYSApp.Data.DBRepository
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public IEnumerable<T> ExecWithStoreProcedure(string query, params object[] parameters)
+        {
+            return unitOfWork.DbContext.Database.SqlQuery<T>(query, parameters);
+        }
     }
 }

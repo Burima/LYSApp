@@ -198,11 +198,13 @@ namespace LYSApp.Model
 
         public int StartingPrice { get; set; }
 
-        public int Gender { get; set; }
+        public int MaxSharingType { get; set; }
 
-        public decimal Latitude { get; set; }
+        public Nullable<int> Gender { get; set; }
 
-        public decimal Longitude { get; set; }
+        public Nullable<decimal> Latitude { get; set; }
+
+        public Nullable<decimal> Longitude { get; set; }
 
         public IList<House> HouseList { get; set; }
 

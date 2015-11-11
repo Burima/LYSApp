@@ -95,5 +95,8 @@ namespace LYSApp.Data.DBRepository
         /// </summary>
         /// <param name="entity">The entity to delete</param>
         void Delete(T entity);
+
+       IEnumerable<T> ExecWithStoreProcedure(string query, params object[] parameters);
+
     }
 }

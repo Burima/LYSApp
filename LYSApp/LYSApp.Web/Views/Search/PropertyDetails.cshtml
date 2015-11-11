@@ -71,8 +71,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                     <div class="summaryItem">
-                                        <h1 class="pageTitle">@Mode
-.PGName</h1>
+                                        <h1 class="pageTitle">@Model.PGName</h1>
                                         <div class="address"><span class="icon-pointer"></span> @Model.Address</div>
                                         <ul class="rating">
                                             <li><a href="#"><span class="fa fa-star"></span></a></li>
@@ -87,7 +86,7 @@
                                         <div class="clearfix"></div>
                                         <ul class="features">
                                             <li><span class="fa fa-money"></span><div>@Model.StartingPrice</div></li>
-                                            <li><span class="fa fa-share-alt"></span><div>4 sharing</div></li>
+                                            <li><span class="fa fa-share-alt"></span><div>@Model.MaxSharingType</div></li>
                                             @if (Model.Gender == 2)
                                             {
                                                 <li><span class="fa fa-female"></span><div>Female</div></li>
@@ -145,7 +144,7 @@
                                                     <div id="divAmenities" class="amenities" style="display:none">
                                                         <h3>Amenities</h3>
                                                         <div class="row">
-                                                          @foreach (KeyValuePair<string, byte> kvp in Model.AmenityList)
+                                                          @*@foreach (KeyValuePair<string, byte> kvp in Model.AmenityList)
                                                           {
                                                               if (kvp.Value == 1)
                                                               {
@@ -153,7 +152,7 @@
                                                                     <span class="@(kvp.Key.Equals("AC") ? "fa fa-asterisk" :
                                                                     (kvp.Key.Equals("Aquaguard")? "icon-drop":"")))"></span> @kvp.Key</div>
                                                               }
-                                                           }
+                                                           }*@
                                                         </div>
                                                         
                                                     </div>
