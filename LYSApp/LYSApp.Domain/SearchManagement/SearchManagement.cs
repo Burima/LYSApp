@@ -159,12 +159,13 @@ namespace LYSApp.Domain.SearchManagement
 
             propertyDetailsViewModel.PGDetailsID = PGDetailsID;
             propertyDetailsViewModel.PGName = (from p in pgDetailRepository.Where(p => p.PGDetailID == PGDetailsID).Select(p => p.PGName) select p).ToList().FirstOrDefault();
-            propertyDetailsViewModel.Gender = houseList.FirstOrDefault().Gender;
+           
             propertyDetailsViewModel.Address = houseList.FirstOrDefault().Address;
             propertyDetailsViewModel.Latitude = houseList.FirstOrDefault().Latitude;
             propertyDetailsViewModel.Longitude = houseList.FirstOrDefault().Longitude;
             propertyDetailsViewModel.Description = houseList.FirstOrDefault().Description;
-            
+      
+                      
             propertyDetailsViewModel.HouseList = houseList;
             return propertyDetailsViewModel;
         }

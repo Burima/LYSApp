@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comparator.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="NotificationManagement\MandrillMailer.cs" />

@@ -200,10 +200,6 @@ namespace LYSApp.Model
 
         public string Description { get; set; }
 
-        public int StartingPrice { get; set; }
-
-        public int MaxSharingType { get; set; }
-
         public Nullable<int> Gender { get; set; }
 
         public Nullable<decimal> Latitude { get; set; }
@@ -211,8 +207,6 @@ namespace LYSApp.Model
         public Nullable<decimal> Longitude { get; set; }
 
         public IList<House> HouseList { get; set; }
-
-        public Dictionary<string,byte> AmenityList { get; set; }
 
     }
 }
