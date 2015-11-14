@@ -2,27 +2,24 @@
     minDate: 0,
     maxDate: "+1M +0D",
     numberOfMonths: 2,
+    dateFormat: "dd/mm/yy",
     onSelect: function () {
         var toDate = $(this).datepicker('getDate');
-        toDate.setDate(toDate.getMonth() + 1);
-        alert(toDate);
+        //alert(toDate);
+        toDate.setMonth(toDate.getMonth() + 1);
+        //alert(toDate);
         $("#txtBookingToDate").datepicker({
-            minDate: 0,
-            maxDate: "+1M +0D",
+            minDate: toDate,
+            maxDate: "+1Y +0M +0D",
             numberOfMonths: 2,
+            dateFormat: "dd/mm/yy"
         });
     }
 });
 
-//$('#txtBookingFromDate').click(function () {
-//    fnFillBookingToDate();
+//click on datepicker icon calender opens
+$('.glyphicon-calendar').click(function () {
+    $(this).parent().parent().find('.lys-date-picker').focus();   
+});
 
-//});
-//function fnFillBookingToDate() {
-//    if ($('#txtBookingFromDate').val() != '') {
-//        $('#divSelectFromDateWarning').hide();
-//    } else {
-//        $('#divSelectFromDateWarning').show();
-//    }
-//}
 

@@ -161,3 +161,7 @@ a{
 input[readonly] {
      cursor: initial !important;
 }
+/*------------- calender icon pointer cursor------------------*/
+ .glyphicon-calendar{
+        cursor:pointer !important;
+    }

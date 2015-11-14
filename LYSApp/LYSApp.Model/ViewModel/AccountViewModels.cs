@@ -83,7 +83,7 @@ namespace LYSApp.Model
 
     public class ResetPasswordViewModel
     {
-       
+
         public string UserID { get; set; }
         public string Code { get; set; }
 
@@ -98,7 +98,7 @@ namespace LYSApp.Model
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        
+
     }
 
     public class ForgotPasswordViewModel
@@ -110,12 +110,12 @@ namespace LYSApp.Model
     }
 
     public class AccountViewModel
-    {        
+    {
         public RegisterViewModel RegisterViewModel { get; set; }
         public LoginViewModel LoginViewModel { get; set; }
         public ResetPasswordViewModel ResetPasswordViewModel { get; set; }
         public ExternalLoginConfirmationViewModel ExternalLoginConfirmationViewModel { get; set; }
-        
+
     }
 
     [JsonObject(MemberSerialization.OptIn)]
@@ -143,7 +143,7 @@ namespace LYSApp.Model
         public string HighestEducation { get; set; }
         public string InstitutionName { get; set; }
         public int Status { get; set; }
-        public Nullable<System.DateTime> LastUpdatedOn { get; set; }  
+        public Nullable<System.DateTime> LastUpdatedOn { get; set; }
         public IList<HouseReview> houseReviews { get; set; }
         public HouseReviewModel HouseReviewModel { get; set; }
         public ManageUserViewModel ManageUserViewModel { get; set; }
@@ -168,10 +168,14 @@ namespace LYSApp.Model
         public int AreaID { get; set; }
 
         public int Gender { get; set; }
-
-        public int BookingFromDate { get; set; }
-
-        public int BookingToDate { get; set; }
+        [DisplayFormat(NullDisplayText = "", DataFormatString = "{0:d}")]
+        [Display(Name = "Booking From")]
+        [DataType(DataType.Date)]
+        public DateTime BookingFromDate { get; set; }
+        [DisplayFormat(NullDisplayText = "", DataFormatString = "{0:d}")]
+        [Display(Name = "Booking Upto")]
+        [DataType(DataType.Date)]
+        public DateTime BookingToDate { get; set; }
 
         public int SharingType { get; set; }
 
