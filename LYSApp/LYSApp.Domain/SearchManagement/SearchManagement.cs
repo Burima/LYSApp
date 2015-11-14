@@ -68,8 +68,8 @@ namespace LYSApp.Domain.SearchManagement
             IList<House> houseList = new List<House>();
             IEnumerable<LYSApp.Data.DBEntity.Room> dbRoomList = roomRepository.ExecWithStoreProcedure(
               "GetHouseListByPGDetailsID @pgDetailsId",
-              new SqlParameter("pgDetailsId", SqlDbType.Int) { Value = PGDetailsID });
-            IEnumerable<LYSApp.Data.DBEntity.Room> dbRoomListCopy = dbRoomList;
+              new SqlParameter("pgDetailsId", SqlDbType.Int) { Value = PGDetailsID }).ToList();
+           
             int[] houseIDList = dbRoomList.Select(x => x.HouseID).ToArray();
 
             int[] roomIDList = dbRoomList.Select(x => x.RoomID).ToArray();
@@ -145,7 +145,7 @@ namespace LYSApp.Domain.SearchManagement
                                                 ImagePath = i.ImagePath
                                             }).ToList(),
 
-                             Rooms = (from r in p.Rooms
+                             Rooms = (from r in p.Rooms.Where(x=> roomIDList.Contains(x.RoomID))
                                       select new LYSApp.Model.Room
                                       {
                                           RoomID = r.RoomID,
@@ -159,11 +159,12 @@ namespace LYSApp.Domain.SearchManagement
 
             propertyDetailsViewModel.PGDetailsID = PGDetailsID;
             propertyDetailsViewModel.PGName = (from p in pgDetailRepository.Where(p => p.PGDetailID == PGDetailsID).Select(p => p.PGName) select p).ToList().FirstOrDefault();
-            //propertyDetailsViewModel.Gender = houseList.FirstOrDefault().Gender;
-            //propertyDetailsViewModel.Address = houseList.FirstOrDefault().Address;
-            //propertyDetailsViewModel.Latitude = houseList.FirstOrDefault().Latitude;
-            //propertyDetailsViewModel.Longitude = houseList.FirstOrDefault().Longitude;
-            //propertyDetailsViewModel.Description = houseList.FirstOrDefault().Description;
+            propertyDetailsViewModel.Gender = houseList.FirstOrDefault().Gender;
+            propertyDetailsViewModel.Address = houseList.FirstOrDefault().Address;
+            propertyDetailsViewModel.Latitude = houseList.FirstOrDefault().Latitude;
+            propertyDetailsViewModel.Longitude = houseList.FirstOrDefault().Longitude;
+            propertyDetailsViewModel.Description = houseList.FirstOrDefault().Description;
+            
             propertyDetailsViewModel.HouseList = houseList;
             return propertyDetailsViewModel;
         }
