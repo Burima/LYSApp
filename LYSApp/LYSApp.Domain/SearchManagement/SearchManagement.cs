@@ -64,36 +64,17 @@ namespace LYSApp.Domain.SearchManagement
         public PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID)
         {
             PropertyDetailsViewModel propertyDetailsViewModel = new PropertyDetailsViewModel();
-            
+           
             IList<House> houseList = new List<House>();
-            IEnumerable<LYSApp.Data.DBEntity.House> dbHouseList = houseRepository.ExecWithStoreProcedure(
+            IEnumerable<LYSApp.Data.DBEntity.Room> dbRoomList = roomRepository.ExecWithStoreProcedure(
               "GetHouseListByPGDetailsID @pgDetailsId",
               new SqlParameter("pgDetailsId", SqlDbType.Int) { Value = PGDetailsID });
-            foreach (LYSApp.Data.DBEntity.House h in dbHouseList)
-            {
-                //var house = Mapper.Map<LYSApp.Data.DBEntity.House, LYSApp.Model.House>(h);
-                //house.Rooms = (from r in roomRepository.Where(r=> r.HouseID == house.HouseID) select new LYSApp.Model.Room{}).ToList();
-                //house.HouseImages = (from r in houseImageRepository.Where(r => r.HouseID == house.HouseID) select new LYSApp.Model.HouseImage { }).ToList();
-                //house.HouseReviews = (from r in houseReviewsRepository.Where(r => r.HouseID == house.HouseID) select new LYSApp.Model.HouseReview { }).ToList();
-                //house.HouseAmenities = (from r in houseAmenitiesRepository.Where(r => r.HouseID == house.HouseID) select new LYSApp.Model.HouseAmenity { }).ToList();
-                var house = GetHouseByID(h.HouseID);
-                houseList.Add(house);
-            }
+            IEnumerable<LYSApp.Data.DBEntity.Room> dbRoomListCopy = dbRoomList;
+            int[] houseIDList = dbRoomList.Select(x => x.HouseID).ToArray();
 
-            propertyDetailsViewModel.PGDetailsID = PGDetailsID;
-            propertyDetailsViewModel.PGName = (from p in pgDetailRepository.Where(p => p.PGDetailID == PGDetailsID).Select(p => p.PGName) select p).ToList().FirstOrDefault();
-            propertyDetailsViewModel.Gender = houseList.FirstOrDefault().Gender;
-            propertyDetailsViewModel.Address = houseList.FirstOrDefault().Address;
-            propertyDetailsViewModel.Latitude = houseList.FirstOrDefault().Latitude;
-            propertyDetailsViewModel.Longitude = houseList.FirstOrDefault().Longitude;
-            propertyDetailsViewModel.Description = houseList.FirstOrDefault().Description;
-            propertyDetailsViewModel.HouseList = houseList;
-            return propertyDetailsViewModel;
-        }
+            int[] roomIDList = dbRoomList.Select(x => x.RoomID).ToArray();
 
-        public Model.House GetHouseByID(int houseID)
-        {
-            var house = (from p in houseRepository.Get(p=> p.HouseID == houseID)
+            houseList = (from p in houseRepository.Where(p => houseIDList.Contains(p.HouseID))
                          select new Model.House
                          {
                              HouseID = p.HouseID,
@@ -173,10 +154,20 @@ namespace LYSApp.Domain.SearchManagement
                                           Deposit = r.Deposit,
                                           NoOfBeds = r.NoOfBeds
                                       }).ToList()
-                         }                     
-                         ).FirstOrDefault();
+                         }
+                         ).ToList();
 
-            return house;
+            propertyDetailsViewModel.PGDetailsID = PGDetailsID;
+            propertyDetailsViewModel.PGName = (from p in pgDetailRepository.Where(p => p.PGDetailID == PGDetailsID).Select(p => p.PGName) select p).ToList().FirstOrDefault();
+            //propertyDetailsViewModel.Gender = houseList.FirstOrDefault().Gender;
+            //propertyDetailsViewModel.Address = houseList.FirstOrDefault().Address;
+            //propertyDetailsViewModel.Latitude = houseList.FirstOrDefault().Latitude;
+            //propertyDetailsViewModel.Longitude = houseList.FirstOrDefault().Longitude;
+            //propertyDetailsViewModel.Description = houseList.FirstOrDefault().Description;
+            propertyDetailsViewModel.HouseList = houseList;
+            return propertyDetailsViewModel;
         }
+
+       
     }
 }
