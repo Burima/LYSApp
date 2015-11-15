@@ -72,12 +72,6 @@
     <Compile Include="DBEntity\Country.cs">
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntity\C__MigrationHistory.cs">
-      <DependentUpon>LYSAdmin.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\GetHouseListByPGDetailsID_Result.cs">
-      <DependentUpon>LYSAdmin.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBEntity\House.cs">
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
@@ -112,15 +106,6 @@
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\Room.cs">
-      <DependentUpon>LYSAdmin.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>LYSAdmin.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\sp_helpdiagrams_Result.cs">
-      <DependentUpon>LYSAdmin.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\sysdiagram.cs">
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\User.cs">
@@ -165,6 +150,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

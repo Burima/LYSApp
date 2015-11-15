@@ -11,10 +11,9 @@ namespace LYSApp.Data.DBEntity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class UserDetail
     {
-        [Key]
         public int UserDetailsID { get; set; }
         public long UserID { get; set; }
         public string PresentAddress { get; set; }

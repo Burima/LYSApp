@@ -4,45 +4,43 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="302ce644c3dd48419e160ce9c404cb43" Name="Diagram1">
-        <EntityTypeShape EntityType="LYSAdminModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="LYSAdminModel.Apartment" Width="1.5" PointX="5.25" PointY="24" />
-        <EntityTypeShape EntityType="LYSAdminModel.Area" Width="1.5" PointX="3" PointY="14.75" />
-        <EntityTypeShape EntityType="LYSAdminModel.Bed" Width="1.5" PointX="5.25" PointY="16.625" />
-        <EntityTypeShape EntityType="LYSAdminModel.Block" Width="1.5" PointX="7.5" PointY="24.375" />
-        <EntityTypeShape EntityType="LYSAdminModel.City" Width="1.5" PointX="0.75" PointY="14.875" />
-        <EntityTypeShape EntityType="LYSAdminModel.Country" Width="1.5" PointX="1.5" PointY="11.125" />
-        <EntityTypeShape EntityType="LYSAdminModel.HouseAmenity" Width="1.5" PointX="9.75" PointY="27.5" />
-        <EntityTypeShape EntityType="LYSAdminModel.HouseImage" Width="1.5" PointX="9.75" PointY="24.625" />
-        <EntityTypeShape EntityType="LYSAdminModel.HouseReview" Width="1.5" PointX="8.25" PointY="20.75" />
-        <EntityTypeShape EntityType="LYSAdminModel.House" Width="1.5" PointX="7.5" PointY="29.875" />
-        <EntityTypeShape EntityType="LYSAdminModel.PGDetail" Width="1.5" PointX="5.25" PointY="20.875" />
-        <EntityTypeShape EntityType="LYSAdminModel.Role" Width="1.5" PointX="0.75" PointY="21.25" />
-        <EntityTypeShape EntityType="LYSAdminModel.Room" Width="1.5" PointX="9.75" PointY="38.375" />
-        <EntityTypeShape EntityType="LYSAdminModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="LYSAdminModel.UserClaim" Width="1.5" PointX="5.25" PointY="49.5" />
-        <EntityTypeShape EntityType="LYSAdminModel.UserDetail" Width="1.5" PointX="5.25" PointY="52.25" />
-        <EntityTypeShape EntityType="LYSAdminModel.UserLogin" Width="1.5" PointX="5.25" PointY="35.125" />
-        <EntityTypeShape EntityType="LYSAdminModel.User" Width="1.5" PointX="3" PointY="18.875" />
-        <AssociationConnector Association="LYSAdminModel.FK_Apartments_AreaID" />
-        <AssociationConnector Association="LYSAdminModel.FK_Apartments_OwnerID" />
-        <AssociationConnector Association="LYSAdminModel.FK_Blocks_ApartmentID" />
-        <AssociationConnector Association="LYSAdminModel.FK_Areas_CityID" />
-        <AssociationConnector Association="LYSAdminModel.FK_PGDetails_AreaID" />
-        <AssociationConnector Association="LYSAdminModel.FK_Beds_RoomID" />
-        <AssociationConnector Association="LYSAdminModel.FK_Beds_UserID" />
-        <AssociationConnector Association="LYSAdminModel.FK_Cities_CountryID" />
-        <AssociationConnector Association="LYSAdminModel.FK__House_Amenities__Houses" />
-        <AssociationConnector Association="LYSAdminModel.FK_HouseImages_HouseID" />
-        <AssociationConnector Association="LYSAdminModel.FK_HouseReviews_HouseID" />
-        <AssociationConnector Association="LYSAdminModel.FK_HouseReviews_UserID" />
-        <AssociationConnector Association="LYSAdminModel.FK_Houses_PGDetailID" />
-        <AssociationConnector Association="LYSAdminModel.FK_Rooms_HouseID" />
-        <AssociationConnector Association="LYSAdminModel.FK_PGDetails_OwnerID" />
-        <AssociationConnector Association="LYSAdminModel.FK_dbo_UserClaim_dbo_User_UserID" />
-        <AssociationConnector Association="LYSAdminModel.FK_UserDetails_UserID" />
-        <AssociationConnector Association="LYSAdminModel.FK_dbo_UserLogin_dbo_User_UserID" />
-        <AssociationConnector Association="LYSAdminModel.UserRoles" />
+      <Diagram DiagramId="b55a4f0321d64c498c0401f8f45c332e" Name="Diagram1" ZoomLevel="60">
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.Apartment" Width="1.5" PointX="5.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.Area" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.Bed" Width="1.5" PointX="8.25" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.Block" Width="1.5" PointX="7.5" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.City" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.Country" Width="1.5" PointX="1.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.HouseAmenity" Width="1.5" PointX="9.75" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.HouseImage" Width="1.5" PointX="9.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.HouseReview" Width="1.5" PointX="8.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.House" Width="1.5" PointX="7.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.PGDetail" Width="1.5" PointX="5.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.Role" Width="1.5" PointX="0.75" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.Room" Width="1.5" PointX="9.75" PointY="35.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.UserClaim" Width="1.5" PointX="5.25" PointY="47.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.UserDetail" Width="1.5" PointX="5.25" PointY="50.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.UserLogin" Width="1.5" PointX="5.25" PointY="54.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSApp.Data.DBEntity.User" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_Apartments_AreaID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_Apartments_OwnerID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_Blocks_ApartmentID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_Areas_CityID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_PGDetails_AreaID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_Beds_RoomID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_Beds_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_Cities_CountryID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK__House_Amenities__Houses" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_HouseImages_HouseID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_HouseReviews_HouseID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_HouseReviews_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_Houses_PGDetailID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_Rooms_HouseID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_PGDetails_OwnerID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_dbo_UserClaim_dbo_User_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_UserDetails_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.FK_dbo_UserLogin_dbo_User_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSApp.Data.DBEntity.UserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
