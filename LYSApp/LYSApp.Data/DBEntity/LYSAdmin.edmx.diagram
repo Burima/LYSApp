@@ -5,19 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="302ce644c3dd48419e160ce9c404cb43" Name="Diagram1">
-        <EntityTypeShape EntityType="LYSAdminModel.Apartment" Width="1.5" PointX="8.25" PointY="20" />
+        <EntityTypeShape EntityType="LYSAdminModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LYSAdminModel.Apartment" Width="1.5" PointX="5.25" PointY="24" />
         <EntityTypeShape EntityType="LYSAdminModel.Area" Width="1.5" PointX="3" PointY="14.75" />
         <EntityTypeShape EntityType="LYSAdminModel.Bed" Width="1.5" PointX="5.25" PointY="16.625" />
-        <EntityTypeShape EntityType="LYSAdminModel.Block" Width="1.5" PointX="10.5" PointY="20.375" />
+        <EntityTypeShape EntityType="LYSAdminModel.Block" Width="1.5" PointX="7.5" PointY="24.375" />
         <EntityTypeShape EntityType="LYSAdminModel.City" Width="1.5" PointX="0.75" PointY="14.875" />
         <EntityTypeShape EntityType="LYSAdminModel.Country" Width="1.5" PointX="1.5" PointY="11.125" />
-        <EntityTypeShape EntityType="LYSAdminModel.HouseAmenity" Width="1.5" PointX="9.75" PointY="32.5" />
-        <EntityTypeShape EntityType="LYSAdminModel.HouseImage" Width="1.5" PointX="9.75" PointY="29.5" />
-        <EntityTypeShape EntityType="LYSAdminModel.HouseReview" Width="1.5" PointX="5.25" PointY="24.75" />
-        <EntityTypeShape EntityType="LYSAdminModel.House" Width="1.5" PointX="7.5" PointY="30.875" />
+        <EntityTypeShape EntityType="LYSAdminModel.HouseAmenity" Width="1.5" PointX="9.75" PointY="27.5" />
+        <EntityTypeShape EntityType="LYSAdminModel.HouseImage" Width="1.5" PointX="9.75" PointY="24.625" />
+        <EntityTypeShape EntityType="LYSAdminModel.HouseReview" Width="1.5" PointX="8.25" PointY="20.75" />
+        <EntityTypeShape EntityType="LYSAdminModel.House" Width="1.5" PointX="7.5" PointY="29.875" />
         <EntityTypeShape EntityType="LYSAdminModel.PGDetail" Width="1.5" PointX="5.25" PointY="20.875" />
         <EntityTypeShape EntityType="LYSAdminModel.Role" Width="1.5" PointX="0.75" PointY="21.25" />
-        <EntityTypeShape EntityType="LYSAdminModel.Room" Width="1.5" PointX="9.75" PointY="25.625" />
+        <EntityTypeShape EntityType="LYSAdminModel.Room" Width="1.5" PointX="9.75" PointY="38.375" />
+        <EntityTypeShape EntityType="LYSAdminModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="LYSAdminModel.UserClaim" Width="1.5" PointX="5.25" PointY="49.5" />
         <EntityTypeShape EntityType="LYSAdminModel.UserDetail" Width="1.5" PointX="5.25" PointY="52.25" />
         <EntityTypeShape EntityType="LYSAdminModel.UserLogin" Width="1.5" PointX="5.25" PointY="35.125" />
@@ -41,8 +43,6 @@
         <AssociationConnector Association="LYSAdminModel.FK_UserDetails_UserID" />
         <AssociationConnector Association="LYSAdminModel.FK_dbo_UserLogin_dbo_User_UserID" />
         <AssociationConnector Association="LYSAdminModel.UserRoles" />
-        <EntityTypeShape EntityType="LYSAdminModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="LYSAdminModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

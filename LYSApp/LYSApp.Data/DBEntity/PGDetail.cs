@@ -22,7 +22,7 @@ namespace LYSApp.Data.DBEntity
         public int PGDetailID { get; set; }
         public string PGName { get; set; }
         public int AreaID { get; set; }
-        public long OwnerID { get; set; }
+        public long UserID { get; set; }
     
         public virtual Area Area { get; set; }
         public virtual ICollection<House> Houses { get; set; }

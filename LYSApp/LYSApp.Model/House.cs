@@ -13,7 +13,7 @@ namespace LYSApp.Model
         public string HouseName { get; set; }
         public string Description { get; set; }
         public Nullable<bool> Status { get; set; }
-        public Nullable<int> OwnerID { get; set; }
+        public Nullable<long> OwnerID { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }
         public Nullable<int> LinkID { get; set; }

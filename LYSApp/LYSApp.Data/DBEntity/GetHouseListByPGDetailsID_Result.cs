@@ -10,23 +10,14 @@
 namespace LYSApp.Data.DBEntity
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class House
+    public partial class GetHouseListByPGDetailsID_Result
     {
-        public House()
-        {
-            this.HouseAmenities = new HashSet<HouseAmenity>();
-            this.HouseImages = new HashSet<HouseImage>();
-            this.HouseReviews = new HashSet<HouseReview>();
-            this.Rooms = new HashSet<Room>();
-        }
-    
         public int HouseID { get; set; }
         public string HouseName { get; set; }
         public string Description { get; set; }
         public Nullable<bool> Status { get; set; }
-        public Nullable<long> OwnerID { get; set; }
+        public Nullable<int> OwnerID { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }
         public Nullable<int> LinkID { get; set; }
@@ -45,11 +36,5 @@ namespace LYSApp.Data.DBEntity
         public Nullable<int> Gender { get; set; }
         public Nullable<int> NoOfBathrooms { get; set; }
         public Nullable<int> NoOfBalconnies { get; set; }
-    
-        public virtual ICollection<HouseAmenity> HouseAmenities { get; set; }
-        public virtual ICollection<HouseImage> HouseImages { get; set; }
-        public virtual ICollection<HouseReview> HouseReviews { get; set; }
-        public virtual PGDetail PGDetail { get; set; }
-        public virtual ICollection<Room> Rooms { get; set; }
     }
 }

@@ -75,6 +75,9 @@
     <Compile Include="DBEntity\C__MigrationHistory.cs">
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntity\GetHouseListByPGDetailsID_Result.cs">
+      <DependentUpon>LYSAdmin.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntity\House.cs">
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
@@ -109,6 +112,12 @@
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\Room.cs">
+      <DependentUpon>LYSAdmin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>LYSAdmin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_helpdiagrams_Result.cs">
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\sysdiagram.cs">
