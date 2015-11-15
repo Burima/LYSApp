@@ -11,9 +11,10 @@ namespace LYSApp.Data.DBEntity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class HouseAmenity
     {
+        [Key]
         public int AminityID { get; set; }
         public int HouseID { get; set; }
         public bool AC { get; set; }
