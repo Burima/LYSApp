@@ -8,27 +8,27 @@
         </div>
         <div class="panel-body">
             @if (Model.houseReviews != null && Model.houseReviews.Count == 0)
-          {
+            {
                 <div class="row">
                     <div class="col-md-9">
                         No comments provided by you.
                     </div>
                 </div>
-          }
-          else if (Model.houseReviews != null)
-          {
-             foreach (var houseReview in Model.houseReviews)
-              {
-                <div class="row row-padding-top-1">
-                    <div class="col-md-3">
-                        @houseReview.CommentTime
+            }
+            else if (Model.houseReviews != null)
+            {
+                foreach (var houseReview in Model.houseReviews)
+                {
+                    <div class="row row-padding-top-1">
+                        <div class="col-md-3">
+                            @houseReview.CommentTime
+                        </div>
+                        <div class="col-md-9">
+                            @houseReview.Comments
+                        </div>
                     </div>
-                    <div class="col-md-9">
-                        @houseReview.Comments
-                    </div>
-                </div>
-              }
-          }
+                }
+            }
         </div>
     </div>
     <div class="col-md-9 align-right">
@@ -55,9 +55,9 @@
         </div>
 
         <script>
-        function fnDisplayBlock() {
-            document.getElementById('divComment').style.display = 'block';
-        }
-         </script>
+            $("#btnComment").click(function () {
+                document.getElementById('divComment').style.display = 'block';
+            });
+        </script>
     }
 </div>

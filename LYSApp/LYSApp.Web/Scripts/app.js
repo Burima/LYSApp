@@ -39,150 +39,6 @@
 
     var newMarker = null;
     var markers = [];
-
-    // json for properties markers on map
-    var props = [{
-        title : 'Modern Residence in New York',
-        image : '1-1-thmb.png',
-        type : 'For Sale',
-        price : '$1,550,000',
-        address : '39 Remsen St, Brooklyn, NY 11201, USA',
-        bedrooms : '3',
-        bathrooms : '2',
-        area : '3430 Sq Ft',
-        position : {
-            lat : 40.696047,
-            lng : -73.997159
-        },
-        markerIcon : "marker-green.png"
-    }, {
-        title : 'Hauntingly Beautiful Estate',
-        image : '2-1-thmb.png',
-        type : 'For Rent',
-        price : '$1,750,000',
-        address : '169 Warren St, Brooklyn, NY 11201, USA',
-        bedrooms : '2',
-        bathrooms : '2',
-        area : '4430 Sq Ft',
-        position : {
-            lat : 40.688042,
-            lng : -73.996472
-        },
-        markerIcon : "marker-green.png"
-    }, {
-        title : 'Sophisticated Residence',
-        image : '3-1-thmb.png',
-        type : 'For Sale',
-        price : '$1,340,000',
-        address : '38-62 Water St, Brooklyn, NY 11201, USA',
-        bedrooms : '2',
-        bathrooms : '3',
-        area : '2640 Sq Ft',
-        position : {
-            lat : 40.702620,
-            lng : -73.989682
-        },
-        markerIcon : "marker-green.png"
-    }, {
-        title : 'House With a Lovely Glass-Roofed Pergola',
-        image : '4-1-thmb.png',
-        type : 'For Sale',
-        price : '$1,930,000',
-        address : 'Wunsch Bldg, Brooklyn, NY 11201, USA',
-        bedrooms : '3',
-        bathrooms : '2',
-        area : '2800 Sq Ft',
-        position : {
-            lat : 40.694355,
-            lng : -73.985229
-        },
-        markerIcon : "marker-green.png"
-    }, {
-        title : 'Luxury Mansion',
-        image : '5-1-thmb.png',
-        type : 'For Rent',
-        price : '$2,350,000',
-        address : '95 Butler St, Brooklyn, NY 11231, USA',
-        bedrooms : '2',
-        bathrooms : '2',
-        area : '2750 Sq Ft',
-        position : {
-            lat : 40.686838,
-            lng : -73.990078
-        },
-        markerIcon : "marker-green.png"
-    }, {
-        title : 'Modern Residence in New York',
-        image : '1-1-thmb.png',
-        type : 'For Sale',
-        price : '$1,550,000',
-        address : '39 Remsen St, Brooklyn, NY 11201, USA',
-        bedrooms : '3',
-        bathrooms : '2',
-        area : '3430 Sq Ft',
-        position : {
-            lat : 40.703686,
-            lng : -73.982910
-        },
-        markerIcon : "marker-green.png"
-    }, {
-        title : 'Hauntingly Beautiful Estate',
-        image : '2-1-thmb.png',
-        type : 'For Rent',
-        price : '$1,750,000',
-        address : '169 Warren St, Brooklyn, NY 11201, USA',
-        bedrooms : '2',
-        bathrooms : '2',
-        area : '4430 Sq Ft',
-        position : {
-            lat : 40.702189,
-            lng : -73.995098
-        },
-        markerIcon : "marker-green.png"
-    }, {
-        title : 'Sophisticated Residence',
-        image : '3-1-thmb.png',
-        type : 'For Sale',
-        price : '$1,340,000',
-        address : '38-62 Water St, Brooklyn, NY 11201, USA',
-        bedrooms : '2',
-        bathrooms : '3',
-        area : '2640 Sq Ft',
-        position : {
-            lat : 40.687417,
-            lng : -73.982653
-        },
-        markerIcon : "marker-green.png"
-    }, {
-        title : 'House With a Lovely Glass-Roofed Pergola',
-        image : '4-1-thmb.png',
-        type : 'For Sale',
-        price : '$1,930,000',
-        address : 'Wunsch Bldg, Brooklyn, NY 11201, USA',
-        bedrooms : '3',
-        bathrooms : '2',
-        area : '2800 Sq Ft',
-        position : {
-            lat : 40.694120,
-            lng : -73.974413
-        },
-        markerIcon : "marker-green.png"
-    }, {
-        title : 'Luxury Mansion',
-        image : '5-1-thmb.png',
-        type : 'For Rent',
-        price : '$2,350,000',
-        address : '95 Butler St, Brooklyn, NY 11231, USA',
-        bedrooms : '2',
-        bathrooms : '2',
-        area : '2750 Sq Ft',
-        position : {
-            lat : 40.682665,
-            lng : -74.000934
-        },
-        markerIcon : "marker-green.png"
-    }];
-
     // custom infowindow object
     var infobox = new InfoBox({
         disableAutoPan: false,
@@ -203,19 +59,17 @@
     });
 
     // function that adds the markers on map
-    var addMarkers = function(props, map) {
+    var addMarkers = function (props, map) {
+        
         $.each(props, function(i,prop) {
-            var latlng = new google.maps.LatLng(prop.position.lat,prop.position.lng);
+            var latlng = new google.maps.LatLng(prop.position.lat, prop.position.lng);
+            map.setCenter(latlng);
+            map.setZoom(16);
+            var image = '/Images/marker-green.png';
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                icon: new google.maps.MarkerImage( 
-                    'images/' + prop.markerIcon,
-                    null,
-                    null,
-                    null,
-                    new google.maps.Size(36, 36)
-                ),
+                icon: image,
                 draggable: false,
                 animation: google.maps.Animation.DROP,
             });
@@ -355,12 +209,12 @@
         });
 
         map.mapTypes.set('Styled', styledMapType);
-        map.setCenter(new google.maps.LatLng(40.6984237,-73.9890044));
+        map.setCenter(new google.maps.LatLng(20.1885251, 64.4458764));
         map.setZoom(14);
 
         if ($('#address').length > 0) {
             newMarker = new google.maps.Marker({
-                position: new google.maps.LatLng(40.6984237,-73.9890044),
+                position: new google.maps.LatLng(20.1885251, 64.4458764),
                 map: map,
                 icon: new google.maps.MarkerImage( 
                     'images/marker-new.png',
