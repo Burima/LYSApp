@@ -228,8 +228,26 @@
                 <div class="clearfix"></div>
                 <div class="map">
                     <h3 class="place-center">Location in Map</h3>
-                    <div class="clearfix"></div>
-                    <div id="mapView" class="mob-min"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
+                   <div class="head-links place-center">
+                       <ul class="mapItems">
+                           <li class="mapList"><label id="commute" class="mapLabel active">Commute</label></li>
+                           <li class="mapList"><label id="amenity" class="mapLabel active">Basic Amenity</label></li>
+                           <li class="mapList"><label id="healthcare" class="mapLabel active">Healthcare</label></li>
+                           <li class="mapList"><label id="shopping" class="mapLabel active">Shopping & Entertainment</label></li>
+                           <li class="mapList"><label id="food" class="mapLabel active">Food & Drinks</label></li>
+                           <li class="mapList"><label id="childfriendliness" class="mapLabel active">Child Friendliness</label></li>
+                       </ul>
+                   </div>
+                    <div class="mapPlaceholder">
+                        <div id="mapView" class="mob-min"><span class="fa fa-spin fa-spinner"></span> Loading map...</div>
+
+                        <div class="mapSubCat">
+                            <ul id="Commute-subcat">
+                                <li><label>Bus Stop</label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
                 </div>
             </div>
 
