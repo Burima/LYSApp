@@ -35,7 +35,7 @@ namespace LYSApp.Web.Controllers
 
        public void GetHouses(SearchViewModel searchViewModel)
        {
-           searchManagement.GetHouses(searchViewModel);
+          var properties= searchManagement.GetPGDetailsBySearchCriteria(searchViewModel);
        }
 
        public ActionResult PropertyDetails()

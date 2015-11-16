@@ -10,7 +10,6 @@ namespace LYSApp.Model
     public class HouseAmenity
     {
         [Key]
-
         public int AminityID { get; set; }
         public int HouseID { get; set; }
         public bool AC { get; set; }
@@ -57,7 +56,7 @@ namespace LYSApp.Model
         public bool NoBoysEntry { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.DateTime LastUpdatedOn { get; set; }
-
+    
         public virtual House House { get; set; }
     }
 }

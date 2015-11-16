@@ -165,3 +165,8 @@ input[readonly] {
  .glyphicon-calendar{
         cursor:pointer !important;
     }
+
+ /*-------------------- input focus -------------------*/
+ input,select,textarea :focus{
+     border:1px solid #1ab394 !important;
+ }
