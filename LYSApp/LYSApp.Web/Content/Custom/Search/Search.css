@@ -37,11 +37,7 @@
     box-shadow: 0 4px 5px 0 #d1cdd1;
     position: relative;
     z-index: 1;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
     display: block;
-    box-sizing: border-box;
 }
 
 .mapItems{
@@ -76,6 +72,13 @@
     background: #5896e8;
 }
 
+.mapBind {
+    height: 450px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+
 .mapSubCat{
     position: absolute;
     height: auto;
@@ -84,24 +87,30 @@
     left: 20px;
     top: 50px;
     box-shadow: inset 0 2px 0 rgba(255,255,255,.3),0 2px 4px rgba(0,0,0,.4);
-    opacity: .9;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    display : block;
+    opacity: .9 ;
+
 }
 
-.mapSubCat > .ul{
-    border: 1px solid #cdcdcd;
-}
 
-.mapSubCat > .ul > .li{
+.mapSubCat > ul > li{
     padding: 10px;
     width: 100%;
     border-bottom: 1px solid #cdcdcd;
     list-style: none;
     text-align: left;
     cursor: pointer;
-        box-sizing: border-box;
     margin: 0;
 }
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-align : center;
+}
+
+
+input[type="radio"] {
+    margin-right: 10px!important;
+}
+

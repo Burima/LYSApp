@@ -238,15 +238,16 @@
                            <li class="mapList"><label id="childfriendliness" class="mapLabel active">Child Friendliness</label></li>
                        </ul>
                    </div>
-                    <div class="mapPlaceholder">
-                        <div id="mapView" class="mob-min"><span class="fa fa-spin fa-spinner"></span> Loading map...</div>
-
+                    <div class="col-md-12 mapBind">
+                        <div id="mapView" class="mob-min"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
                         <div class="mapSubCat">
                             <ul id="Commute-subcat">
-                                <li><label>Bus Stop</label></li>
+                                <li><label><input type="radio" id="connectivity-bus">Bus Stop</label></li>
+                                <li><label><input type="radio" id="connectivity-railstation">RailStation</label></li>
                             </ul>
                         </div>
                     </div>
+                    
                     </div>
                 </div>
             </div>
