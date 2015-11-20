@@ -241,6 +241,7 @@
     <Content Include="Images\blog-3.jpg" />
     <Content Include="Images\blog-4.jpg" />
     <Content Include="Images\blur.svg" />
+    <Content Include="Images\bus.png" />
     <Content Include="Images\calendar.gif" />
     <Content Include="Images\default_profile_pic.jpg" />
     <Content Include="Images\infobox-bg.png" />
@@ -273,7 +274,9 @@
     <Content Include="Images\prop\4-4.png" />
     <Content Include="Images\prop\5-1-thmb.png" />
     <Content Include="Images\prop\5-1.png" />
+    <Content Include="Images\railway.png" />
     <Content Include="Images\signup-lite-dropdown.png" />
+    <Content Include="Images\tree.png" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\blog.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
