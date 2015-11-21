@@ -47,12 +47,13 @@ $(document).ready(function () {
     var infobox = new InfoBox({
         disableAutoPan: false,
         maxWidth: 202,
-       
+        pixelOffset: new google.maps.Size(-101, -120),
         zIndex: null,
         boxStyle: {
-            
+            background: "url('../Images/infobox-bg.png') no-repeat",
+            opacity: 1,
             width: "202px",
-            height: "245px"
+            height: "70px"
         },
         closeBoxMargin: "28px 26px 0px 0px",
         closeBoxURL: "",
@@ -60,7 +61,6 @@ $(document).ready(function () {
         pane: "floatPane",
         enableEventPropagation: false
     });
-
     // function that adds the markers on map
     var addMarkers = function (props, map) {
 
@@ -212,30 +212,10 @@ $(document).ready(function () {
         });
 
         var infoboxContent = '<div class="infoW">' +
-                                    '<div class="propImg">' +
-                                        '<img src="images/prop/2-1.png'+ '">' +
-                                        
-                                    '</div>' +
+                                    
                                     '<div class="paWrapper">' +
                                         '<div class="propTitle">' + place.name + '</div>' +
                                         '<div class="propAddress">' + place.name + '</div>' +
-                                    '</div>' +
-                                    '<div class="propRating">' +
-                                        '<span class="fa fa-star"></span>' +
-                                        '<span class="fa fa-star"></span>' +
-                                        '<span class="fa fa-star"></span>' +
-                                        '<span class="fa fa-star"></span>' +
-                                        '<span class="fa fa-star-o"></span>' +
-                                    '</div>' +
-                                    '<ul class="propFeat">' +
-                                        '<li><span class="fa fa-moon-o"></span> ' + place.name + '</li>' +
-                                        '<li><span class="icon-drop"></span> ' + place.name + '</li>' +
-                                        '<li><span class="icon-frame"></span> ' + place.name + '</li>' +
-                                    '</ul>' +
-                                    '<div class="clearfix"></div>' +
-                                    '<div class="infoButtons">' +
-                                        '<a class="btn btn-sm btn-round btn-gray btn-o closeInfo">Close</a>' +
-                                        '<a href="single.html" class="btn btn-sm btn-round btn-green viewInfo">View</a>' +
                                     '</div>' +
                                  '</div>';
 
@@ -264,6 +244,7 @@ $(document).ready(function () {
     }
 
     $("#btnViewAmenities").click(function () {
+       
         if (document.getElementById('divAmenities').style.display == 'none') {
             document.getElementById('divAmenities').style.display = 'block';
             $("#btnViewAmenities").text('Hide Amenities');
@@ -274,17 +255,31 @@ $(document).ready(function () {
     });
     $("#commute").click(function () {
         name = 'connectivity';
-        $('#commute').toggleClass('active');
+        $('#commute').addClass('active-map');
+        $('#amenity').removeClass("active-map");
+        $('#healthcare').removeClass("active-map");
+        $('#entertainment').removeClass("active-map");
+        $('#food').removeClass("active-map");
+        $('#education').removeClass("active-map");
+
         $('#connectivity').removeClass("hidden");
         $('#basicamenity').addClass("hidden");
         $('#healthcares').addClass("hidden");
         $('#entertainments').addClass("hidden");
         $('#foods').addClass("hidden");
         $('#educations').addClass("hidden");
+        
     });
 
     $("#amenity").click(function () {
-        $('#amenity').toggleClass('active');
+        $('#amenity').addClass('active-map');
+        $('#healthcare').removeClass("active-map");
+        $('#entertainment').removeClass("active-map");
+        $('#food').removeClass("active-map");
+        $('#education').removeClass("active-map");
+        $('#commute').removeClass("active-map");
+
+
         $('#basicamenity').removeClass("hidden");
         $('#healthcares').addClass("hidden");
         $('#entertainments').addClass("hidden");
@@ -294,7 +289,13 @@ $(document).ready(function () {
     });
 
     $("#healthcare").click(function () {
-        $('#healthcare').toggleClass('active');
+        $('#healthcare').addClass('active-map');
+        $('#entertainment').removeClass("active-map");
+        $('#food').removeClass("active-map");
+        $('#education').removeClass("active-map");
+        $('#commute').removeClass("active-map");
+        $('#amenity').removeClass('active-map');
+
         $('#healthcares').removeClass("hidden");
         $('#entertainments').addClass("hidden");
         $('#foods').addClass("hidden");
@@ -303,8 +304,14 @@ $(document).ready(function () {
         $('#basicamenity').addClass("hidden");
     });
 
-    $("#shopping").click(function () {
-        $('#shopping').toggleClass('active');
+    $("#entertainment").click(function () {
+        $('#entertainment').addClass('active-map');
+        $('#healthcare').removeClass('active-map');
+        $('#food').removeClass("active-map");
+        $('#education').removeClass("active-map");
+        $('#commute').removeClass("active-map");
+        $('#amenity').removeClass('active-map');
+
         $('#entertainments').removeClass("hidden");
         $('#foods').addClass("hidden");
         $('#educations').addClass("hidden");
@@ -314,7 +321,13 @@ $(document).ready(function () {
     });
 
     $("#food").click(function () {
-        $('#food').toggleClass('active');
+        $('#food').addClass('active-map');
+        $('#entertainment').removeClass('active-map');
+        $('#healthcare').removeClass('active-map');
+        $('#education').removeClass("active-map");
+        $('#commute').removeClass("active-map");
+        $('#amenity').removeClass('active-map');
+
         $('#foods').removeClass("hidden");
         $('#educations').addClass("hidden");
         $('#connectivity').addClass("hidden");
@@ -324,7 +337,13 @@ $(document).ready(function () {
     });
 
     $("#education").click(function () {
-        $('#education').toggleClass('active');
+        $('#food').removeClass('active-map');
+        $('#entertainment').removeClass('active-map');
+        $('#healthcare').removeClass('active-map');
+        $('#commute').removeClass("active-map");
+        $('#amenity').removeClass('active-map');
+        $('#education').addClass('active-map');
+
         $('#educations').removeClass("hidden");
         $('#connectivity').addClass("hidden");
         $('#basicamenity').addClass("hidden");
