@@ -209,4 +209,24 @@ namespace LYSApp.Model
         public IList<House> HouseList { get; set; }
 
     }
+
+    public class BookingDetailsViewModel
+    {
+        public DateTime BookingStartDate { get; set; }
+
+        public DateTime BookingEndDate { get; set; }
+
+        public int HouseID { get; set; }
+
+        public int RoomID { get; set; }
+
+        public int Price { get; set; }
+
+        public string RoomName { get; set; }
+
+        public User User { get; set; }
+
+        public long OwnerID { get; set; }
+
+    }
 }

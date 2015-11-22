@@ -265,6 +265,9 @@ namespace LYSApp.Domain.SearchManagement
             return propertyDetailsViewModel;
         }
 
+        public void GetBookingDetails()
+        {
 
+        }
     }
 }
