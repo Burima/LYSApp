@@ -241,11 +241,26 @@
     <Content Include="Images\blog-3.jpg" />
     <Content Include="Images\blog-4.jpg" />
     <Content Include="Images\blur.svg" />
-    <Content Include="Images\bus.png" />
     <Content Include="Images\calendar.gif" />
     <Content Include="Images\default_profile_pic.jpg" />
     <Content Include="Images\infobox-bg.png" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\Map\amusementpark.png" />
+    <Content Include="Images\Map\ATM.png" />
+    <Content Include="Images\Map\bank.png" />
+    <Content Include="Images\Map\bus.png" />
+    <Content Include="Images\Map\college.png" />
+    <Content Include="Images\Map\disc.png" />
+    <Content Include="Images\Map\hospital.png" />
+    <Content Include="Images\Map\petrol.png" />
+    <Content Include="Images\Map\pharmacy.png" />
+    <Content Include="Images\Map\police.png" />
+    <Content Include="Images\Map\Restaurant.png" />
+    <Content Include="Images\Map\salon.png" />
+    <Content Include="Images\Map\school.png" />
+    <Content Include="Images\Map\store.png" />
+    <Content Include="Images\Map\theatre.png" />
+    <Content Include="Images\Map\trainstation.png" />
     <Content Include="Images\marker-blue.png" />
     <Content Include="Images\marker-green.png" />
     <Content Include="Images\marker-magenta.png" />
@@ -274,9 +289,7 @@
     <Content Include="Images\prop\4-4.png" />
     <Content Include="Images\prop\5-1-thmb.png" />
     <Content Include="Images\prop\5-1.png" />
-    <Content Include="Images\railway.png" />
     <Content Include="Images\signup-lite-dropdown.png" />
-    <Content Include="Images\tree.png" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\blog.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -380,6 +393,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
     <Content Include="Views\Search\PropertyDetails.cshtml" />
+    <Content Include="Views\Search\ItineraryDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
