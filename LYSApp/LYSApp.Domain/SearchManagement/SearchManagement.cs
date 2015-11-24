@@ -156,7 +156,7 @@ namespace LYSApp.Domain.SearchManagement
                             {
                                 PGDetailID = pg.PGDetailID,
                                 PGName = pg.PGName,
-                                MinimumRentHouse = (from p in pg.Houses.OrderBy(x=>x.Rooms.OrderBy(p=>p.MonthlyRent))
+                                MinimumRentHouse = (from p in pg.Houses.OrderBy(x => x.Rooms.OrderBy(p => p.MonthlyRent))//order house with minimum MonthlRent first
                                                     select new Model.House
                                                     {
                                                         Latitude = p.Latitude,
@@ -167,18 +167,18 @@ namespace LYSApp.Domain.SearchManagement
                                                                        {
                                                                            HouseImageID = i.HouseImageID,
                                                                            ImagePath = i.ImagePath
-                                                                       }).ToList(),
+                                                                       }).ToList(),//get all house images
                                                         HouseReviews = (from review in p.HouseReviews
                                                                         select new Model.HouseReview
                                                                         {
                                                                             Rating = review.Rating,
-                                                                        }).ToList(),
-                                                        Rooms = (from room in p.Rooms.OrderBy(x=>x.MonthlyRent)
+                                                                        }).ToList(),//get all ratings
+                                                        Rooms = (from room in p.Rooms.OrderBy(x=>x.MonthlyRent)//order Rooms with minimum MonthlRent
                                                                  select new LYSApp.Model.Room
                                                                  {                                                                     
                                                                      MonthlyRent = room.MonthlyRent,                                                                     
                                                                      //NoOfBeds = room.NoOfBeds
-                                                                 }).ToList()//roomList
+                                                                 }).ToList(),//get all rooms
                                                     }).FirstOrDefault(),
                                 
                             }).ToList();
