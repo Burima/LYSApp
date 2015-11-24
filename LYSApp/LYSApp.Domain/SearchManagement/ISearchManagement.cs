@@ -9,7 +9,8 @@ namespace LYSApp.Domain.SearchManagement
 {
     public interface ISearchManagement
     {
-        IList<Model.PropertyDetailsViewModel> GetPGDetailsBySearchCriteria(SearchViewModel serchViewModel);
+        //IList<Model.PropertyDetailsViewModel> GetPGDetailsBySearchCriteria(SearchViewModel serchViewModel);
+        IList<SearchResultViewModel> GetPGsBySearchCriteria(SearchViewModel searchViewModel);
 
         IList<SearchAreaViewModel> GetAreas(string term);
 
