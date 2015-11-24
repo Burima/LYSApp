@@ -42,19 +42,19 @@ namespace LYSApp.Model
     }
     public class PropertyDetailsViewModel
     {
-        public int PGDetailsID { get; set; }
+        public int PGDetailID { get; set; }
 
         public string PGName { get; set; }
 
-        public string Address { get; set; }
+        //public string Address { get; set; }
 
-        public string Description { get; set; }
+        //public string Description { get; set; }
 
-        public Nullable<int> Gender { get; set; }
+        //public Nullable<int> Gender { get; set; }
 
-        public Nullable<decimal> Latitude { get; set; }
+        //public Nullable<decimal> Latitude { get; set; }
 
-        public Nullable<decimal> Longitude { get; set; }
+        //public Nullable<decimal> Longitude { get; set; }
 
         public IList<House> HouseList { get; set; }
 

@@ -142,6 +142,11 @@ namespace LYSApp.Domain.SearchManagement
         //    return modelPGDetails;
         //}
 
+        /// <summary>
+        /// This methods returns list of PGs filtered by Search Criteria
+        /// </summary>
+        /// <param name="searchViewModel">contains search criteria</param>
+        /// <returns>List of PGs</returns>
         public IList<SearchResultViewModel> GetPGsBySearchCriteria(SearchViewModel searchViewModel)
         {
             var modelPGs = (from pg in pgDetailRepository.Get()
@@ -186,6 +191,12 @@ namespace LYSApp.Domain.SearchManagement
             return modelPGs;
         }
 
+        /// <summary>
+        /// This method provides List of Areas and Cities entered in the Area box while searching.
+        /// This is providing data to jQuery autocomplete
+        /// </summary>
+        /// <param name="term">search term</param>
+        /// <returns>List of Areas and Cities </returns>
         public IList<SearchAreaViewModel> GetAreas(string term)
         {
             IList<SearchAreaViewModel> areaList = new List<SearchAreaViewModel>();
@@ -201,111 +212,107 @@ namespace LYSApp.Domain.SearchManagement
             return areaList;
         }
 
+        /// <summary>
+        /// This methos provides all the type of houeses group by MonthlyRent 
+        /// for a specific PG based on PGID
+        /// </summary>
+        /// <param name="PGDetailsID">PGID of the PG selected</param>
+        /// <returns>List of Houses of the PG selected</returns>
         public PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID)
         {
-            PropertyDetailsViewModel propertyDetailsViewModel = new PropertyDetailsViewModel();
+            var propertyDetailsViewModel = (from pg in pgDetailRepository.Get()
+                                            join h in houseRepository.Get() on pg.PGDetailID equals h.PGDetailID
+                                            join r in roomRepository.Get() on h.HouseID equals r.HouseID
+                                            join b in bedRepository.Get() on r.RoomID equals b.RoomID
+                                            where pg.PGDetailID==PGDetailsID  //selected area
+                                            //      h.Status!=null && h.Status==true && h.Gender==searchViewModel.Gender &&//status active for House
+                                            //      r.Status!=null && r.Status==true && //Status active for Room
+                                            //      b.Status != null && b.Status == true && ((b.UserID==0)||(((DateTime)b.BookingToDate-searchViewModel.BookingFromDate).Days>=30))//Status active for Bed and bed is empty (zero)
+                                            select new PropertyDetailsViewModel {
+                                                PGDetailID = pg.PGDetailID,
+                                                PGName=pg.PGName,
+                                                HouseList = (from p in pg.Houses
+                                                select new Model.House
+                                                {
+                                                    HouseID = p.HouseID,
+                                                    HouseName = p.HouseName,
+                                                    Latitude = p.Latitude,
+                                                    Longitude = p.Longitude,
+                                                    Address = p.Address,
+                                                    Landmark = p.Landmark,
+                                                    Gender = p.Gender,
+                                                    NoOfBalconnies = p.NoOfBalconnies,
+                                                    NoOfBathrooms = p.NoOfBathrooms,
 
-            IList<House> houseList = new List<House>();
-            IEnumerable<LYSApp.Data.DBEntity.Room> dbRoomList = roomRepository.ExecWithStoreProcedure(
-              "GetHouseListByPGDetailsID @pgDetailsId",
-              new SqlParameter("pgDetailsId", SqlDbType.Int) { Value = PGDetailsID }).ToList();
+                                                    HouseAmenities = (from g in p.HouseAmenities
+                                                                      select new LYSApp.Model.HouseAmenity
+                                                                      {
+                                                                          AminityID = g.AminityID,
+                                                                          AC = g.AC,
+                                                                          Aquaguard = g.Aquaguard,
+                                                                          AttachBathrooms = g.AttachBathrooms,
+                                                                          BreakFastGiven = g.BreakFastGiven,
+                                                                          Clubhouse = g.Clubhouse,
+                                                                          CommonTV = g.CommonTV,
+                                                                          CreatedOn = g.CreatedOn,
+                                                                          DinnerGiven = g.DinnerGiven,
+                                                                          EmergencyMedicalServices = g.EmergencyMedicalServices,
+                                                                          FourWheelerCloseParking = g.FourWheelerCloseParking,
+                                                                          FourWheelerOpenParking = g.FourWheelerOpenParking,
+                                                                          Fridge = g.Fridge,
+                                                                          GuardianEntry = g.GuardianEntry,
+                                                                          GYM = g.GYM,
+                                                                          HotColdWaterSupply = g.HotColdWaterSupply,
+                                                                          Housekeeping = g.Housekeeping,
+                                                                          IndividualTV = g.IndividualTV,
+                                                                          IntercomFacility = g.IntercomFacility,
+                                                                          IroningWashingServices = g.IroningWashingServices,
+                                                                          KitchenFacilityWithGas = g.KitchenFacilityWithGas,
+                                                                          LCDTVCableConnection = g.LCDTVCableConnection,
+                                                                          Lift = g.Lift,
+                                                                          Lockers = g.Lockers,
+                                                                          LunchGiven = g.LunchGiven,
+                                                                          MineralDrinkingWater = g.MineralDrinkingWater,
+                                                                          Newspaper = g.Newspaper,
+                                                                          NoBoysEntry = g.NoBoysEntry,
+                                                                          NoDrinking = g.NoDrinking,
+                                                                          NoSmoking = g.NoSmoking,
+                                                                          NonVegAllowed = g.NonVegAllowed,
+                                                                          Partyhall = g.Partyhall,
+                                                                          Playground = g.Playground,
+                                                                          Powerbackup = g.Powerbackup,
+                                                                          RoomService = g.RoomService,
+                                                                          Security = g.Security,
+                                                                          SwimmingPool = g.SwimmingPool,
+                                                                          TwoWheelerCloseParking = g.TwoWheelerCloseParking,
+                                                                          TwoWheelerOpenParking = g.TwoWheelerOpenParking,
+                                                                          VideoSurveillance = g.VideoSurveillance,
+                                                                          Wardrobes = g.Wardrobes,
+                                                                          Washingmachine = g.Washingmachine,
+                                                                          WaterSupply = g.WaterSupply,
+                                                                          Wifi = g.Wifi
 
-            int[] houseIDList = dbRoomList.Select(x => x.HouseID).ToArray();
-
-            int[] roomIDList = dbRoomList.Select(x => x.RoomID).ToArray();
-
-            houseList = (from p in houseRepository.Where(p => houseIDList.Contains(p.HouseID))
-                         select new Model.House
-                         {
-                             HouseID = p.HouseID,
-                             HouseName = p.HouseName,
-                             Latitude = p.Latitude,
-                             Longitude = p.Longitude,
-                             Address = p.Address,
-                             Landmark = p.Landmark,
-                             Gender = p.Gender,
-                             NoOfBalconnies = p.NoOfBalconnies,
-                             NoOfBathrooms = p.NoOfBathrooms,
-
-                             HouseAmenities = (from g in p.HouseAmenities
-                                               select new LYSApp.Model.HouseAmenity
-                                               {
-                                                   AminityID = g.AminityID,
-                                                   AC = g.AC,
-                                                   Aquaguard = g.Aquaguard,
-                                                   AttachBathrooms = g.AttachBathrooms,
-                                                   BreakFastGiven = g.BreakFastGiven,
-                                                   Clubhouse = g.Clubhouse,
-                                                   CommonTV = g.CommonTV,
-                                                   CreatedOn = g.CreatedOn,
-                                                   DinnerGiven = g.DinnerGiven,
-                                                   EmergencyMedicalServices = g.EmergencyMedicalServices,
-                                                   FourWheelerCloseParking = g.FourWheelerCloseParking,
-                                                   FourWheelerOpenParking = g.FourWheelerOpenParking,
-                                                   Fridge = g.Fridge,
-                                                   GuardianEntry = g.GuardianEntry,
-                                                   GYM = g.GYM,
-                                                   HotColdWaterSupply = g.HotColdWaterSupply,
-                                                   Housekeeping = g.Housekeeping,
-                                                   IndividualTV = g.IndividualTV,
-                                                   IntercomFacility = g.IntercomFacility,
-                                                   IroningWashingServices = g.IroningWashingServices,
-                                                   KitchenFacilityWithGas = g.KitchenFacilityWithGas,
-                                                   LCDTVCableConnection = g.LCDTVCableConnection,
-                                                   Lift = g.Lift,
-                                                   Lockers = g.Lockers,
-                                                   LunchGiven = g.LunchGiven,
-                                                   MineralDrinkingWater = g.MineralDrinkingWater,
-                                                   Newspaper = g.Newspaper,
-                                                   NoBoysEntry = g.NoBoysEntry,
-                                                   NoDrinking = g.NoDrinking,
-                                                   NoSmoking = g.NoSmoking,
-                                                   NonVegAllowed = g.NonVegAllowed,
-                                                   Partyhall = g.Partyhall,
-                                                   Playground = g.Playground,
-                                                   Powerbackup = g.Powerbackup,
-                                                   RoomService = g.RoomService,
-                                                   Security = g.Security,
-                                                   SwimmingPool = g.SwimmingPool,
-                                                   TwoWheelerCloseParking = g.TwoWheelerCloseParking,
-                                                   TwoWheelerOpenParking = g.TwoWheelerOpenParking,
-                                                   VideoSurveillance = g.VideoSurveillance,
-                                                   Wardrobes = g.Wardrobes,
-                                                   Washingmachine = g.Washingmachine,
-                                                   WaterSupply = g.WaterSupply,
-                                                   Wifi = g.Wifi
-
-                                               }).ToList(),
-
-
-                             HouseImages = (from i in p.HouseImages
-                                            select new LYSApp.Model.HouseImage
-                                            {
-                                                HouseImageID = i.HouseImageID,
-                                                ImagePath = i.ImagePath
-                                            }).ToList(),
-
-                             Rooms = (from r in p.Rooms.Where(x => roomIDList.Contains(x.RoomID))
-                                      select new LYSApp.Model.Room
-                                      {
-                                          RoomID = r.RoomID,
-                                          RoomNumber = r.RoomNumber,
-                                          MonthlyRent = r.MonthlyRent,
-                                          Deposit = r.Deposit,
-                                          NoOfBeds = r.NoOfBeds
-                                      }).ToList()
-                         }).ToList();
-
-            propertyDetailsViewModel.PGDetailsID = PGDetailsID;
-            propertyDetailsViewModel.PGName = (from p in pgDetailRepository.Where(p => p.PGDetailID == PGDetailsID).Select(p => p.PGName) select p).ToList().FirstOrDefault();
-
-            propertyDetailsViewModel.Address = houseList.FirstOrDefault().Address;
-            propertyDetailsViewModel.Latitude = houseList.FirstOrDefault().Latitude;
-            propertyDetailsViewModel.Longitude = houseList.FirstOrDefault().Longitude;
-            propertyDetailsViewModel.Description = houseList.FirstOrDefault().Description;
+                                                                      }).ToList(),
 
 
-            propertyDetailsViewModel.HouseList = houseList;
+                                                    HouseImages = (from i in p.HouseImages
+                                                                   select new LYSApp.Model.HouseImage
+                                                                   {
+                                                                       HouseImageID = i.HouseImageID,
+                                                                       ImagePath = i.ImagePath
+                                                                   }).ToList(),
+
+                                                    Rooms = (from room in p.Rooms
+                                                             select new LYSApp.Model.Room
+                                                             {
+                                                                 RoomID = room.RoomID,
+                                                                 RoomNumber = room.RoomNumber,
+                                                                 MonthlyRent = room.MonthlyRent,
+                                                                 Deposit = room.Deposit,
+                                                                 NoOfBeds = room.NoOfBeds
+                                                             }).ToList()//roomList
+                                                }).ToList(),//houseList
+                                            }).FirstOrDefault();
             return propertyDetailsViewModel;
         }
 
