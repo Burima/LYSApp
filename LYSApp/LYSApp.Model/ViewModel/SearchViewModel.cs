@@ -33,6 +33,13 @@ namespace LYSApp.Model
 
         public string CityName { get; set; }
     }
+
+    public class SearchResultViewModel
+    {
+        public int PGDetailID { get; set; }
+        public string PGName { get; set; }
+        public House MinimumRentHouse { get; set; }
+    }
     public class PropertyDetailsViewModel
     {
         public int PGDetailsID { get; set; }
