@@ -121,16 +121,39 @@
 <script src="~/Scripts/Custom/User/SearchHome.js"></script>
     
 <script type="text/javascript">
-
+   
+    
     $(document).ready(function () {
-        
-        function populateMapContent() {
-            @foreach (var ViewModel in Model)
-            {
-                
+       
+        function populateMap() {
+
+            var prop; //object declared here so that memory allocation is done one time
+            var position;
+            var props = [];
+            var i;
+            for (i = 0; i < '@Model.Count()' ; i++) {
+                var count = i;
+                prop = {};
+                position = {};
+                prop.title = '@Model.ElementAt(i).PGName';
+                prop.image = '@Model.ElementAt(i).MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath';
+                prop.price = '@Model.ElementAt(i).MinimumRentHouse.Rooms.FirstOrDefault().MonthlyRent';
+                prop.address = '@Model.ElementAt(i).MinimumRentHouse.Address';
+                position.lat = '@Model.ElementAt(i).MinimumRentHouse.Latitude';
+                position.long = '@Model.ElementAt(i).MinimumRentHouse.Longitude';
+                prop.position = position;
+                markerIcon : "marker-green.png"
+
+                props.push(prop);
+
             }
+
+            var endTime = Date.now();
+
+            var timeTaken = endTime - startTime;
+            console.log('Time taken: ' + timeTaken);
+
         }
-      
        
         function fnFillHouseRatings() {
 
