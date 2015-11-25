@@ -14,7 +14,7 @@ namespace LYSApp.Domain.SearchManagement
 
         IList<SearchAreaViewModel> GetAreas(string term);
 
-        PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID);
+        PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID, SearchViewModel searchViewModel);
 
         void GetBookingDetails();
     }

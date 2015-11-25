@@ -218,7 +218,7 @@ namespace LYSApp.Domain.SearchManagement
         /// </summary>
         /// <param name="PGDetailsID">PGID of the PG selected</param>
         /// <returns>List of Houses of the PG selected</returns>
-        public PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID)
+        public PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID, SearchViewModel searchViewModel)
         {
             var propertyDetailsViewModel = (from pg in pgDetailRepository.Get()
                                             join h in houseRepository.Get() on pg.PGDetailID equals h.PGDetailID
@@ -302,7 +302,7 @@ namespace LYSApp.Domain.SearchManagement
                                                                        ImagePath = i.ImagePath
                                                                    }).ToList(),
 
-                                                    Rooms = (from room in p.Rooms
+                                                    Rooms = (from room in p.Rooms.GroupBy(a => a.MonthlyRent).FirstOrDefault()//grouped rooms by MonthlyRent
                                                              select new LYSApp.Model.Room
                                                              {
                                                                  RoomID = room.RoomID,
@@ -320,5 +320,6 @@ namespace LYSApp.Domain.SearchManagement
         {
 
         }
+
     }
 }
