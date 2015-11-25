@@ -33,15 +33,22 @@ namespace LYSApp.Web.Controllers
 
        }
 
-       public void GetHouses(SearchViewModel searchViewModel)
+       public ActionResult GetPGs(SearchViewModel searchViewModel)
        {
-          var properties= searchManagement.GetPGDetailsBySearchCriteria(searchViewModel);
+           Session["SearchCriteria"] = searchViewModel;
+          return View("Index", searchManagement.GetPGsBySearchCriteria(searchViewModel));
        }
 
-       public ActionResult PropertyDetails()
+       public ActionResult PropertyDetails(int PGID)
        {
-
-           return View(searchManagement.GetPropertyDetails(2));//default value passed as 1 to avoid error as of now
+           if (Session["SearchCriteria"] != null)
+           {
+               return View(searchManagement.GetPropertyDetails(PGID, Session["SearchCriteria"] as SearchViewModel));
+           }
+           else
+           {
+               return RedirectToAction("Index","Account");
+           }
        }
     }
 }
