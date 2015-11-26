@@ -12,9 +12,14 @@ namespace LYSApp.Data.DBEntity
     using System;
     using System.Collections.Generic;
     
-    public partial class HouseReview
+    public partial class PGReview
     {
-        public int HouseReviewID { get; set; }
+        public PGReview()
+        {
+            this.PGDetails = new HashSet<PGDetail>();
+        }
+    
+        public int PGReviewID { get; set; }
         public long UserID { get; set; }
         public int HouseID { get; set; }
         public string Comments { get; set; }
@@ -22,6 +27,7 @@ namespace LYSApp.Data.DBEntity
         public Nullable<System.DateTime> CommentTime { get; set; }
     
         public virtual House House { get; set; }
+        public virtual ICollection<PGDetail> PGDetails { get; set; }
         public virtual User User { get; set; }
     }
 }

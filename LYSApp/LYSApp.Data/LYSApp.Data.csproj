@@ -81,9 +81,6 @@
     <Compile Include="DBEntity\HouseImage.cs">
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntity\HouseReview.cs">
-      <DependentUpon>LYSAdmin.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBEntity\LYSAdmin.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,6 +97,9 @@
       <DependentUpon>LYSAdmin.edmx</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\PGDetail.cs">
+      <DependentUpon>LYSAdmin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\PGReview.cs">
       <DependentUpon>LYSAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\Role.cs">

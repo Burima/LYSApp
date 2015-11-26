@@ -33,9 +33,9 @@ namespace LYSApp.Data.DBEntity
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<HouseAmenity> HouseAmenities { get; set; }
         public virtual DbSet<HouseImage> HouseImages { get; set; }
-        public virtual DbSet<HouseReview> HouseReviews { get; set; }
         public virtual DbSet<House> Houses { get; set; }
         public virtual DbSet<PGDetail> PGDetails { get; set; }
+        public virtual DbSet<PGReview> PGReviews { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<UserClaim> UserClaims { get; set; }

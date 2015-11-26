@@ -16,10 +16,8 @@ namespace LYSApp.Data.DBEntity
     {
         public User()
         {
-            this.Apartments = new HashSet<Apartment>();
             this.Beds = new HashSet<Bed>();
-            this.HouseReviews = new HashSet<HouseReview>();
-            this.PGDetails = new HashSet<PGDetail>();
+            this.PGReviews = new HashSet<PGReview>();
             this.UserClaims = new HashSet<UserClaim>();
             this.UserDetails = new HashSet<UserDetail>();
             this.UserLogins = new HashSet<UserLogin>();
@@ -47,10 +45,8 @@ namespace LYSApp.Data.DBEntity
         public int AccessFailedCount { get; set; }
         public int Status { get; set; }
     
-        public virtual ICollection<Apartment> Apartments { get; set; }
         public virtual ICollection<Bed> Beds { get; set; }
-        public virtual ICollection<HouseReview> HouseReviews { get; set; }
-        public virtual ICollection<PGDetail> PGDetails { get; set; }
+        public virtual ICollection<PGReview> PGReviews { get; set; }
         public virtual ICollection<UserClaim> UserClaims { get; set; }
         public virtual ICollection<UserDetail> UserDetails { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
