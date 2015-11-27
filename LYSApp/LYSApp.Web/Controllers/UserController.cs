@@ -63,8 +63,8 @@ namespace LYSApp.Web.Controllers
                     userViewModel.InstitutionName = user.UserDetails.FirstOrDefault().InstitutionName;
                 }
 
-                if (user.HouseReviews != null && user.HouseReviews.Count > 0){
-                    userViewModel.houseReviews = user.HouseReviews.ToList();
+                if (user.PGReviews != null && user.PGReviews.Count > 0){
+                    userViewModel.pgReviews = user.PGReviews.ToList();
                 }
             }
             return View(userViewModel);

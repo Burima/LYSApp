@@ -144,7 +144,7 @@ namespace LYSApp.Model
         public string InstitutionName { get; set; }
         public int Status { get; set; }
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }
-        public IList<HouseReview> houseReviews { get; set; }
+        public IList<PGReview> pgReviews { get; set; }
         public HouseReviewModel HouseReviewModel { get; set; }
         public ManageUserViewModel ManageUserViewModel { get; set; }
     }

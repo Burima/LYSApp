@@ -38,6 +38,12 @@ namespace LYSApp.Model
     {
         public int PGDetailID { get; set; }
         public string PGName { get; set; }
+        public Nullable<decimal> Latitude { get; set; }
+        public Nullable<decimal> Longitude { get; set; }
+        public string Address { get; set; }
+        public string Landmark { get; set; }
+
+        public IList<PGReview> PGReviews { get; set; }
         public House MinimumRentHouse { get; set; }
     }
     public class PropertyDetailsViewModel
@@ -46,15 +52,10 @@ namespace LYSApp.Model
 
         public string PGName { get; set; }
 
-        //public string Address { get; set; }
-
-        //public string Description { get; set; }
-
-        //public Nullable<int> Gender { get; set; }
-
-        //public Nullable<decimal> Latitude { get; set; }
-
-        //public Nullable<decimal> Longitude { get; set; }
+        public Nullable<decimal> Latitude { get; set; }
+        public Nullable<decimal> Longitude { get; set; }
+        public string Address { get; set; }
+        public string Landmark { get; set; }
 
         public IList<House> HouseList { get; set; }
 

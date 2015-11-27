@@ -16,7 +16,7 @@ namespace LYSApp.Domain.UserManagement
         private IUnitOfWork unitOfWork = null;
         private IBaseRepository<Data.DBEntity.User> userRepository = null;
         private IBaseRepository<Data.DBEntity.UserDetail> userDetailsRepository = null;
-        private IBaseRepository<Data.DBEntity.HouseReview> houseReviewRepository = null;
+        private IBaseRepository<Data.DBEntity.PGReview> pgReviewRepository = null;
         private IBaseRepository<Data.DBEntity.Bed> bedRepository = null;
         private IBaseRepository<Data.DBEntity.House> houseRepository = null;
         private IBaseRepository<Data.DBEntity.Room> roomRepository = null;
@@ -28,7 +28,7 @@ namespace LYSApp.Domain.UserManagement
             bedRepository = new BaseRepository<Data.DBEntity.Bed>(unitOfWork);
             roomRepository = new BaseRepository<Data.DBEntity.Room>(unitOfWork);
             houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
-            houseReviewRepository = new BaseRepository<Data.DBEntity.HouseReview>(unitOfWork);
+            pgReviewRepository = new BaseRepository<Data.DBEntity.PGReview>(unitOfWork);
         }
 
         public int UpdateUser(UserViewModel userViewModel)
@@ -85,16 +85,17 @@ namespace LYSApp.Domain.UserManagement
 
         public int UpdateComment(UserViewModel userviewModel)
         {
-            LYSApp.Data.DBEntity.HouseReview houseReview = new LYSApp.Data.DBEntity.HouseReview();
-            houseReview.UserID = userviewModel.UserID;
-            houseReview.Comments = userviewModel.HouseReviewModel.Comments;
-            houseReview.CommentTime = DateTime.Now;
-            houseReview.Rating = userviewModel.HouseReviewModel.Rating;
-            houseReview.HouseID = userviewModel.HouseReviewModel.HouseID;
-            houseReview.User = userRepository.FirstOrDefault(m => m.UserID == userviewModel.UserID);
-            houseReview.House = houseRepository.FirstOrDefault(m => m.HouseID == userviewModel.HouseReviewModel.HouseID);
-            houseReviewRepository.Insert(houseReview);
-            return unitOfWork.SaveChanges();
+            //LYSApp.Data.DBEntity.PGReview pgReview = new LYSApp.Data.DBEntity.PGReview();
+            //pgReview.UserID = userviewModel.UserID;
+            //pgReview.Comments = userviewModel.HouseReviewModel.Comments;
+            //pgReview.CommentTime = DateTime.Now;
+            //pgReview.Rating = userviewModel.HouseReviewModel.Rating;
+            //pgReview.PGDetailID = userviewModel.HouseReviewModel.pg;
+            //pgReview.User = userRepository.FirstOrDefault(m => m.UserID == userviewModel.UserID);
+            //pgReview.House = houseRepository.FirstOrDefault(m => m.HouseID == userviewModel.HouseReviewModel.HouseID);
+            //pgReviewRepository.Insert(pgReview);
+            //return unitOfWork.SaveChanges();
+            return 0;
         }
 
         public int GetHouseID(long userID)

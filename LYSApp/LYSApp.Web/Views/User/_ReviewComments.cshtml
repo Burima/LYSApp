@@ -7,7 +7,7 @@
             Past Comments by you
         </div>
         <div class="panel-body">
-            @if (Model.houseReviews != null && Model.houseReviews.Count == 0)
+            @if (Model.pgReviews != null && Model.pgReviews.Count == 0)
             {
                 <div class="row">
                     <div class="col-md-9">
@@ -15,16 +15,16 @@
                     </div>
                 </div>
             }
-            else if (Model.houseReviews != null)
+            else if (Model.pgReviews != null)
             {
-                foreach (var houseReview in Model.houseReviews)
+                foreach (var pgReview in Model.pgReviews)
                 {
                     <div class="row row-padding-top-1">
                         <div class="col-md-3">
-                            @houseReview.CommentTime
+                            @pgReview.CommentTime
                         </div>
                         <div class="col-md-9">
-                            @houseReview.Comments
+                            @pgReview.Comments
                         </div>
                     </div>
                 }
