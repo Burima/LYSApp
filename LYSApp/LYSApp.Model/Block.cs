@@ -22,5 +22,6 @@ namespace LYSApp.Model
         public Nullable<int> CreatedBy { get; set; }
 
         public virtual Apartment Apartment { get; set; }
+        public virtual ICollection<House> Houses { get; set; }
     }
 }
