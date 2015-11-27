@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LYSAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LYSAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Apartments">
           <Key>
             <PropertyRef Name="ApartmentID" />
@@ -171,8 +171,8 @@
           <Property Name="PGName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="AreaID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="bigint" Nullable="false" />
-          <Property Name="latitude" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Longitude" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Latitude" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="Longitude" Type="decimal" Precision="12" Scale="9" />
           <Property Name="Address" Type="varchar" MaxLength="100" />
           <Property Name="Landmark" Type="varchar" MaxLength="100" />
           <Property Name="IsPg" Type="bit" Nullable="false" />
@@ -597,8 +597,7 @@
             <End Role="UserDetails" EntitySet="UserDetails" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LYSAdminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -629,7 +628,7 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="City" Relationship="Self.FK_Areas_CityID" FromRole="Areas" ToRole="Cities" />
-          <NavigationProperty Name="PGDetails" Relationship="Self.FK_PGDetails_AreaID" FromRole="Areas" ToRole="PGDetails" />
+          <NavigationProperty Name="PGDetails" Relationship="LYSAdminModel.FK_PGDetails_AreaID" FromRole="Area" ToRole="PGDetail" />
         </EntityType>
         <EntityType Name="Bed">
           <Key>
@@ -774,27 +773,8 @@
           <NavigationProperty Name="Block" Relationship="Self.FK_Houses_BlockID" FromRole="Houses" ToRole="Blocks" />
           <NavigationProperty Name="HouseAmenities" Relationship="Self.FK__HouseAmenities__HouseID" FromRole="Houses" ToRole="HouseAmenities" />
           <NavigationProperty Name="HouseImages" Relationship="Self.FK_HouseImages_HouseID" FromRole="Houses" ToRole="HouseImages" />
-          <NavigationProperty Name="PGDetail" Relationship="Self.FK_Houses_PGDetailID" FromRole="Houses" ToRole="PGDetails" />
           <NavigationProperty Name="Rooms" Relationship="Self.FK_Rooms_HouseID" FromRole="Houses" ToRole="Rooms" />
-        </EntityType>
-        <EntityType Name="PGDetail">
-          <Key>
-            <PropertyRef Name="PGDetailID" />
-          </Key>
-          <Property Name="PGDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PGName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AreaID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="Int64" Nullable="false" />
-          <Property Name="latitude" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Landmark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsPg" Type="Boolean" Nullable="false" />
-          <Property Name="PGReviewID" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Area" Relationship="Self.FK_PGDetails_AreaID" FromRole="PGDetails" ToRole="Areas" />
-          <NavigationProperty Name="Houses" Relationship="Self.FK_Houses_PGDetailID" FromRole="PGDetails" ToRole="Houses" />
-          <NavigationProperty Name="PGReview" Relationship="Self.FK_PGDetails_PGReviewID" FromRole="PGDetails" ToRole="PGReviews" />
+          <NavigationProperty Name="PGDetail" Relationship="LYSAdminModel.FK_Houses_PGDetailID" FromRole="House" ToRole="PGDetail" />
         </EntityType>
         <EntityType Name="PGReview">
           <Key>
@@ -805,8 +785,8 @@
           <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Rating" Type="Decimal" Precision="3" Scale="2" />
           <Property Name="CommentTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="PGDetails" Relationship="Self.FK_PGDetails_PGReviewID" FromRole="PGReviews" ToRole="PGDetails" />
           <NavigationProperty Name="User" Relationship="Self.FK_PGReviews_UserID" FromRole="PGReviews" ToRole="Users" />
+          <NavigationProperty Name="PGDetails" Relationship="LYSAdminModel.FK_PGDetails_PGReviewID" FromRole="PGReview" ToRole="PGDetail" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -928,18 +908,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PGDetails_AreaID">
-          <End Role="Areas" Type="Self.Area" Multiplicity="1" />
-          <End Role="PGDetails" Type="Self.PGDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Areas">
-              <PropertyRef Name="AreaID" />
-            </Principal>
-            <Dependent Role="PGDetails">
-              <PropertyRef Name="AreaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Beds_RoomID">
           <End Role="Rooms" Type="Self.Room" Multiplicity="1" />
           <End Role="Beds" Type="Self.Bed" Multiplicity="*" />
@@ -1012,18 +980,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Houses_PGDetailID">
-          <End Role="PGDetails" Type="Self.PGDetail" Multiplicity="1" />
-          <End Role="Houses" Type="Self.House" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PGDetails">
-              <PropertyRef Name="PGDetailID" />
-            </Principal>
-            <Dependent Role="Houses">
-              <PropertyRef Name="PGDetailID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Rooms_HouseID">
           <End Role="Houses" Type="Self.House" Multiplicity="1" />
           <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
@@ -1033,18 +989,6 @@
             </Principal>
             <Dependent Role="Rooms">
               <PropertyRef Name="HouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PGDetails_PGReviewID">
-          <End Role="PGReviews" Type="Self.PGReview" Multiplicity="1" />
-          <End Role="PGDetails" Type="Self.PGDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PGReviews">
-              <PropertyRef Name="PGReviewID" />
-            </Principal>
-            <Dependent Role="PGDetails">
-              <PropertyRef Name="PGReviewID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1114,7 +1058,6 @@
           <EntitySet Name="HouseAmenities" EntityType="Self.HouseAmenity" />
           <EntitySet Name="HouseImages" EntityType="Self.HouseImage" />
           <EntitySet Name="Houses" EntityType="Self.House" />
-          <EntitySet Name="PGDetails" EntityType="Self.PGDetail" />
           <EntitySet Name="PGReviews" EntityType="Self.PGReview" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Rooms" EntityType="Self.Room" />
@@ -1129,10 +1072,6 @@
           <AssociationSet Name="FK_Areas_CityID" Association="Self.FK_Areas_CityID">
             <End Role="Cities" EntitySet="Cities" />
             <End Role="Areas" EntitySet="Areas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PGDetails_AreaID" Association="Self.FK_PGDetails_AreaID">
-            <End Role="Areas" EntitySet="Areas" />
-            <End Role="PGDetails" EntitySet="PGDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Beds_RoomID" Association="Self.FK_Beds_RoomID">
             <End Role="Rooms" EntitySet="Rooms" />
@@ -1158,17 +1097,9 @@
             <End Role="Houses" EntitySet="Houses" />
             <End Role="HouseImages" EntitySet="HouseImages" />
           </AssociationSet>
-          <AssociationSet Name="FK_Houses_PGDetailID" Association="Self.FK_Houses_PGDetailID">
-            <End Role="PGDetails" EntitySet="PGDetails" />
-            <End Role="Houses" EntitySet="Houses" />
-          </AssociationSet>
           <AssociationSet Name="FK_Rooms_HouseID" Association="Self.FK_Rooms_HouseID">
             <End Role="Houses" EntitySet="Houses" />
             <End Role="Rooms" EntitySet="Rooms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PGDetails_PGReviewID" Association="Self.FK_PGDetails_PGReviewID">
-            <End Role="PGReviews" EntitySet="PGReviews" />
-            <End Role="PGDetails" EntitySet="PGDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_PGReviews_UserID" Association="Self.FK_PGReviews_UserID">
             <End Role="Users" EntitySet="Users" />
@@ -1190,7 +1121,75 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="PGDetails" EntityType="LYSAdminModel.PGDetail" />
+          <AssociationSet Name="FK_PGDetails_AreaID" Association="LYSAdminModel.FK_PGDetails_AreaID">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="PGDetail" EntitySet="PGDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Houses_PGDetailID" Association="LYSAdminModel.FK_Houses_PGDetailID">
+            <End Role="PGDetail" EntitySet="PGDetails" />
+            <End Role="House" EntitySet="Houses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PGDetails_PGReviewID" Association="LYSAdminModel.FK_PGDetails_PGReviewID">
+            <End Role="PGReview" EntitySet="PGReviews" />
+            <End Role="PGDetail" EntitySet="PGDetails" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="PGDetail">
+          <Key>
+            <PropertyRef Name="PGDetailID" />
+          </Key>
+          <Property Name="PGDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PGName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AreaID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="12" Scale="9" />
+          <Property Name="Longitude" Type="Decimal" Precision="12" Scale="9" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Landmark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsPg" Type="Boolean" Nullable="false" />
+          <Property Name="PGReviewID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Area" Relationship="LYSAdminModel.FK_PGDetails_AreaID" FromRole="PGDetail" ToRole="Area" />
+          <NavigationProperty Name="Houses" Relationship="LYSAdminModel.FK_Houses_PGDetailID" FromRole="PGDetail" ToRole="House" />
+          <NavigationProperty Name="PGReview" Relationship="LYSAdminModel.FK_PGDetails_PGReviewID" FromRole="PGDetail" ToRole="PGReview" />
+        </EntityType>
+        <Association Name="FK_PGDetails_AreaID">
+          <End Type="LYSAdminModel.Area" Role="Area" Multiplicity="1" />
+          <End Type="LYSAdminModel.PGDetail" Role="PGDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="AreaID" />
+            </Principal>
+            <Dependent Role="PGDetail">
+              <PropertyRef Name="AreaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Houses_PGDetailID">
+          <End Type="LYSAdminModel.PGDetail" Role="PGDetail" Multiplicity="1" />
+          <End Type="LYSAdminModel.House" Role="House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PGDetail">
+              <PropertyRef Name="PGDetailID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="PGDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PGDetails_PGReviewID">
+          <End Type="LYSAdminModel.PGReview" Role="PGReview" Multiplicity="1" />
+          <End Type="LYSAdminModel.PGDetail" Role="PGDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PGReview">
+              <PropertyRef Name="PGReviewID" />
+            </Principal>
+            <Dependent Role="PGDetail">
+              <PropertyRef Name="PGReviewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1364,23 +1363,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PGDetails">
-            <EntityTypeMapping TypeName="LYSAdminModel.PGDetail">
-              <MappingFragment StoreEntitySet="PGDetails">
-                <ScalarProperty Name="PGDetailID" ColumnName="PGDetailID" />
-                <ScalarProperty Name="PGName" ColumnName="PGName" />
-                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Landmark" ColumnName="Landmark" />
-                <ScalarProperty Name="IsPg" ColumnName="IsPg" />
-                <ScalarProperty Name="PGReviewID" ColumnName="PGReviewID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PGReviews">
             <EntityTypeMapping TypeName="LYSAdminModel.PGReview">
               <MappingFragment StoreEntitySet="PGReviews">
@@ -1488,6 +1470,23 @@
               <ScalarProperty Name="UserID" ColumnName="UserID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="PGDetails">
+            <EntityTypeMapping TypeName="LYSAdminModel.PGDetail">
+              <MappingFragment StoreEntitySet="PGDetails">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PGReviewID" ColumnName="PGReviewID" />
+                <ScalarProperty Name="IsPg" ColumnName="IsPg" />
+                <ScalarProperty Name="Landmark" ColumnName="Landmark" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="PGName" ColumnName="PGName" />
+                <ScalarProperty Name="PGDetailID" ColumnName="PGDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

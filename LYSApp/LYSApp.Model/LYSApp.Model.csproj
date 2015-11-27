@@ -87,7 +87,7 @@
     <Compile Include="House.cs" />
     <Compile Include="HouseAmenity.cs" />
     <Compile Include="HouseImage.cs" />
-    <Compile Include="HouseReview.cs" />
+    <Compile Include="PGReview.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="UserLogin.cs" />
     <Compile Include="UserRole.cs" />

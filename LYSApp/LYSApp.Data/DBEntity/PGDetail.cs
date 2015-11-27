@@ -23,7 +23,7 @@ namespace LYSApp.Data.DBEntity
         public string PGName { get; set; }
         public int AreaID { get; set; }
         public long UserID { get; set; }
-        public Nullable<decimal> latitude { get; set; }
+        public Nullable<decimal> Latitude { get; set; }
         public Nullable<decimal> Longitude { get; set; }
         public string Address { get; set; }
         public string Landmark { get; set; }
