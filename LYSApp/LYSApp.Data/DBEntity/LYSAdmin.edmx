@@ -176,7 +176,6 @@
           <Property Name="Address" Type="varchar" MaxLength="100" />
           <Property Name="Landmark" Type="varchar" MaxLength="100" />
           <Property Name="IsPg" Type="bit" Nullable="false" />
-          <Property Name="PGReviewID" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="PGReviews">
@@ -188,6 +187,7 @@
           <Property Name="Comments" Type="varchar" MaxLength="500" />
           <Property Name="Rating" Type="decimal" Precision="3" Scale="2" />
           <Property Name="CommentTime" Type="datetime" />
+          <Property Name="PGDetailID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -457,15 +457,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PGDetails_PGReviewID">
-          <End Role="PGReviews" Type="Self.PGReviews" Multiplicity="1" />
-          <End Role="PGDetails" Type="Self.PGDetails" Multiplicity="*" />
+        <Association Name="FK_PGReviews_PGDetailID">
+          <End Role="PGDetails" Type="Self.PGDetails" Multiplicity="1" />
+          <End Role="PGReviews" Type="Self.PGReviews" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PGReviews">
-              <PropertyRef Name="PGReviewID" />
+            <Principal Role="PGDetails">
+              <PropertyRef Name="PGDetailID" />
             </Principal>
-            <Dependent Role="PGDetails">
-              <PropertyRef Name="PGReviewID" />
+            <Dependent Role="PGReviews">
+              <PropertyRef Name="PGDetailID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -580,9 +580,9 @@
             <End Role="Areas" EntitySet="Areas" />
             <End Role="PGDetails" EntitySet="PGDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_PGDetails_PGReviewID" Association="Self.FK_PGDetails_PGReviewID">
-            <End Role="PGReviews" EntitySet="PGReviews" />
+          <AssociationSet Name="FK_PGReviews_PGDetailID" Association="Self.FK_PGReviews_PGDetailID">
             <End Role="PGDetails" EntitySet="PGDetails" />
+            <End Role="PGReviews" EntitySet="PGReviews" />
           </AssociationSet>
           <AssociationSet Name="FK_PGReviews_UserID" Association="Self.FK_PGReviews_UserID">
             <End Role="Users" EntitySet="Users" />
@@ -776,18 +776,6 @@
           <NavigationProperty Name="Rooms" Relationship="Self.FK_Rooms_HouseID" FromRole="Houses" ToRole="Rooms" />
           <NavigationProperty Name="PGDetail" Relationship="LYSAdminModel.FK_Houses_PGDetailID" FromRole="House" ToRole="PGDetail" />
         </EntityType>
-        <EntityType Name="PGReview">
-          <Key>
-            <PropertyRef Name="PGReviewID" />
-          </Key>
-          <Property Name="PGReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int64" Nullable="false" />
-          <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Rating" Type="Decimal" Precision="3" Scale="2" />
-          <Property Name="CommentTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="User" Relationship="Self.FK_PGReviews_UserID" FromRole="PGReviews" ToRole="Users" />
-          <NavigationProperty Name="PGDetails" Relationship="LYSAdminModel.FK_PGDetails_PGReviewID" FromRole="PGReview" ToRole="PGDetail" />
-        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="RoleID" />
@@ -878,11 +866,11 @@
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Beds" Relationship="Self.FK_Beds_UserID" FromRole="Users" ToRole="Beds" />
-          <NavigationProperty Name="PGReviews" Relationship="Self.FK_PGReviews_UserID" FromRole="Users" ToRole="PGReviews" />
           <NavigationProperty Name="UserClaims" Relationship="Self.FK_dbo_UserClaim_dbo_User_UserID" FromRole="Users" ToRole="UserClaims" />
           <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_UserID" FromRole="Users" ToRole="UserDetails" />
           <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_UserLogin_dbo_User_UserID" FromRole="Users" ToRole="UserLogins" />
           <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="PGReviews" Relationship="LYSAdminModel.FK_PGReviews_UserID" FromRole="User" ToRole="PGReview" />
         </EntityType>
         <Association Name="FK_Blocks_ApartmentID">
           <End Role="Apartments" Type="Self.Apartment" Multiplicity="0..1" />
@@ -992,18 +980,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PGReviews_UserID">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="PGReviews" Type="Self.PGReview" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="PGReviews">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_UserClaim_dbo_User_UserID">
           <End Role="Users" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1058,7 +1034,6 @@
           <EntitySet Name="HouseAmenities" EntityType="Self.HouseAmenity" />
           <EntitySet Name="HouseImages" EntityType="Self.HouseImage" />
           <EntitySet Name="Houses" EntityType="Self.House" />
-          <EntitySet Name="PGReviews" EntityType="Self.PGReview" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Rooms" EntityType="Self.Room" />
           <EntitySet Name="UserClaims" EntityType="Self.UserClaim" />
@@ -1101,10 +1076,6 @@
             <End Role="Houses" EntitySet="Houses" />
             <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
-          <AssociationSet Name="FK_PGReviews_UserID" Association="Self.FK_PGReviews_UserID">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="PGReviews" EntitySet="PGReviews" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_UserClaim_dbo_User_UserID" Association="Self.FK_dbo_UserClaim_dbo_User_UserID">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserClaims" EntitySet="UserClaims" />
@@ -1122,6 +1093,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="PGDetails" EntityType="LYSAdminModel.PGDetail" />
+          <EntitySet Name="PGReviews" EntityType="LYSAdminModel.PGReview" />
           <AssociationSet Name="FK_PGDetails_AreaID" Association="LYSAdminModel.FK_PGDetails_AreaID">
             <End Role="Area" EntitySet="Areas" />
             <End Role="PGDetail" EntitySet="PGDetails" />
@@ -1130,11 +1102,15 @@
             <End Role="PGDetail" EntitySet="PGDetails" />
             <End Role="House" EntitySet="Houses" />
           </AssociationSet>
-          <AssociationSet Name="FK_PGDetails_PGReviewID" Association="LYSAdminModel.FK_PGDetails_PGReviewID">
-            <End Role="PGReview" EntitySet="PGReviews" />
+          <AssociationSet Name="FK_PGReviews_PGDetailID" Association="LYSAdminModel.FK_PGReviews_PGDetailID">
             <End Role="PGDetail" EntitySet="PGDetails" />
+            <End Role="PGReview" EntitySet="PGReviews" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_PGReviews_UserID" Association="LYSAdminModel.FK_PGReviews_UserID">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PGReview" EntitySet="PGReviews" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="PGDetail">
           <Key>
             <PropertyRef Name="PGDetailID" />
@@ -1148,11 +1124,23 @@
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Landmark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IsPg" Type="Boolean" Nullable="false" />
-          <Property Name="PGReviewID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Area" Relationship="LYSAdminModel.FK_PGDetails_AreaID" FromRole="PGDetail" ToRole="Area" />
           <NavigationProperty Name="Houses" Relationship="LYSAdminModel.FK_Houses_PGDetailID" FromRole="PGDetail" ToRole="House" />
-          <NavigationProperty Name="PGReview" Relationship="LYSAdminModel.FK_PGDetails_PGReviewID" FromRole="PGDetail" ToRole="PGReview" />
+          <NavigationProperty Name="PGReviews" Relationship="LYSAdminModel.FK_PGReviews_PGDetailID" FromRole="PGDetail" ToRole="PGReview" />
+        </EntityType>
+        <EntityType Name="PGReview">
+          <Key>
+            <PropertyRef Name="PGReviewID" />
+          </Key>
+          <Property Name="PGReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Rating" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="CommentTime" Type="DateTime" Precision="3" />
+          <Property Name="PGDetailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PGDetail" Relationship="LYSAdminModel.FK_PGReviews_PGDetailID" FromRole="PGReview" ToRole="PGDetail" />
+          <NavigationProperty Name="User" Relationship="LYSAdminModel.FK_PGReviews_UserID" FromRole="PGReview" ToRole="User" />
         </EntityType>
         <Association Name="FK_PGDetails_AreaID">
           <End Type="LYSAdminModel.Area" Role="Area" Multiplicity="1" />
@@ -1178,19 +1166,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PGDetails_PGReviewID">
-          <End Type="LYSAdminModel.PGReview" Role="PGReview" Multiplicity="1" />
-          <End Type="LYSAdminModel.PGDetail" Role="PGDetail" Multiplicity="*" />
+        <Association Name="FK_PGReviews_PGDetailID">
+          <End Type="LYSAdminModel.PGDetail" Role="PGDetail" Multiplicity="1" />
+          <End Type="LYSAdminModel.PGReview" Role="PGReview" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PGReview">
-              <PropertyRef Name="PGReviewID" />
+            <Principal Role="PGDetail">
+              <PropertyRef Name="PGDetailID" />
             </Principal>
-            <Dependent Role="PGDetail">
-              <PropertyRef Name="PGReviewID" />
+            <Dependent Role="PGReview">
+              <PropertyRef Name="PGDetailID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_PGReviews_UserID">
+          <End Type="LYSAdminModel.User" Role="User" Multiplicity="1" />
+          <End Type="LYSAdminModel.PGReview" Role="PGReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PGReview">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1363,17 +1363,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PGReviews">
-            <EntityTypeMapping TypeName="LYSAdminModel.PGReview">
-              <MappingFragment StoreEntitySet="PGReviews">
-                <ScalarProperty Name="PGReviewID" ColumnName="PGReviewID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
-                <ScalarProperty Name="CommentTime" ColumnName="CommentTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="LYSAdminModel.Role">
               <MappingFragment StoreEntitySet="Roles">
@@ -1474,7 +1463,6 @@
             <EntityTypeMapping TypeName="LYSAdminModel.PGDetail">
               <MappingFragment StoreEntitySet="PGDetails">
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="PGReviewID" ColumnName="PGReviewID" />
                 <ScalarProperty Name="IsPg" ColumnName="IsPg" />
                 <ScalarProperty Name="Landmark" ColumnName="Landmark" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -1484,6 +1472,18 @@
                 <ScalarProperty Name="AreaID" ColumnName="AreaID" />
                 <ScalarProperty Name="PGName" ColumnName="PGName" />
                 <ScalarProperty Name="PGDetailID" ColumnName="PGDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PGReviews">
+            <EntityTypeMapping TypeName="LYSAdminModel.PGReview">
+              <MappingFragment StoreEntitySet="PGReviews">
+                <ScalarProperty Name="PGDetailID" ColumnName="PGDetailID" />
+                <ScalarProperty Name="CommentTime" ColumnName="CommentTime" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PGReviewID" ColumnName="PGReviewID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

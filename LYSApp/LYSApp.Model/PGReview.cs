@@ -13,8 +13,9 @@ namespace LYSApp.Model
         public string Comments { get; set; }
         public Nullable<decimal> Rating { get; set; }
         public Nullable<System.DateTime> CommentTime { get; set; }
+        public int PGDetailID { get; set; }
 
-        public virtual ICollection<PGDetail> PGDetails { get; set; }
+        public virtual PGDetail PGDetail { get; set; }
         public virtual User User { get; set; }
     }
 }

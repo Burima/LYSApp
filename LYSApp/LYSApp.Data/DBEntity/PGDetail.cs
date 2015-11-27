@@ -17,6 +17,7 @@ namespace LYSApp.Data.DBEntity
         public PGDetail()
         {
             this.Houses = new HashSet<House>();
+            this.PGReviews = new HashSet<PGReview>();
         }
     
         public int PGDetailID { get; set; }
@@ -28,11 +29,10 @@ namespace LYSApp.Data.DBEntity
         public string Address { get; set; }
         public string Landmark { get; set; }
         public bool IsPg { get; set; }
-        public int PGReviewID { get; set; }
         public string Description { get; set; }
     
         public virtual Area Area { get; set; }
         public virtual ICollection<House> Houses { get; set; }
-        public virtual PGReview PGReview { get; set; }
+        public virtual ICollection<PGReview> PGReviews { get; set; }
     }
 }
