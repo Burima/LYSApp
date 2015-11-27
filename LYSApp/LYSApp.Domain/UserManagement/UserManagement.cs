@@ -20,6 +20,7 @@ namespace LYSApp.Domain.UserManagement
         private IBaseRepository<Data.DBEntity.Bed> bedRepository = null;
         private IBaseRepository<Data.DBEntity.House> houseRepository = null;
         private IBaseRepository<Data.DBEntity.Room> roomRepository = null;
+        private IBaseRepository<Data.DBEntity.PGDetail> pgDetailRepository = null;
         public UserManagement()
         {
             unitOfWork = new UnitOfWork();
@@ -29,6 +30,7 @@ namespace LYSApp.Domain.UserManagement
             roomRepository = new BaseRepository<Data.DBEntity.Room>(unitOfWork);
             houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
             pgReviewRepository = new BaseRepository<Data.DBEntity.PGReview>(unitOfWork);
+            pgDetailRepository = new BaseRepository<Data.DBEntity.PGDetail>(unitOfWork);
         }
 
         public int UpdateUser(UserViewModel userViewModel)
@@ -85,17 +87,19 @@ namespace LYSApp.Domain.UserManagement
 
         public int UpdateComment(UserViewModel userviewModel)
         {
-            //LYSApp.Data.DBEntity.PGReview pgReview = new LYSApp.Data.DBEntity.PGReview();
-            //pgReview.UserID = userviewModel.UserID;
-            //pgReview.Comments = userviewModel.HouseReviewModel.Comments;
-            //pgReview.CommentTime = DateTime.Now;
-            //pgReview.Rating = userviewModel.HouseReviewModel.Rating;
-            //pgReview.PGDetailID = userviewModel.HouseReviewModel.pg;
-            //pgReview.User = userRepository.FirstOrDefault(m => m.UserID == userviewModel.UserID);
-            //pgReview.House = houseRepository.FirstOrDefault(m => m.HouseID == userviewModel.HouseReviewModel.HouseID);
-            //pgReviewRepository.Insert(pgReview);
-            //return unitOfWork.SaveChanges();
-            return 0;
+            LYSApp.Data.DBEntity.PGReview pgReview = new LYSApp.Data.DBEntity.PGReview();
+            pgReview.UserID = userviewModel.UserID;
+            pgReview.Comments = userviewModel.HouseReviewModel.Comments;
+            pgReview.CommentTime = DateTime.Now;
+            pgReview.Rating = userviewModel.HouseReviewModel.Rating;
+            pgReview.PGDetailID = (from pg in pgDetailRepository.Get()
+                                   join h in houseRepository.Get() on pg.PGDetailID equals h.PGDetailID
+                                   join r in roomRepository.Get() on h.HouseID equals r.HouseID
+                                   join b in bedRepository.Get() on r.RoomID equals b.RoomID
+                                   join u in userRepository.Get() on b.UserID equals u.UserID
+                                   select pg.PGDetailID).FirstOrDefault();
+            pgReviewRepository.Insert(pgReview);
+            return unitOfWork.SaveChanges();
         }
 
         public int GetHouseID(long userID)

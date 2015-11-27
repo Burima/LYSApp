@@ -76,7 +76,9 @@
         </div>
         <div class="resultsList">
             <div class="row">
-                @foreach (var ViewModel in Model)
+                @if (Model != null && Model.Count > 0)
+                {
+               foreach (var ViewModel in Model)
                 {
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <a href="single.html" class="card">
@@ -88,16 +90,20 @@
                                 <div class="figView"><span class="icon-eye"></span></div>
                             </div>
                             <h2>@ViewModel.PGName</h2>
-                            <div class="cardAddress"><span class="icon-pointer"></span>@ViewModel.MinimumRentHouse.Address</div>
+                            <div class="cardAddress"><span class="icon-pointer"></span>@ViewModel.Address</div>
                             <div class="cardRating">
-                              <input type="hidden" value="@ViewModel.MinimumRentHouse.HouseReviews.FirstOrDefault().Rating" id="Rating" />
+                              <input type="hidden" value="@ViewModel.PGReviews.FirstOrDefault().Rating" id="Rating" />
                             </div>
                            
                             <div class="clearfix"></div>
                         </a>
                     </div>
                 }
-               
+                }
+                else
+                {
+                    <p> No Search Results</p>
+                }
             </div>
             <ul class="pagination">
                 <li class="disabled"><a href="#"><span class="fa fa-angle-left"></span></a></li>
@@ -140,9 +146,9 @@
                 prop.title = PGs[i].PGName;
                 prop.image = PGs[i].MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath;
                 prop.price = PGs[i].MinimumRentHouse.Rooms.FirstOrDefault().MonthlyRent;
-                prop.address = PGs[i].MinimumRentHouse.Address;
-                position.lat = PGs[i].MinimumRentHouse.Latitude;
-                position.long = PGs[i].MinimumRentHouse.Longitude;
+                prop.address = PGs[i].Address;
+                position.lat = PGs[i].Latitude;
+                position.long = PGs[i].Longitude;
                 prop.position = position;
                 markerIcon : "marker-green.png"
 
