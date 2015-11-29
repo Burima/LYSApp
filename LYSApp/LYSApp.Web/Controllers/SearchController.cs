@@ -20,10 +20,12 @@ namespace LYSApp.Web.Controllers
            this.searchManagement = searchManagement;
        }
 
-       public ActionResult Index()
-        {
-            return View();
-        }
+       // [HttpPost]
+       // [ChildActionOnly]
+       //public ActionResult Index()
+       // {
+       //     return View();
+       // }
 
        public JsonResult GetArea(string term)
        {
@@ -32,11 +34,18 @@ namespace LYSApp.Web.Controllers
            return Json(result, JsonRequestBehavior.AllowGet);
 
        }
-
+        
        public ActionResult GetPGs(SearchViewModel searchViewModel)
        {
-           Session["SearchCriteria"] = searchViewModel;
-          return View("Index", searchManagement.GetPGsBySearchCriteria(searchViewModel));
+           if (searchViewModel !=null)
+           {
+               Session["SearchCriteria"] = searchViewModel;
+               return View("Index", searchManagement.GetPGsBySearchCriteria(searchViewModel));
+           }
+           else
+           {
+               return RedirectToAction("Index", "Account");
+           }
        }
 
        public ActionResult PropertyDetails(int PGID)

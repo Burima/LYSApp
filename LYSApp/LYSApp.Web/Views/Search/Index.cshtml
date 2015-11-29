@@ -2,12 +2,17 @@
 
 @{
     ViewBag.Title = "Search";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 <link href="~/Content/jquery-ui.css" rel="stylesheet" />
 <link href="~/Content/datepicker.css" rel="stylesheet" />
+<style>
 
+    #wrapper {
+    margin: 60px 0 0 0px !important;
+}
+</style>
 
 <!-- Content -->
 
@@ -78,21 +83,22 @@
             <div class="row">
                 @if (Model != null && Model.Count > 0)
                 {
-               foreach (var ViewModel in Model)
-                {
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    foreach (var pg in Model)
+                    {
+                        
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <a href="single.html" class="card">
                             <div class="figure">
-                                <img src="@Url.Action(ViewModel.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath)" alt="">
+                                <img src="@Url.Action(pg.MinimumRentHouse.HouseImages.Count > 0 && pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath != String.Empty ? pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath : "./../Images/1-1-thmb.png")" alt="">
                                 <div class="figCaption">
-                                    <div>@ViewModel.MinimumRentHouse.Rooms.FirstOrDefault().MonthlyRent</div>
+                                    <div>@pg.MinimumRentHouse.Rooms.FirstOrDefault().MonthlyRent</div>
                                 </div>
                                 <div class="figView"><span class="icon-eye"></span></div>
                             </div>
-                            <h2>@ViewModel.PGName</h2>
-                            <div class="cardAddress"><span class="icon-pointer"></span>@ViewModel.Address</div>
+                            <h2>@pg.PGName</h2>
+                            <div class="cardAddress"><span class="icon-pointer"></span>@(pg.Address!=null?pg.Address:"Address not provided by PG Owner")</div>
                             <div class="cardRating">
-                              <input type="hidden" value="@ViewModel.PGReviews.FirstOrDefault().Rating" id="Rating" />
+                              <input type="hidden" value="@(pg.PGReviews.Count>0? pg.PGReviews.FirstOrDefault().Rating:0)" id="Rating" />
                             </div>
                            
                             <div class="clearfix"></div>
@@ -120,64 +126,83 @@
 </div>
 @section scripts{
 
-<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery-ui-touch-punch.js"></script>
+<script src="~/Scripts/jquery.placeholder.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery.touchSwipe.min.js"></script>
 <script src="~/Scripts/jquery.slimscroll.min.js"></script>
+<script src="~/Scripts/jquery.visible.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?libraries=geometry&amp;libraries=places" type="text/javascript"></script>
+<script src="~/Scripts/infobox.js"></script>
 <script src="~/Scripts/jquery.tagsinput.min.js"></script>
-<script src="~/Scripts/app.js"></script>
-<script src="~/Scripts/Custom/User/SearchHome.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/app.js" type="text/javascript"></script>
+
+
+
     
 <script type="text/javascript">
-   
+    var props = [];
+    var PGList =eval('@Html.Raw(Json.Encode(Model))');  
     
     $(document).ready(function () {
-       
-        function populateMap() {
+        //console.log(PGs[0]);
+        populateMap();
+        fnFillHouseRatings();
+        //alert(PGList.length);
+        //console.log(PGs);
+        
+    });
 
-            var PGs = '@Html.Raw(Json.Encode(Model))';
-            alert(PGs.length)
-            var prop; //object declared here so that memory allocation is done one time
-            var position;
-            var props = [];
-            var i;
-            for (i = 0; i < PGs.length ; i++) {
-                var count = i;
-                prop = {};
-                position = {};
-                prop.title = PGs[i].PGName;
-                prop.image = PGs[i].MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath;
-                prop.price = PGs[i].MinimumRentHouse.Rooms.FirstOrDefault().MonthlyRent;
-                prop.address = PGs[i].Address;
-                position.lat = PGs[i].Latitude;
-                position.long = PGs[i].Longitude;
-                prop.position = position;
-                markerIcon : "marker-green.png"
+    function populateMap() {
 
-                props.push(prop);
 
-            }
+        //alert(PGs);
+        //console.log(PGs);
+        var prop; //object declared here so that memory allocation is done one time
+        var position;
 
-            var endTime = Date.now();
+        
+        for (var i = 0; i < PGList.length ; i++) {
+            //var count = i;
+            prop = {};
+            position = {};
+            prop.title = PGList[i].PGName;
+            prop.price = PGList[i].MinimumRentHouse.Rooms[0].MonthlyRent;
+            prop.address = PGList[i].Address;
+            position.lat = PGList[i].Latitude;
+            position.long = PGList[i].Longitude;
+            prop.position = position;
+            markerIcon: "marker-green.png"
 
-            var timeTaken = endTime - startTime;
-            console.log('Time taken: ' + timeTaken);
+            props.push(prop);
 
         }
-       
-        function fnFillHouseRatings() {
+        //alert(props.length);
+        //console.log(props.length);
+        //var endTime = Date.now();
 
-            eval("var houseRatings = " + $("#Rating").val());
-            $.each(houseRatings, function (i, houseRating) {
+        //var timeTaken = endTime - startTime;
+        //console.log('Time taken: ' + timeTaken);
 
-                var data = '<li class="list-group-item">' +
-                              '<p id = "pHouseRating"><span class=""fa fa-star""><span style="width:' + (houseRating.AverageRating * 20) + '%;"></span></span></p>'
-                '</li>';
+    }
 
-                $('#cardRating').append(data);
-            });
-        }
+    function fnFillHouseRatings() {
 
+        eval("var houseRatings = " + $("#Rating").val());
+        $.each(houseRatings, function (i, houseRating) {
+
+            var data = '<li class="list-group-item">' +
+                          '<p id = "pHouseRating"><span class=""fa fa-star""><span style="width:' + (houseRating.AverageRating * 20) + '%;"></span></span></p>'
+            '</li>';
+
+            $('#cardRating').append(data);
         });
+    }
     </script>
+<script src="~/Scripts/Custom/User/SearchHome.js"></script>
 }
 
 

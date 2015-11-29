@@ -1,10 +1,13 @@
-﻿var geocoder;
-var map;
-var infowindow;
-var latlng;
-var icon;
-var name;
-$(document).ready(function () {
+﻿$(document).ready(function () {
+
+
+    var geocoder;
+    var map;
+    var infowindow;
+    var latlng;
+    var icon;
+    var name;
+
 
     var options = {
         zoom: 14,
@@ -63,20 +66,21 @@ $(document).ready(function () {
     });
     // function that adds the markers on map
     var addMarkers = function (props, map) {
-
+        //alert(props.length);
         $.each(props, function (i, prop) {
-            latlng = new google.maps.LatLng(prop.position.lat, prop.position.lng);
+            //alert("lat : "+prop.position.lat+"   long : "+ prop.position.long);
+            latlng = new google.maps.LatLng(prop.position.lat, prop.position.long);
             map.setCenter(latlng);
             map.setZoom(15);
-            var image = '/Images/marker-green.png';
+            var image = '../Images/marker-green.png';
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
                 icon: image,
                 draggable: false,
-              
+
             });
-           
+
 
             $(document).on('click', '.closeInfo', function () {
                 infobox.open(null, null);
@@ -99,7 +103,8 @@ $(document).ready(function () {
         map.mapTypes.set('Styled', styledMapType);
         map.setCenter(new google.maps.LatLng(20.1885251, 64.4458764));
         map.setZoom(15);
-
+        //alert("js"+props.length);
+        //console.log("js" + props.length);
         addMarkers(props, map);
     }, 300);
     $("#connectivity-bus").click(function () {
@@ -107,7 +112,7 @@ $(document).ready(function () {
     });
 
     $("#connectivity-railstation").click(function () {
-          codeAddress();
+        codeAddress();
     });
 
     $("#amenity-store").click(function () {
@@ -140,7 +145,7 @@ $(document).ready(function () {
     });
 
     $("#healthcare-pharmacy").click(function () {
-         codeAddress();
+        codeAddress();
     });
 
     $("#entertainment-mall").click(function () {
@@ -172,11 +177,11 @@ $(document).ready(function () {
 
     function codeAddress() {
         refreshMap();
-       
+
         var selectedVal = "";
         var selected = $("input[type='radio'][name='commongroup']:checked");
         if (selected.length > 0) {
-          
+
             selectedVal = selected.val();
             if (selectedVal == "Bus") {
                 icon = '/Images/Map/bus.png';
@@ -214,14 +219,14 @@ $(document).ready(function () {
                 icon = '/Images/marker-red.png';
             } else if (selectedVal == "College and University") {
                 icon = '/Images/Map/college.png';
-            } 
+            }
         }
 
         var request = {
             location: latlng,
             radius: '5000',
             query: selectedVal
-           
+
         };
 
         var service = new google.maps.places.PlacesService(map);
@@ -237,9 +242,9 @@ $(document).ready(function () {
     }
 
     function createMarker(place) {
-        
+
         var placeLoc = place.geometry.location
-       
+
         var marker = new google.maps.Marker({
             map: map,
             title: place.name,
@@ -248,7 +253,7 @@ $(document).ready(function () {
         });
 
         var infoboxContent = '<div class="infoW">' +
-                                    
+
                                     '<div class="paWrapper">' +
                                         '<div class="propTitle">' + place.name + '</div>' +
                                         '<div class="propAddress">' + place.name + '</div>' +
@@ -280,7 +285,7 @@ $(document).ready(function () {
     }
 
     $("#btnViewAmenities").click(function () {
-       
+
         if (document.getElementById('divAmenities').style.display == 'none') {
             document.getElementById('divAmenities').style.display = 'block';
             $("#btnViewAmenities").text('Hide Amenities');
@@ -304,7 +309,7 @@ $(document).ready(function () {
         $('#entertainments').addClass("hidden");
         $('#foods').addClass("hidden");
         $('#educations').addClass("hidden");
-        
+
     });
 
     $("#amenity").click(function () {
@@ -388,7 +393,6 @@ $(document).ready(function () {
         $('#foods').addClass("hidden");
     });
 
-   
 });
 
 

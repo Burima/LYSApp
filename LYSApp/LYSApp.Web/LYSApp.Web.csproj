@@ -225,6 +225,7 @@
     <Content Include="fonts\Simple-Line-Icons.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\1-1-thmb.png" />
     <Content Include="Images\avatar-1.png" />
     <Content Include="Images\avatar-2.png" />
     <Content Include="Images\avatar-3.png" />

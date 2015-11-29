@@ -98,3 +98,6 @@ LYSApp/LYSApp.Web/bin/Ninject.Web.Mvc.xml
 LYSApp/LYSApp.Web/bin/Ninject.xml
 LYSApp/packages/*
 
+LYSApp/LYSApp.Web/bin/FSharp.Core.xml
+LYSApp/LYSApp.v12.suo
+*.suo
