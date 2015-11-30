@@ -46,6 +46,24 @@
 
     var newMarker = null;
     var markers = [];
+    // custom infowindow object for property
+    var propertyInfoBox = new InfoBox({
+        disableAutoPan: false,
+        maxWidth: 202,
+        pixelOffset: new google.maps.Size(-101, -285),
+        zIndex: null,
+        boxStyle: {
+            background: "url('../Images/infobox-bg.png') no-repeat",
+            opacity: 1,
+            width: "202px",
+            height: "245px"
+        },
+        closeBoxMargin: "28px 26px 0px 0px",
+        closeBoxURL: "",
+        infoBoxClearance: new google.maps.Size(1, 1),
+        pane: "floatPane",
+        enableEventPropagation: false
+    });
     // custom infowindow object
     var infobox = new InfoBox({
         disableAutoPan: false,
@@ -80,10 +98,40 @@
                 draggable: false,
 
             });
+            var infoboxContent = '<div class="infoW">' +
+                                   '<div class="propImg">' +
+                                       '<img src="images/prop/' + prop.image + '">' +
+                                       '<div class="propBg">' +
+                                           '<div class="propPrice">' + prop.price + '</div>' +
+                                       '</div>' +
+                                   '</div>' +
+                                   '<div class="paWrapper">' +
+                                       '<div class="propTitle">' + prop.title + '</div>' +
+                                       '<div class="propAddress">' + prop.address + '</div>' +
+                                   '</div>' +
+                                   //'<div class="propRating">' +
+                                   //    '<span class="fa fa-star"></span>' +
+                                   //    '<span class="fa fa-star"></span>' +
+                                   //    '<span class="fa fa-star"></span>' +
+                                   //    '<span class="fa fa-star"></span>' +
+                                   //    '<span class="fa fa-star-o"></span>' +
+                                   //'</div>' +
+                                   '<div class="clearfix"></div>' +
+                                   '<div class="infoButtons">' +
+                                       '<a class="btn btn-sm btn-round btn-gray btn-o closeInfo">Close</a>' +
+                                       '<a href="single.html" class="btn btn-sm btn-round btn-green viewInfo">View</a>' +
+                                   '</div>' +
+                                '</div>';
 
+           google.maps.event.addListener(marker, 'click', (function(marker, i) {
+               return function() {
+                   propertyInfoBox.setContent(infoboxContent);
+                   propertyInfoBox.open(map, marker);
+               }
+           })(marker, i));
 
             $(document).on('click', '.closeInfo', function () {
-                infobox.open(null, null);
+                propertyInfoBox.open(null, null);
             });
 
             markers.push(marker);

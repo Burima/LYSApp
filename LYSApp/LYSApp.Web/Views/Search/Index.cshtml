@@ -98,7 +98,7 @@
                             <h2>@pg.PGName</h2>
                             <div class="cardAddress"><span class="icon-pointer"></span>@(pg.Address!=null?pg.Address:"Address not provided by PG Owner")</div>
                             <div class="cardRating">
-                              <input type="hidden" value="@(pg.PGReviews.Count>0? pg.PGReviews.FirstOrDefault().Rating:0)" id="Rating" />
+                              <input type="hidden" value="@(pg.PGReviews.Count>0? pg.PGReviews.FirstOrDefault().Rating:0)" id="Rating" onload="fnFillHouseRatings()"/>
                             </div>
                            
                             <div class="clearfix"></div>
@@ -148,19 +148,12 @@
     var PGList =eval('@Html.Raw(Json.Encode(Model))');  
     
     $(document).ready(function () {
-        //console.log(PGs[0]);
         populateMap();
         fnFillHouseRatings();
-        //alert(PGList.length);
-        //console.log(PGs);
-        
     });
 
     function populateMap() {
 
-
-        //alert(PGs);
-        //console.log(PGs);
         var prop; //object declared here so that memory allocation is done one time
         var position;
 
@@ -170,6 +163,7 @@
             prop = {};
             position = {};
             prop.title = PGList[i].PGName;
+            prop.image = "../../../Images/1-1-thmb.png";
             prop.price = PGList[i].MinimumRentHouse.Rooms[0].MonthlyRent;
             prop.address = PGList[i].Address;
             position.lat = PGList[i].Latitude;
@@ -180,26 +174,19 @@
             props.push(prop);
 
         }
-        //alert(props.length);
-        //console.log(props.length);
-        //var endTime = Date.now();
-
-        //var timeTaken = endTime - startTime;
-        //console.log('Time taken: ' + timeTaken);
-
+       
     }
 
     function fnFillHouseRatings() {
-
+        
         eval("var houseRatings = " + $("#Rating").val());
-        $.each(houseRatings, function (i, houseRating) {
-
+        alert(houseRatings);
             var data = '<li class="list-group-item">' +
-                          '<p id = "pHouseRating"><span class=""fa fa-star""><span style="width:' + (houseRating.AverageRating * 20) + '%;"></span></span></p>'
+                          '<p id = "pHouseRating"><span class=""fa fa-star""><span style="width:' + (houseRatings * 20) + '%;"></span></span></p>'
             '</li>';
 
             $('#cardRating').append(data);
-        });
+       
     }
     </script>
 <script src="~/Scripts/Custom/User/SearchHome.js"></script>
