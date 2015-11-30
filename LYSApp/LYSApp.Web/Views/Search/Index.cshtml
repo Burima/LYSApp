@@ -182,7 +182,7 @@
 
     function fnFillHouseRatings() {
         eval("var houseRatings = " + $("#Rating").val());
-        alert(houseRatings);
+      
             var data = '<li class="list-group-item">' +
                           '<p id = "pHouseRating"><span class=""fa fa-star""><span style="width:' + (houseRatings * 20) + '%;"></span></span></p>'
             '</li>';
@@ -191,7 +191,11 @@
        
     }
     $("#PG").click(function () {
-        alert("clicked")
+       
+        GetPropertyDetails();
+    });
+
+    function GetPropertyDetails() {
         $.ajax({
 
             url: PGDetailsUrl,
@@ -207,7 +211,7 @@
             error: function (data) { }
 
         });
-    });
+    }
    
     </script>
 <script src="~/Scripts/Custom/User/SearchHome.js"></script>
