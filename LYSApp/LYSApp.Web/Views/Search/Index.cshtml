@@ -81,14 +81,15 @@
         </div>
         <div class="resultsList">
             <div class="row">
-                @if (Model != null && Model.Count > 0)
+               @if (Model != null && Model.Count > 0)
                 {
                     foreach (var pg in Model)
                     {
                         
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <a href="single.html" class="card">
+                        <a class="card" id="PG">
                             <div class="figure">
+                                <input type="hidden" value="@pg.PGDetailID" name="PGID" id="PGID" />
                                 <img src="@Url.Action(pg.MinimumRentHouse.HouseImages.Count > 0 && pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath != String.Empty ? pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath : "./../Images/1-1-thmb.png")" alt="">
                                 <div class="figCaption">
                                     <div>@pg.MinimumRentHouse.Rooms.FirstOrDefault().MonthlyRent</div>
@@ -98,7 +99,7 @@
                             <h2>@pg.PGName</h2>
                             <div class="cardAddress"><span class="icon-pointer"></span>@(pg.Address!=null?pg.Address:"Address not provided by PG Owner")</div>
                             <div class="cardRating">
-                              <input type="hidden" value="@(pg.PGReviews.Count>0? pg.PGReviews.FirstOrDefault().Rating:0)" id="Rating" onload="fnFillHouseRatings()"/>
+                              <input type="hidden" value="@(pg.PGReviews.Count>0? pg.PGReviews.FirstOrDefault().Rating:0)" id="Rating"/>
                             </div>
                            
                             <div class="clearfix"></div>
@@ -106,10 +107,12 @@
                     </div>
                 }
                 }
+          
                 else
                 {
                     <p> No Search Results</p>
                 }
+
             </div>
             <ul class="pagination">
                 <li class="disabled"><a href="#"><span class="fa fa-angle-left"></span></a></li>
@@ -146,7 +149,7 @@
 <script type="text/javascript">
     var props = [];
     var PGList =eval('@Html.Raw(Json.Encode(Model))');  
-    
+    var PGDetailsUrl = '@Url.Action("PropertyDetails", "Search")';
     $(document).ready(function () {
         populateMap();
         fnFillHouseRatings();
@@ -178,7 +181,6 @@
     }
 
     function fnFillHouseRatings() {
-        
         eval("var houseRatings = " + $("#Rating").val());
         alert(houseRatings);
             var data = '<li class="list-group-item">' +
@@ -188,6 +190,25 @@
             $('#cardRating').append(data);
        
     }
+    $("#PG").click(function () {
+        alert("clicked")
+        $.ajax({
+
+            url: PGDetailsUrl,
+            type: 'POST',
+
+            data: {
+                PGID: $("#PGID").val()
+            },
+
+            success: function (data) {
+
+            },
+            error: function (data) { }
+
+        });
+    });
+   
     </script>
 <script src="~/Scripts/Custom/User/SearchHome.js"></script>
 }

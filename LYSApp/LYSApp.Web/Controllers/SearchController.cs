@@ -47,7 +47,8 @@ namespace LYSApp.Web.Controllers
                return RedirectToAction("Index", "Account");
            }
        }
-
+        
+       [HttpPost]
        public ActionResult PropertyDetails(int PGID)
        {
            if (Session["SearchCriteria"] != null)
