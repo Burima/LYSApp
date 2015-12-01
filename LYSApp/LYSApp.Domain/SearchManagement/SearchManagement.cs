@@ -220,7 +220,7 @@ namespace LYSApp.Domain.SearchManagement
                                                                        ImagePath = i.ImagePath
                                                                    }).ToList(),
 
-                                                    Rooms = (from room in p.Rooms.GroupBy(a => a.MonthlyRent).FirstOrDefault()//grouped rooms by MonthlyRent
+                                                    Rooms = (from room in p.Rooms.GroupBy(a => a.MonthlyRent).Select(y=>y.FirstOrDefault()) //grouped rooms by MonthlyRent
                                                              select new LYSApp.Model.Room
                                                              {
                                                                  RoomID = room.RoomID,

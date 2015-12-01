@@ -98,7 +98,8 @@
                 draggable: false,
 
             });
-            var infoboxContent = '<div class="infoW">' +
+            //console.log("pgid : "+prop.pgDetailID);
+            var infoboxContent = '<div class="infoW pg" pgDetailID=' + prop.pgDetailID + '>' +
                                    '<div class="propImg">' +
                                        '<img src="images/prop/' + prop.image + '">' +
                                        '<div class="propBg">' +
@@ -135,9 +136,13 @@
             });
 
             $(document).on('click', '.viewInfo', function () {
-              
-                GetPropertyDetails();
+                //console.log($(this).parents(".pg").attr('pgDetailID'));
+                GetPropertyDetails($(this).parents(".pg").attr("pgDetailID"));
             });
+            //$(".viewInfo").click(function () {
+            //    console.log($(this).parent(".pg").attr(".pgDetailID"));
+            //    GetPropertyDetails($(this).parent(".pg").attr(".pgDetailID"));
+            //});
             markers.push(marker);
         });
     }

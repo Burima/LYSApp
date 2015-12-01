@@ -8,7 +8,6 @@
 <link href="~/Content/jquery-ui.css" rel="stylesheet" />
 <link href="~/Content/datepicker.css" rel="stylesheet" />
 <style>
-
     #wrapper {
     margin: 60px 0 0 0px !important;
 }
@@ -80,16 +79,16 @@
             </form>
         </div>
         <div class="resultsList">
-            <div class="row">
+            <div class="row pglist">
                @if (Model != null && Model.Count > 0)
                 {
                     foreach (var pg in Model)
                     {
                         
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <a class="card" id="PG">
+                        <a class="card pg" pgDetailID="@pg.PGDetailID">
                             <div class="figure">
-                                <input type="hidden" value="@pg.PGDetailID" name="PGID" id="PGID" />
+                                @*<input type="hidden" value="@pg.PGDetailID" name="PGID" class="pgid" />*@
                                 <img src="@Url.Action(pg.MinimumRentHouse.HouseImages.Count > 0 && pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath != String.Empty ? pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath : "./../Images/1-1-thmb.png")" alt="">
                                 <div class="figCaption">
                                     <div>@pg.MinimumRentHouse.Rooms.FirstOrDefault().MonthlyRent</div>
@@ -97,11 +96,11 @@
                                 <div class="figView"><span class="icon-eye"></span></div>
                             </div>
                             <h2>@pg.PGName</h2>
-                            <div class="cardAddress"><span class="icon-pointer"></span>@(pg.Address!=null?pg.Address:"Address not provided by PG Owner")</div>
+                            <div class="cardAddress"><span class="icon-pointer"></span>@(pg.Address != null ? pg.Address : "Address not provided by PG Owner")</div>
                             <div class="cardRating">
-                              <input type="hidden" value="@(pg.PGReviews.Count>0? pg.PGReviews.FirstOrDefault().Rating:0)" id="Rating"/>
+                                <input type="hidden" value="@(pg.PGReviews.Count>0? pg.PGReviews.FirstOrDefault().Rating:0)" id="Rating" />
                             </div>
-                           
+
                             <div class="clearfix"></div>
                         </a>
                     </div>
@@ -147,6 +146,7 @@
 
     
 <script type="text/javascript">
+    var PropertyDetailsURL = '@Url.Action("PropertyDetails", "Search", new { PGID=-1 })';
     var props = [];
     var PGList =eval('@Html.Raw(Json.Encode(Model))');  
     var PGDetailsUrl = '@Url.Action("PropertyDetails", "Search")';
@@ -165,6 +165,7 @@
             //var count = i;
             prop = {};
             position = {};
+            prop.pgDetailID = PGList[i].PGDetailID;
             prop.title = PGList[i].PGName;
             prop.image = "../../../Images/1-1-thmb.png";
             prop.price = PGList[i].MinimumRentHouse.Rooms[0].MonthlyRent;
@@ -190,27 +191,16 @@
             $('#cardRating').append(data);
        
     }
-    $("#PG").click(function () {
-       
-        GetPropertyDetails();
+    $(".pg").click(function () {        
+        GetPropertyDetails($(this).attr("pgDetailID"));
+        //location.href = PropertyDetailsURL.replace("-1", $(this).attr("pgDetailID"));
     });
 
-    function GetPropertyDetails() {
-        $.ajax({
-
-            url: PGDetailsUrl,
-            type: 'POST',
-
-            data: {
-                PGID: $("#PGID").val()
-            },
-
-            success: function (data) {
-
-            },
-            error: function (data) { }
-
-        });
+    function GetPropertyDetails(pgid) {
+        alert(pgid);
+        if (pgid != undefined && pgid > 0) {
+            location.href = PropertyDetailsURL.replace("-1", pgid);
+        }
     }
    
     </script>

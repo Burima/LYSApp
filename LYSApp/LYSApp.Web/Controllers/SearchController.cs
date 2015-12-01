@@ -7,6 +7,7 @@ using LYSApp.Web.Utilities;
 using LYSApp.Domain.SearchManagement;
 using LYSApp.Model;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace LYSApp.Web.Controllers
 {
@@ -47,18 +48,20 @@ namespace LYSApp.Web.Controllers
                return RedirectToAction("Index", "Account");
            }
        }
-        
-       [HttpPost]
-       public ActionResult PropertyDetails(int PGID)
+      
+      public ActionResult PropertyDetails(int PGID)
        {
            if (Session["SearchCriteria"] != null)
            {
                return View(searchManagement.GetPropertyDetails(PGID, Session["SearchCriteria"] as SearchViewModel));
+
            }
            else
            {
                return RedirectToAction("Index","Account");
            }
        }
+
+     
     }
 }
