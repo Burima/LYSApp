@@ -200,7 +200,11 @@
     <Content Include="Content\Custom\Account\Index.css" />
     <Content Include="Content\Custom\Home\Jobs.css" />
     <Content Include="Content\Custom\Home\TermsAndConditions.css" />
+    <Content Include="Content\Custom\Search\custom-jquery.steps.css" />
     <Content Include="Content\Custom\Search\Search.css" />
+    <Content Include="Content\Custom\Search\shop.blocks.css" />
+    <Content Include="Content\Custom\Search\shop.plugins.css" />
+    <Content Include="Content\Custom\Search\shop.style.css" />
     <Content Include="Content\Custom\Shared\_Header.css" />
     <Content Include="Content\Custom\User\profile.css" />
     <Content Include="Content\Custom\User\style.css" />
@@ -313,9 +317,14 @@
     <Content Include="Scripts\calendar.js" />
     <Content Include="Scripts\clndr.js" />
     <Content Include="Scripts\Custom\User\form-image-crop.js" />
+    <Content Include="Scripts\Custom\User\jquery-migrate.min.js" />
     <Content Include="Scripts\Custom\User\jquery.Jcrop.js" />
     <Content Include="Scripts\Custom\User\jquery.Jcrop.min.js" />
+    <Content Include="Scripts\Custom\User\jquery.steps.js" />
+    <Content Include="Scripts\Custom\User\jquery.validate.min.js" />
     <Content Include="Scripts\Custom\User\SearchHome.js" />
+    <Content Include="Scripts\Custom\User\shop.app.js" />
+    <Content Include="Scripts\Custom\User\stepWizard.js" />
     <Content Include="Scripts\Custom\User\ViewProfile.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\home.js" />
@@ -394,7 +403,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
     <Content Include="Views\Search\PropertyDetails.cshtml" />
-    <Content Include="Views\Search\ItineraryDetails.cshtml" />
+    <Content Include="Views\Search\ReviewBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

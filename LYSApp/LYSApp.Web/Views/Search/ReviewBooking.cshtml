@@ -1,9 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "ItineraryDetails";
+    ViewBag.Title = "ReviewBooking";
+       Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h2>ItineraryDetails</h2>
+<link href="~/Content/app.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/Custom/Search/shop.style.css" rel="stylesheet" />
+<link href="~/Content/Custom/Search/custom-jquery.steps.css" rel="stylesheet" />
 
 <div class="content-md margin-bottom-30">
     <div class="container">
@@ -30,7 +34,7 @@
                             <tbody>
                                 <tr>
                                     <td class="product-in-table">
-                                        <img class="img-responsive" src="assets/img/thumb/08.jpg" alt="">
+                                        <img class="img-responsive" src="" alt="">
                                         <div class="product-it-in">
                                             <h3>Double-Breasted</h3>
                                             <span>Sed aliquam tincidunt tempus</span>
@@ -49,7 +53,7 @@
                                 </tr>
                                 <tr>
                                     <td class="product-in-table">
-                                        <img class="img-responsive" src="assets/img/thumb/07.jpg" alt="">
+                                        <img class="img-responsive" src="" alt="">
                                         <div class="product-it-in">
                                             <h3>Vivamus ligula</h3>
                                             <span>Sed aliquam tincidunt tempus</span>
@@ -68,7 +72,7 @@
                                 </tr>
                                 <tr>
                                     <td class="product-in-table">
-                                        <img class="img-responsive" src="assets/img/thumb/06.jpg" alt="">
+                                        <img class="img-responsive" src="" alt="">
                                         <div class="product-it-in">
                                             <h3>Vivamus ligula</h3>
                                             <span>Sed aliquam tincidunt tempus</span>
@@ -87,7 +91,7 @@
                                 </tr>
                                 <tr>
                                     <td class="product-in-table">
-                                        <img class="img-responsive" src="assets/img/thumb/09.jpg" alt="">
+                                        <img class="img-responsive" src="" alt="">
                                         <div class="product-it-in">
                                             <h3>Vivamus ligula</h3>
                                             <span>Sed aliquam tincidunt tempus</span>
@@ -370,3 +374,16 @@
     </div><!--/end container-->
 </div>
 <!--=== End Content Medium Part ===-->
+@section Scripts{
+<script src="~/Scripts/Custom/User/jquery.steps.js"></script>
+<script src="~/Scripts/Custom/User/jquery.validate.min.js"></script>
+<script src="~/Scripts/Custom/User/shop.app.js"></script>
+<script src="~/Scripts/Custom/User/stepWizard.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        App.init();
+        StepWizard.initStepWizard();
+    });
+</script>
+
+}
