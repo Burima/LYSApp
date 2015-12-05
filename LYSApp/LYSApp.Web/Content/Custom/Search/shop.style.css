@@ -2046,36 +2046,30 @@ li:first-child {
 	text-transform: uppercase;
 }
 
-.shopping-cart .billing-info-inputs {
+.shopping-cart .user-info-inputs {
 	padding: 20px;
 	background: #f8f8f8;
 	border: 1px solid #eee;
 }
 
-.shopping-cart .billing-info-inputs label {
-	color: #555;
-	margin-bottom: 0;
-	vertical-align: middle;
-}
-
-.shopping-cart .billing-info-inputs input {
+.shopping-cart .user-info-inputs input {
 	min-height: 40px;
 	border-color: #eee;
 	margin-bottom: 10px;
 }
 
-.shopping-cart .billing-info-inputs .form-control {
+.shopping-cart .user-info-inputs .form-control {
 	color: #888;
 	box-shadow: none;
 }
 
-.shopping-cart .billing-info-inputs .form-control::-moz-placeholder {
+.shopping-cart .user-info-inputs .form-control::-moz-placeholder {
 	color: #888;
 }
-.shopping-cart .billing-info-inputs .form-control:-ms-input-placeholder {
+.shopping-cart .user-info-inputs .form-control:-ms-input-placeholder {
 	color: #888;
 }
-.shopping-cart .billing-info-inputs .form-control::-webkit-input-placeholder {
+.shopping-cart .user-info-inputs .form-control::-webkit-input-placeholder {
 	color: #888;
 }
 
