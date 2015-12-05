@@ -151,7 +151,7 @@
 
     setTimeout(function () {
         $('body').removeClass('notransition');
-
+       
         map = new google.maps.Map(document.getElementById('mapView'), options);
         var styledMapType = new google.maps.StyledMapType(styles, {
             name: 'Styled'

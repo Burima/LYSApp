@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-
+<link href="~/Content/Custom/Search/Search.css" rel="stylesheet" />
 
 @using (Html.BeginForm("GetBookingDetails", "Search", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
 {
@@ -512,7 +512,7 @@
         area : '3430 Sq Ft',
         position : {
             lat: latitude,
-            lng: longitude
+            long: longitude
         },
        
     }];

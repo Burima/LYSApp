@@ -9,172 +9,144 @@
 <link href="~/Content/Custom/Search/shop.style.css" rel="stylesheet" />
 <link href="~/Content/Custom/Search/custom-jquery.steps.css" rel="stylesheet" />
 
-<div class="content-md margin-bottom-30">
+<div class="content-md margin-bottom-30 row-padding-top-5">
     <div class="container">
         <form class="shopping-cart" action="#">
             <div>
                 <div class="header-tags">
                     <div class="overflow-h">
-                        <h2>Shopping Cart</h2>
-                        <p>Review &amp; edit your product</p>
+                        <h2>Review Booking</h2>
+                        <p>Review &amp; edit your booking</p>
                         <i class="rounded-x fa fa-check"></i>
                     </div>
                 </div>
                 <section>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Qty</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="product-in-table">
-                                        <img class="img-responsive" src="" alt="">
-                                        <div class="product-it-in">
-                                            <h3>Double-Breasted</h3>
-                                            <span>Sed aliquam tincidunt tempus</span>
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Ganesh PG</div>
+                            <div class="panel-body">
+                               <div class="row">
+                                   <div class="col-md-4">
+                                       <img src="~/Images/prop/1-1.png" alt="room image" width="150" height="100"/>
+                                   </div>
+                                   <div class="col-md-4">
+                                       <p>3 Sharing AC room</p>
+                                       <p>Address</p>
+                                   </div>
+                                   <div class="col-md-4">
+                                       <p>Check-In Date</p>
+                                       <p>05-12-2015</p>
+                                   </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Fare Details</div>
+                            <div class="panel-body">
+                             
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="list-inline total-result">
+                                                <li>
+                                                    <h4>Fare</h4>
+                                                    <div class="total-result-in">
+                                                        <span>$ 1280.00</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <h4>Fees & Taxes</h4>
+                                                    <div class="total-result-in">
+                                                        <span class="text-right">200</span>
+                                                    </div>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li class="total-price">
+                                                    <h4>Total</h4>
+                                                    <div class="total-result-in">
+                                                        <span>$ 1480.00</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        
                                         </div>
-                                    </td>
-                                    <td>$ 160.00</td>
-                                    <td>
-                                        <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty1();' value='-'>-</button>
-                                        <input type='text' class="quantity-field" name='qty1' value="5" id='qty1' />
-                                        <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty1").value++;' value='+'>+</button>
-                                    </td>
-                                    <td class="shop-red">$ 320.00</td>
-                                    <td>
-                                        <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="product-in-table">
-                                        <img class="img-responsive" src="" alt="">
-                                        <div class="product-it-in">
-                                            <h3>Vivamus ligula</h3>
-                                            <span>Sed aliquam tincidunt tempus</span>
-                                        </div>
-                                    </td>
-                                    <td>$ 160.00</td>
-                                    <td>
-                                        <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty2();' value='-'>-</button>
-                                        <input type='text' class="quantity-field" name='qty2' value="3" id='qty2' />
-                                        <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty2").value++;' value='+'>+</button>
-                                    </td>
-                                    <td class="shop-red">$ 320.00</td>
-                                    <td>
-                                        <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="product-in-table">
-                                        <img class="img-responsive" src="" alt="">
-                                        <div class="product-it-in">
-                                            <h3>Vivamus ligula</h3>
-                                            <span>Sed aliquam tincidunt tempus</span>
-                                        </div>
-                                    </td>
-                                    <td>$ 160.00</td>
-                                    <td>
-                                        <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty3();' value='-'>-</button>
-                                        <input type='text' class="quantity-field" name='qty3' value="1" id='qty3' />
-                                        <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty3").value++;' value='+'>+</button>
-                                    </td>
-                                    <td class="shop-red">$ 320.00</td>
-                                    <td>
-                                        <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="product-in-table">
-                                        <img class="img-responsive" src="" alt="">
-                                        <div class="product-it-in">
-                                            <h3>Vivamus ligula</h3>
-                                            <span>Sed aliquam tincidunt tempus</span>
-                                        </div>
-                                    </td>
-                                    <td>$ 160.00</td>
-                                    <td>
-                                        <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty4();' value='-'>-</button>
-                                        <input type='text' class="quantity-field" name='qty4' value="7" id='qty4' />
-                                        <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty4").value++;' value='+'>+</button>
-                                    </td>
-                                    <td class="shop-red">$ 320.00</td>
-                                    <td>
-                                        <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="coupon-code">
+                        <div class="row">
+                            <div class="col-sm-4 sm-margin-bottom-30">
+                                <h3>Discount Code</h3>
+                                <p>Enter your coupon code</p>
+                                <input class="form-control margin-bottom-10" name="code" type="text">
+                                <button type="button" class="btn-u btn-u-sea-shop">Apply Coupon</button>
+                            </div>
+
+                        </div>
                     </div>
                 </section>
 
                 <div class="header-tags">
                     <div class="overflow-h">
-                        <h2>Billing info</h2>
-                        <p>Shipping and address infot</p>
+                        <h2>User Details</h2>
+                        <p>User Details</p>
                         <i class="rounded-x fa fa-home"></i>
                     </div>
                 </div>
                 <section class="billing-info">
                     <div class="row">
-                        <div class="col-md-6 md-margin-bottom-40">
-                            <h2 class="title-type">Billing Address</h2>
-                            <div class="billing-info-inputs checkbox-list">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <input id="name" type="text" placeholder="First Name" name="firstname" class="form-control required">
-                                        <input id="email" type="text" placeholder="Email" name="email" class="form-control required email">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input id="surname" type="text" placeholder="Last Name" name="lastname" class="form-control required">
-                                        <input id="phone" type="tel" placeholder="Phone" name="phone" class="form-control required">
-                                    </div>
-                                </div>
-                                <input id="billingAddress" type="text" placeholder="Address Line 1" name="address1" class="form-control required">
-                                <input id="billingAddress2" type="text" placeholder="Address Line 2" name="address2" class="form-control required">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <input id="city" type="text" placeholder="City" name="city" class="form-control required">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input id="zip" type="text" placeholder="Zip/Postal Code" name="zip" class="form-control required">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Ganesh PG</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img src="~/Images/prop/1-1.png" alt="room image" width="150" height="100" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>3 Sharing AC room</p>
+                                            <p>Address</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Check-In Date</p>
+                                            <p>05-12-2015</p>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <label class="checkbox text-left">
-                                    <input type="checkbox" name="checkbox" />
-                                    <i></i>
-                                    Ship item to the above billing address
-                                </label>
                             </div>
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Fare Details</div>
+                                <div class="panel-body">
 
-                        <div class="col-md-6">
-                            <h2 class="title-type">Shipping Address</h2>
-                            <div class="billing-info-inputs checkbox-list">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <input id="name2" type="text" placeholder="First Name" name="firstname" class="form-control">
-                                        <input id="email2" type="text" placeholder="Email" name="email" class="form-control email">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input id="surname2" type="text" placeholder="Last Name" name="lastname" class="form-control">
-                                        <input id="phone2" type="tel" placeholder="Phone" name="phone" class="form-control">
-                                    </div>
-                                </div>
-                                <input id="shippingAddress" type="text" placeholder="Address Line 1" name="address1" class="form-control">
-                                <input id="shippingAddress2" type="text" placeholder="Address Line 2" name="address2" class="form-control">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <input id="city2" type="text" placeholder="City" name="city" class="form-control">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input id="zip2" type="text" placeholder="Zip/Postal Code" name="zip" class="form-control">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="list-inline total-result">
+                                                <li>
+                                                    <h4>Fare</h4>
+                                                    <div class="total-result-in">
+                                                        <span>$ 1280.00</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <h4>Fees & Taxes</h4>
+                                                    <div class="total-result-in">
+                                                        <span class="text-right">200</span>
+                                                    </div>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li class="total-price">
+                                                    <h4>Total</h4>
+                                                    <div class="total-result-in">
+                                                        <span>$ 1480.00</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +163,7 @@
                 </div>
                 <section>
                     <div class="row">
-                        <div class="col-md-6 md-margin-bottom-50">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 md-margin-bottom-50">
                             <h2 class="title-type">Choose a payment method</h2>
                             <!-- Accordion -->
                             <div class="accordion-v2">
@@ -267,108 +239,44 @@
                             </div>
                             <!-- End Accordion -->
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Fare Details</div>
+                                <div class="panel-body">
 
-                        <div class="col-md-6">
-                            <h2 class="title-type">Frequently asked questions</h2>
-                            <!-- Accordion -->
-                            <div class="accordion-v2 plus-toggle">
-                                <div class="panel-group" id="accordion-v2">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion-v2" href="#collapseOne-v2">
-                                                    What payments methods can I use?
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne-v2" class="panel-collapse collapse in">
-                                            <div class="panel-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit, felis vel tincidunt sodales, urna metus rutrum leo, sit amet finibus velit ante nec lacus. Cras erat nunc, pulvinar nec leo at, rhoncus elementum orci. Nullam ut sapien ultricies, gravida ante ut, ultrices nunc.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion-v2" href="#collapseTwo-v2">
-                                                    Can I use gift card to pay for my purchase?
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTwo-v2" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit, felis vel tincidunt sodales, urna metus rutrum leo, sit amet finibus velit ante nec lacus. Cras erat nunc, pulvinar nec leo at, rhoncus elementum orci. Nullam ut sapien ultricies, gravida ante ut, ultrices nunc.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion-v2" href="#collapseThree-v2">
-                                                    Will I be charged when I place my order?
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseThree-v2" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit, felis vel tincidunt sodales, urna metus rutrum leo, sit amet finibus velit ante nec lacus. Cras erat nunc, pulvinar nec leo at, rhoncus elementum orci. Nullam ut sapien ultricies, gravida ante ut, ultrices nunc.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion-v2" href="#collapseFour-v2">
-                                                    How long will it take to get my order?
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseFour-v2" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit, felis vel tincidunt sodales, urna metus rutrum leo, sit amet finibus velit ante nec lacus. Cras erat nunc, pulvinar nec leo at, rhoncus elementum orci. Nullam ut sapien ultricies, gravida ante ut, ultrices nunc.
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="list-inline total-result">
+                                                <li>
+                                                    <h4>Fare</h4>
+                                                    <div class="total-result-in">
+                                                        <span>$ 1280.00</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <h4>Fees & Taxes</h4>
+                                                    <div class="total-result-in">
+                                                        <span class="text-right">200</span>
+                                                    </div>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li class="total-price">
+                                                    <h4>Total</h4>
+                                                    <div class="total-result-in">
+                                                        <span>$ 1480.00</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- End Accordion -->
                         </div>
                     </div>
                 </section>
 
-                <div class="coupon-code">
-                    <div class="row">
-                        <div class="col-sm-4 sm-margin-bottom-30">
-                            <h3>Discount Code</h3>
-                            <p>Enter your coupon code</p>
-                            <input class="form-control margin-bottom-10" name="code" type="text">
-                            <button type="button" class="btn-u btn-u-sea-shop">Apply Coupon</button>
-                        </div>
-                        <div class="col-sm-3 col-sm-offset-5">
-                            <ul class="list-inline total-result">
-                                <li>
-                                    <h4>Subtotal:</h4>
-                                    <div class="total-result-in">
-                                        <span>$ 1280.00</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h4>Shipping:</h4>
-                                    <div class="total-result-in">
-                                        <span class="text-right">- - - -</span>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li class="total-price">
-                                    <h4>Total:</h4>
-                                    <div class="total-result-in">
-                                        <span>$ 1280.00</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </form>
     </div><!--/end container-->
