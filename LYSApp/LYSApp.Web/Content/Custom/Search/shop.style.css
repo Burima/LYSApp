@@ -2058,20 +2058,6 @@ li:first-child {
 	margin-bottom: 10px;
 }
 
-.shopping-cart .user-info-inputs .form-control {
-	color: #888;
-	box-shadow: none;
-}
-
-.shopping-cart .user-info-inputs .form-control::-moz-placeholder {
-	color: #888;
-}
-.shopping-cart .user-info-inputs .form-control:-ms-input-placeholder {
-	color: #888;
-}
-.shopping-cart .user-info-inputs .form-control::-webkit-input-placeholder {
-	color: #888;
-}
 
 /*Custom Form Horizontal*/
 .cus-form-horizontal .form-group {

@@ -16,7 +16,7 @@ namespace LYSApp.Domain.SearchManagement
 
         PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID, SearchViewModel searchViewModel);
 
-        void GetBookingDetails();
+        BookingDetailsViewModel GetBookingDetails(int RoomID);
     }
 
 }

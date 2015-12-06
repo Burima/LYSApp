@@ -234,9 +234,28 @@ namespace LYSApp.Domain.SearchManagement
             return propertyDetailsViewModel;
         }
 
-        public void GetBookingDetails()
+        public BookingDetailsViewModel GetBookingDetails(int RoomID)
         {
+            BookingDetailsViewModel BookingDetailsViewModel = (from pg in pgDetailRepository.Get()
+                                                               join h in houseRepository.Get() on pg.PGDetailID equals h.PGDetailID
+                                                               join r in roomRepository.Get() on h.HouseID equals r.HouseID
+                                                               where r.RoomID == RoomID
 
+                                                               select new LYSApp.Model.BookingDetailsViewModel
+                                                               {
+                                                                   HouseID = h.HouseID,
+                                                                   RoomID = r.RoomID,
+                                                                   Price = r.MonthlyRent,
+                                                                   RoomName = r.NoOfBeds + " Sharing Rooms",
+                                                                   OwnerID = pg.UserID,
+                                                                   Address = pg.Address,
+                                                                   PGDetailsID = pg.PGDetailID,
+                                                                   PGName = pg.PGName,
+                                                                   ImagePath = h.HouseImages.FirstOrDefault().ImagePath
+                                                               }).FirstOrDefault();
+
+           
+            return BookingDetailsViewModel;
         }
 
     }

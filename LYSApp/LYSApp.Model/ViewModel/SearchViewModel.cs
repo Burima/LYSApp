@@ -78,5 +78,13 @@ namespace LYSApp.Model
 
         public long OwnerID { get; set; }
 
+        public string Address { get; set; }
+
+        public int PGDetailsID { get; set; }
+
+        public string PGName { get; set; }
+
+        public string ImagePath { get; set; }
+
     }
 }
