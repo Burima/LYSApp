@@ -105,7 +105,8 @@
                         {
                             foreach (var room in house.Rooms)
                             {
-                                 using (Html.BeginForm("ReviewBooking", "Search", FormMethod.Post, new { role = "form", id = "form-booking-details", @class = "form-inline" })) { 
+                                using (Html.BeginForm("ReviewBooking", "Search", FormMethod.Post, new { role = "form",  @class = "form-inline form-booking-details" }))
+                                { 
                                     <div class="row row-padding-top-1 border-bottom padding-left">
                                     <div class="col-md-6">
                                         <input type="hidden" name="RoomID" value="@room.RoomID" />
@@ -114,110 +115,110 @@
                                     <div class="col-md-3">@room.MonthlyRent</div>
                                     <div class="col-md-3">
                                         <div class="row">
-                                            <div class="col-md-6"><a class="btn btn-s btn-round btn-o btn-green" id="btnViewAmenities">View Amenities</a></div>
+                                            <div class="col-md-6"><a class="btn btn-s btn-round btn-o btn-green btnViewAmenities">View Amenities</a></div>
                                             <div class="col-md-6"><input type="submit" class="btn btn-s btn-round btn-o btn-green" value="Book Now"></div>
                                         </div>
                                     </div>
                                     <div class="col-md-12  row-padding-top-1">
-                                        <div id="divAmenities" class="row" style="display:none">
-                                         
-                                                @foreach (var HouseAmenity in house.HouseAmenities)
+                                        <div class="row divAmenities hidden" >
+                                            @foreach (var HouseAmenity in house.HouseAmenities)
+                                            {
+                                                if (HouseAmenity.AC)
                                                 {
-                                                    if (HouseAmenity.AC)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1 text-center"><span class="fa fa-asterisk"></span> Air Conditioning</div>
-                                                    } if (HouseAmenity.Aquaguard)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="icon-drop"></span> Water Purifier</div>
-                                                    }
-                                                    if (HouseAmenity.AttachBathrooms)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1 text-center"><span class="fa fa-wheelchair"></span> AttachBathrooms</div>
-                                                    } if (HouseAmenity.Clubhouse)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1 text-center"><span class="fa fa-bank"></span> Club</div>
-                                                    } if (HouseAmenity.CommonTV)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-users"></span><span class="icon-screen-desktop"></span> Common TV</div>
-                                                    } if (HouseAmenity.EmergencyMedicalServices)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-ambulance"></span> Emergency Medical Services</div>
-                                                    } if (HouseAmenity.FourWheelerCloseParking)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-car"></span> Four Wheeler Parking</div>
-                                                    } if (HouseAmenity.Fridge)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="glyphicon-asterisk"></span> Refrigerator</div>
-                                                    } if (HouseAmenity.GYM)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> GYM</div>
-                                                    } if (HouseAmenity.HotColdWaterSupply)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> HotColdWaterSupply</div>
-                                                    } if (HouseAmenity.Housekeeping)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Housekeeping</div>
-                                                    } if (HouseAmenity.IndividualTV)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Individual TV</div>
-                                                    } if (HouseAmenity.IntercomFacility)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Intercom Facility</div>
-                                                    } if (HouseAmenity.IroningWashingServices)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Laundry Service</div>
-                                                    } if (HouseAmenity.KitchenFacilityWithGas)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Kitchen Facility With Gas</div>
-                                                    } if (HouseAmenity.Lift)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Lift</div>
-                                                    } if (HouseAmenity.Lockers)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Lockers</div>
-                                                    } if (HouseAmenity.Newspaper)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Newspaper</div>
-                                                    } if (HouseAmenity.Partyhall)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Party Hall</div>
-                                                    } if (HouseAmenity.Playground)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Playground</div>
-                                                    } if (HouseAmenity.Powerbackup)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Power backup</div>
-                                                    } if (HouseAmenity.RoomService)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Room Service</div>
-                                                    } if (HouseAmenity.Security)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Security</div>
-                                                    } if (HouseAmenity.SwimmingPool)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Swimming Pool</div>
-                                                    } if (HouseAmenity.TwoWheelerCloseParking)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Two Wheeler Parking</div>
-                                                    } if (HouseAmenity.VideoSurveillance)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> VideoSurveillance</div>
-                                                    } if (HouseAmenity.Wardrobes)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Wardrobes</div>
-                                                    } if (HouseAmenity.Washingmachine)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="glyphicon-tint"></span> Washing Machine</div>
-                                                    } if (HouseAmenity.WaterSupply)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="icon-drop"></span> 24/7 Water Supply</div>
-                                                    } if (HouseAmenity.Wifi)
-                                                    {
-                                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-wifi"></span> Wifi</div>
-                                                    }
-
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1 text-center"><span class="fa fa-asterisk"></span> Air Conditioning</div>
+                                                } if (HouseAmenity.Aquaguard)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="icon-drop"></span> Water Purifier</div>
                                                 }
+                                                if (HouseAmenity.AttachBathrooms)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1 text-center"><span class="fa fa-wheelchair"></span> AttachBathrooms</div>
+                                                } if (HouseAmenity.Clubhouse)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1 text-center"><span class="fa fa-bank"></span> Club</div>
+                                                } if (HouseAmenity.CommonTV)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-users"></span><span class="icon-screen-desktop"></span> Common TV</div>
+                                                } if (HouseAmenity.EmergencyMedicalServices)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-ambulance"></span> Emergency Medical Services</div>
+                                                } if (HouseAmenity.FourWheelerCloseParking)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-car"></span> Four Wheeler Parking</div>
+                                                } if (HouseAmenity.Fridge)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="glyphicon-asterisk"></span> Refrigerator</div>
+                                                } if (HouseAmenity.GYM)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> GYM</div>
+                                                } if (HouseAmenity.HotColdWaterSupply)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> HotColdWaterSupply</div>
+                                                } if (HouseAmenity.Housekeeping)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Housekeeping</div>
+                                                } if (HouseAmenity.IndividualTV)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Individual TV</div>
+                                                } if (HouseAmenity.IntercomFacility)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Intercom Facility</div>
+                                                } if (HouseAmenity.IroningWashingServices)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Laundry Service</div>
+                                                } if (HouseAmenity.KitchenFacilityWithGas)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Kitchen Facility With Gas</div>
+                                                } if (HouseAmenity.Lift)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Lift</div>
+                                                } if (HouseAmenity.Lockers)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Lockers</div>
+                                                } if (HouseAmenity.Newspaper)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Newspaper</div>
+                                                } if (HouseAmenity.Partyhall)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Party Hall</div>
+                                                } if (HouseAmenity.Playground)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Playground</div>
+                                                } if (HouseAmenity.Powerbackup)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Power backup</div>
+                                                } if (HouseAmenity.RoomService)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Room Service</div>
+                                                } if (HouseAmenity.Security)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Security</div>
+                                                } if (HouseAmenity.SwimmingPool)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Swimming Pool</div>
+                                                } if (HouseAmenity.TwoWheelerCloseParking)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Two Wheeler Parking</div>
+                                                } if (HouseAmenity.VideoSurveillance)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> VideoSurveillance</div>
+                                                } if (HouseAmenity.Wardrobes)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-arrows-h"></span> Wardrobes</div>
+                                                } if (HouseAmenity.Washingmachine)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="glyphicon-tint"></span> Washing Machine</div>
+                                                } if (HouseAmenity.WaterSupply)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="icon-drop"></span> 24/7 Water Supply</div>
+                                                } if (HouseAmenity.Wifi)
+                                                {
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem row-padding-top-1  text-center"><span class="fa fa-wifi"></span> Wifi</div>
+                                                }
+
+                                            }
                                         </div>
+
                                     </div>
                                 </div>
                                  }

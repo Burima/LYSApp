@@ -341,15 +341,22 @@
         addMarkers(props, map);
     }
 
-    $("#btnViewAmenities").click(function () {
+    $(".btnViewAmenities").click(function () {
 
-        if (document.getElementById('divAmenities').style.display == 'none') {
-            document.getElementById('divAmenities').style.display = 'block';
-            $("#btnViewAmenities").text('Hide Amenities');
+        if($(this).parents('.form-booking-details').find('.divAmenities').hasClass('hidden')){
+            $(this).parents('.form-booking-details').find('.divAmenities').removeClass('hidden');
+            $(this).text('Hide Amenities');
         } else {
-            document.getElementById('divAmenities').style.display = 'none';
-            $("#btnViewAmenities").text('View Amenities');
+            $(this).parents('.form-booking-details').find('.divAmenities').addClass('hidden');
+            $(this).text('View Amenities');
         }
+        //if (document.getElementById('divAmenities').style.display == 'none') {
+        //    document.getElementById('divAmenities').style.display = 'block';
+        //    $(this).text('Hide Amenities');
+        //} else {
+        //    document.getElementById('divAmenities').style.display = 'none';
+        //    $(this).text('View Amenities');
+        //}
     });
     $("#commute").click(function () {
         name = 'connectivity';

@@ -152,7 +152,7 @@
     var PGDetailsUrl = '@Url.Action("PropertyDetails", "Search")';
     $(document).ready(function () {
         populateMap();
-        fnFillHouseRatings();
+        fnFillHouseRatings();        
     });
 
     function populateMap() {
@@ -195,9 +195,9 @@
         GetPropertyDetails($(this).attr("pgDetailID"));
         //location.href = PropertyDetailsURL.replace("-1", $(this).attr("pgDetailID"));
     });
-
+   
     function GetPropertyDetails(pgid) {
-        alert(pgid);
+        //alert(pgid); remove this alert after testing only
         if (pgid != undefined && pgid > 0) {
             location.href = PropertyDetailsURL.replace("-1", pgid);
         }
