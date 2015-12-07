@@ -457,6 +457,9 @@
         $('#foods').addClass("hidden");
     });
 
+
+    //making first child of carousel active
+    $('#carouselFull .carousel-inner .item:first-child').addClass('active');
 });
 
 

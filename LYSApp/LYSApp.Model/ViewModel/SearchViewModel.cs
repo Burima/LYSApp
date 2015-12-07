@@ -56,8 +56,9 @@ namespace LYSApp.Model
         public Nullable<decimal> Longitude { get; set; }
         public string Address { get; set; }
         public string Landmark { get; set; }
-
+        public IList<PGReview> PGReviews { get; set; }
         public IList<House> HouseList { get; set; }
+        
 
     }
     public class BookingDetailsViewModel

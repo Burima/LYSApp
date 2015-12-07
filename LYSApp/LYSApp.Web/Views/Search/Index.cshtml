@@ -89,7 +89,7 @@
                         <a class="card pg" pgDetailID="@pg.PGDetailID">
                             <div class="figure">
                                 @*<input type="hidden" value="@pg.PGDetailID" name="PGID" class="pgid" />*@
-                                <img src="@Url.Action(pg.MinimumRentHouse.HouseImages.Count > 0 && pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath != String.Empty ? pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath : "./../Images/1-1-thmb.png")" alt="">
+                                <img src="@Url.Content(pg.MinimumRentHouse.HouseImages.Count > 0 && pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath != String.Empty ? pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath : "./../Images/1-1-thmb.png")" alt="">
                                 <div class="figCaption">
                                     <div>@pg.MinimumRentHouse.Rooms.FirstOrDefault().MonthlyRent</div>
                                 </div>
