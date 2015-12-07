@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<link href="~/Content/app.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<link href="~/Content/Custom/Search/shop.style.css" rel="stylesheet" />
-<link href="~/Content/Custom/Search/custom-jquery.steps.css" rel="stylesheet" />
+<link href='@Url.Content("~/Content/app.css")' rel="stylesheet" />
+<link href='@Url.Content("~/Content/bootstrap.min.css")' rel="stylesheet" />
+<link href='@Url.Content("~/Content/Custom/Search/shop.style.css")' rel="stylesheet" />
+<link href='@Url.Content("~/Content/Custom/Search/custom-jquery.steps.css")' rel="stylesheet" />
 
 <div class="content-md margin-bottom-30 row-padding-top-5">
     <div class="container">
@@ -95,27 +95,67 @@
                         <i class="rounded-x fa fa-home"></i>
                     </div>
                 </div>
-                <section class="user-info">
+              
+                 <section class="user-info">
                     <div class="user-info-inputs">
                         <div class="row">
+                            @if (Model.User != null)
+                            {
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Guest Details</div>
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input id="name" type="text" placeholder="First Name" name="firstname" class="form-control required" readonly value="Susmita">
-                                                <input id="email" type="text" placeholder="Email" name="email" class="form-control required email" readonly value="coolsusmita1603@gmail.com">
+                                                <input id="name" type="text" placeholder="First Name" name="firstname" class="form-control required" readonly value="@Model.User.FirstName">
+                                                <input id="email" type="text" placeholder="Email" name="email" class="form-control required email" readonly value="@Model.User.Email">
                                             </div>
                                             <div class="col-md-6">
-                                                <input id="surname" type="text" placeholder="Last Name" name="lastname" class="form-control required" readonly value="Biswas">
-                                                <input id="phone" type="tel" placeholder="Phone" name="phone" class="form-control required" readonly value="8939381972">
+                                                <input id="surname" type="text" placeholder="Last Name" name="lastname" class="form-control required" readonly value="@Model.User.LastName">
+                                                <input id="phone" type="tel" placeholder="Phone" name="phone" class="form-control required" readonly value="@Model.User.PhoneNumber">
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            }
+                            else
+                            {
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Sign In</div>
+                                        <div class="panel-body">
+                                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = Url.Action("","Search") }, FormMethod.Post, new { role = "form", @class = "form-inline form-sign-in" }))
+                                            {
+                                                <div class="form-group">
+                                                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                                        <p class="help-block"><a href="#">Forgot your password?</a></p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <div class="checkbox custom-checkbox"><label><input type="checkbox" checked="checked"><span class="fa fa-check"></span> Remember me</label></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <input type="submit" class="btn btn-o btn-green" value="Sign In"/>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Fare Details</div>
@@ -152,7 +192,6 @@
                         </div>
                      </div>
                  </section>
-
                 <div class="header-tags">
                     <div class="overflow-h">
                         <h2>Payment</h2>
@@ -210,7 +249,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-4 no-col-space control-label">CSC</label>
+                                                    <label class="col-sm-4 no-col-space control-label">CVV</label>
                                                     <div class="col-sm-8 input-small-field">
                                                         <input type="text" name="number" placeholder="" class="form-control required">
                                                         <a href="#">What's this?</a>
@@ -282,12 +321,12 @@
 </div>
 <!--=== End Content Medium Part ===-->
 @section Scripts{
-<script src="~/Scripts/Custom/User/jquery.steps.js"></script>
-<script src="~/Scripts/Custom/User/jquery.validate.min.js"></script>
-<script src="~/Scripts/Custom/User/shop.app.js"></script>
-<script src="~/Scripts/Custom/User/stepWizard.js"></script>
+<script src='@Url.Content("~/Scripts/Custom/User/jquery.steps.js")'></script>
+<script src='@Url.Content("~/Scripts/Custom/User/jquery.validate.min.js")'></script>
+<script src='@Url.Content("~/Scripts/Custom/User/shop.app.js")'></script>
+<script src='@Url.Content("~/Scripts/Custom/User/stepWizard.js")'></script>
 <script>
-    jQuery(document).ready(function () {
+    $(document).ready(function () {
         var Price = parseInt('@Model.Price',10)+200;
         App.init();
         StepWizard.initStepWizard();

@@ -202,8 +202,6 @@
     <Content Include="Content\Custom\Home\TermsAndConditions.css" />
     <Content Include="Content\Custom\Search\custom-jquery.steps.css" />
     <Content Include="Content\Custom\Search\Search.css" />
-    <Content Include="Content\Custom\Search\shop.blocks.css" />
-    <Content Include="Content\Custom\Search\shop.plugins.css" />
     <Content Include="Content\Custom\Search\shop.style.css" />
     <Content Include="Content\Custom\Shared\_Header.css" />
     <Content Include="Content\Custom\User\profile.css" />
