@@ -43,8 +43,8 @@
                     </div>
                     @Html.Partial("_FareDetailsPartial")
                     <div class="coupon-code">
-                        <div class="row">
-                            <div class="col-sm-4 sm-margin-bottom-30">
+                        <div class="row" style="padding-top:15%">
+                            <div class="col-xs-4 col-sm-4 col-md-4 sm-margin-bottom-30">
                                 <h3>Discount Code</h3>
                                 <p>Enter your coupon code</p>
                                 <input class="form-control margin-bottom-10" name="code" type="text">
@@ -229,11 +229,8 @@
 <script src='@Url.Content("~/Scripts/Custom/User/stepWizard.js")'></script>
 <script>
     $(document).ready(function () {
-        var Price = parseInt('@Model.Price',10)+200;
         App.init();
         StepWizard.initStepWizard();
-        var data = '<span>' + Price + '</span>';
-        $('#result').append(data);
     });
 </script>
 
