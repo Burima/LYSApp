@@ -41,40 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Fare Details</div>
-                            <div class="panel-body">
-                             
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <ul class="list-inline total-result">
-                                                <li>
-                                                    <h4>Fare</h4>
-                                                    <div class="total-result-in">
-                                                        <span>@Model.Price</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h4>Fees & Taxes</h4>
-                                                    <div class="total-result-in">
-                                                        <span class="text-right">200</span>
-                                                    </div>
-                                                </li>
-                                                <li class="divider"></li>
-                                                <li class="total-price">
-                                                    <h4>Total</h4>
-                                                    <div id="result" class="total-result-in">
-                                                      
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        
-                                        </div>
-                                   </div>
-                                </div>
-                            </div>
-                        </div>
+                    @Html.Partial("_FareDetailsPartial")
                     <div class="coupon-code">
                         <div class="row">
                             <div class="col-sm-4 sm-margin-bottom-30">
@@ -156,39 +123,7 @@
                                     </div>
                                 </div>
                             }
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">Fare Details</div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <ul class="list-inline total-result">
-                                                    <li>
-                                                        <h4>Fare</h4>
-                                                        <div class="total-result-in">
-                                                            <span>@Model.Price</span>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <h4>Fees & Taxes</h4>
-                                                        <div class="total-result-in">
-                                                            <span class="text-right">200</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li class="total-price">
-                                                        <h4>Total</h4>
-                                                        <div id="result" class="total-result-in">
-                                                           
-                                                        </div>
-                                                    </li>
-                                                </ul>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @Html.Partial("_FareDetailsPartial")
                         </div>
                      </div>
                  </section>
@@ -277,40 +212,7 @@
                             </div>
                             <!-- End Accordion -->
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top :4%">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Fare Details</div>
-                                <div class="panel-body">
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <ul class="list-inline total-result">
-                                                <li>
-                                                    <h4>Fare</h4>
-                                                    <div class="total-result-in">
-                                                        <span>@Model.Price</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h4>Fees & Taxes</h4>
-                                                    <div class="total-result-in">
-                                                        <span class="text-right">200</span>
-                                                    </div>
-                                                </li>
-                                                <li class="divider"></li>
-                                                <li class="total-price">
-                                                    <h4>Total</h4>
-                                                    <div id="result" class="total-result-in">
-                                                       
-                                                    </div>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @Html.Partial("_FareDetailsPartial")
                     </div>
                 </section>
 
@@ -330,7 +232,7 @@
         var Price = parseInt('@Model.Price',10)+200;
         App.init();
         StepWizard.initStepWizard();
-        var data = '<span>'+Price +'</span>';
+        var data = '<span>' + Price + '</span>';
         $('#result').append(data);
     });
 </script>

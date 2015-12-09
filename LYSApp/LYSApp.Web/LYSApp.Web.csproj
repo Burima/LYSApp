@@ -402,6 +402,7 @@
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
     <Content Include="Views\Search\PropertyDetails.cshtml" />
     <Content Include="Views\Search\ReviewBooking.cshtml" />
+    <Content Include="Views\Search\_FareDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
