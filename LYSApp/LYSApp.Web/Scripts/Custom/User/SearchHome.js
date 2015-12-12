@@ -241,41 +241,41 @@
 
             selectedVal = selected.val();
             if (selectedVal == "Bus") {
-                icon = '/Images/Map/bus.png';
+                icon = '../Images/Map/bus.png';
             } else if (selectedVal == "Railway") {
-                icon = '/Images/Map/trainstation.png';
+                icon = '../Images/Map/trainstation.png';
             } else if (selectedVal == "Supermarket") {
-                icon = '/Images/Map/store.png';
+                icon = '../Images/Map/store.png';
             } else if (selectedVal == "Salon and Spa") {
-                icon = '/Images/Map/salon.png';
+                icon = '../Images/Map/salon.png';
             } else if (selectedVal == "Bank") {
-                icon = '/Images/Map/bank.png';
+                icon = '../Images/Map/bank.png';
             } else if (selectedVal == "ATM") {
-                icon = '/Images/Map/ATM.png';
+                icon = '../Images/Map/ATM.png';
             } else if (selectedVal == "Petrol Station") {
-                icon = '/Images/Map/petrol.png';
+                icon = '../Images/Map/petrol.png';
             } else if (selectedVal == "Police Station") {
-                icon = '/Images/Map/police.png';
+                icon = '../Images/Map/police.png';
             } else if (selectedVal == "Hospitals") {
-                icon = '/Images/Map/hospital.png';
+                icon = '../Images/Map/hospital.png';
             } else if (selectedVal == "Pharmacy") {
-                icon = '/Images/Map/pharmacy.png';
+                icon = '../Images/Map/pharmacy.png';
             } else if (selectedVal == "Mall") {
-                icon = '/Images/Map/store.png';
+                icon = '../Images/Map/store.png';
             } else if (selectedVal == "Movie Theater") {
-                icon = '/Images/Map/theatre.png';
+                icon = '../Images/Map/theatre.png';
             } else if (selectedVal == "Amusement Park") {
-                icon = '/Images/Map/amusementpark.png';
+                icon = '../Images/Map/amusementpark.png';
             } else if (selectedVal == "Restaurants") {
-                icon = '/Images/Map/Restaurant.png';
+                icon = '../Images/Map/Restaurant.png';
             } else if (selectedVal == "Bars and NightClubs") {
-                icon = '/Images/Map/disc.png';
+                icon = '../Images/Map/disc.png';
             } else if (selectedVal == "School") {
-                icon = '/Images/Map/school.png';
+                icon = '../Images/Map/school.png';
             } else if (selectedVal == "Day Care") {
-                icon = '/Images/marker-red.png';
+                icon = '../Images/marker-red.png';
             } else if (selectedVal == "College and University") {
-                icon = '/Images/Map/college.png';
+                icon = '../Images/Map/college.png';
             }
         }
 
