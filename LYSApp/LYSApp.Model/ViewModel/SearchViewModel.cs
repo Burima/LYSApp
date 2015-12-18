@@ -73,9 +73,7 @@ namespace LYSApp.Model
 
         public int Price { get; set; }
 
-        public string RoomName { get; set; }
-
-        public User User { get; set; }
+        public string RoomName { get; set; }      
 
         public long OwnerID { get; set; }
 

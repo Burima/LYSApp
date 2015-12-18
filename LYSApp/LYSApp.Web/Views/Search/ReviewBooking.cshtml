@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "ReviewBooking";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
+    var user = LYSApp.Web.Services.SessionManager.GetSessionUser();
 }
 
 <link href='@Url.Content("~/Content/app.css")' rel="stylesheet" />
@@ -25,19 +26,19 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">@Model.PGName</div>
                             <div class="panel-body">
-                               <div class="row">
-                                   <div class="col-md-4">
-                                       <img src="~/Images/prop/1-1.png" alt="room image" width="150" height="100"/>
-                                   </div>
-                                   <div class="col-md-4">
-                                       <p>@Model.RoomName</p>
-                                       <p>@Model.Address</p>
-                                   </div>
-                                   <div class="col-md-4">
-                                       <p>Check-In Date</p>
-                                       <p>05-12-2015</p>
-                                   </div>
-                               </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img src="~/Images/prop/1-1.png" alt="room image" width="150" height="100" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>@Model.RoomName</p>
+                                        <p>@Model.Address</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Check-In Date</p>
+                                        <p>05-12-2015</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -62,30 +63,30 @@
                         <i class="rounded-x fa fa-home"></i>
                     </div>
                 </div>
-              
-                 <section class="user-info">
+
+                <section id="sec-user-info" class="user-info">
                     <div class="user-info-inputs">
                         <div class="row">
-                            @if (Model.User != null)
+                            @if (user != null)
                             {
-                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">Guest Details</div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <input id="name" type="text" placeholder="First Name" name="firstname" class="form-control required" readonly value="@Model.User.FirstName">
-                                                <input id="email" type="text" placeholder="Email" name="email" class="form-control required email" readonly value="@Model.User.Email">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input id="surname" type="text" placeholder="Last Name" name="lastname" class="form-control required" readonly value="@Model.User.LastName">
-                                                <input id="phone" type="tel" placeholder="Phone" name="phone" class="form-control required" readonly value="@Model.User.PhoneNumber">
-                                            </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Guest Details</div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input id="name" type="text" placeholder="First Name" name="firstname" class="form-control required" readonly value="@user.FirstName">
+                                                    <input id="email" type="text" placeholder="Email" name="email" class="form-control required email" readonly value="@user.Email">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input id="surname" type="text" placeholder="Last Name" name="lastname" class="form-control required" readonly value="@user.LastName">
+                                                    <input id="phone" type="tel" placeholder="Phone" name="phone" class="form-control required" readonly value="@user.PhoneNumber">
+                                                </div>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             }
                             else
                             {
@@ -93,40 +94,15 @@
                                     <div class="panel panel-default">
                                         <div class="panel-heading">Sign In</div>
                                         <div class="panel-body">
-                                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = Url.Action("ReviewBooking","Search") }, FormMethod.Post, new { role = "form", @class = "form-inline form-sign-in" }))
-                                            {
-                                                <div class="form-group">
-                                                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                                                        <p class="help-block"><a href="#">Forgot your password?</a></p>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-2 col-sm-10">
-                                                        <div class="checkbox custom-checkbox"><label><input type="checkbox" checked="checked"><span class="fa fa-check"></span> Remember me</label></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-2 col-sm-10">
-                                                        <input type="submit" class="btn btn-o btn-green" value="Sign In"/>
-                                                    </div>
-                                                </div>
-                                            }
+                                            @Html.Partial("_LoginPartial",new LYSApp.Model.AccountViewModel())
                                         </div>
                                     </div>
                                 </div>
                             }
                             @Html.Partial("_FareDetailsPartial")
                         </div>
-                     </div>
-                 </section>
+                    </div>
+                </section>
                 <div class="header-tags">
                     <div class="overflow-h">
                         <h2>Payment</h2>
@@ -216,22 +192,21 @@
                     </div>
                 </section>
 
-                
+
             </div>
         </form>
     </div><!--/end container-->
 </div>
 <!--=== End Content Medium Part ===-->
 @section Scripts{
-<script src='@Url.Content("~/Scripts/Custom/User/jquery.steps.js")'></script>
-<script src='@Url.Content("~/Scripts/Custom/User/jquery.validate.min.js")'></script>
-<script src='@Url.Content("~/Scripts/Custom/User/shop.app.js")'></script>
-<script src='@Url.Content("~/Scripts/Custom/User/stepWizard.js")'></script>
-<script>
-    $(document).ready(function () {
-        App.init();
-        StepWizard.initStepWizard();
-    });
-</script>
-
+    <script src='@Url.Content("~/Scripts/Custom/User/jquery.steps.js")'></script>
+    <script src='@Url.Content("~/Scripts/Custom/User/jquery.validate.min.js")'></script>
+    <script src='@Url.Content("~/Scripts/Custom/User/shop.app.js")'></script>
+    <script src='@Url.Content("~/Scripts/Custom/User/stepWizard.js")'></script>
+    <script>
+        $(document).ready(function () {
+            App.init();
+            StepWizard.initStepWizard();
+        });
+    </script>
 }

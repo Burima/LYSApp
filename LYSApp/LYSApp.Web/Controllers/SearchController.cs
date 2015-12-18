@@ -65,9 +65,9 @@ namespace LYSApp.Web.Controllers
 
       public ActionResult ReviewBooking(int RoomID)
       {
-          BookingDetailsViewModel BookingDetailsViewModel = searchManagement.GetBookingDetails(RoomID);
-          BookingDetailsViewModel.User = LYSApp.Web.Services.SessionManager.GetSessionUser();
-          return View(BookingDetailsViewModel);
+          BookingDetailsViewModel bookingDetailsViewModel = searchManagement.GetBookingDetails(RoomID);
+          //BookingDetailsViewModel.User = LYSApp.Web.Services.SessionManager.GetSessionUser();
+          return View(bookingDetailsViewModel);
       }
     }
 }
