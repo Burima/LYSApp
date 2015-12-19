@@ -31,5 +31,14 @@ namespace LYSApp.Web.Services.Common
 
         public static string FacebookAppId = ConfigurationManager.AppSettings.Get("FacebookAppId").ToString();
         public static string FacebookAppSecret = ConfigurationManager.AppSettings.Get("FacebookAppSecret").ToString();
+
+        //Booking Keys
+        public static string LYSServiceCharge = ConfigurationManager.AppSettings.Get("LYSServiceCharge").ToString();
+
+        //Payment Gateway
+        public static string PayUmoneySalt = ConfigurationManager.AppSettings.Get("PayUmoneySalt").ToString();
+        public static string PayUmoneyKey = ConfigurationManager.AppSettings.Get("PayUmoneyKey").ToString();
+        public static string PayUmoneyRedirectURL = ConfigurationManager.AppSettings.Get("PayUmoneyRedirectURL").ToString();
+    
     }
 }
