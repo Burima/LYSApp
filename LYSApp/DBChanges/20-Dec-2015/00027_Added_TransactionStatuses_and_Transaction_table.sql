@@ -1,0 +1,26 @@
+CREATE TABLE TransactionStatuses
+(
+TransactionStatusID INT CONSTRAINT PK_TRANSACTIONSTATUSES_TransactionID PRIMARY KEY IDENTITY(1,1),
+TransactionStatus VARCHAR(7) NOT NULL
+)
+GO
+
+
+
+CREATE TABLE Transactions
+(
+TransactionID INT CONSTRAINT PK_Transactions_TransactionID PRIMARY KEY IDENTITY(1,1),
+mode VARCHAR(2) NOT NULL,
+TransactionStatusID INT CONSTRAINT FK_Transactions_TransactionStatusID FOREIGN KEY REFERENCES TransactionStatuses(TransactionStatusID) NOT NULL,
+amount VARCHAR(30) NOT NULL,
+productinfo VARCHAR(100) NOT NULL,
+Error VARCHAR(4) NULL,
+PG_TYPE VARCHAR(10) NULL,
+bank_ref_num VARCHAR(20) NULL,
+payuMoneyId VARCHAR(8) NULL,
+additionalCharges VARCHAR(30) NULL,
+CreatedOn DATETIME NOT NULL,
+UserID BIGINT CONSTRAINT FK_Transactions_UserID FOREIGN KEY REFERENCES Users(UserID) NOT NULL,
+BedID INT CONSTRAINT FK_Transactions_BedID  FOREIGN KEY REFERENCES Beds(BedID ) NOT NULL
+)
+GO
