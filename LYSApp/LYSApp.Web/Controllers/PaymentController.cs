@@ -19,9 +19,11 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         public void RedirectToPayumoney(BookingDetailsViewModel bookingDetailsViewModel)
         {
+
             var user = SessionManager.GetSessionUser();
             if (user != null && user.Id > 0)
             {
+                //transaction management
                 string firstName = user.FirstName;
                 string amount = bookingDetailsViewModel.Price.ToString();
                 string productInfo = bookingDetailsViewModel.RoomID.ToString();
@@ -83,7 +85,8 @@ namespace LYSApp.Web.Controllers
 
                     merc_hash_vars_seq = hash_seq.Split('|');
                     Array.Reverse(merc_hash_vars_seq);
-                    merc_hash_string = ConfigurationManager.AppSettings["SALT"] + "|" + form["status"].ToString();
+                    //merc_hash_string = ConfigurationManager.AppSettings["SALT"] + "|" + form["status"].ToString();//without Convenience Fee Model
+                    merc_hash_string = form["additionalCharges"].ToString() + "|" + ConfigurationManager.AppSettings["SALT"] + "|" + form["status"].ToString();//with Convenience Fee Model
 
 
                     foreach (string merc_hash_var in merc_hash_vars_seq)
