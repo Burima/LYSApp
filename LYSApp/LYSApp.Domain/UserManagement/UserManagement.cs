@@ -92,12 +92,13 @@ namespace LYSApp.Domain.UserManagement
             pgReview.Comments = userviewModel.HouseReviewModel.Comments;
             pgReview.CommentTime = DateTime.Now;
             pgReview.Rating = userviewModel.HouseReviewModel.Rating;
-            pgReview.PGDetailID = (from pg in pgDetailRepository.Get()
-                                   join h in houseRepository.Get() on pg.PGDetailID equals h.PGDetailID
-                                   join r in roomRepository.Get() on h.HouseID equals r.HouseID
-                                   join b in bedRepository.Get() on r.RoomID equals b.RoomID
-                                   join u in userRepository.Get() on b.UserID equals u.UserID
-                                   select pg.PGDetailID).FirstOrDefault();
+            /**------commenting code due to DBUpdate**/
+            //pgReview.PGDetailID = (from pg in pgDetailRepository.Get()
+            //                       join h in houseRepository.Get() on pg.PGDetailID equals h.PGDetailID
+            //                       join r in roomRepository.Get() on h.HouseID equals r.HouseID
+            //                       join b in bedRepository.Get() on r.RoomID equals b.RoomID
+            //                       join u in userRepository.Get() on b.UserID equals u.UserID
+            //                       select pg.PGDetailID).FirstOrDefault();
             pgReviewRepository.Insert(pgReview);
             return unitOfWork.SaveChanges();
         }

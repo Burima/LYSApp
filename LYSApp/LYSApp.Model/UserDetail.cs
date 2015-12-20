@@ -9,7 +9,6 @@ namespace LYSApp.Model
 {
     public class UserDetail
     {
-        [Key]
         public int UserDetailsID { get; set; }
         public long UserID { get; set; }
         public string PresentAddress { get; set; }

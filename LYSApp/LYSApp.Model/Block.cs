@@ -9,6 +9,7 @@ namespace LYSApp.Model
 {
     public class Block
     {
+
         public int BlockID { get; set; }
         public string BlockName { get; set; }
         public string Description { get; set; }
@@ -20,6 +21,7 @@ namespace LYSApp.Model
         public Nullable<int> DeletedBy { get; set; }
         public Nullable<System.DateTime> DeletedOn { get; set; }
         public Nullable<int> CreatedBy { get; set; }
+        public bool IsDefault { get; set; }
 
         public virtual Apartment Apartment { get; set; }
         public virtual ICollection<House> Houses { get; set; }

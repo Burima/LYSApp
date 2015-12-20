@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f5820b16ac6944ef82eef3efbf84716d" Name="Diagram1">
+        <EntityTypeShape EntityType="LYSAdminModel.Apartment" Width="1.5" PointX="10.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.Area" Width="1.5" PointX="6" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.Bed" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.Block" Width="1.5" PointX="12.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.City" Width="1.5" PointX="3.75" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.Country" Width="1.5" PointX="1.5" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.HouseAmenity" Width="1.5" PointX="17.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.HouseImage" Width="1.5" PointX="17.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.House" Width="1.5" PointX="15" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.PGDetail" Width="1.5" PointX="8.25" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.PGReview" Width="1.5" PointX="10.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.Role" Width="1.5" PointX="0.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.Room" Width="1.5" PointX="17.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.Transaction" Width="1.5" PointX="7.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.TransactionStatus" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.UserClaim" Width="1.5" PointX="5.25" PointY="37.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.UserDetail" Width="1.5" PointX="5.25" PointY="40.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.UserLogin" Width="1.5" PointX="5.25" PointY="44.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LYSAdminModel.User" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <AssociationConnector Association="LYSAdminModel.FK_Apartments_PGDetailID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_Blocks_ApartmentID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_Areas_CityID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_PGDetails_AreaID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_Beds_RoomID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_Beds_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_Transactions_BedID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_Houses_BlockID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_Cities_CountryID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK__HouseAmenities__HouseID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_HouseImages_HouseID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_Rooms_HouseID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_PGDetails_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_PGReviews_PGDetailID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_PGReviews_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_Transactions_TransactionStatusID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_Transactions_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_dbo_UserClaim_dbo_User_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_UserDetails_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.FK_dbo_UserLogin_dbo_User_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="LYSAdminModel.UserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

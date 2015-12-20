@@ -14,6 +14,11 @@ namespace LYSApp.Data.DBEntity
     
     public partial class Bed
     {
+        public Bed()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
         public int BedID { get; set; }
         public int RoomID { get; set; }
         public long UserID { get; set; }
@@ -27,5 +32,6 @@ namespace LYSApp.Data.DBEntity
     
         public virtual Room Room { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

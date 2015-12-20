@@ -11,14 +11,17 @@ namespace LYSApp.Data.DBEntity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    public partial class UserLogin
-    {
-        public string LoginProvider { get; set; }
-        [Key]
-        public string ProviderKey { get; set; }
-        public long UserID { get; set; }
     
-        public virtual User User { get; set; }
+    public partial class TransactionStatus
+    {
+        public TransactionStatus()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
+        public int TransactionStatusID { get; set; }
+        public string TransactionStatus1 { get; set; }
+    
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

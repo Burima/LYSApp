@@ -89,6 +89,8 @@
     <Compile Include="HouseImage.cs" />
     <Compile Include="PGReview.cs" />
     <Compile Include="Role.cs" />
+    <Compile Include="Transaction.cs" />
+    <Compile Include="TransactionStatus.cs" />
     <Compile Include="UserLogin.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="PGDetail.cs" />
