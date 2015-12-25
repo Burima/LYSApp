@@ -15,14 +15,16 @@ namespace LYSApp.Data.DBEntity
     public partial class Transaction
     {
         public int TransactionID { get; set; }
+        public string OrderID { get; set; }    
         public string mode { get; set; }
         public int TransactionStatusID { get; set; }
-        public string amount { get; set; }
+        public decimal amount { get; set; }
         public string productinfo { get; set; }
         public string Error { get; set; }
         public string PG_TYPE { get; set; }
         public string bank_ref_num { get; set; }
         public string payuMoneyId { get; set; }
+        public bool IsValidTransaction { get; set; }
         public string additionalCharges { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.DateTime LastUpdatedOn { get; set; }

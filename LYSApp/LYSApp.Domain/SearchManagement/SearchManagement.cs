@@ -57,7 +57,7 @@ namespace LYSApp.Domain.SearchManagement
             //                //where pg.AreaID==searchViewModel.AreaID && //selected area
             //                //      h.Status!=null && h.Status==true && h.Gender==searchViewModel.Gender &&//status active for House
             //                //      r.Status!=null && r.Status==true && //Status active for Room
-            //                //      b.Status != null && b.Status == true && ((b.UserID==0)||(((DateTime)b.BookingToDate-searchViewModel.BookingFromDate).Days>=30))//Status active for Bed and bed is empty (zero)
+            //                //      b.Status != null && b.Status == true && b.BedStatus == (int)Constants.Bed_Status.Vacant && ((b.UserID==0)||(((DateTime)b.BookingToDate-searchViewModel.BookingFromDate).Days>=30))//Status active for Bed and bed is empty (zero)
             //                //group pg by pg.PGDetailID into pg
             //                select new SearchResultViewModel
             //                {
@@ -147,7 +147,7 @@ namespace LYSApp.Domain.SearchManagement
             //                                where pg.PGDetailID == PGDetailsID  //selected area
             //                                //      h.Status!=null && h.Status==true && h.Gender==searchViewModel.Gender &&//status active for House
             //                                //      r.Status!=null && r.Status==true && //Status active for Room
-            //                                //      b.Status != null && b.Status == true && ((b.UserID==0)||(((DateTime)b.BookingToDate-searchViewModel.BookingFromDate).Days>=30))//Status active for Bed and bed is empty (zero)
+            //                                //      b.Status != null && b.Status == true && b.BedStatus == (int)Constants.Bed_Status.Vacant && ((b.UserID==0)||(((DateTime)b.BookingToDate-searchViewModel.BookingFromDate).Days>=30))//Status active for Bed and bed is empty (zero)
             //                                select new PropertyDetailsViewModel
             //                                {
             //                                    PGDetailID = pg.PGDetailID,
