@@ -22,7 +22,8 @@ namespace LYSApp.Model.Constants
             Booked = 1,
             Staying = 2,
             NoticeGiven = 3,
-            Vacant = 4
+            Vacant = 4,
+            InProgress=5
         }
 
         public enum LinkTypeID
@@ -42,6 +43,11 @@ namespace LYSApp.Model.Constants
             Active = 1,
             Inactive = 2,           
         }
-
+        public enum Transaction_Status
+        {
+            inprogress = 1,
+            success = 2,
+            failure=3
+        }
     }
 }
