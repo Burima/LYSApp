@@ -54,78 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBEntity\Apartment.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\Area.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\Bed.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\Block.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\City.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\Country.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\House.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\HouseAmenity.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\HouseImage.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\LYSAdminEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LYSAdminEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\LYSAdminEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\LYSAdminEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LYSAdminEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\PGDetail.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\PGReview.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\Role.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\Room.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\Transaction.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\TransactionStatus.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\User.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\UserClaim.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\UserDetail.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\UserLogin.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBRepository\BaseRepository.cs" />
     <Compile Include="DBRepository\IBaseRepository.cs" />
     <Compile Include="DBRepository\IUnitOfWork.cs" />
@@ -134,29 +62,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="DBEntity\LYSAdminEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LYSAdminEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DBEntity\LYSAdminEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LYSAdminEntities.edmx</DependentUpon>
-      <LastGenOutput>LYSAdminEntities.Context.cs</LastGenOutput>
-    </None>
-    <None Include="DBEntity\LYSAdminEntities.edmx.diagram">
-      <DependentUpon>LYSAdminEntities.edmx</DependentUpon>
-    </None>
-    <None Include="DBEntity\LYSAdminEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LYSAdminEntities.edmx</DependentUpon>
-      <LastGenOutput>LYSAdminEntities.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DBEntity\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

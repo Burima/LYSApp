@@ -219,9 +219,10 @@
             <PropertyRef Name="TransactionID" />
           </Key>
           <Property Name="TransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="mode" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="TransactionStatusID" Type="int" Nullable="false" />
-          <Property Name="amount" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="10" Scale="4" Nullable="false" />
           <Property Name="productinfo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Error" Type="varchar" MaxLength="4" />
           <Property Name="PG_TYPE" Type="varchar" MaxLength="10" />
@@ -940,9 +941,10 @@
             <PropertyRef Name="TransactionID" />
           </Key>
           <Property Name="TransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TransactionStatusID" Type="Int32" Nullable="false" />
-          <Property Name="amount" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
           <Property Name="productinfo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Error" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="PG_TYPE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -1625,6 +1627,7 @@
             <EntityTypeMapping TypeName="LYSAdminModel.Transaction">
               <MappingFragment StoreEntitySet="Transactions">
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="mode" ColumnName="mode" />
                 <ScalarProperty Name="TransactionStatusID" ColumnName="TransactionStatusID" />
                 <ScalarProperty Name="amount" ColumnName="amount" />

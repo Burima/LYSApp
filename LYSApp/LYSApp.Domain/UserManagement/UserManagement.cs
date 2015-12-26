@@ -21,6 +21,8 @@ namespace LYSApp.Domain.UserManagement
         private IBaseRepository<Data.DBEntity.House> houseRepository = null;
         private IBaseRepository<Data.DBEntity.Room> roomRepository = null;
         private IBaseRepository<Data.DBEntity.PGDetail> pgDetailRepository = null;
+        private IBaseRepository<Data.DBEntity.Apartment> apartmentRepository = null;
+        private IBaseRepository<Data.DBEntity.Block> blockRepository = null;
         public UserManagement()
         {
             unitOfWork = new UnitOfWork();
@@ -31,6 +33,8 @@ namespace LYSApp.Domain.UserManagement
             houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
             pgReviewRepository = new BaseRepository<Data.DBEntity.PGReview>(unitOfWork);
             pgDetailRepository = new BaseRepository<Data.DBEntity.PGDetail>(unitOfWork);
+            bedRepository = new BaseRepository<Data.DBEntity.Bed>(unitOfWork);
+            blockRepository = new BaseRepository<Data.DBEntity.Block>(unitOfWork);
         }
 
         public int UpdateUser(UserViewModel userViewModel)
@@ -93,12 +97,14 @@ namespace LYSApp.Domain.UserManagement
             pgReview.CommentTime = DateTime.Now;
             pgReview.Rating = userviewModel.HouseReviewModel.Rating;
             /**------commenting code due to DBUpdate**/
-            //pgReview.PGDetailID = (from pg in pgDetailRepository.Get()
-            //                       join h in houseRepository.Get() on pg.PGDetailID equals h.PGDetailID
-            //                       join r in roomRepository.Get() on h.HouseID equals r.HouseID
-            //                       join b in bedRepository.Get() on r.RoomID equals b.RoomID
-            //                       join u in userRepository.Get() on b.UserID equals u.UserID
-            //                       select pg.PGDetailID).FirstOrDefault();
+            pgReview.PGDetailID = (from pg in pgDetailRepository.Get()
+                                   join a in apartmentRepository.Get() on pg.PGDetailID equals a.PGDetailID
+                                   join x in blockRepository.Get() on a.ApartmentID equals x.ApartmentID
+                                   join h in houseRepository.Get() on x.BlockID equals h.BlockID
+                                   join r in roomRepository.Get() on h.HouseID equals r.HouseID
+                                   join b in bedRepository.Get() on r.RoomID equals b.RoomID
+                                   join u in userRepository.Get() on b.UserID equals u.UserID
+                                   select pg.PGDetailID).FirstOrDefault();
             pgReviewRepository.Insert(pgReview);
             return unitOfWork.SaveChanges();
         }
