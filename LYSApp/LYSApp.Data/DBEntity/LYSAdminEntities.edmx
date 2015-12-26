@@ -229,6 +229,7 @@
           <Property Name="bank_ref_num" Type="varchar" MaxLength="20" />
           <Property Name="payuMoneyId" Type="varchar" MaxLength="8" />
           <Property Name="additionalCharges" Type="varchar" MaxLength="30" />
+          <Property Name="IsValidTransaction" Type="bit" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
           <Property Name="UserID" Type="bigint" Nullable="false" />
@@ -951,6 +952,7 @@
           <Property Name="bank_ref_num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="payuMoneyId" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="additionalCharges" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IsValidTransaction" Type="Boolean" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UserID" Type="Int64" Nullable="false" />
@@ -1637,6 +1639,7 @@
                 <ScalarProperty Name="bank_ref_num" ColumnName="bank_ref_num" />
                 <ScalarProperty Name="payuMoneyId" ColumnName="payuMoneyId" />
                 <ScalarProperty Name="additionalCharges" ColumnName="additionalCharges" />
+                <ScalarProperty Name="IsValidTransaction" ColumnName="IsValidTransaction" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />

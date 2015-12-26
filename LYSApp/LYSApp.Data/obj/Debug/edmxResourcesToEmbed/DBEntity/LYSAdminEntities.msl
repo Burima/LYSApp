@@ -227,6 +227,7 @@
       <EntityTypeMapping TypeName="LYSAdminModel.Transaction">
         <MappingFragment StoreEntitySet="Transactions">
           <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="mode" ColumnName="mode" />
           <ScalarProperty Name="TransactionStatusID" ColumnName="TransactionStatusID" />
           <ScalarProperty Name="amount" ColumnName="amount" />
@@ -236,6 +237,7 @@
           <ScalarProperty Name="bank_ref_num" ColumnName="bank_ref_num" />
           <ScalarProperty Name="payuMoneyId" ColumnName="payuMoneyId" />
           <ScalarProperty Name="additionalCharges" ColumnName="additionalCharges" />
+          <ScalarProperty Name="IsValidTransaction" ColumnName="IsValidTransaction" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />

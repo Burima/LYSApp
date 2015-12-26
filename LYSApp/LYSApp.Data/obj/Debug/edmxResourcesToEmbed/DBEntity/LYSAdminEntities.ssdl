@@ -214,15 +214,17 @@
       <PropertyRef Name="TransactionID" />
     </Key>
     <Property Name="TransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderID" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="mode" Type="varchar" MaxLength="2" Nullable="false" />
     <Property Name="TransactionStatusID" Type="int" Nullable="false" />
-    <Property Name="amount" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="amount" Type="decimal" Precision="10" Scale="4" Nullable="false" />
     <Property Name="productinfo" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Error" Type="varchar" MaxLength="4" />
     <Property Name="PG_TYPE" Type="varchar" MaxLength="10" />
     <Property Name="bank_ref_num" Type="varchar" MaxLength="20" />
     <Property Name="payuMoneyId" Type="varchar" MaxLength="8" />
     <Property Name="additionalCharges" Type="varchar" MaxLength="30" />
+    <Property Name="IsValidTransaction" Type="bit" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
     <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
     <Property Name="UserID" Type="bigint" Nullable="false" />

@@ -62,6 +62,8 @@
     <Compile Include="SearchManagement\SearchManagement.cs" />
     <Compile Include="StaticContentManagement\IStaticContentManagement.cs" />
     <Compile Include="StaticContentManagement\StaticContentManagement.cs" />
+    <Compile Include="TransactionManagement\ITransactionManagement.cs" />
+    <Compile Include="TransactionManagement\TransactionManagement.cs" />
     <Compile Include="UserManagement\IUserManagement.cs" />
     <Compile Include="UserManagement\UserManagement.cs" />
   </ItemGroup>

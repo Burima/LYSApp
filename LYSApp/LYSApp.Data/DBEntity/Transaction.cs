@@ -25,6 +25,7 @@ namespace LYSApp.Data.DBEntity
         public string bank_ref_num { get; set; }
         public string payuMoneyId { get; set; }
         public string additionalCharges { get; set; }
+        public bool IsValidTransaction { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.DateTime LastUpdatedOn { get; set; }
         public long UserID { get; set; }
