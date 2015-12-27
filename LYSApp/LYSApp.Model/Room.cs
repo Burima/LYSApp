@@ -9,7 +9,6 @@ namespace LYSApp.Model
 {
     public class Room
     {
-
         public int RoomID { get; set; }
         public int HouseID { get; set; }
         public int RoomNumber { get; set; }

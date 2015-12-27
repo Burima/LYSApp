@@ -9,6 +9,7 @@ namespace LYSApp.Model
 {
     public class Apartment
     {
+
         public int ApartmentID { get; set; }
         public string ApartmentName { get; set; }
         public string HouseNo { get; set; }
@@ -25,6 +26,5 @@ namespace LYSApp.Model
 
         public virtual PGDetail PGDetail { get; set; }
         public virtual ICollection<Block> Blocks { get; set; }
-
     }
 }
