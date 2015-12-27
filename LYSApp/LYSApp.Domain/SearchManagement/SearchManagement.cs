@@ -18,28 +18,31 @@ namespace LYSApp.Domain.SearchManagement
         private IUnitOfWork unitOfWork = null;
 
         private IBaseRepository<Data.DBEntity.Area> areaRepository = null;
-        private IBaseRepository<Data.DBEntity.House> houseRepository = null;
-        private IBaseRepository<Data.DBEntity.Room> roomRepository = null;
         private IBaseRepository<Data.DBEntity.PGDetail> pgDetailRepository = null;
-        private IBaseRepository<Data.DBEntity.HouseImage> houseImageRepository = null;
         private IBaseRepository<Data.DBEntity.PGReview> pgReviewsRepository = null;
-        private IBaseRepository<Data.DBEntity.HouseAmenity> houseAmenitiesRepository = null;
-        private IBaseRepository<Data.DBEntity.Bed> bedRepository = null;
         private IBaseRepository<Data.DBEntity.Apartment> apartmentRepository = null;
         private IBaseRepository<Data.DBEntity.Block> blockRepository = null;
+        private IBaseRepository<Data.DBEntity.House> houseRepository = null;
+        private IBaseRepository<Data.DBEntity.HouseAmenity> houseAmenitiesRepository = null;
+        private IBaseRepository<Data.DBEntity.HouseImage> houseImageRepository = null;
+        private IBaseRepository<Data.DBEntity.Room> roomRepository = null;
+        private IBaseRepository<Data.DBEntity.Bed> bedRepository = null;
+        
         public SearchManagement()
         {
             unitOfWork = new UnitOfWork();
 
-            areaRepository = new BaseRepository<Data.DBEntity.Area>(unitOfWork);
-            houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
-            roomRepository = new BaseRepository<Data.DBEntity.Room>(unitOfWork);
+            areaRepository = new BaseRepository<Data.DBEntity.Area>(unitOfWork);            
             pgDetailRepository = new BaseRepository<Data.DBEntity.PGDetail>(unitOfWork);
-            houseImageRepository = new BaseRepository<Data.DBEntity.HouseImage>(unitOfWork);
             pgReviewsRepository = new BaseRepository<Data.DBEntity.PGReview>(unitOfWork);
+            apartmentRepository = new BaseRepository<Data.DBEntity.Apartment>(unitOfWork);
+            blockRepository = new BaseRepository<Data.DBEntity.Block>(unitOfWork);           
+            houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
+            houseImageRepository = new BaseRepository<Data.DBEntity.HouseImage>(unitOfWork);
             houseAmenitiesRepository = new BaseRepository<Data.DBEntity.HouseAmenity>(unitOfWork);
+            roomRepository = new BaseRepository<Data.DBEntity.Room>(unitOfWork);
             bedRepository = new BaseRepository<Data.DBEntity.Bed>(unitOfWork);
-            blockRepository = new BaseRepository<Data.DBEntity.Block>(unitOfWork);
+            
 
             Mapper.CreateMap<LYSApp.Data.DBEntity.House, LYSApp.Model.House>();
             Mapper.CreateMap<LYSApp.Data.DBEntity.PGDetail, LYSApp.Model.PGDetail>();
@@ -71,46 +74,45 @@ namespace LYSApp.Domain.SearchManagement
                                 Latitude = pg.Latitude,
                                 Longitude = pg.Longitude,
                                 Address = pg.Address,
-                                //PGReviews = (from review in pg.PGReviews
-                                //             select new Model.PGReview
-                                //             {
-                                //                 PGReviewID = review.PGReviewID,
-                                //                 PGDetailID = pg.PGDetailID,
-                                //                 Rating = review.Rating,
-                                //             }).ToList()//,//get all ratings
-                            }).ToList();
-                            //    MinimumRentHouse = (from p in blk.Houses//order house with minimum MonthlRent first
-                            //                        select new Model.House
-                            //                        {
-                            //                            BlockID = p.BlockID,
-                            //                            //PGDetailID = p.PGDetailID,
-                            //                            //HouseAmenities = (from amenity in p.HouseAmenities
-                            //                            //                  select new LYSApp.Model.HouseAmenity
-                            //                            //                  {
-                            //                            //                      AminityID = amenity.AminityID,
-                            //                            //                      HouseID = p.HouseID,
-                            //                            //                      AC = amenity.AC,
-                            //                            //                      Fridge = amenity.Fridge
-                            //                            //                  }).ToList(),
+                                PGReviews = (from review in pg.PGReviews
+                                             select new Model.PGReview
+                                             {
+                                                 PGReviewID = review.PGReviewID,
+                                                 PGDetailID = pg.PGDetailID,
+                                                 Rating = review.Rating,
+                                             }).ToList(),//get all ratings                            
+                                MinimumRentHouse = (from p in blk.Houses//order house with minimum MonthlRent first
+                                                    select new Model.House
+                                                    {
+                                                        BlockID = p.BlockID,
+                                                        //PGDetailID = p.PGDetailID,
+                                                        HouseAmenities = (from amenity in p.HouseAmenities
+                                                                          select new LYSApp.Model.HouseAmenity
+                                                                          {
+                                                                              AminityID = amenity.AminityID,
+                                                                              HouseID = p.HouseID,
+                                                                              AC = amenity.AC,
+                                                                              Fridge = amenity.Fridge
+                                                                          }).ToList(),
 
-                            //                            //HouseImages = (from i in p.HouseImages
-                            //                            //               select new LYSApp.Model.HouseImage
-                            //                            //               {
-                            //                            //                   HouseImageID = i.HouseImageID,
-                            //                            //                   HouseID = p.HouseID,
-                            //                            //                   ImagePath = i.ImagePath
-                            //                            //               }).ToList(),//get all house images                                                        
-                            //                            //Rooms = (from room in p.Rooms.OrderBy(y => y.MonthlyRent)//order Rooms with minimum MonthlRent
-                            //                            //         select new LYSApp.Model.Room
-                            //                            //         {
-                            //                            //             RoomID = room.RoomID,
-                            //                            //             MonthlyRent = room.MonthlyRent,
-                            //                            //             HouseID = p.HouseID
-                            //                            //             //NoOfBeds = room.NoOfBeds
-                            //                            //         }).ToList(),//get all rooms
-                            //                        }).FirstOrDefault()
+                                                        HouseImages = (from i in p.HouseImages
+                                                                       select new LYSApp.Model.HouseImage
+                                                                       {
+                                                                           HouseImageID = i.HouseImageID,
+                                                                           HouseID = p.HouseID,
+                                                                           ImagePath = i.ImagePath
+                                                                       }).ToList(),//get all house images                                                        
+                                                        Rooms = (from room in p.Rooms.OrderBy(y => y.MonthlyRent)//order Rooms with minimum MonthlRent
+                                                                 select new LYSApp.Model.Room
+                                                                 {
+                                                                     RoomID = room.RoomID,
+                                                                     MonthlyRent = room.MonthlyRent,
+                                                                     HouseID = p.HouseID
+                                                                     //NoOfBeds = room.NoOfBeds
+                                                                 }).ToList(),//get all rooms
+                                                    }).FirstOrDefault()
 
-                            //}).Where(h => h.MinimumRentHouse != null && h.MinimumRentHouse.Rooms != null && h.MinimumRentHouse.Rooms.Count() > 0).GroupBy(x => x.PGDetailID).Select(y => y.FirstOrDefault() ).ToList();
+                            }).Where(h => h.MinimumRentHouse != null && h.MinimumRentHouse.Rooms != null && h.MinimumRentHouse.Rooms.Count() > 0).GroupBy(x => x.PGDetailID).Select(y => y.FirstOrDefault() ).ToList();
                            
 
             return modelPGs;
