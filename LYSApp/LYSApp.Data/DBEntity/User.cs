@@ -21,9 +21,9 @@ namespace LYSApp.Data.DBEntity
             this.PGReviews = new HashSet<PGReview>();
             this.Transactions = new HashSet<Transaction>();
             this.UserClaims = new HashSet<UserClaim>();
-            this.UserDetails = new HashSet<UserDetail>();
             this.UserLogins = new HashSet<UserLogin>();
             this.Roles = new HashSet<Role>();
+            this.UserDetails = new HashSet<UserDetail>();
         }
     
         public long UserID { get; set; }
@@ -53,8 +53,8 @@ namespace LYSApp.Data.DBEntity
         public virtual ICollection<PGReview> PGReviews { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ICollection<UserClaim> UserClaims { get; set; }
-        public virtual ICollection<UserDetail> UserDetails { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<UserDetail> UserDetails { get; set; }
     }
 }

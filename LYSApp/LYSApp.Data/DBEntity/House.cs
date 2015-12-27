@@ -16,9 +16,9 @@ namespace LYSApp.Data.DBEntity
     {
         public House()
         {
-            this.HouseAmenities = new HashSet<HouseAmenity>();
             this.HouseImages = new HashSet<HouseImage>();
             this.Rooms = new HashSet<Room>();
+            this.HouseAmenities = new HashSet<HouseAmenity>();
         }
     
         public int HouseID { get; set; }
@@ -38,8 +38,8 @@ namespace LYSApp.Data.DBEntity
         public string HouseNo { get; set; }
     
         public virtual Block Block { get; set; }
-        public virtual ICollection<HouseAmenity> HouseAmenities { get; set; }
         public virtual ICollection<HouseImage> HouseImages { get; set; }
         public virtual ICollection<Room> Rooms { get; set; }
+        public virtual ICollection<HouseAmenity> HouseAmenities { get; set; }
     }
 }
