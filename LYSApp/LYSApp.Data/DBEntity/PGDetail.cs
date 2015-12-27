@@ -32,6 +32,10 @@ namespace LYSApp.Data.DBEntity
         public string Description { get; set; }
         public Nullable<bool> Status { get; set; }
         public Nullable<long> CreatedBy { get; set; }
+        public Nullable<long> DeletedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<System.DateTime> LastUpdatedOn { get; set; }
+        public Nullable<System.DateTime> DeletedOn { get; set; }
     
         public virtual ICollection<Apartment> Apartments { get; set; }
         public virtual Area Area { get; set; }

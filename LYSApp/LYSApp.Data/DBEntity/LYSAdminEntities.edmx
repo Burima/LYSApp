@@ -155,9 +155,9 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="LastUpdatedOn" Type="datetime" />
           <Property Name="isDeleted" Type="bit" />
-          <Property Name="DeletedBy" Type="int" />
+          <Property Name="DeletedBy" Type="bigint" />
           <Property Name="DeletedOn" Type="datetime" />
-          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedBy" Type="bigint" />
           <Property Name="DisplayName" Type="varchar" MaxLength="50" />
           <Property Name="Gender" Type="int" />
           <Property Name="NoOfBathrooms" Type="int" />
@@ -181,6 +181,10 @@
           <Property Name="Description" Type="varchar" MaxLength="100" />
           <Property Name="Status" Type="bit" />
           <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="DeletedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="date" />
+          <Property Name="LastUpdatedOn" Type="date" />
+          <Property Name="DeletedOn" Type="date" />
         </EntityType>
         <EntityType Name="PGReviews">
           <Key>
@@ -865,9 +869,9 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="isDeleted" Type="Boolean" />
-          <Property Name="DeletedBy" Type="Int32" />
+          <Property Name="DeletedBy" Type="Int64" />
           <Property Name="DeletedOn" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int64" />
           <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="Int32" />
           <Property Name="NoOfBathrooms" Type="Int32" />
@@ -895,6 +899,10 @@
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
           <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="DeletedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Precision="0" />
+          <Property Name="DeletedOn" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Apartments" Relationship="Self.FK_Apartments_PGDetailID" FromRole="PGDetails" ToRole="Apartments" />
           <NavigationProperty Name="Area" Relationship="Self.FK_PGDetails_AreaID" FromRole="PGDetails" ToRole="Areas" />
           <NavigationProperty Name="User" Relationship="Self.FK_PGDetails_UserID" FromRole="PGDetails" ToRole="Users" />
@@ -1587,6 +1595,10 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

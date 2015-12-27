@@ -27,9 +27,9 @@ namespace LYSApp.Data.DBEntity
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }
         public Nullable<bool> isDeleted { get; set; }
-        public Nullable<int> DeletedBy { get; set; }
+        public Nullable<long> DeletedBy { get; set; }
         public Nullable<System.DateTime> DeletedOn { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<long> CreatedBy { get; set; }
         public string DisplayName { get; set; }
         public Nullable<int> Gender { get; set; }
         public Nullable<int> NoOfBathrooms { get; set; }

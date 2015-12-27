@@ -22,7 +22,7 @@ namespace LYSApp.Data.DBEntity
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-           
+            throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<Apartment> Apartments { get; set; }
