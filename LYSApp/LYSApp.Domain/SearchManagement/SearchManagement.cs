@@ -55,11 +55,11 @@ namespace LYSApp.Domain.SearchManagement
            
             var modelPGs = (from pg in pgDetailRepository.Get()
                             join a in apartmentRepository.Get() on pg.PGDetailID equals a.PGDetailID
-                            join x in blockRepository.Get() on a.ApartmentID equals x.ApartmentID
-                            join h in houseRepository.Get() on x.BlockID equals h.BlockID
+                            join blk in blockRepository.Get() on a.ApartmentID equals blk.ApartmentID
+                            join h in houseRepository.Get() on blk.BlockID equals h.BlockID
                             join r in roomRepository.Get() on h.HouseID equals r.HouseID
                             join b in bedRepository.Get() on r.RoomID equals b.RoomID
-                            //where pg.AreaID==searchViewModel.AreaID && //selected area
+                            where pg.AreaID == searchViewModel.AreaID && blk.BlockID>0//selected area
                             //      h.Status!=null && h.Status==true && h.Gender==searchViewModel.Gender &&//status active for House
                             //      r.Status!=null && r.Status==true && //Status active for Room
                             //      b.Status != null && b.Status == true && b.BedStatus == (int)Constants.Bed_Status.Vacant && ((b.UserID==0)||(((DateTime)b.BookingToDate-searchViewModel.BookingFromDate).Days>=30))//Status active for Bed and bed is empty (zero)
@@ -71,45 +71,47 @@ namespace LYSApp.Domain.SearchManagement
                                 Latitude = pg.Latitude,
                                 Longitude = pg.Longitude,
                                 Address = pg.Address,
-                                PGReviews = (from review in pg.PGReviews
-                                             select new Model.PGReview
-                                             {
-                                                 PGReviewID = review.PGReviewID,
-                                                 PGDetailID = pg.PGDetailID,
-                                                 Rating = review.Rating,
-                                             }).ToList(),//get all ratings
-                                MinimumRentHouse = (from p in x.Houses//order house with minimum MonthlRent first
-                                                    select new Model.House
-                                                    {
-                                                        BlockID = p.BlockID,
-                                                        //PGDetailID = p.PGDetailID,
-                                                        HouseAmenities = (from amenity in p.HouseAmenities
-                                                                          select new LYSApp.Model.HouseAmenity
-                                                                          {
-                                                                              AminityID = amenity.AminityID,
-                                                                              HouseID = p.HouseID,
-                                                                              AC = amenity.AC,
-                                                                              Fridge = amenity.Fridge
-                                                                          }).ToList(),
+                                //PGReviews = (from review in pg.PGReviews
+                                //             select new Model.PGReview
+                                //             {
+                                //                 PGReviewID = review.PGReviewID,
+                                //                 PGDetailID = pg.PGDetailID,
+                                //                 Rating = review.Rating,
+                                //             }).ToList()//,//get all ratings
+                            }).ToList();
+                            //    MinimumRentHouse = (from p in blk.Houses//order house with minimum MonthlRent first
+                            //                        select new Model.House
+                            //                        {
+                            //                            BlockID = p.BlockID,
+                            //                            //PGDetailID = p.PGDetailID,
+                            //                            //HouseAmenities = (from amenity in p.HouseAmenities
+                            //                            //                  select new LYSApp.Model.HouseAmenity
+                            //                            //                  {
+                            //                            //                      AminityID = amenity.AminityID,
+                            //                            //                      HouseID = p.HouseID,
+                            //                            //                      AC = amenity.AC,
+                            //                            //                      Fridge = amenity.Fridge
+                            //                            //                  }).ToList(),
 
-                                                        HouseImages = (from i in p.HouseImages
-                                                                       select new LYSApp.Model.HouseImage
-                                                                       {
-                                                                           HouseImageID = i.HouseImageID,
-                                                                           HouseID = p.HouseID,
-                                                                           ImagePath = i.ImagePath
-                                                                       }).ToList(),//get all house images                                                        
-                                                        Rooms = (from room in p.Rooms.OrderBy(y => y.MonthlyRent)//order Rooms with minimum MonthlRent
-                                                                 select new LYSApp.Model.Room
-                                                                 {
-                                                                     RoomID = room.RoomID,
-                                                                     MonthlyRent = room.MonthlyRent,
-                                                                     HouseID = p.HouseID
-                                                                     //NoOfBeds = room.NoOfBeds
-                                                                 }).ToList(),//get all rooms
-                                                    }).FirstOrDefault()
+                            //                            //HouseImages = (from i in p.HouseImages
+                            //                            //               select new LYSApp.Model.HouseImage
+                            //                            //               {
+                            //                            //                   HouseImageID = i.HouseImageID,
+                            //                            //                   HouseID = p.HouseID,
+                            //                            //                   ImagePath = i.ImagePath
+                            //                            //               }).ToList(),//get all house images                                                        
+                            //                            //Rooms = (from room in p.Rooms.OrderBy(y => y.MonthlyRent)//order Rooms with minimum MonthlRent
+                            //                            //         select new LYSApp.Model.Room
+                            //                            //         {
+                            //                            //             RoomID = room.RoomID,
+                            //                            //             MonthlyRent = room.MonthlyRent,
+                            //                            //             HouseID = p.HouseID
+                            //                            //             //NoOfBeds = room.NoOfBeds
+                            //                            //         }).ToList(),//get all rooms
+                            //                        }).FirstOrDefault()
 
-                            }).Where(h => h.MinimumRentHouse != null && h.MinimumRentHouse.Rooms != null && h.MinimumRentHouse.Rooms.Count() > 0).GroupBy(x => x.PGDetailID).Select(y => y.FirstOrDefault()).ToList();
+                            //}).Where(h => h.MinimumRentHouse != null && h.MinimumRentHouse.Rooms != null && h.MinimumRentHouse.Rooms.Count() > 0).GroupBy(x => x.PGDetailID).Select(y => y.FirstOrDefault() ).ToList();
+                           
 
             return modelPGs;
         }
