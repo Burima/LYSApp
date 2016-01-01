@@ -89,7 +89,7 @@ namespace LYSApp.Domain.SearchManagement
                                                         HouseAmenities = (from amenity in p.HouseAmenities
                                                                           select new LYSApp.Model.HouseAmenity
                                                                           {
-                                                                              AminityID = amenity.AminityID,
+                                                                              HouseAmenityID = amenity.HouseAmenityID,
                                                                               HouseID = p.HouseID,
                                                                               AC = amenity.AC,
                                                                               Fridge = amenity.Fridge
@@ -186,7 +186,7 @@ namespace LYSApp.Domain.SearchManagement
                                                                  HouseAmenities = (from g in p.HouseAmenities
                                                                                    select new LYSApp.Model.HouseAmenity
                                                                                    {
-                                                                                       AminityID = g.AminityID,
+                                                                                       HouseAmenityID = g.HouseAmenityID,
                                                                                        AC = g.AC,
                                                                                        Aquaguard = g.Aquaguard,
                                                                                        AttachBathrooms = g.AttachBathrooms,
