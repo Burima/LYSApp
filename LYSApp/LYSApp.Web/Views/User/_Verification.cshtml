@@ -1,0 +1,202 @@
+﻿@model LYSApp.Model.UserViewModel
+
+@*---Mobile Verification Modal---*@
+<div id="divMobileVerification" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bounceInRight">
+            <div class="modal-header">
+                <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Verify Mobile Number</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        Verification code has been sent to your mobile number
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" id="textVerficationCode" placeholder="Enter code" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" id="btnVerfiy" type="button" aria-hidden="true" value="Verify" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@*---Email Verification Modal---*@
+<div id="divEmailVerification" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bounceInRight">
+            <div class="modal-header">
+                <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Verify Email</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        Verification code has been sent to your provided Email ID.Please check you email id.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*---Change Password*@
+
+    <div id="divChangePassword" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bounceInRight">
+                <div class="modal-header">
+                    <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Change Password</h4>
+                </div>
+                @using (Ajax.BeginForm("ChangePassword", "Account", FormMethod.Post, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnPasswordChange", OnFailure = "OnPasswordChange" }))
+                {
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            Current Password
+                        </div>
+                        <div class="col-md-9">
+                           @Html.PasswordFor(model => model.ManageUserViewModel.OldPassword, new { @class = "form-control", placeholder = "Current Password" })
+                        </div>
+                    </div>
+
+                    <div class="row row-padding-top-5">
+                        <div class="col-md-3">
+                            New Password
+                        </div>
+                        <div class="col-md-9">
+                            @Html.PasswordFor(model => model.ManageUserViewModel.NewPassword, new { @class = "form-control", placeholder = "New Password" })
+                        </div>
+                    </div>
+
+                    <div class="row row-padding-top-5">
+                        <div class="col-md-3">
+                            Current Password
+                        </div>
+                        <div class="col-md-9">
+                            @Html.PasswordFor(model => model.ManageUserViewModel.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-green" id="btnChange" type="submit" aria-hidden="true" value="Change" />
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+@*---Content---*@
+<div class="col-md-9">
+    <div class="panel content">
+        <div class="panel-heading">
+            Verification
+        </div>
+        <div class="panel-body">
+            @*---Mobile Number---*@
+            <div class="row">
+                <div class="col-md-12">
+                    Phone Number
+                </div>
+                <div class="col-md-12">
+                    @if (Model.PhoneNumberConfirmed)
+                    {
+                        <p>Your mobile number @Model.PhoneNumber is verfied</p>
+                    }else
+                    {
+                        <p>Make it easier to communicate with a verified phone number. We’ll send you a code by SMS or read it to you over the phone. 
+                        Enter the code below to confirm that you’re the person on the other end.</p>
+                        <br />
+                        if (Model.PhoneNumber != null)
+                         {
+                             <p>Your mobile number @Model.PhoneNumber is not verified.Please click the <a  id="linkVerify">link</a> to get verification message</p>
+                         }else
+                         {
+                             <p>No mobile number is added</p>
+                         }
+                    }
+                </div>
+                
+            </div>
+            @*---Email ID---*@
+            <div class="row row-padding-top-5">
+                <div class="col-md-12">
+                    Email Address
+                </div>
+                <div class="col-md-12">
+                    @if (@Model.EmailConfirmed)
+                    {
+                        <p>Your Email ID @Model.Email is verified successfully</p>
+                    }
+                    else
+                    {
+                        <p>Make it easier to communicate with a verified Email ID.Verify your email id to get attractive offers and updates from our side.
+                            <br />
+                            <br />
+                            Your email id @Model.Email is not verified yet.Please click <a  id="linkVerifyEmail">here</a> to verify your email id.<br />
+                            You will recieve message from <b><i>LockYourStay</i></b>.With just one click on the link given in the mail you can verify.
+                            <br />
+                            <br />
+                            Cant find our message? Please check spam folder or <a  id="linkVerifyEmail">Resend Confirmtion Email</a> </p>
+                    }
+                   
+                </div>
+               
+            </div>
+            @*---Change Password---*@
+            <div class="row row-padding-top-5">
+                <div class="col-md-12">
+                    Password
+                </div>
+                <div class="col-md-9">
+                    To change your current password please click <a  id="linkChangePassword">here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/validate")
+
+<script>
+
+    var mobileVerificationURL = '@Url.Action("Verification", "User")';
+    var emailVerificationURL = '@Url.Action("SendAccountActivationMailForExistingUser", "Account")';
+    var passwordChangeURL = '@Url.Action("Manage", "Account")'
+    $('#linkVerify').click(function () {
+        $("#divMobileVerification").modal('show');
+    });
+
+    $('#linkVerifyEmail').click(function () {
+        $.ajax({
+            url: emailVerificationURL,
+            type: 'POST',
+            success: function () {
+                $("#divEmailVerification").modal('show');
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    });
+
+    $('#linkChangePassword').click(function () {
+
+        $("#divChangePassword").modal('show');
+    });
+
+   
+    function OnPasswordChange() {
+        $("#divChangePassword").modal('hide');
+        alert(@ViewBag.StatusMessage);
+    }
+
+</script>

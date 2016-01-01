@@ -1,0 +1,132 @@
+﻿.about-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-size: 130%;
+}
+
+.twitter-heading {
+    text-align: center;
+    line-height: 1.2em;
+}
+
+.quote-info {
+    text-align: center;
+    width: 65% !important;
+    margin: 0 auto;
+    float: none;
+    padding: 170px 0 150px;
+}
+
+.twelve {
+    width: 100%;
+}
+
+.columns {
+    float: left;
+    min-height: 1px;
+    padding: 0 15px;
+    position: relative;
+}
+/*.inner-wrap2 {
+    background: #999 url(../images/star.jpeg) no-repeat fixed center;
+    background-size: 130% 160%;
+}
+.cover {
+    background: url(../images/pat-dark-2.png);
+    padding: 125px 0;
+}
+.no-padding {
+    padding: 0px!important;
+}
+.parallax-background {
+    background-size: cover;
+    background-position: 50% 0;
+    background-attachment: fixed;
+}
+.home.page-header-padding {
+    padding-top: 250px;
+    padding-bottom: 0px;
+}
+.home {
+    position: relative;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    display: block;
+    padding: 560px 0 140px;
+}
+.cover-background, .parallax-background {
+    -webkit-background-size: cover;
+    background-repeat: no-repeat;
+}
+.section-container {
+    z-index: 10;
+    position: relative;
+    margin-top: -10px;
+    margin-bottom: 70px;
+}
+.body{
+    text-rendering: optimizeLegibility;
+}
+.image-8 {
+    background-image: url(../images/frost.jpg);
+}*/
+
+#vision-container {
+}
+
+.vision {
+    background-color: #676a6c;
+    height: 200px;
+    width: 100%;
+    position: relative;
+    color: white;
+    padding: 20px 20px 0px 20px;
+    text-align: left;
+    font-size: 16px;
+    font-style: italic;
+    color: white;
+    padding-bottom: 5%;
+}
+
+.testimoials {
+    height: 150px;
+    text-align: left;
+}
+
+.testimoials-head {
+    margin: 0;
+    padding: 25px 0 30px 0;
+    font-size: 22px;
+    line-height: 22px;
+    text-align: center;
+}
+
+.padding-index {
+    width: 85%;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.home-header {
+    background-color: transparent;
+}
+
+/*search form*/
+@media only screen and (max-width: 400px) {
+    #form-Search-pg .form-group .area {
+        width: 250px !important;
+    }
+}
+
+@media only screen and (min-width: 401px) {
+    #form-Search-pg .form-group .area {
+        width: 400px !important;
+    }
+}
+
+.form-group select {
+    background: url(../../../Images/signup-lite-dropdown.png) right 7px top 12px no-repeat #fff;
+}
+/*end search form*/

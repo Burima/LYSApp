@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LYSApp.Web;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,15 @@ namespace LYSApp.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            StaticContentConfig.GetStaticContents();
+        }
+        protected void Application_EndRequest(Object sender, EventArgs e)
+        {
+            if (Context.Items["AjaxPermissionDenied"] is bool)
+            {
+                Context.Response.StatusCode = 401;
+                Context.Response.End();
+            }
         }
     }
 }

@@ -1,0 +1,63 @@
+﻿@model LYSApp.Model.UserViewModel
+
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+<div class="col-md-9">
+    <div class="panel content">
+        <div class="panel-heading">
+            Past Comments by you
+        </div>
+        <div class="panel-body">
+            @if (Model.pgReviews != null && Model.pgReviews.Count == 0)
+            {
+                <div class="row">
+                    <div class="col-md-9">
+                        No comments provided by you.
+                    </div>
+                </div>
+            }
+            else if (Model.pgReviews != null)
+            {
+                foreach (var pgReview in Model.pgReviews)
+                {
+                    <div class="row row-padding-top-1">
+                        <div class="col-md-3">
+                            @pgReview.CommentTime
+                        </div>
+                        <div class="col-md-9">
+                            @pgReview.Comments
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="col-md-9 align-right">
+        <input type="button" id="btnComment" value="Add Comment" class="btn btn-green" onclick="fnDisplayBlock()" />
+    </div>
+    @using (Ajax.BeginForm("AddComment", "User", new AjaxOptions { UpdateTargetId = "divComment" }))
+    {
+        <div id="divComment" class="col-md-9 row-padding-top-5" style="display:none">
+            <div class="row">
+                <div class="col-md-3">
+                    <b>Comments</b>
+                </div>
+                <div class="col-md-9">
+                    @Html.TextAreaFor(m => m.HouseReviewModel.Comments, new { @class = "form-control", maxlength = "50", placeholder = "Comments", tabIndex = "1" })
+                </div>
+            </div>
+            <div class="row row-padding-top-5">
+                <div class="col-md-12 align-right">
+                    <input type="submit" id="btnSubmitComment" value="Submit" class="btn btn-green" />
+                </div>
+            </div>
+            <div>@Html.HiddenFor(model => model.HouseReviewModel.HouseID)</div>
+            <div>@Html.HiddenFor(model => model.UserID)</div>
+        </div>
+
+        <script>
+            $("#btnComment").click(function () {
+                document.getElementById('divComment').style.display = 'block';
+            });
+        </script>
+    }
+</div>

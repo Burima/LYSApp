@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9162114E-F1F7-45E6-8198-34D6FCD210D4}</ProjectGuid>
+    <ProjectGuid>{F7731E38-45CF-4CB6-9343-45D6C30404BC}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -39,7 +39,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MailChimp" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -92,6 +103,9 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -155,17 +169,24 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\StaticContentConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Common\LYSConfig.cs" />
+    <Compile Include="Services\Security\TripleDES.cs" />
+    <Compile Include="Services\SessionManager.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\LYSUserAuthorize.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app-blue.css" />
@@ -174,16 +195,27 @@
     <Content Include="Content\app-yellow.css" />
     <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Custom\Home\About.css" />
     <Content Include="Content\Custom\Home\Contact.css" />
-    <Content Include="Content\Custom\Home\Index.css" />
+    <Content Include="Content\Custom\Account\Index.css" />
     <Content Include="Content\Custom\Home\Jobs.css" />
     <Content Include="Content\Custom\Home\TermsAndConditions.css" />
+    <Content Include="Content\Custom\Search\custom-jquery.steps.css" />
+    <Content Include="Content\Custom\Search\Search.css" />
+    <Content Include="Content\Custom\Search\shop.style.css" />
+    <Content Include="Content\Custom\Shared\_Header.css" />
+    <Content Include="Content\Custom\User\profile.css" />
+    <Content Include="Content\Custom\User\style.css" />
+    <Content Include="Content\Custom\User\ViewProfile.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\fileinput.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\fullscreen-slider.css" />
+    <Content Include="Content\Jcrop.gif" />
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery.Jcrop.css" />
+    <Content Include="Content\jquery.Jcrop.min.css" />
     <Content Include="Content\jquery.tagsinput.css" />
     <Content Include="Content\lockyourstay.css" />
     <Content Include="Content\simple-line-icons.css" />
@@ -195,6 +227,8 @@
     <Content Include="fonts\Simple-Line-Icons.dev.svg" />
     <Content Include="fonts\Simple-Line-Icons.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\1-1-thmb.png" />
     <Content Include="Images\avatar-1.png" />
     <Content Include="Images\avatar-2.png" />
     <Content Include="Images\avatar-3.png" />
@@ -211,8 +245,26 @@
     <Content Include="Images\blog-3.jpg" />
     <Content Include="Images\blog-4.jpg" />
     <Content Include="Images\blur.svg" />
+    <Content Include="Images\calendar.gif" />
+    <Content Include="Images\default_profile_pic.jpg" />
     <Content Include="Images\infobox-bg.png" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\Map\amusementpark.png" />
+    <Content Include="Images\Map\ATM.png" />
+    <Content Include="Images\Map\bank.png" />
+    <Content Include="Images\Map\bus.png" />
+    <Content Include="Images\Map\college.png" />
+    <Content Include="Images\Map\disc.png" />
+    <Content Include="Images\Map\hospital.png" />
+    <Content Include="Images\Map\petrol.png" />
+    <Content Include="Images\Map\pharmacy.png" />
+    <Content Include="Images\Map\police.png" />
+    <Content Include="Images\Map\Restaurant.png" />
+    <Content Include="Images\Map\salon.png" />
+    <Content Include="Images\Map\school.png" />
+    <Content Include="Images\Map\store.png" />
+    <Content Include="Images\Map\theatre.png" />
+    <Content Include="Images\Map\trainstation.png" />
     <Content Include="Images\marker-blue.png" />
     <Content Include="Images\marker-green.png" />
     <Content Include="Images\marker-magenta.png" />
@@ -241,12 +293,39 @@
     <Content Include="Images\prop\4-4.png" />
     <Content Include="Images\prop\5-1-thmb.png" />
     <Content Include="Images\prop\5-1.png" />
+    <Content Include="Images\signup-lite-dropdown.png" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\blog.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\OpenSans-Light-webfont.eot" />
+    <Content Include="fonts\OpenSans-Light-webfont.ttf" />
+    <Content Include="fonts\OpenSans-Light-webfont.woff" />
+    <Content Include="fonts\OpenSans-Regular-webfont.eot" />
+    <Content Include="fonts\OpenSans-Regular-webfont.ttf" />
+    <Content Include="fonts\OpenSans-Regular-webfont.woff" />
+    <Content Include="fonts\Simple-Line-Icons.eot" />
+    <Content Include="fonts\Simple-Line-Icons.ttf" />
+    <Content Include="fonts\Simple-Line-Icons.woff" />
+    <None Include="Properties\PublishProfiles\LYSApp.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
     <Content Include="Scripts\clndr.js" />
+    <Content Include="Scripts\Custom\User\form-image-crop.js" />
+    <Content Include="Scripts\Custom\User\jquery-migrate.min.js" />
+    <Content Include="Scripts\Custom\User\jquery.Jcrop.js" />
+    <Content Include="Scripts\Custom\User\jquery.Jcrop.min.js" />
+    <Content Include="Scripts\Custom\User\jquery.steps.js" />
+    <Content Include="Scripts\Custom\User\jquery.validate.min.js" />
+    <Content Include="Scripts\Custom\User\SearchHome.js" />
+    <Content Include="Scripts\Custom\User\shop.app.js" />
+    <Content Include="Scripts\Custom\User\stepWizard.js" />
+    <Content Include="Scripts\Custom\User\ViewProfile.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\home.js" />
     <Content Include="Scripts\infobox.js" />
@@ -258,16 +337,33 @@
     <Content Include="Scripts\jquery.slimscroll.min.js" />
     <Content Include="Scripts\jquery.tagsinput.min.js" />
     <Content Include="Scripts\jquery.touchSwipe.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.visible.js" />
     <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\lockyourstay.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-2.5.1.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Shared\layout.js" />
+    <Content Include="Scripts\Shared\search.js" />
     <Content Include="Scripts\signin.js" />
     <Content Include="Scripts\signup.js" />
     <Content Include="Scripts\sortable.js" />
     <Content Include="Scripts\table.js" />
     <Content Include="Scripts\tablesorter.js" />
     <Content Include="Scripts\underscore.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -278,38 +374,64 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\OpenSans-Light-webfont.eot" />
-    <Content Include="fonts\OpenSans-Light-webfont.ttf" />
-    <Content Include="fonts\OpenSans-Light-webfont.woff" />
-    <Content Include="fonts\OpenSans-Regular-webfont.eot" />
-    <Content Include="fonts\OpenSans-Regular-webfont.ttf" />
-    <Content Include="fonts\OpenSans-Regular-webfont.woff" />
-    <Content Include="fonts\Simple-Line-Icons.eot" />
-    <Content Include="fonts\Simple-Line-Icons.ttf" />
-    <Content Include="fonts\Simple-Line-Icons.woff" />
-    <None Include="Project_Readme.html" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\_Register.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Home\Jobs.cshtml" />
     <Content Include="Views\Home\TermsAndCondition.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\User\ViewProfile.cshtml" />
+    <Content Include="Views\User\_ProfilePicture.cshtml" />
+    <Content Include="Views\User\_EditProfile.cshtml" />
+    <Content Include="Views\User\_Verification.cshtml" />
+    <Content Include="Views\User\_ReviewComments.cshtml" />
+    <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Views\Search\PropertyDetails.cshtml" />
+    <Content Include="Views\Search\ReviewBooking.cshtml" />
+    <Content Include="Views\Search\_FareDetailsPartial.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Payment\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LYSApp.Data\LYSApp.Data.csproj">
+      <Project>{4cce9be0-4948-46c2-9be7-5d07b9461308}</Project>
+      <Name>LYSApp.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LYSApp.Domain\LYSApp.Domain.csproj">
+      <Project>{bd54aff9-a65a-48d7-ac9d-1410e5112340}</Project>
+      <Name>LYSApp.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LYSApp.Model\LYSApp.Model.csproj">
+      <Project>{5448af25-9919-4fdf-9a50-15fa70a924ce}</Project>
+      <Name>LYSApp.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -325,11 +447,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>23485</DevelopmentServerPort>
+          <DevelopmentServerPort>29335</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:23485/</IISUrl>
+          <IISUrl>http://localhost:26497/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

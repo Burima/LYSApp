@@ -26,16 +26,12 @@ namespace LYSApp.Web.Controllers
 
             return View();
         }
-        public ActionResult TermsAndCondition()
-        {
-            ViewBag.Message = "Terms And Condition";
-
-            return View();
-        }
         public ActionResult Jobs()
         {
-            ViewBag.Message = "Jobs";
-
+            return View();
+        }
+        public ActionResult TermsAndCondition()
+        {
             return View();
         }
     }

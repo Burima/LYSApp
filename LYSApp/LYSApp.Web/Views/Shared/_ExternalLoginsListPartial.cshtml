@@ -1,0 +1,41 @@
+﻿@using LYSApp.Model
+@model ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders!=null&& loginProviders.Count() > 0)
+    {
+        
+        using (Html.BeginForm(Model.Action, "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            
+                    foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        if (p.AuthenticationType == "Facebook") { 
+                        <div class="form-group">
+                            <div class="btn-group-justified">
+                                <button type="submit" class="btn btn-lg btn-facebook full-width" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="fa fa-facebook pull-left"></span><span class="action">Sign Up</span> with Facebook</button>
+                                <!-- based on the action class the inner text will be changed as Sign In or Sign Up  -->
+                            </div>
+                        </div>
+                        }
+                        else if (p.AuthenticationType == "Google")
+                        {
+                            <div class="form-group">
+                                <div class="btn-group-justified">
+                                    <button type="submit" class="btn btn-lg btn-google full-width" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="fa fa-google-plus pull-left"></span><span class="action">Sign Up</span> with Google</button>
+                                    <!-- based on the action class the inner text will be changed as Sign In or Sign Up  -->
+                                </div>
+                            </div>
+                        }
+                       
+                    }
+                    <div class="signOr">OR</div>
+               
+        }
+    }
+    
+}

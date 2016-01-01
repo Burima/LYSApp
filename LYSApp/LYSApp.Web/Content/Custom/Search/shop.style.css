@@ -1,0 +1,144 @@
+/*
+ * Template Name: Unify - Responsive Bootstrap Template
+ * Description: Business, Corporate, Portfolio, E-commerce and Blog Theme.
+ * Version: 1.7
+ * Author: @htmlstream
+ * Website: http://htmlstream.com
+*/
+
+
+
+h1, h2, h3, h4, h5, h6 {
+	color: #687074;
+}
+
+p {
+	color: #888;
+	font-size: 14px;
+}
+
+a {
+   color: #18ba9b;
+   text-decoration: none;  
+}
+
+a:hover {
+   color: #18ba9b;
+   text-decoration: underline;
+}
+
+ul.list-inline {
+	margin-left: 0;
+}
+
+li:first-child {
+	padding-left: 0;
+}
+
+.cus-form-horizontal .form-group {
+    margin: 0 0 15px;
+    overflow: hidden;
+    padding-bottom: 7px;
+}
+/*Shopping Cart
+------------------------------------*/
+/*Coupon Code*/
+.shopping-cart .coupon-code {
+	margin-top: 35px;
+	padding-top: 35px;
+	border-top: 1px solid #eee;
+}
+
+.shopping-cart .coupon-code h3 {
+	margin: 0;
+	color: #687074;
+	font-size: 18px;
+}
+
+.shopping-cart .coupon-code input {
+	width: 60%;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+.shopping-cart .total-result li {
+	display: block;
+}
+
+.shopping-cart .total-result li:after,
+.shopping-cart .total-result li:before {
+	content: " ";
+	display: table;
+}
+
+.shopping-cart .total-result li:after {
+	clear: both;
+}
+
+.shopping-cart .total-result li.divider {
+	height: 1px;
+  	margin: 9px 0;
+  	overflow: hidden;
+  	background: #eee;
+}
+
+.shopping-cart .total-result h4 {
+	float: left;
+	margin-right: 15px;
+}
+.shopping-cart .total-result-in {
+	overflow: hidden;
+	text-align: right;
+}
+
+.shopping-cart .total-result-in h4,
+.shopping-cart .total-result-in span {
+	color: #687074;
+	font-size: 18px;
+}
+
+.shopping-cart .total-result .total-price h4,
+.shopping-cart .total-result .total-price span {
+	font-weight: 600;
+}
+
+.shopping-cart .total-result .total-price h4 {
+	margin: 0 auto;
+}
+
+.shopping-cart .total-result .total-price span {
+	color: #c9253c;
+}
+
+
+/*Billing Info*/
+.shopping-cart h2.title-type {
+	font-size: 16px;
+	margin-left: 20px;
+	text-transform: uppercase;
+}
+
+.shopping-cart .user-info-inputs {
+	padding: 20px;
+	background: #f8f8f8;
+	border: 1px solid #eee;
+}
+
+.shopping-cart .user-info-inputs input {
+	min-height: 40px;
+	border-color: #eee;
+	margin-bottom: 10px;
+}
+
+
+
+
+/*Payment Type*/
+.cus-form-horizontal .payment-type li {
+	margin-right: 10px;
+}
+
+.cus-form-horizontal .payment-type i {
+	color: #888;
+	font-size: 35px;
+}

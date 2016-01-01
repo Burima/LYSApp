@@ -2,3 +2,171 @@
     background-color: #1ab394;
     color: #fff;
 }
+
+.full-width {
+    width: 100% !important;
+}
+
+/*make the input large*/
+.input-large {
+    font-size: 1.1em;
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+
+/*auto savinf */
+.saving-progress {
+    float: right;
+    color: #3fb34f;
+}
+/*remove bold for label inside form-group*/
+.form-group label {
+    font-weight: 300;
+    font-size: 1.1em;
+    padding-left: 0px;
+}
+
+/*row space*/
+.row-space-top-1 {
+    margin-top: 1%;
+}
+
+/*validation error*/
+.error {
+    /*color: #ff5a5f;*/
+    border: 1px solid red;
+}
+
+.input-validation-error {
+    border: 1px solid red;
+}
+
+.has-error {
+    border: 1px solid red;
+}
+
+/* maximum character for a control*/
+.max-character-entered {
+    float: right;
+    color: #82888a;
+    font-size: 1.1em;
+}
+
+
+
+/*error*/
+input.error,
+textarea.error, .form-control.error {
+    border: 1px solid red;
+}
+
+label.error {
+    display: none !important;
+}
+/*------------- radio button------------*/
+.margin-left-2pc {
+    margin-left: 2% !important;
+}
+
+
+.standard-font {
+    font-weight: 500 !important;
+    font-size: 1.2em !important;
+}
+
+/*------------- Row Spacer -------------*/
+.row-spacer {
+    height: 4.725em;
+}
+
+.row-spacer-small {
+    height: 2em;
+}
+
+.row-spacer-mini {
+    height: 1.25em;
+}
+
+/*------------------------ Padding -------------------------*/
+.row-padding-top-1 {
+    padding-top: 1%;
+}
+
+.row-padding-top-5 {
+    padding-top: 5%;
+}
+
+/*------------------------- Anchor ------------------------------*/
+a {
+    color: #428BCA;
+    text-decoration: none;
+}
+
+    a:hover, a:focus {
+        color: #2A6496;
+        text-decoration: underline;
+    }
+
+/*-------------------- text -----------------*/
+.text-red {
+    color: red;
+}
+
+.home-header {
+    background-color: rgb(14, 170, 166);
+}
+
+.home-container {
+    margin-top: 5%;
+    font-size: 1em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+.no-margin {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.no-left-margin {
+    margin-left: 0px !important;
+}
+
+.no-right-margin {
+    margin-right: 0px !important;
+}
+
+/* alert for showing errror inside modal */
+.modal-alert {
+    font-size: 1.2em;
+    margin-bottom: 0px;
+    font-weight: 300;
+    background-color: #ffd1c4;
+    color: black;
+    padding: 15px 0px 0px 0px;
+    min-height: 70px;
+}
+.modal-alert i{
+    font-size: 40px;
+}
+.modal-alert span{
+    display:block;
+}
+/*------ for all anchor which don't have any href-----------*/
+a{
+    cursor:pointer;
+}
+
+/*------------- readonly input default cursor------------------*/
+input[readonly] {
+     cursor: initial !important;
+}
+/*------------- calender icon pointer cursor------------------*/
+ .glyphicon-calendar{
+        cursor:pointer !important;
+    }
+
+ /*-------------------- input focus -------------------*/
+ input,select,textarea :focus{
+     border:1px solid #1ab394 !important;
+ }

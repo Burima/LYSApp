@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B094F1CA-8355-4D70-909A-71C8DB6D256F}</ProjectGuid>
+    <ProjectGuid>{BD54AFF9-A65A-48D7-AC9D-1410E5112340}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LYSApp.Domain</RootNamespace>
@@ -30,8 +30,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MailChimp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,7 +54,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="ImageHelper.cs" />
+    <Compile Include="NotificationManagement\MandrillMailer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchManagement\ISearchManagement.cs" />
+    <Compile Include="SearchManagement\SearchManagement.cs" />
+    <Compile Include="StaticContentManagement\IStaticContentManagement.cs" />
+    <Compile Include="StaticContentManagement\StaticContentManagement.cs" />
+    <Compile Include="TransactionManagement\ITransactionManagement.cs" />
+    <Compile Include="TransactionManagement\TransactionManagement.cs" />
+    <Compile Include="UserManagement\IUserManagement.cs" />
+    <Compile Include="UserManagement\UserManagement.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LYSApp.Data\LYSApp.Data.csproj">
+      <Project>{4cce9be0-4948-46c2-9be7-5d07b9461308}</Project>
+      <Name>LYSApp.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LYSApp.Model\LYSApp.Model.csproj">
+      <Project>{5448af25-9919-4fdf-9a50-15fa70a924ce}</Project>
+      <Name>LYSApp.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

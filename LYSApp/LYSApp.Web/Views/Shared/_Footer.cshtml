@@ -1,4 +1,5 @@
-﻿<div class="home-footer">
+﻿@using LYSApp.Web.Services.Common
+<div class="home-footer">
     <div class="home-wrapper">
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
@@ -7,22 +8,22 @@
                     <li><a href="@Url.Action("About","Home")">About</a></li>
                     <li><a href="@Url.Action("Jobs", "Home")">Jobs</a></li>
                     <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
-                    <li><a href="@System.Configuration.ConfigurationManager.AppSettings.Get("BlogURL")" target="_blank">Blog</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">Policies</a></li>
+                    <li><a href="@LYSConfig.BlogUrl" target="_blank">Blog</a></li>
+                    <li><a >Help</a></li>
+                    <li><a >Policies</a></li>
                     <li><a href="@Url.Action("TermsAndCondition", "Home")">Terms & Privacy</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                 <div class="osLight footer-header">Discover</div>
                 <ul class="footer-nav pb20">
-                    <li><a href="#">Become a Member</a></li>
-                    <li><a href="#">Properties List</a></li>
-                    <li><a href="#">Sign In</a></li>
-                    <li><a href="#">Widgets</a></li>
-                    <li><a href="#">Components</a></li>
-                    <li><a href="#">Tables</a></li>
-                    <li><a href="#">Lists</a></li>
+                    <li><a >Become a Member</a></li>
+                    <li><a >Properties List</a></li>
+                    <li><a >Sign In</a></li>
+                    <li><a >Widgets</a></li>
+                    <li><a >Components</a></li>
+                    <li><a >Tables</a></li>
+                    <li><a >Lists</a></li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -35,24 +36,35 @@
                         <p>Tamil Nadu 600097</p>
                     </li>
                     <li>
-                        <a href="@System.Configuration.ConfigurationManager.AppSettings.Get("FacebookUrl")" target="_blank" class="btn btn-sm btn-icon btn-round btn-o btn-white"><span class="fa fa-facebook"></span></a> 
-                        <a href="@System.Configuration.ConfigurationManager.AppSettings.Get("TwitterUrl")" target="_blank" class="btn btn-sm btn-icon btn-round btn-o btn-white"><span class="fa fa-twitter"></span></a> 
-                        <a href="@System.Configuration.ConfigurationManager.AppSettings.Get("GooglePlusUrl")" target="_blank" class="btn btn-sm btn-icon btn-round btn-o btn-white"><span class="fa fa-google-plus"></span></a> 
-                        <a href="@System.Configuration.ConfigurationManager.AppSettings.Get("LinkedinUrl")" target="_blank" class="btn btn-sm btn-icon btn-round btn-o btn-white"><span class="fa fa-linkedin"></span></a> </li>
+                        <a href="@LYSConfig.FacebookUrl" target="_blank" class="btn btn-sm btn-icon btn-round btn-o btn-white"><span class="fa fa-facebook"></span></a> 
+                        <a href="@LYSConfig.TwitterUrl" target="_blank" class="btn btn-sm btn-icon btn-round btn-o btn-white"><span class="fa fa-twitter"></span></a> 
+                        <a href="@LYSConfig.GooglePlusUrl" target="_blank" class="btn btn-sm btn-icon btn-round btn-o btn-white"><span class="fa fa-google-plus"></span></a> 
+                        <a href="@LYSConfig.LinkedinUrl" target="_blank" class="btn btn-sm btn-icon btn-round btn-o btn-white"><span class="fa fa-linkedin"></span></a> </li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                 <div class="osLight footer-header">Subscribe to Our Newsletter</div>
-                <form role="form">
+                <form  role="form" id="form-Subscribe">
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email Address">
-                    </div>
+                        <input type="email" class="form-control" placeholder="Email Address" id="txtEmailForSubscribe" name="txtEmailForSubscribe" required>
+                    </div>                    
+                    <p id="subscribe-info" class="text-red"></p>                    
                     <div class="form-group">
-                        <a href="#" class="btn btn-green btn-block">Subscribe</a>
+                        <button type="button" class="btn btn-green btn-block btnSubscribe">Subscribe</button>
                     </div>
                 </form>
+                @*@using (Ajax.BeginForm("EmailSubscribe", "Account", FormMethod.Post, new AjaxOptions { UpdateTargetId = "subscribe-info" }))
+                {
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email Address" name="txtEmailForSubscribe" required value="">
+                    </div>
+                    <p id="subscribe-info" class="text-red"></p>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-green btn-block btnSubscribe">Subscribe</button>
+                    </div>
+                }*@
             </div>
         </div>
-        <div class="copyright">lockyourstay.com<br> &copy; 2015</div>
+        <div class="copyright">lockyourstay.com&copy; 2015</div>
     </div>
 </div>

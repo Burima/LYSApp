@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Lockyourstay | ConfirmAccount";
+}
+
+
+<style>
+    p {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        font-size: 1em;
+        color: #2E3B4E;
+    }
+
+    
+</style>
+<div class="container">
+    <div class="row body_div">
+        <h2>Confirm Account</h2>
+        <div class="row-padding-top-1">
+            @if (ViewBag.Error != null)
+            {
+                <p> @ViewBag.Error Please click <a  data-toggle="modal" data-target="#signin">here</a>  to log in. </p>
+            }
+            else
+            {
+                <p>
+                    Thank you for confirming your account. Please click <a data-toggle="modal" data-target="#signin">here</a>  to log in.
+                </p>
+            }
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.home-header').css("background-color", "#0eaaa6");
+        });
+    </script>
+}

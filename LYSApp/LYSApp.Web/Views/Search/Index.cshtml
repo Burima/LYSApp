@@ -1,0 +1,211 @@
+﻿@model List<LYSApp.Model.SearchResultViewModel>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/datepicker.css" rel="stylesheet" />
+<style>
+    #wrapper {
+    margin: 60px 0 0 0px !important;
+}
+</style>
+
+<!-- Content -->
+
+<div id="wrapper">
+    <div id="mapView">
+        <div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div>
+    </div>
+    <div id="content">
+        <div class="filter">
+            <h1 class="osLight">Filter your results</h1>
+            <a href="#" class="handleFilter"><span class="icon-equalizer"></span></a>
+            <div class="clearfix"></div>
+            <form class="filterForm">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
+                        <div class="formField">
+                            <input type="text" class="form-control" id="city" placeholder="City" autocomplete="on">
+                        </div>
+                    </div>
+                
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
+                        <div class="formField">
+                            <input type="text" class="form-control" id="area" placeholder="Area" autocomplete="on">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
+                        <div class="formField">
+                            <select class="form-control">
+                                <option selected="selected" disabled>--Sharing--</option>
+                                <option value="1">Single</option>
+                                <option value="2">Double</option>
+                                <option value="3">Triple</option>
+                                <option value="4">Four</option>
+                                <option value="5">Five</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
+                        <div class="formField">
+                            <select class="form-control">
+                                <option selected="selected" disabled>--Gender--</option>
+                                <option value="Male">Boys</option>
+                                <option value="Female">Girls</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
+                        <div class="formField">
+                            <label>Price Range</label>
+                            <div class="slider priceSlider">
+                                <div class="sliderTooltip">
+                                    <div class="stArrow"></div>
+                                    <div class="stLabel"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 
+                </div>
+             
+            </form>
+        </div>
+        <div class="resultsList">
+            <div class="row pglist">
+               @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var pg in Model)
+                    {
+                        
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <a class="card pg" pgDetailID="@pg.PGDetailID">
+                            <div class="figure">
+                                @*<input type="hidden" value="@pg.PGDetailID" name="PGID" class="pgid" />*@
+                                <img src="@Url.Content(pg.MinimumRentHouse.HouseImages.Count > 0 && pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath != String.Empty ? pg.MinimumRentHouse.HouseImages.FirstOrDefault().ImagePath : "./../Images/1-1-thmb.png")" alt="">
+                                <div class="figCaption">
+                                    <div>@pg.MinimumRentHouse.Rooms.FirstOrDefault().MonthlyRent</div>
+                                </div>
+                                <div class="figView"><span class="icon-eye"></span></div>
+                            </div>
+                            <h2>@pg.PGName</h2>
+                            <div class="cardAddress"><span class="icon-pointer"></span>@(pg.Address != null ? pg.Address : "Address not provided by PG Owner")</div>
+                            <div class="cardRating">
+                                <input type="hidden" value="@(pg.PGReviews.Count>0? pg.PGReviews.FirstOrDefault().Rating:0)" id="Rating" />
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </a>
+                    </div>
+                }
+                }
+          
+                else
+                {
+                    <p> No Search Results</p>
+                }
+
+            </div>
+            <ul class="pagination">
+                <li class="disabled"><a href="#"><span class="fa fa-angle-left"></span></a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#"><span class="fa fa-angle-right"></span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+@section scripts{
+
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery-ui-touch-punch.js"></script>
+<script src="~/Scripts/jquery.placeholder.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery.touchSwipe.min.js"></script>
+<script src="~/Scripts/jquery.slimscroll.min.js"></script>
+<script src="~/Scripts/jquery.visible.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?libraries=geometry&amp;libraries=places" type="text/javascript"></script>
+<script src="~/Scripts/infobox.js"></script>
+<script src="~/Scripts/jquery.tagsinput.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/app.js" type="text/javascript"></script>
+
+
+
+    
+<script type="text/javascript">
+    var PropertyDetailsURL = '@Url.Action("PropertyDetails", "Search", new { PGID=-1 })';
+    var props = [];
+    var PGList =eval('@Html.Raw(Json.Encode(Model))');  
+    var PGDetailsUrl = '@Url.Action("PropertyDetails", "Search")';
+    $(document).ready(function () {
+        populateMap();
+        fnFillHouseRatings();        
+    });
+
+    function populateMap() {
+
+        var prop; //object declared here so that memory allocation is done one time
+        var position;
+
+        
+        for (var i = 0; i < PGList.length ; i++) {
+            //var count = i;
+            prop = {};
+            position = {};
+            prop.pgDetailID = PGList[i].PGDetailID;
+            prop.title = PGList[i].PGName;
+            prop.image = "../../../Images/1-1-thmb.png";
+            prop.price = PGList[i].MinimumRentHouse.Rooms[0].MonthlyRent;
+            prop.address = PGList[i].Address;
+            position.lat = PGList[i].Latitude;
+            position.long = PGList[i].Longitude;
+            prop.position = position;
+            markerIcon: "marker-green.png"
+
+            props.push(prop);
+
+        }
+       
+    }
+
+    function fnFillHouseRatings() {
+        eval("var houseRatings = " + $("#Rating").val());
+      
+            var data = '<li class="list-group-item">' +
+                          '<p id = "pHouseRating"><span class=""fa fa-star""><span style="width:' + (houseRatings * 20) + '%;"></span></span></p>'
+            '</li>';
+
+            $('#cardRating').append(data);
+       
+    }
+    $(".pg").click(function () {        
+        GetPropertyDetails($(this).attr("pgDetailID"));
+        //location.href = PropertyDetailsURL.replace("-1", $(this).attr("pgDetailID"));
+    });
+   
+    function GetPropertyDetails(pgid) {
+        //alert(pgid); remove this alert after testing only
+        if (pgid != undefined && pgid > 0) {
+            location.href = PropertyDetailsURL.replace("-1", pgid);
+        }
+    }
+   
+    </script>
+<script src="~/Scripts/Custom/User/SearchHome.js"></script>
+}
+
+
+

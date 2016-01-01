@@ -23,8 +23,14 @@
     font-size: 130%;
 }
 .career-botton{
-    margin-top:2%; 
+    
     font-size: 130%;
+    padding: 8px 0px;
+}
+.career-details-botton{
+     
+    font-size: 130%;
+    padding: 5px 0px;
 }
 .job-button {
     font-weight: 700;
@@ -32,5 +38,26 @@
     background: #1ab394;
     border-radius: 3px;
     color: #fff;
-    padding: 7px 15px 8px 15px;
+    padding: 7px 33px 8px 30px;
+}
+.job-details-button {
+    font-weight: 700;
+    font-size: 0.865em;
+    background: #676a6c;
+    border-radius: 3px;
+    color: #fff;
+    padding: 6px 10px 6px 10px;
+}
+.job-details{
+    background: #F9F9F9;
+    border: 1px solid #E1E1E8;
+    margin: 10px 0;
+    padding: 8px;
+}
+
+.btn-know-more{
+    color: #fff;
+    background-color: #676a6c;
+    border-color: #285e8e;
+    padding: 4px 10px  3px 10px ;
 }

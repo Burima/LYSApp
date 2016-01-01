@@ -1,0 +1,58 @@
+﻿/*a:hover {
+   color: #72c02c;
+}
+
+a,
+a:focus, 
+a:hover, 
+a:active {
+   outline: 0 !important;
+}*/
+
+
+body { 
+   color: #333; 
+   font-size: 13px;
+   line-height: 1.6;
+}
+#demo3{
+    height : 250px;
+    width : 250px;
+}
+
+.container.content.profile{
+    padding-top: 10%;
+    padding-bottom: 40px;
+}
+.content{
+    box-sizing: border-box;
+    display:block;
+}
+/*---- left menu css -----*/
+#leftMenu .list-group-item.active{
+    background-color : rgb(14, 170, 166);
+}
+#leftMenu .list-group-item.active a{    
+    color : white !important;
+}
+
+.panel{
+    border: 1px solid #dce0e0;
+
+}
+
+.panel-heading{
+    background-color: #edefed;
+}
+
+ div.jcrop-holder input[type=radio] {
+            display: none !important;
+ }
+
+
+
+
+
+
+
+

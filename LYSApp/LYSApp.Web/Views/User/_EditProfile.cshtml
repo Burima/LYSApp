@@ -1,0 +1,201 @@
+﻿@using Newtonsoft.Json
+@model LYSApp.Model.UserViewModel
+
+
+@using (Ajax.BeginForm("ViewProfile", "User", new AjaxOptions { UpdateTargetId = "divMain" ,OnSuccess = "OnSuccess",OnFailure = "OnFailure"}))
+{
+<!-- Show message -->
+
+    
+<div class="col-md-9" id="divMain">
+    <div class="panel content">
+        <div class="panel-heading">
+            Required
+        </div>
+        <div class="panel-body">
+            @*---User ID---*@
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.HiddenFor(model=>model.UserID)
+                </div>
+                <div class="col-md-9">
+                    @Html.HiddenFor(model => model.UserName)
+                </div>
+            </div>
+            @*---First Name---*@
+            <div class="row">
+                <div class="col-md-3">
+                    First Name
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", maxlength = "50", placeholder = "FirstName", tabIndex = "1" })
+                </div>
+            </div>
+
+            @*---Last Name---*@
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Last Name
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", maxlength = "50", placeholder = "LastName", tabIndex = "2" })
+                </div>
+            </div>
+
+            @*---Gender---*@
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    I am
+                </div>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>{
+                        new SelectListItem{ Text="Male", Value="1"},
+                        new SelectListItem{ Text="Female", Value="2"}
+                        }, "--- Select ---", new { @class = "form-control", maxlength = "50", placeholder = "Gender", tabIndex = "3" })
+                </div>
+            </div>
+
+            @*---Email Address---*@
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Email Address
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email", tabIndex = "4" })
+                </div>
+            </div>
+
+            @*---Phone Number---*@
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Phone Number
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", maxlength = "50", placeholder = "Phone Number", tabIndex = "5" })
+                </div>
+            </div>
+
+            @*---Present Address---*@
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Present Address
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.PresentAddress, new { @class = "form-control", maxlength = "50", placeholder = "Present Address", tabIndex = "6" })
+                </div>
+            </div>
+
+            @*---Permanent Address---*@
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Permanent Address
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.PermanentAddress, new { @class = "form-control", maxlength = "50", placeholder = "Permanent Address", tabIndex = "7" })
+                </div>
+            </div>
+
+            @*---Govt ID Type---*@
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Govt ID Type
+                </div>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.GovtIDType, new List<SelectListItem>{
+                        new SelectListItem{ Text="PAN Card", Value="1"},
+                        new SelectListItem{ Text="Voter ID Card", Value="2"},
+                        new SelectListItem{ Text="Driving License", Value="3"},
+                        new SelectListItem{ Text="Aadhar Card", Value="4"},
+                        new SelectListItem{ Text="Passport", Value="5"}
+                        }, "--- Select ---", new { @class = "form-control", maxlength = "50", tabIndex = "8" })
+                </div>
+            </div>
+
+            @*---Govt ID Number----*@
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Govt ID Number
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.GovtID, new { @class = "form-control", maxlength = "50", placeholder = "ID Number", tabIndex = "9" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-heading">
+            Optional
+        </div>
+        <div class="panel-body">
+            <div class="row ">
+                <div class="col-md-3">
+                    Profession
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.UserProfession, new List<SelectListItem>{
+                            new SelectListItem{ Text="Self-Employed", Value="1"},
+                            new SelectListItem{ Text="Salaried", Value="2"}
+                            }, "--- Select ---", new { @class = "form-control", maxlength = "50",  tabIndex = "10" })
+                    </div>
+                </div>
+
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Office Address
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.OfficeLocation, new { @class = "form-control", maxlength = "50", placeholder = "Office Address", tabIndex = "11" })
+                </div>
+            </div>
+
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Current Employer
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.CurrentEmployer, new { @class = "form-control", maxlength = "50", placeholder = " Current Employer", tabIndex = "12" })
+                </div>
+            </div>
+
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Employee ID
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.EmployeeID, new { @class = "form-control", maxlength = "50", placeholder = "Employee ID", tabIndex = "13" })
+                </div>
+            </div>
+
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Highest Education
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.HighestEducation, new { @class = "form-control", maxlength = "50", placeholder = "Highest Education", tabIndex = "14" })
+                </div>
+            </div>
+
+            <div class="row row-padding-top-5">
+                <div class="col-md-3">
+                    Institution Name
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.InstitutionName, new { @class = "form-control", maxlength = "50", placeholder = "Institution Name", tabIndex = "15" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input id="btnSubmit" type="submit" class="btn btn-lg btn-green center-block btn-block" value="Save">
+</div>
+}
+<script>
+    function OnSuccess(data) {
+       alert("Success")
+    }
+
+    function OnFailure(data) {
+        alert("Failure")
+    }
+</script>

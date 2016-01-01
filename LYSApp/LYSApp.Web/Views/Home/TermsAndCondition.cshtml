@@ -3,6 +3,7 @@
 }
 
 <link href='@Url.Content("~/Content/Custom/Home/TermsAndConditions.css")' rel="stylesheet" />
+<div class="hidden-lg hidden-md row-spacer-small"></div>
 <div class="container termsandcond-container" @*style="margin-top:5%; margin-bottom:5%"*@>
     @*<font size="3">*@
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 align-left">
@@ -57,10 +58,3 @@
         </div>
     </div>
 </div>
-@section scripts{
-    <script>
-    $(document).ready(function () {
-        $('.home-header').css("background-color", "#0eaaa6");
-    });
-    </script>
-}

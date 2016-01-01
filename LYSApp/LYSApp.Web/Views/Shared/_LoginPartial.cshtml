@@ -1,22 +1,29 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+﻿@model LYSApp.Model.AccountViewModel
+@using (Ajax.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "sec-user-info", LoadingElementId = "loader" }))
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
-    }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <div class="form-group">
+        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            @*<input type="email" class="form-control" id="inputEmail" placeholder="Email">*@
+            @Html.TextBoxFor(model => model.LoginViewModel.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email", tabIndex = "1" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            @*<input type="password" class="form-control" id="inputPassword" placeholder="Password">*@
+            @Html.PasswordFor(model => model.LoginViewModel.Password, new { @class = "form-control", maxlength = "50", placeholder = "Password", tabIndex = "2" })
+            <p class="help-block"><a href="#">Forgot your password?</a></p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox custom-checkbox"><label><input type="checkbox" checked="checked"><span class="fa fa-check"></span> Remember me</label></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" class="btn btn-o btn-green" value="Sign In" />
+        </div>
+    </div>
 }
