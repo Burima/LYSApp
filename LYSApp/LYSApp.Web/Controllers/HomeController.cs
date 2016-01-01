@@ -34,5 +34,10 @@ namespace LYSApp.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult ListYourProperty()
+        {
+            return View();
+        }
     }
 }

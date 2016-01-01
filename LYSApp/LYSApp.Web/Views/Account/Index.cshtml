@@ -24,11 +24,11 @@
     <div class="home-caption">
         <div class="home-title">Now we are collecting data. </div>
         <div class="home-subtitle">With lockyourstay - one-stop store for your Dream Stay</div>
-        <a href="" class="btn btn-lg btn-black">List Your Property</a>
+        <a href="" class="btn btn-lg btn-black" data-toggle="modal" data-target="#modalListYourProperty">List Your Property</a>
     </div>
 
    <!-- Search -->
-   @Html.Partial("_SearchPartial", new LYSApp.Model.SearchViewModel {AreaID=0})
+   @*@Html.Partial("_SearchPartial", new LYSApp.Model.SearchViewModel {AreaID=0})*@
    <!-- end Search -->
 </div> <!-- End Hero-->
 
@@ -80,7 +80,7 @@
             </a>
         </div>
     </div>
-    <div class="row pb40">
+    @*<div class="row pb40">
         <h2 class="osLight">Recently Listed Properties</h2><br />
         <div class="row padding-index">
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
@@ -204,7 +204,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="row pb40 padding-index">
         <div class="twitter-heading col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h2 class="osLight">lockyourstay On Twitter</h2>
@@ -285,7 +285,27 @@
             </div>
         </div>
     </div>
-
+ <!-- List your property Modal -->
+<div class="modal inmodal" id="modalListYourProperty" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated flipInY">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">List Your PG/Hostel(s)</h4>
+                <small class="font-bold">Send us your details we'll get back to you soon.</small>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("ListYourProperty", "Account", FormMethod.Post, new { role = "form", id = "form-SignUp", autocomplete = "off" }))
+                {
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div> <!-- End List your property Modal -->
 
 <!-- End Main Content -->
 @section scripts{
