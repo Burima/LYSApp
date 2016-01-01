@@ -19,10 +19,10 @@ namespace LYSApp.Model
         public Nullable<bool> isDeleted { get; set; }
         public Nullable<int> DeletedBy { get; set; }
         public Nullable<System.DateTime> DeletedOn { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<long> CreatedBy { get; set; }
         public bool IsDefault { get; set; }
 
-        public virtual Apartment Apartment { get; set; }
         public virtual ICollection<House> Houses { get; set; }
+        public virtual Apartment Apartment { get; set; }
     }
 }

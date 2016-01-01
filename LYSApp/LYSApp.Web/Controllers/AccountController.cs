@@ -66,8 +66,8 @@ namespace LYSApp.Web.Controllers
         }
 
         //
-        // POST: /Account/Login
-        //[HttpPost]
+        //POST: /Account/Login
+        [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(AccountViewModel model, string returnUrl)

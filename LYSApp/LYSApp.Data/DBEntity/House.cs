@@ -37,9 +37,9 @@ namespace LYSApp.Data.DBEntity
         public int BlockID { get; set; }
         public string HouseNo { get; set; }
     
-        public virtual Block Block { get; set; }
         public virtual ICollection<HouseImage> HouseImages { get; set; }
         public virtual ICollection<Room> Rooms { get; set; }
         public virtual ICollection<HouseAmenity> HouseAmenities { get; set; }
+        public virtual Block Block { get; set; }
     }
 }

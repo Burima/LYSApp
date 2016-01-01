@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace LYSApp.Model
 {
-    public class HouseAmenity
+    public partial class HouseAmenity
     {
-        [Key]
-        public int AminityID { get; set; }
+        public int HouseAmenityID { get; set; }
         public int HouseID { get; set; }
         public bool AC { get; set; }
         public bool Fridge { get; set; }
