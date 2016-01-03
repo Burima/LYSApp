@@ -15,7 +15,7 @@ namespace LYSApp.Web
 
             routes.MapRoute(
                name: "ListYourProperty",
-               url: "{ListYourProperty}/{action}/{id}",
+               url: "{list-your-property}/{action}/{id}",
                defaults: new { controller = "Home", action = "ListYourProperty", id = UrlParameter.Optional }
            );
 

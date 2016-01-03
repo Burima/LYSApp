@@ -167,6 +167,6 @@ input[readonly] {
     }
 
  /*-------------------- input focus -------------------*/
- input,select,textarea :focus{
+ input:focus,select:focus,textarea :focus{
      border:1px solid #1ab394 !important;
  }
