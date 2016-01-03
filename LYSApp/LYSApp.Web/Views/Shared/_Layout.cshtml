@@ -218,7 +218,7 @@
     <script src='@Url.Content("~/Scripts/home.js")' type="text/javascript"></script>
     @Scripts.Render("~/bundles/validate")
     @Scripts.Render("~/bundles/lockyourstay")
-
+    @Html.Partial("_Show_And_Hide_Progress")
     <script>
         var EmailSubscribeURL = '@Url.Action("EmailSubscribe","Account")'
         var ForgotPasswordURL = '@Url.Action("ForgotPassword", "Account")'
