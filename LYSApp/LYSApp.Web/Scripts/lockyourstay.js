@@ -99,3 +99,5 @@ function isMobile(evt) {
 var windowheight = $(document).height();
 $(".body_div").css("min-height", (windowheight - (windowheight / 4)));
 $(".body_div").css("padding-top", "5%");
+
+

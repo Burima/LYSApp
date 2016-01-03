@@ -413,6 +413,7 @@
     <Content Include="Views\Search\ReviewBooking.cshtml" />
     <Content Include="Views\Search\_FareDetailsPartial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Show_And_Hide_Progress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

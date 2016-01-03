@@ -101,6 +101,7 @@
     <Compile Include="UserDetail.cs" />
     <Compile Include="ViewModel\AccountViewModels.cs" />
     <Compile Include="ViewModel\HouseReviewModel.cs" />
+    <Compile Include="ViewModel\ListYourPropertyViewModel.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

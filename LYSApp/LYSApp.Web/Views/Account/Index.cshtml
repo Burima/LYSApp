@@ -479,7 +479,34 @@
             }
             $('.btn-list-your-property').click(function () {
                 if (validateForm()) {
-                    $('#form-list-your-property').submit();
+                    var model = { FirstName: $("#txtFirstName").val(), LastName: $("#txtLastName").val(), Email: $("#txtEmail").val(), Mobile: $("#txtMobile").val(), Address: $("#txtAddress").val() };
+                   
+                    //alert(model);
+                    showProgress(false, "Listing your record. Please wait...");
+                    $.ajax({
+                        url: "/list-your-property",
+                        type: 'POST',
+                        data:  JSON.stringify(model),
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data, textStatus, XMLHttpRequest) {
+                            if (data.toUpperCase() == "ERROR") {
+                                ShowLoginDiv();
+                                hideProgress();
+                                $("#login-alert").show();
+                            }
+                            else {
+                                location.href = HomeSummaryUrl;
+                            }
+
+
+                        },
+                        error: function (xhr, status) {
+                            hideProgress();
+                        }
+
+
+                    });
                 }
 
             });
