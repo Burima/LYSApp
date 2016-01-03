@@ -19,7 +19,6 @@ $(document).ready(function () {
                 $("#" + id).css("border", "1px solid #e5e6e7");
                 flag = false;
             }
-
         });
     });
 });
@@ -83,7 +82,19 @@ function inputkeyup() {
     })
 };
 //END: Number and character validation parts
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 
+function isMobile(evt) {
+    var obj = (evt.srcElement) ? evt.srcElement : evt.target;
+    $(obj).val($(obj).val().replace(/[^0-9]/g, '').replace(/([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\/? ])+/g, '-').replace(/^(-)+|(-)+$/g, ''));
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    if ((charCode >= 48 && charCode <= 57) || (charCode >= 96 && charCode <= 105) || ($.inArray(charCode, Operable_keys) != -1) || evt.length==10)
+        return true;
+    return false;
+}
 /* Change height of the page based on the window height*/
 var windowheight = $(document).height();
 $(".body_div").css("min-height", (windowheight - (windowheight / 4)));

@@ -312,11 +312,11 @@
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
                                 <label class="sr-only" for="txtFirstName">First Name</label>
-                                <input type="text" class="form-control" id="txtFirstName" placeholder="First Name" data-validation="required">                              
+                                <input type="text" class="form-control required" id="txtFirstName" placeholder="First Name" >                              
                             </div>
                             <div class="col-md-6 col-xs-12">
                                 <label class="sr-only" for="txtLastName">Last Name</label>
-                                <input type="text" class="form-control" id="txtLastName" placeholder="Last Name">                                
+                                <input type="text" class="form-control " id="txtLastName" placeholder="Last Name">                                
                             </div>
                         </div>
 
@@ -325,11 +325,11 @@
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
                                 <label class="sr-only" for="txtEmail">Email</label>
-                                <input type="text" class="form-control" id="txtEmail" placeholder="Email" data-validation="email">                                
+                                <input type="text" class="form-control  email" id="txtEmail" placeholder="Email" >                                
                             </div>
                             <div class="col-md-6 col-xs-12">
                                 <label class="sr-only" for="txtMobile">Mobile</label>
-                                <input type="text" class="form-control" id="txtMobile" placeholder="Mobile">                                
+                                <input type="text" class="form-control numbersAlone mobile" id="txtMobile" placeholder="Mobile" maxlength="10">                                
                             </div>
                         </div>
                     </div>
@@ -338,7 +338,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="sr-only" for="txtCity">Address</label>
-                                <textarea class="form-control" id="txtAddress" placeholder="Address"></textarea>                              
+                                <textarea class="form-control required" id="txtAddress" placeholder="Address" ></textarea>                              
                             </div>
                         </div>
                     </div>
@@ -346,7 +346,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-green" tabindex="6">Save changes</button>
+                <button type="button" class="btn btn-green btn-list-your-property" tabindex="6">Save changes</button>
             </div>
             </form>
         </div>
@@ -416,5 +416,74 @@
  <!-- MVP1 -->
 @*<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js"></script>*@
 @*<script src='@Url.Content("~/Scripts/jquery-formvalidator.min.js")'></script>*@
+    <script>
+        //jQuery.extend(jQuery.validator.messages, {
+        //    required: "Required"
+        //});
+        $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
+        $(".email").on("keyup keydown keypress", function () {
+            var id = $(this).attr("id");
+            var value = $("#" + id).val();
+            if (value.trim() == "" || validateEmail(value) == false) {
+                //console.log("no value detected " + id + "----------" + value);
+                $("#" + id).css("border", "1px solid red");
+            } else {
+                $("#" + id).css("border", "1px solid #e5e6e7");
+            }
+        });
+        $(document).ready(function () {
+            function validateForm() {
+                var flag = false;
+                $('.required').each(function () {                   
+                        var id = $(this).attr("id");
+                        var value = $("#" + id).val();                        
+                        if (value.trim() == "") {
+                            //console.log("no value detected" + id + "----------" + value);
+                            $("#" + id).css("border", "1px solid red");
+                            flag = false;
+                        }
+                        else {
+                            $("#" + id).css("border", "1px solid #e5e6e7");
+                            flag = true;
+                        }
+                   
+                });
+
+                $('.email').each(function () {
+                    var id = $(this).attr("id");
+                    var value = $("#" + id).val();
+                    if (validateEmail(value) == false) {
+                        $("#" + id).css("border", "1px solid red");
+                        flag = false;
+                    }
+                    else {
+                        $("#" + id).css("border", "1px solid #e5e6e7");
+                        flag = true;
+                    }
+                });
+
+                $('.mobile').each(function () {
+                    var id = $(this).attr("id");
+                    var value = $("#" + id).val();
+                    if (value.length!=10) {
+                        $("#" + id).css("border", "1px solid red");
+                        flag = false;
+                    }
+                    else {
+                        $("#" + id).css("border", "1px solid #e5e6e7");
+                        flag = true;
+                    }
+                });
+
+                return flag;
+            }
+            $('.btn-list-your-property').click(function () {
+                if (validateForm()) {
+                    $('#form-list-your-property').submit();
+                }
+
+            });
+        });
+    </script>
 <!-- End MVP1 -->
 }
