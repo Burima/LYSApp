@@ -62,13 +62,7 @@
         }
 
     });
-    //this method will show the modal message. content will be passes in the parameter data.
-    function showModalMessage(data) {
-        $('#spnMessage').html(data);
-        $('#modal-message').modal('show');
-        //hide message modal after 5sec
-        window.setTimeout(function () { $('#modal-message').modal('hide'); }, 5000);
-    };
+    
     //subscribe email function
     $('.btnSubscribe').click(function () {
         if ($('#form-Subscribe').valid()) {
@@ -164,6 +158,7 @@
 
             //alert(model);
             $('#modal-list-your-property').modal('hide');
+            $('.btn-list-your-property').prop('disabled', true);
             showProgress(false, "Listing your record. Please wait...");
             $.ajax({
                 url: ListYourPropertyURL,
@@ -173,10 +168,13 @@
                 contentType: "application/json",
                 success: function (data, textStatus, XMLHttpRequest) {                    
                     hideProgress();
+                    $('.btn-list-your-property').prop('disabled', false);
+                    $('#form-list-your-property').find("input, textarea").val("");
                     showModalMessage(data);
                 },
                 error: function (xhr, status) {                    
                     hideProgress();
+                    $('.btn-list-your-property').prop('disabled', false);
                     showModalMessage("Something went wrong! Please contact support@lockyourstay.com.");
                 }
 
@@ -187,3 +185,10 @@
     });
 });
 /*----------------------------- End List your property functionality ---------------------------------------*/
+//this method will show the modal message. content will be passes in the parameter data.
+function showModalMessage(data) {
+    $('#spnMessage').html(data);
+    $('#modal-message').modal('show');
+    //hide message modal after 5sec
+    window.setTimeout(function () { $('#modal-message').modal('hide'); }, 5000);
+};

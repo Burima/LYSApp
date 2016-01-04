@@ -65,10 +65,9 @@
         $(document).ready(function () {
             $('.ContactButton').click(function () {
                 if ($('#form-contact').valid()) {
-                    //$('#form-contact-us').submit();
+                    $('.ContactButton').prop('disabled', true);
                     var model = { Name: $("#txtName").val(), Email: $("#txtEmail").val(), Subject: $("#txtSubject").val(), Message: $("#txtMessage").val() };
-
-                    showProgress(false, "Listing your record. Please wait...");
+                    
                     $.ajax({
                         url: ContactURL,
                         type: 'POST',
@@ -76,11 +75,13 @@
                         dataType: 'html',
                         contentType: "application/json",
                         success: function (data, textStatus, XMLHttpRequest) {
-                            hideProgress();
+                            $('.ContactButton').prop('disabled', false);
+                            $('#form-contact').find("input, textarea").val("");
                             showModalMessage(data);
+
                         },
                         error: function (xhr, status) {
-                            hideProgress();
+                            $('.ContactButton').prop('disabled', true);
                             showModalMessage("Something went wrong! Please contact support@lockyourstay.com.");
                         }
                     });

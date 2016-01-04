@@ -134,13 +134,23 @@ namespace LYSApp.Domain.NotificationManagement
 
         public void NotifySuperAdmin(string email,string subject, string body, string templateName)
         {
+            var toList = ConfigurationManager.AppSettings["SuperAdminToEmails"].Split(';');
+            var recipientCount = toList.Count();
+            var count = 0;
+
+            MN.Messages.Recipient[] recipients = new MN.Messages.Recipient[recipientCount];
+            foreach (var to in toList)
+            {
+                recipients[count] = new MN.Messages.Recipient(to, to);
+                count++;
+            }
             var m = new MandrillApi(key);
             //Mail settings for mandrill
             var message = new MN.Messages.Message();
             message.Subject = subject;
             message.FromEmail = ConfigurationManager.AppSettings["SupportEmailID"];
             message.FromName = "LockYourStay";
-            message.To = new[] { new MN.Messages.Recipient(email, email) };
+            message.To = recipients;
 
             //mergevars for dynamic content in mandrill template
             var globalMergeVars = new Mandrill.Merges();
