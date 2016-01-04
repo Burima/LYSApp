@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     //if any error in log in
-    if (loginError != '') {       
+    if (loginError != '') {
         $('#signin span.errormessage').html(loginError);
         $('#signin div.errorblock').removeClass('hidden');
         $('#signin').modal('show');
@@ -50,11 +50,7 @@
                 dataType: 'html',
                 success: function (data, textStatus, XMLHttpRequest) {
                     $('#forgotpassword').modal('hide');
-                    $('#spnMessage').html(data);
-                    $('#modal-message').modal('show');
-                    //hide message modal after 5sec
-                    window.setTimeout(function () { $('#modal-message').modal('hide'); }, 5000);
-
+                    showModalMessage(data);
 
                 },
                 error: function (xhr, status) {
@@ -66,8 +62,13 @@
         }
 
     });
-
-
+    //this method will show the modal message. content will be passes in the parameter data.
+    function showModalMessage(data) {
+        $('#spnMessage').html(data);
+        $('#modal-message').modal('show');
+        //hide message modal after 5sec
+        window.setTimeout(function () { $('#modal-message').modal('hide'); }, 5000);
+    };
     //subscribe email function
     $('.btnSubscribe').click(function () {
         if ($('#form-Subscribe').valid()) {
@@ -95,27 +96,27 @@
             return false;
         }
     });
-});
 
-/*----------------------------- List your property functionality ---------------------------------------*/
 
-        $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
-$(".email").on("keyup keydown keypress", function () {
-    var id = $(this).attr("id");
-    var value = $("#" + id).val();
-    if (value.trim() == "" || validateEmail(value) == false) {
-        //console.log("no value detected " + id + "----------" + value);
-        $("#" + id).css("border", "1px solid red");
-    } else {
-        $("#" + id).css("border", "1px solid #e5e6e7");
-    }
-});
-$(document).ready(function () {
+    /*----------------------------- List your property functionality ---------------------------------------*/
+
+    $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
+    $(".email").on("keyup keydown keypress", function () {
+        var id = $(this).attr("id");
+        var value = $("#" + id).val();
+        if (value.trim() == "" || validateEmail(value) == false) {
+            //console.log("no value detected " + id + "----------" + value);
+            $("#" + id).css("border", "1px solid red");
+        } else {
+            $("#" + id).css("border", "1px solid #e5e6e7");
+        }
+    });
+
     function validateForm() {
         var flag = false;
-        $('.required').each(function () {                   
+        $('.required').each(function () {
             var id = $(this).attr("id");
-            var value = $("#" + id).val();                        
+            var value = $("#" + id).val();
             if (value.trim() == "") {
                 //console.log("no value detected" + id + "----------" + value);
                 $("#" + id).css("border", "1px solid red");
@@ -125,7 +126,7 @@ $(document).ready(function () {
                 $("#" + id).css("border", "1px solid #e5e6e7");
                 flag = true;
             }
-                   
+
         });
 
         $('.email').each(function () {
@@ -144,7 +145,7 @@ $(document).ready(function () {
         $('.mobile').each(function () {
             var id = $(this).attr("id");
             var value = $("#" + id).val();
-            if (value.length!=10) {
+            if (value.length != 10) {
                 $("#" + id).css("border", "1px solid red");
                 flag = false;
             }
@@ -159,32 +160,23 @@ $(document).ready(function () {
     $('.btn-list-your-property').click(function () {
         if (validateForm()) {
             var model = { FirstName: $("#txtFirstName").val(), LastName: $("#txtLastName").val(), Email: $("#txtEmail").val(), Mobile: $("#txtMobile").val(), Address: $("#txtAddress").val() };
-                   
+
             //alert(model);
             $('#modal-list-your-property').modal('hide');
             showProgress(false, "Listing your record. Please wait...");
             $.ajax({
                 url: "/list-your-property",
                 type: 'POST',
-                data:  JSON.stringify(model),
-                dataType: 'json',
+                data: JSON.stringify(model),
+                dataType: 'html',
                 contentType: "application/json",
-                success: function (data, textStatus, XMLHttpRequest) {
+                success: function (data, textStatus, XMLHttpRequest) {                    
                     hideProgress();
-                    if (data.toUpperCase() == "SUCCESS") {
-                                
-                        //show success modal
-                                
-                    }
-                    else {
-                        //show failure modal
-                    }
-
-
+                    showModalMessage(data);
                 },
-                error: function (xhr, status) {
+                error: function (xhr, status) {                    
                     hideProgress();
-                    //show failure modal
+                    showModalMessage("Something went wrong! Please contact support@lockyourstay.com.");
                 }
 
 

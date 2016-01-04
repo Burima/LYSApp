@@ -14,6 +14,7 @@ namespace LYSApp.Web.Controllers
     public class HomeController : Controller
     {
         private IOwnerPropertyListingRequestManagement ownerPropertyListingRequestManagement;
+       
         public HomeController(OwnerPropertyListingRequestManagement ownerPropertyListingRequestManagement)
         {
             this.ownerPropertyListingRequestManagement = ownerPropertyListingRequestManagement;
@@ -54,12 +55,13 @@ namespace LYSApp.Web.Controllers
                 delegateOwnerPropertyListingRequest del = new delegateOwnerPropertyListingRequest(mailer.NotifyUser);
                 del += mailer.NotifySuperAdmin;
                 del += ownerPropertyListingRequestManagement.AddOwnerPropertyListingRequest;
-                return Content("SUCCESS");
+                del(model);
+                return Content("Thank you for reaching us. We'll get back to you soon.");
                 
             }
             catch (Exception ex)
             {
-                return Content("ERROR");
+                return Content("Something went wrong! Please contact support@lockyourstay.com.");
             }
            
         }

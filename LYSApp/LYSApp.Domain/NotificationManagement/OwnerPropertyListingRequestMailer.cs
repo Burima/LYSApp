@@ -20,7 +20,7 @@ namespace LYSApp.Domain.NotificationManagement
             var m = new MandrillApi(key);
             //Mail settings for mandrill
             var message = new MN.Messages.Message();
-            message.Subject = "Thank you for choosing Lockyoustay fr listing your property";
+            message.Subject = "Thank you for choosing Lockyoustay for listing your property";
             message.FromEmail = ConfigurationManager.AppSettings["SupportEmailID"];
             message.FromName = "LockYourStay";
             message.To = new[] { new MN.Messages.Recipient(model.Email,model.FirstName) };
