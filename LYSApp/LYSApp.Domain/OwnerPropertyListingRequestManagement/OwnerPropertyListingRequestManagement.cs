@@ -20,11 +20,11 @@ namespace LYSApp.Domain.OwnerPropertyListingRequestManagement
             Mapper.CreateMap<Model.OwnerPropertyListingRequestViewModel, Data.DBEntity.OwnerPropertyListingRequest>();
         }
 
-        public void AddOwnerPropertyListingRequest(OwnerPropertyListingRequestViewModel model)
+        public int AddOwnerPropertyListingRequest(OwnerPropertyListingRequestViewModel model)
         {
             var dbOwnerPropertyListingRequest = Mapper.Map<Model.OwnerPropertyListingRequestViewModel, Data.DBEntity.OwnerPropertyListingRequest>(model);
             ownerPropertyListingRequestRepository.Insert(dbOwnerPropertyListingRequest);
-            unitOfWork.SaveChanges();
+            return unitOfWork.SaveChanges();
         }
              
     }

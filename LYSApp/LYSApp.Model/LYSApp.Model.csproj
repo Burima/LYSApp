@@ -100,6 +100,7 @@
     <Compile Include="UserClaim.cs" />
     <Compile Include="UserDetail.cs" />
     <Compile Include="ViewModel\AccountViewModels.cs" />
+    <Compile Include="ViewModel\ContactViewModel.cs" />
     <Compile Include="ViewModel\HouseReviewModel.cs" />
     <Compile Include="ViewModel\OwnerPropertyListingRequestViewModel.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />

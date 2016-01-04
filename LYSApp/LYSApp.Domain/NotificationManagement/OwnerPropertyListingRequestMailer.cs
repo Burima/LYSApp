@@ -11,10 +11,9 @@ using MN = MailChimp.Types.Mandrill;
 
 namespace LYSApp.Domain.NotificationManagement
 {
-    public class OwnerPropertyListingRequestMailer
+    public class OwnerPropertyListingRequestMailer : IOwnerPropertyListingRequestMailer
     {
-        string key = ConfigurationManager.AppSettings["MandrillKey"];
-        
+        string key = ConfigurationManager.AppSettings["MandrillKey"];        
         public void NotifyUser(OwnerPropertyListingRequestViewModel model)
         {
             var m = new MandrillApi(key);
@@ -28,7 +27,7 @@ namespace LYSApp.Domain.NotificationManagement
             //mergevars for dynamic content in mandrill template
             var globalMergeVars = new Mandrill.Merges();
             globalMergeVars.Add("SUBJECT", message.Subject);
-            globalMergeVars.Add("FirstName", model.FirstName);
+            globalMergeVars.Add("NAME", model.FirstName+" "+model.LastName);
             globalMergeVars.Add("Body", "We have received request for listing your property.We have forwarded your request to our concern team and will update you soon.");
 
             message.GlobalMergeVars = globalMergeVars; // common information for all receipient
@@ -36,8 +35,8 @@ namespace LYSApp.Domain.NotificationManagement
             //dynamic template content
             var templateContent = new List<Mandrill.NameContentPair<string>>();
             templateContent.Add(new Mandrill.NameContentPair<string>("SUBJECT", message.Subject));
-            templateContent.Add(new Mandrill.NameContentPair<string>("FirstName", model.FirstName));
-            templateContent.Add(new Mandrill.NameContentPair<string>("Body", "We have received request for listing your property.We have forwarded your request to our concern team and will update you soon."));
+            templateContent.Add(new Mandrill.NameContentPair<string>("NAME", model.FirstName + " " + model.LastName));
+            templateContent.Add(new Mandrill.NameContentPair<string>("BODY", "We have received request for listing your property.We have forwarded your request to our concern team and will update you soon."));
 
             //Send mail
             m.SendTemplate("Notify User", templateContent, message);
@@ -65,22 +64,22 @@ namespace LYSApp.Domain.NotificationManagement
             //mergevars for dynamic content in mandrill template
             var globalMergeVars = new Mandrill.Merges();
             globalMergeVars.Add("SUBJECT", message.Subject);
-            globalMergeVars.Add("FirstName", model.FirstName);
-            globalMergeVars.Add("LastName", model.LastName);
-            globalMergeVars.Add("Email", model.Email);
-            globalMergeVars.Add("Mobile", model.Mobile);
-            globalMergeVars.Add("Address", model.Address);
+            globalMergeVars.Add("FIRSTNAME", model.FirstName);
+            globalMergeVars.Add("LASTNAME", model.LastName);
+            globalMergeVars.Add("EMAIL", model.Email);
+            globalMergeVars.Add("MOBILE", model.Mobile);
+            globalMergeVars.Add("ADDRESS", model.Address);
 
             message.GlobalMergeVars = globalMergeVars; // common information for all receipient
 
             //dynamic template content
             var templateContent = new List<Mandrill.NameContentPair<string>>();
             templateContent.Add(new Mandrill.NameContentPair<string>("SUBJECT", message.Subject));
-            templateContent.Add(new Mandrill.NameContentPair<string>("FirstName", model.FirstName));
-            templateContent.Add(new Mandrill.NameContentPair<string>("LastName", model.LastName));
-            templateContent.Add(new Mandrill.NameContentPair<string>("Email", model.Email));
-            templateContent.Add(new Mandrill.NameContentPair<string>("Mobile", model.Mobile));
-            templateContent.Add(new Mandrill.NameContentPair<string>("Address", model.Address));
+            templateContent.Add(new Mandrill.NameContentPair<string>("FIRSTNAME", model.FirstName));
+            templateContent.Add(new Mandrill.NameContentPair<string>("LASTNAME", model.LastName));
+            templateContent.Add(new Mandrill.NameContentPair<string>("EMAIL", model.Email));
+            templateContent.Add(new Mandrill.NameContentPair<string>("MOBILE", model.Mobile));
+            templateContent.Add(new Mandrill.NameContentPair<string>("ADDRESS", model.Address));
 
             //Send mail
             m.SendTemplate("Notify SuperAdmin", templateContent, message);

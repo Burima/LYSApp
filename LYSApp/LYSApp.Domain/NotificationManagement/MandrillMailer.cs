@@ -12,7 +12,7 @@ using MN = MailChimp.Types.Mandrill;
 
 namespace LYSApp.Domain.NotificationManagement
 {
-    public class MandrillMailer
+    public class MandrillMailer : IMandrillMailer
     {
 
         string key = ConfigurationManager.AppSettings["MandrillKey"];
@@ -52,7 +52,8 @@ namespace LYSApp.Domain.NotificationManagement
                         //send mail to user
                         if (isSubscribeOnly)
                         {
-                            NotifyUser(emailId, "Thanks for showing interest in LockYourStay!", "Thank you for subscribing Lockyourstay.We will keep you posted with all updates", "Notify User");
+                            //send emailid in place of mail because name is empty in this case.
+                            NotifyUser(emailId, emailId, "Thanks for showing interest in LockYourStay!", "Thank you for subscribing Lockyourstay.We will keep you posted with all updates", "Notify User");
                         }
                         return "Thank you for your subscription!";
                     }
@@ -73,8 +74,6 @@ namespace LYSApp.Domain.NotificationManagement
             }
            
         }
-
-
 
 
         //email to reset password, Reset user, user activation
@@ -105,7 +104,7 @@ namespace LYSApp.Domain.NotificationManagement
             //Send mail
             m.SendTemplate(templateName, templateContent, message);
         }
-        public void NotifyUser(string email,string subject,string body,string templateName)
+        public void NotifyUser(string email,string name,string subject,string body,string templateName)
         {
             var m = new MandrillApi(key);
             //Mail settings for mandrill
@@ -118,16 +117,42 @@ namespace LYSApp.Domain.NotificationManagement
             //mergevars for dynamic content in mandrill template
             var globalMergeVars = new Mandrill.Merges();
             globalMergeVars.Add("SUBJECT", message.Subject);
-            globalMergeVars.Add("FirstName", email);
-            globalMergeVars.Add("Body", body);
+            globalMergeVars.Add("NAME", name);
+            globalMergeVars.Add("BODY", body);
 
             message.GlobalMergeVars = globalMergeVars; // common information for all receipient
 
             //dynamic template content
             var templateContent = new List<Mandrill.NameContentPair<string>>();
             templateContent.Add(new Mandrill.NameContentPair<string>("SUBJECT", message.Subject));
-            templateContent.Add(new Mandrill.NameContentPair<string>("FirstName", email));
-            templateContent.Add(new Mandrill.NameContentPair<string>("Body", body));
+            templateContent.Add(new Mandrill.NameContentPair<string>("NAME", name));
+            templateContent.Add(new Mandrill.NameContentPair<string>("BODY", body));
+
+            //Send mail
+            m.SendTemplate(templateName, templateContent, message);
+        }
+
+        public void NotifySuperAdmin(string email,string subject, string body, string templateName)
+        {
+            var m = new MandrillApi(key);
+            //Mail settings for mandrill
+            var message = new MN.Messages.Message();
+            message.Subject = subject;
+            message.FromEmail = ConfigurationManager.AppSettings["SupportEmailID"];
+            message.FromName = "LockYourStay";
+            message.To = new[] { new MN.Messages.Recipient(email, email) };
+
+            //mergevars for dynamic content in mandrill template
+            var globalMergeVars = new Mandrill.Merges();
+            globalMergeVars.Add("SUBJECT", message.Subject);
+            globalMergeVars.Add("BODY", body);
+
+            message.GlobalMergeVars = globalMergeVars; // common information for all receipient
+
+            //dynamic template content
+            var templateContent = new List<Mandrill.NameContentPair<string>>();
+            templateContent.Add(new Mandrill.NameContentPair<string>("SUBJECT", message.Subject));
+            templateContent.Add(new Mandrill.NameContentPair<string>("BODY", body));
 
             //Send mail
             m.SendTemplate(templateName, templateContent, message);
