@@ -249,7 +249,6 @@
     <Content Include="Images\blog-3.jpg" />
     <Content Include="Images\blog-4.jpg" />
     <Content Include="Images\blur.svg" />
-    <Content Include="Images\calendar.gif" />
     <Content Include="Images\default_profile_pic.jpg" />
     <Content Include="Images\infobox-bg.png" />
     <Content Include="Images\loading.gif" />
@@ -298,6 +297,7 @@
     <Content Include="Images\prop\5-1-thmb.png" />
     <Content Include="Images\prop\5-1.png" />
     <Content Include="Images\signup-lite-dropdown.png" />
+    <Content Include="Images\spinner01.gif" />
     <Content Include="Images\Team\GoyeshMdMiah.png" />
     <Content Include="Images\testimonial\AbhijitDutta.jpg" />
     <Content Include="Images\testimonial\KaushikKannan.jpg" />
