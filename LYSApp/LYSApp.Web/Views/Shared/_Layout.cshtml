@@ -206,6 +206,62 @@
             </div>
         </div>
     </div> <!-- End Message Modal -->
+    <!-- List your property Modal -->
+    <div class="modal inmodal" id="modal-list-your-property" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated flipInY">
+                <form action="/list-your-property" method="post" id="form-list-your-property" class="form-inline" role="form">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">List Your PG/Hostel(s)</h4>
+                        <small class="font-bold">Send us your details we'll get back to you soon.</small>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <label class="sr-only" for="txtFirstName">First Name</label>
+                                    <input type="text" class="form-control required" id="txtFirstName" placeholder="First Name">
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <label class="sr-only" for="txtLastName">Last Name</label>
+                                    <input type="text" class="form-control " id="txtLastName" placeholder="Last Name">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <label class="sr-only" for="txtEmail">Email</label>
+                                    <input type="text" class="form-control  email" id="txtEmail" placeholder="Email">
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <label class="sr-only" for="txtMobile">Mobile</label>
+                                    <input type="text" class="form-control numbersAlone mobile" id="txtMobile" placeholder="Mobile" maxlength="10">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label class="sr-only" for="txtCity">Address</label>
+                                    <textarea class="form-control required" id="txtAddress" placeholder="Address"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-green btn-list-your-property" tabindex="6">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> <!-- End List your property Modal -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jqueryuitouchpunch")

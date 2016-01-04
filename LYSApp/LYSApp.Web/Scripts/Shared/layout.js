@@ -96,3 +96,101 @@
         }
     });
 });
+
+/*----------------------------- List your property functionality ---------------------------------------*/
+
+        $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
+$(".email").on("keyup keydown keypress", function () {
+    var id = $(this).attr("id");
+    var value = $("#" + id).val();
+    if (value.trim() == "" || validateEmail(value) == false) {
+        //console.log("no value detected " + id + "----------" + value);
+        $("#" + id).css("border", "1px solid red");
+    } else {
+        $("#" + id).css("border", "1px solid #e5e6e7");
+    }
+});
+$(document).ready(function () {
+    function validateForm() {
+        var flag = false;
+        $('.required').each(function () {                   
+            var id = $(this).attr("id");
+            var value = $("#" + id).val();                        
+            if (value.trim() == "") {
+                //console.log("no value detected" + id + "----------" + value);
+                $("#" + id).css("border", "1px solid red");
+                flag = false;
+            }
+            else {
+                $("#" + id).css("border", "1px solid #e5e6e7");
+                flag = true;
+            }
+                   
+        });
+
+        $('.email').each(function () {
+            var id = $(this).attr("id");
+            var value = $("#" + id).val();
+            if (validateEmail(value) == false) {
+                $("#" + id).css("border", "1px solid red");
+                flag = false;
+            }
+            else {
+                $("#" + id).css("border", "1px solid #e5e6e7");
+                flag = true;
+            }
+        });
+
+        $('.mobile').each(function () {
+            var id = $(this).attr("id");
+            var value = $("#" + id).val();
+            if (value.length!=10) {
+                $("#" + id).css("border", "1px solid red");
+                flag = false;
+            }
+            else {
+                $("#" + id).css("border", "1px solid #e5e6e7");
+                flag = true;
+            }
+        });
+
+        return flag;
+    }
+    $('.btn-list-your-property').click(function () {
+        if (validateForm()) {
+            var model = { FirstName: $("#txtFirstName").val(), LastName: $("#txtLastName").val(), Email: $("#txtEmail").val(), Mobile: $("#txtMobile").val(), Address: $("#txtAddress").val() };
+                   
+            //alert(model);
+            $('#modal-list-your-property').modal('hide');
+            showProgress(false, "Listing your record. Please wait...");
+            $.ajax({
+                url: "/list-your-property",
+                type: 'POST',
+                data:  JSON.stringify(model),
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (data, textStatus, XMLHttpRequest) {
+                    hideProgress();
+                    if (data.toUpperCase() == "SUCCESS") {
+                                
+                        //show success modal
+                                
+                    }
+                    else {
+                        //show failure modal
+                    }
+
+
+                },
+                error: function (xhr, status) {
+                    hideProgress();
+                    //show failure modal
+                }
+
+
+            });
+        }
+
+    });
+});
+/*----------------------------- End List your property functionality ---------------------------------------*/

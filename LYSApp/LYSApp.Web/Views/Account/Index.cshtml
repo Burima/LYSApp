@@ -35,7 +35,7 @@
     <div class="home-caption">
         <div class="home-title">Now we are collecting data. </div>
         <div class="home-subtitle">With lockyourstay - one-stop store for your Dream Stay</div>
-        <a href="" class="btn btn-lg btn-black" data-toggle="modal" data-target="#modalListYourProperty">List Your Property</a>
+        <a href="" class="btn btn-lg btn-black" data-toggle="modal" data-target="#modal-list-your-property">List Your Property</a>
     </div>
 
    <!-- Search -->
@@ -296,62 +296,7 @@
             </div>
         </div>
     </div>
- <!-- List your property Modal -->
-<div class="modal inmodal" id="modalListYourProperty" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content animated flipInY">
-            <form action="/list-your-property" method="post" id="form-list-your-property" class="form-inline" role="form">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">List Your PG/Hostel(s)</h4>
-                    <small class="font-bold">Send us your details we'll get back to you soon.</small>
-                </div>
-                <div class="modal-body">
 
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-xs-12">
-                                <label class="sr-only" for="txtFirstName">First Name</label>
-                                <input type="text" class="form-control required" id="txtFirstName" placeholder="First Name" >                              
-                            </div>
-                            <div class="col-md-6 col-xs-12">
-                                <label class="sr-only" for="txtLastName">Last Name</label>
-                                <input type="text" class="form-control " id="txtLastName" placeholder="Last Name">                                
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-xs-12">
-                                <label class="sr-only" for="txtEmail">Email</label>
-                                <input type="text" class="form-control  email" id="txtEmail" placeholder="Email" >                                
-                            </div>
-                            <div class="col-md-6 col-xs-12">
-                                <label class="sr-only" for="txtMobile">Mobile</label>
-                                <input type="text" class="form-control numbersAlone mobile" id="txtMobile" placeholder="Mobile" maxlength="10">                                
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="sr-only" for="txtCity">Address</label>
-                                <textarea class="form-control required" id="txtAddress" placeholder="Address" ></textarea>                              
-                            </div>
-                        </div>
-                    </div>
-           
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-green btn-list-your-property" tabindex="6">Save changes</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div> <!-- End List your property Modal -->
 
 <!-- End Main Content -->
 @section scripts{
@@ -416,101 +361,6 @@
  <!-- MVP1 -->
 @*<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js"></script>*@
 @*<script src='@Url.Content("~/Scripts/jquery-formvalidator.min.js")'></script>*@
-    <script>
-        //jQuery.extend(jQuery.validator.messages, {
-        //    required: "Required"
-        //});
-        $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
-        $(".email").on("keyup keydown keypress", function () {
-            var id = $(this).attr("id");
-            var value = $("#" + id).val();
-            if (value.trim() == "" || validateEmail(value) == false) {
-                //console.log("no value detected " + id + "----------" + value);
-                $("#" + id).css("border", "1px solid red");
-            } else {
-                $("#" + id).css("border", "1px solid #e5e6e7");
-            }
-        });
-        $(document).ready(function () {
-            function validateForm() {
-                var flag = false;
-                $('.required').each(function () {                   
-                        var id = $(this).attr("id");
-                        var value = $("#" + id).val();                        
-                        if (value.trim() == "") {
-                            //console.log("no value detected" + id + "----------" + value);
-                            $("#" + id).css("border", "1px solid red");
-                            flag = false;
-                        }
-                        else {
-                            $("#" + id).css("border", "1px solid #e5e6e7");
-                            flag = true;
-                        }
-                   
-                });
-
-                $('.email').each(function () {
-                    var id = $(this).attr("id");
-                    var value = $("#" + id).val();
-                    if (validateEmail(value) == false) {
-                        $("#" + id).css("border", "1px solid red");
-                        flag = false;
-                    }
-                    else {
-                        $("#" + id).css("border", "1px solid #e5e6e7");
-                        flag = true;
-                    }
-                });
-
-                $('.mobile').each(function () {
-                    var id = $(this).attr("id");
-                    var value = $("#" + id).val();
-                    if (value.length!=10) {
-                        $("#" + id).css("border", "1px solid red");
-                        flag = false;
-                    }
-                    else {
-                        $("#" + id).css("border", "1px solid #e5e6e7");
-                        flag = true;
-                    }
-                });
-
-                return flag;
-            }
-            $('.btn-list-your-property').click(function () {
-                if (validateForm()) {
-                    var model = { FirstName: $("#txtFirstName").val(), LastName: $("#txtLastName").val(), Email: $("#txtEmail").val(), Mobile: $("#txtMobile").val(), Address: $("#txtAddress").val() };
-                   
-                    //alert(model);
-                    showProgress(false, "Listing your record. Please wait...");
-                    $.ajax({
-                        url: "/list-your-property",
-                        type: 'POST',
-                        data:  JSON.stringify(model),
-                        dataType: 'json',
-                        contentType: "application/json",
-                        success: function (data, textStatus, XMLHttpRequest) {
-                            if (data.toUpperCase() == "ERROR") {
-                                ShowLoginDiv();
-                                hideProgress();
-                                $("#login-alert").show();
-                            }
-                            else {
-                                location.href = HomeSummaryUrl;
-                            }
-
-
-                        },
-                        error: function (xhr, status) {
-                            hideProgress();
-                        }
-
-
-                    });
-                }
-
-            });
-        });
-    </script>
+    
 <!-- End MVP1 -->
 }
