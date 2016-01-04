@@ -136,7 +136,7 @@ namespace LYSApp.Web.Controllers
                     //enables for production only
                     if (LYSConfig.EnvironmentName == "Production")
                     {
-                        mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName);
+                        mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName,false);
                     }
 
                     //Send Activation emai
@@ -530,7 +530,7 @@ namespace LYSApp.Web.Controllers
                         //enables for production only
                         if (LYSConfig.EnvironmentName == "Production")
                         {
-                            mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName);
+                            mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName,false);
                         }
 
                         //send Email Action emai
@@ -575,18 +575,10 @@ namespace LYSApp.Web.Controllers
 
         //Email Subscribe
         [AllowAnonymous]
-        [HttpPost]        
-        public async Task<ActionResult> EmailSubscribe(string email)
+        [HttpPost]
+        public ActionResult EmailSubscribe(EmailSubscribeViewModel model)
         {
-            if (email != null && email.ToString().Trim() != String.Empty)
-            {
-                if (mandrillMailer.SaveToMailChimpList(email, "", ""))
-                {
-                    return Content("Success");
-                }
-            }
-            //return Content("Whoops! That didn't go so well did it?");
-            return Content("Error");
+              return Content(mandrillMailer.SaveToMailChimpList(model.Email, "", "",true));   
         }
 
         protected override void Dispose(bool disposing)

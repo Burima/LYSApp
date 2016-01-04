@@ -276,8 +276,9 @@
     @Scripts.Render("~/bundles/lockyourstay")
     @Html.Partial("_Show_And_Hide_Progress")
     <script>
-        var EmailSubscribeURL = '@Url.Action("EmailSubscribe","Account")'
-        var ForgotPasswordURL = '@Url.Action("ForgotPassword", "Account")'
+        var EmailSubscribeURL = '@Url.Action("EmailSubscribe","Account")';
+        var ForgotPasswordURL = '@Url.Action("ForgotPassword", "Account")';
+        var ListYourPropertyURL = '@Url.Action("ListYourProperty", "Home")';
         var loginError = '@loginError'
         var registerError='@registerError'
     </script>

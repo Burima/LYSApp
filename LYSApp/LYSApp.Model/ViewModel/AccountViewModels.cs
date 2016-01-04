@@ -148,5 +148,8 @@ namespace LYSApp.Model
         public HouseReviewModel HouseReviewModel { get; set; }
         public ManageUserViewModel ManageUserViewModel { get; set; }
     }
-
+    public class EmailSubscribeViewModel
+    {
+        public string Email { get; set; }
+    }
 }

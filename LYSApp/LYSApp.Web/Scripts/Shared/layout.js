@@ -72,24 +72,25 @@
     //subscribe email function
     $('.btnSubscribe').click(function () {
         if ($('#form-Subscribe').valid()) {
-            var jmodel = { email: $("#txtEmailForSubscribe").val() };
+            var model = { Email: $("#txtEmailForSubscribe").val() };
+            $('.btnSubscribe').prop('disabled', true);
             $.ajax({
                 url: EmailSubscribeURL,
                 type: 'POST',
-                data: jmodel,
+                data: JSON.stringify(model),
+                contentType: "application/json",
                 dataType: 'html',
                 success: function (data, textStatus, XMLHttpRequest) {
-                    if (data.toUpperCase() == "SUCCESS") {
-                        $('#subscribe-info').html('Thank you for you subscription!');
-                    } else {
-                        $('#subscribe-info').html("Whoops! Please try again later.");
-                    }
+                    //alert(data);
+                    $('.btnSubscribe').prop('disabled', false);;//enable for subscription again
+                    $("#txtEmailForSubscribe").val("");//make email field empty
+                    $('#subscribe-info').html(data).show();//show message for 5sec                    
                     setTimeout(function () {
                         $("#subscribe-info").hide('blind', {}, 500)
                     }, 5000);
                 },
                 error: function (xhr, status) {
-                    alert('e')
+                    //alert(xhr.status);
                 }
             })//ajax end
         } else {
@@ -165,7 +166,7 @@
             $('#modal-list-your-property').modal('hide');
             showProgress(false, "Listing your record. Please wait...");
             $.ajax({
-                url: "/list-your-property",
+                url: ListYourPropertyURL,
                 type: 'POST',
                 data: JSON.stringify(model),
                 dataType: 'html',
