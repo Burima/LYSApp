@@ -53,7 +53,7 @@ namespace LYSApp.Domain.NotificationManagement
                         if (isSubscribeOnly)
                         {
                             //send emailid in place of mail because name is empty in this case.
-                            NotifyUser(emailId, emailId, "Thanks for showing interest in LockYourStay!", "Thank you for subscribing Lockyourstay.We will keep you posted with all updates", "Notify User");
+                            NotifyUser(emailId, emailId, "Thanks for showing interest in LockYourStay!", "Thank you for subscribing Lockyourstay.We will keep you posted with all updates.", "Notify User");
                         }
                         return "Thank you for your subscription!";
                     }

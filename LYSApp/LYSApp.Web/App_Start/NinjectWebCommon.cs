@@ -67,8 +67,7 @@ namespace LYSApp.Web.App_Start
             kernel.Bind<IOwnerPropertyListingRequestManagement>().To<OwnerPropertyListingRequestManagement>();
 
             //notification management
-            kernel.Bind<IMandrillMailer>().To<MandrillMailer>();
-            kernel.Bind<IOwnerPropertyListingRequestMailer>().To<OwnerPropertyListingRequestMailer>();
+            kernel.Bind<IMandrillMailer>().To<MandrillMailer>();            
         }        
     }
 }

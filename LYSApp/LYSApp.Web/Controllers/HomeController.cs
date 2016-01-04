@@ -11,17 +11,14 @@ using LYSApp.Model.ViewModel;
 using System.Text;
 
 namespace LYSApp.Web.Controllers
-{
-    public delegate void delegateOwnerPropertyListingRequest(OwnerPropertyListingRequestViewModel model);
+{    
     public class HomeController : Controller
     {
         private IOwnerPropertyListingRequestManagement ownerPropertyListingRequestManagement;
-        private IOwnerPropertyListingRequestMailer ownerPropertyListingRequestMailer;
         private IMandrillMailer mandrillMailer;
-        public HomeController(OwnerPropertyListingRequestManagement ownerPropertyListingRequestManagement, OwnerPropertyListingRequestMailer ownerPropertyListingRequestMailer, MandrillMailer mandrillMailer)
+        public HomeController(OwnerPropertyListingRequestManagement ownerPropertyListingRequestManagement,MandrillMailer mandrillMailer)
         {
             this.ownerPropertyListingRequestManagement = ownerPropertyListingRequestManagement;
-            this.ownerPropertyListingRequestMailer = ownerPropertyListingRequestMailer;
             this.mandrillMailer = mandrillMailer;
         }
         public ActionResult Index()
@@ -49,8 +46,8 @@ namespace LYSApp.Web.Controllers
             //Thank you mailer for user
             mandrillMailer.NotifyUser(model.Email,model.Name, "Thank you for contacting LockYourStay.", "Thank you for contacting Lockyourstay.We will get back to you at earliest.", "Notify User");
             //send mail to admin
-            string body = model.Name + " has contacted you. Please find the details below. <br><br> <table><tr><td>Name : </td><td>" + model.Name + "</td></tr><tr><td>Email : </td><td>" + model.Email + "</td></tr><tr><td>Subject : </td><td>" + model.Subject + "</td></tr><tr><td>Message : </td><td>" + model.Message + "</td></tr></table>";
-            mandrillMailer.NotifySuperAdmin(model.Email,model.Name + " have contacted LockYourStay", body, "ContactUs Notification SuperAdmin");
+            string body = model.Name + " has contacted you. Please find the details below, <br><br> <table><tr><td>Name : </td><td>" + model.Name + "</td></tr><tr><td>Email : </td><td>" + model.Email + "</td></tr><tr><td>Subject : </td><td>" + model.Subject + "</td></tr><tr><td>Message : </td><td>" + model.Message + "</td></tr></table>";
+            mandrillMailer.NotifySuperAdmin(model.Email,model.Name + " have contacted LockYourStay", body, "Notify Admin");
 
             return Content("Thank you for contacting LockYourStay.");
         }
@@ -70,8 +67,8 @@ namespace LYSApp.Web.Controllers
                 //send user notification
                 mandrillMailer.NotifyUser(model.Email, model.FirstName + " " + model.LastName, "Thank you for choosing Lockyoustay for listing your property", "We have received request for listing your property.We have forwarded your request to our concern team and will update you soon.", "Notify User");
                 //send admin notification
-                string body = model.FirstName + " " + model.LastName + " has contacted you for listing property.Please find the details below.<br><br> <table><tr><td>Email: </td><td>"+model.Email+"</td></tr><tr><td>Mobile: </td><td>"+model.Mobile+"</td></tr><tr><td>Address: </td><td>"+model.Address+"</td></tr></table>";
-                mandrillMailer.NotifySuperAdmin(model.Email,model.Email+ " have contacted you for listing his/her property",body,"ContactUs Notification SuperAdmin");
+                string body = model.FirstName + " " + model.LastName + " has contacted you for listing property.Please find the details below,<br><br> <table><tr><td>Email: </td><td>"+model.Email+"</td></tr><tr><td>Mobile: </td><td>"+model.Mobile+"</td></tr><tr><td>Address: </td><td>"+model.Address+"</td></tr></table>";
+                mandrillMailer.NotifySuperAdmin(model.Email,model.Email+ " have contacted you for listing his/her property",body,"Notify Admin");
 
                 if (ownerPropertyListingRequestManagement.AddOwnerPropertyListingRequest(model) > 0)
                 {

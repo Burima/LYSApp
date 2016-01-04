@@ -62,31 +62,32 @@
         var ContactURL = '@Url.Action("Contact", "Home")';
     </script>
     <script>
-        $('.ContactButton').click(function () {
-            if ($('#form-contact').valid()) {
-                //$('#form-contact-us').submit();
-                var model = { Name: $("#txtName").val(), Email: $("#txtEmail").val(), Subject: $("#txtSubject").val(), Message: $("#txtMessage").val()};
+        $(document).ready(function () {
+            $('.ContactButton').click(function () {
+                if ($('#form-contact').valid()) {
+                    //$('#form-contact-us').submit();
+                    var model = { Name: $("#txtName").val(), Email: $("#txtEmail").val(), Subject: $("#txtSubject").val(), Message: $("#txtMessage").val() };
 
-                showProgress(false, "Listing your record. Please wait...");
-                $.ajax({
-                    url: ContactURL,
-                    type: 'POST',
-                    data: JSON.stringify(model),
-                    dataType: 'html',
-                    contentType: "application/json",
-                    success: function (data, textStatus, XMLHttpRequest) {
-                        hideProgress();
-                        showModalMessage(data);
-                    },
-                    error: function (xhr, status) {
-                        hideProgress();
-                        showModalMessage("Something went wrong! Please contact support@lockyourstay.com.");
-                    }
-
-
-                });
-            }
+                    showProgress(false, "Listing your record. Please wait...");
+                    $.ajax({
+                        url: ContactURL,
+                        type: 'POST',
+                        data: JSON.stringify(model),
+                        dataType: 'html',
+                        contentType: "application/json",
+                        success: function (data, textStatus, XMLHttpRequest) {
+                            hideProgress();
+                            showModalMessage(data);
+                        },
+                        error: function (xhr, status) {
+                            hideProgress();
+                            showModalMessage("Something went wrong! Please contact support@lockyourstay.com.");
+                        }
+                    });
+                }
+            });
         });
+       
     </script>
     
 }
