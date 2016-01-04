@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LYSApp.Model
 {
-    public class ListYourPropertyViewModel
+    public class OwnerPropertyListingRequestViewModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

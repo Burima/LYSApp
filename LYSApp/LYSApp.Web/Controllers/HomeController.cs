@@ -1,15 +1,23 @@
-﻿using LYSApp.Model;
+﻿using LYSApp.Domain.OwnerPropertyListingRequestManagement;
+using LYSApp.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LYSApp.Domain.NotificationManagement;
 
 namespace LYSApp.Web.Controllers
 {
+    public delegate void delegateOwnerPropertyListingRequest(OwnerPropertyListingRequestViewModel model);
     public class HomeController : Controller
     {
+        private IOwnerPropertyListingRequestManagement ownerPropertyListingRequestManagement;
+        public HomeController(OwnerPropertyListingRequestManagement ownerPropertyListingRequestManagement)
+        {
+            this.ownerPropertyListingRequestManagement = ownerPropertyListingRequestManagement;
+        }
         public ActionResult Index()
         {
             return View();
@@ -38,10 +46,22 @@ namespace LYSApp.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ListYourProperty(ListYourPropertyViewModel model)
-        {
-            //var listYourPropertyViewModel = JsonConvert.DeserializeObject<ListYourPropertyViewModel>(model);
-            return View();
+        public ActionResult ListYourProperty(OwnerPropertyListingRequestViewModel model)
+        {            
+            try
+            {
+                OwnerPropertyListingRequestMailer mailer = new OwnerPropertyListingRequestMailer();
+                delegateOwnerPropertyListingRequest del = new delegateOwnerPropertyListingRequest(mailer.NotifyUser);
+                del += mailer.NotifySuperAdmin;
+                del += ownerPropertyListingRequestManagement.AddOwnerPropertyListingRequest;
+                return Content("SUCCESS");
+                
+            }
+            catch (Exception ex)
+            {
+                return Content("ERROR");
+            }
+           
         }
     }
 }

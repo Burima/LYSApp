@@ -96,6 +96,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LYSAdminEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DBEntity\OwnerPropertyListingRequest.cs">
+      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntity\PGDetail.cs">
       <DependentUpon>LYSAdminEntities.tt</DependentUpon>
     </Compile>

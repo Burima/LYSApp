@@ -22,7 +22,7 @@ namespace LYSApp.Data.DBEntity
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //throw new UnintentionalCodeFirstException();
+            throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<Area> Areas { get; set; }
@@ -44,5 +44,6 @@ namespace LYSApp.Data.DBEntity
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<Block> Blocks { get; set; }
         public virtual DbSet<Apartment> Apartments { get; set; }
+        public virtual DbSet<OwnerPropertyListingRequest> OwnerPropertyListingRequests { get; set; }
     }
 }

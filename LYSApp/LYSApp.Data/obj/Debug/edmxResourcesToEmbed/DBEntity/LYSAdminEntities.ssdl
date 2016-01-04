@@ -57,7 +57,7 @@
     <Property Name="isDeleted" Type="bit" />
     <Property Name="DeletedBy" Type="int" />
     <Property Name="DeletedOn" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedBy" Type="bigint" />
     <Property Name="IsDefault" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Cities">
@@ -81,9 +81,9 @@
   </EntityType>
   <EntityType Name="HouseAmenities">
     <Key>
-      <PropertyRef Name="AminityID" />
+      <PropertyRef Name="HouseAmenityID" />
     </Key>
-    <Property Name="AminityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HouseAmenityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HouseID" Type="int" Nullable="false" />
     <Property Name="AC" Type="bit" Nullable="false" />
     <Property Name="Fridge" Type="bit" Nullable="false" />
@@ -150,15 +150,26 @@
     <Property Name="CreatedOn" Type="datetime" />
     <Property Name="LastUpdatedOn" Type="datetime" />
     <Property Name="isDeleted" Type="bit" />
-    <Property Name="DeletedBy" Type="int" />
+    <Property Name="DeletedBy" Type="bigint" />
     <Property Name="DeletedOn" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedBy" Type="bigint" />
     <Property Name="DisplayName" Type="varchar" MaxLength="50" />
     <Property Name="Gender" Type="int" />
     <Property Name="NoOfBathrooms" Type="int" />
     <Property Name="NoOfBalconnies" Type="int" />
     <Property Name="BlockID" Type="int" Nullable="false" />
     <Property Name="HouseNo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OwnerPropertyListingRequests">
+    <Key>
+      <PropertyRef Name="OwnerPropertyListingRequestID" />
+    </Key>
+    <Property Name="OwnerPropertyListingRequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mobile" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
   </EntityType>
   <EntityType Name="PGDetails">
     <Key>
@@ -176,6 +187,10 @@
     <Property Name="Description" Type="varchar" MaxLength="100" />
     <Property Name="Status" Type="bit" />
     <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="DeletedBy" Type="bigint" />
+    <Property Name="CreatedOn" Type="date" />
+    <Property Name="LastUpdatedOn" Type="date" />
+    <Property Name="DeletedOn" Type="date" />
   </EntityType>
   <EntityType Name="PGReviews">
     <Key>
@@ -248,9 +263,9 @@
   </EntityType>
   <EntityType Name="UserDetails">
     <Key>
-      <PropertyRef Name="UserDetailsID" />
+      <PropertyRef Name="UserDetailID" />
     </Key>
-    <Property Name="UserDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserID" Type="bigint" Nullable="false" />
     <Property Name="PresentAddress" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="PermanentAddress" Type="varchar" MaxLength="50" Nullable="false" />
@@ -591,6 +606,7 @@
     <EntitySet Name="HouseAmenities" EntityType="Self.HouseAmenities" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HouseImages" EntityType="Self.HouseImages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Houses" EntityType="Self.Houses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OwnerPropertyListingRequests" EntityType="Self.OwnerPropertyListingRequests" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PGDetails" EntityType="Self.PGDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PGReviews" EntityType="Self.PGReviews" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />

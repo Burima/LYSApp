@@ -12,12 +12,13 @@ namespace LYSApp.Data.DBEntity
     using System;
     using System.Collections.Generic;
     
-    public partial class UserLogin
+    public partial class OwnerPropertyListingRequest
     {
-        public string LoginProvider { get; set; }
-        public string ProviderKey { get; set; }
-        public long UserID { get; set; }
-    
-        public virtual User User { get; set; }
+        public int OwnerPropertyListingRequestID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
+        public string Address { get; set; }
     }
 }

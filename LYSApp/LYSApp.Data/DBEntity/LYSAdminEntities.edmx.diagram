@@ -45,6 +45,7 @@
         <EntityTypeShape EntityType="LYSAdminModel.Apartment" Width="1.5" PointX="10.5" PointY="19.375" />
         <AssociationConnector Association="LYSAdminModel.FK_Apartments_PGDetailID" />
         <AssociationConnector Association="LYSAdminModel.FK_Blocks_ApartmentID" />
+        <EntityTypeShape EntityType="LYSAdminModel.OwnerPropertyListingRequest" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

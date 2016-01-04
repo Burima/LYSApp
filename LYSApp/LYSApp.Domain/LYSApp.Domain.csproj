@@ -57,6 +57,9 @@
     <Compile Include="FileHelper.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="NotificationManagement\MandrillMailer.cs" />
+    <Compile Include="NotificationManagement\OwnerPropertyListingRequestMailer.cs" />
+    <Compile Include="OwnerPropertyListingRequestManagement\IOwnerPropertyListingRequestManagement.cs" />
+    <Compile Include="OwnerPropertyListingRequestManagement\OwnerPropertyListingRequestManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchManagement\ISearchManagement.cs" />
     <Compile Include="SearchManagement\SearchManagement.cs" />
