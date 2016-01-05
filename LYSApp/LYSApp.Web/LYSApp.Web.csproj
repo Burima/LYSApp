@@ -339,6 +339,7 @@
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\GoogleAnalytics\lockyourstay-google-analytics.min.js" />
     <Content Include="Scripts\home.js" />
+    <Content Include="Scripts\home.min.js" />
     <Content Include="Scripts\infobox.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-ui-touch-punch.js" />

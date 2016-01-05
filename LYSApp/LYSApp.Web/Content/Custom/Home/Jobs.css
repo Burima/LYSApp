@@ -61,3 +61,10 @@
     border-color: #285e8e;
     padding: 4px 10px  3px 10px ;
 }
+.no-margin {
+        margin: 0px !important;
+    }
+
+    .no-padding {
+        padding: 0px !important;
+    }

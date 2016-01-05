@@ -2,9 +2,8 @@
 @{
     ViewBag.Title = "Home";   
 }
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<link href='@Url.Content("~/Content/jquery-ui.css")' rel="stylesheet" />
-<link href='@Url.Content("~/Content/Custom/Account/Index.css")' rel="stylesheet" />
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">*@
+@Styles.Render("~/Content/index")
 
 <!-- Hero -->
 
@@ -290,12 +289,12 @@
 
 <!-- End Main Content -->
 @section scripts{
-    <script>
+    @*<script>
     var getAreaListURL = '@Url.Action("getArea", "Search")';
     var searchURL = '@Url.Action("getHouses", "Search")';
-    </script>
-    <script src='@Url.Content("~/Scripts/jquery-ui.min.js")'></script>
-    <script>
+    </script>*@
+    @*<script src='@Url.Content("~/Scripts/jquery-ui.min.js")'></script>*@
+    @*<script>
         $("#txtArea").autocomplete({
             source: function (request, response) {
 
@@ -343,14 +342,9 @@
                 }
             })
 
-        });*@
-    </script>
+        });
+    </script>*@
 
-<script src='@Url.Content("~/Scripts/Shared/search.js")'></script>
-
- <!-- MVP1 -->
-@*<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js"></script>*@
-@*<script src='@Url.Content("~/Scripts/jquery-formvalidator.min.js")'></script>*@
-    
-<!-- End MVP1 -->
+@*<script src='@Url.Content("~/Scripts/Shared/search.js")'></script>*@
+     
 }

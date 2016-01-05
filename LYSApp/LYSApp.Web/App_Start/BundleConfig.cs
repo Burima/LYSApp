@@ -64,6 +64,38 @@ namespace LYSApp.Web
             // GA script
             bundles.Add(new ScriptBundle("~/bundles/lockyourstayGA").Include(
                       "~/Scripts/GoogleAnalytics/lockyourstay-google-analytics.min.js"));
+
+            //css added in _Layout.cshtml
+            bundles.Add(new StyleBundle("~/Content/layout").Include(
+                     "~/Content/font-awesome.css",
+                     "~/Content/simple-line-icons.css",
+                     "~/Content/fullscreen-slider.css",
+                     "~/Content/bootstrap.css",
+                     "~/Content/app.css",
+                     "~/Content/lockyourstay.css",
+                     "~/Content/Custom/Shared/_Header.css"));
+
+            //css added in Index.cshtml --> Home page
+            bundles.Add(new StyleBundle("~/Content/index").Include(
+                     "~/Content/jquery-ui.css",
+                     "~/Content/Custom/Account/Index.css"));
+
+            //css added in About.cshtml --> About page
+            bundles.Add(new StyleBundle("~/Content/about").Include(
+                     "~/Content/Custom/Home/About.css"));
+
+            // css contact
+            bundles.Add(new StyleBundle("~/Content/contact").Include(
+                "~/Content/Custom/Home/Contact.css"));
+
+            //jobs
+            bundles.Add(new StyleBundle("~/Content/jobs").Include(
+                "~/Content/Custom/Home/Jobs.css"));
+
+            //TermsAndConditions
+            bundles.Add(new StyleBundle("~/Content/termsAndConditions").Include(
+              "~/Content/Custom/Home/TermsAndConditions.css"));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;
