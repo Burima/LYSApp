@@ -60,6 +60,10 @@ namespace LYSApp.Web
             // Layout script
             bundles.Add(new ScriptBundle("~/bundles/layout").Include(
                       "~/Scripts/Shared/layout.js"));
+
+            // GA script
+            bundles.Add(new ScriptBundle("~/bundles/lockyourstayGA").Include(
+                      "~/Scripts/GoogleAnalytics/lockyourstay-google-analytics.min.js"));
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;

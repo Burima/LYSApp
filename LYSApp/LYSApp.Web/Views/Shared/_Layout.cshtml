@@ -38,7 +38,6 @@
 </head>
 <body class="notransition no-hidden">
 
-
     <!-- Header -->
     @Html.Partial("_Header")
 
@@ -275,6 +274,11 @@
     @Scripts.Render("~/bundles/validate")
     @Scripts.Render("~/bundles/lockyourstay")
     @Html.Partial("_Show_And_Hide_Progress")
+    @if (System.Configuration.ConfigurationManager.AppSettings.Get("EnvironmentName") == "Production")
+    {
+        <!-- Google Analytics code -->
+        @Scripts.Render("~/bundles/lockyourstayGA")
+    }
     <script>
         var EmailSubscribeURL = '@Url.Action("EmailSubscribe","Account")';
         var ForgotPasswordURL = '@Url.Action("ForgotPassword", "Account")';
