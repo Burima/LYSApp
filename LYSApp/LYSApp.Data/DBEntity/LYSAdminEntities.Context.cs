@@ -44,5 +44,6 @@ namespace LYSApp.Data.DBEntity
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<Block> Blocks { get; set; }
         public virtual DbSet<Apartment> Apartments { get; set; }
+        public virtual DbSet<OwnerPropertyListingRequest> OwnerPropertyListingRequests { get; set; }
     }
 }

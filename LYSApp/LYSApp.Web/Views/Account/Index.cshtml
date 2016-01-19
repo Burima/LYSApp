@@ -1,9 +1,9 @@
-﻿@{
+﻿@model LYSApp.Model.AccountViewModel
+@{
     ViewBag.Title = "Home";   
 }
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<link href='@Url.Content("~/Content/jquery-ui.css")' rel="stylesheet" />
-<link href='@Url.Content("~/Content/Custom/Account/Index.css")' rel="stylesheet" />
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">*@
+@Styles.Render("~/Content/index")
 
 <!-- Hero -->
 
@@ -16,14 +16,19 @@
         <li><span></span></li>
         <li><span></span></li>
     </ul>
-    <div class="home-caption">
+    @*<div class="home-caption">
         <div class="home-title">Now it's easy to find your future home</div>
         <div class="home-subtitle">With lockyourstay - one-stop store for your Dream Stay</div>
         <a href="" class="btn btn-lg btn-black">Learn More</a>
+    </div>*@
+    <div class="home-caption">
+        <div class="home-title">Please be patient..<br /> We are in process of collecting data... </div>
+        <div class="home-subtitle">With lockyourstay - one-stop store for your Dream Stay</div>
+        <a href="" class="btn btn-lg btn-black" data-toggle="modal" data-target="#modal-list-your-property">List Your Property</a>
     </div>
 
    <!-- Search -->
-   @Html.Partial("_SearchPartial", new LYSApp.Model.SearchViewModel {AreaID=0})
+   @*@Html.Partial("_SearchPartial", new LYSApp.Model.SearchViewModel {AreaID=0})*@
    <!-- end Search -->
 </div> <!-- End Hero-->
 
@@ -75,7 +80,7 @@
             </a>
         </div>
     </div>
-    <div class="row pb40">
+    @*<div class="row pb40">
         <h2 class="osLight">Recently Listed Properties</h2><br />
         <div class="row padding-index">
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
@@ -199,19 +204,19 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="row pb40 padding-index">
         <div class="twitter-heading col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h2 class="osLight">lockyourstay On Twitter</h2>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 twitter-cell">
-            <blockquote class="twitter-tweet" lang="en-gb"><p lang="en" dir="ltr">The world bids farewell to one of the greatest souls who have ever lived.&#10;You will always be remembered <p></p><a href="https://twitter.com/APJAbdulKalam">@@APJAbdulKalam</a> <a href="https://twitter.com/hashtag/RIPKalam?src=hash">#RIPKalam</a></p>&mdash; Lock Your Stay (@@lockyourstay) <a href="https://twitter.com/lockyourstay/status/626652870092263424">July 30, 2015</a></blockquote>
+            <blockquote class="twitter-tweet" lang="en-gb"><p lang="en" dir="ltr">Wish you all a very very Happy New Year.. Team <a href="https://twitter.com/lockyourstay">@@lockyourstay</a></p>&mdash; Lock Your Stay (@@lockyourstay) <a href="https://twitter.com/lockyourstay/status/682834406109614084">January 1, 2016</a></blockquote>            
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 twitter-cell">
-            <blockquote class="twitter-tweet" lang="en-gb"><p lang="en" dir="ltr">Go digital. Go green.&#10;<p></p><a href="https://twitter.com/hashtag/godigital?src=hash">#godigital</a> <a href="https://twitter.com/hashtag/digitalindia?src=hash">#digitalindia</a> <a href="https://twitter.com/hashtag/DigitalLockers?src=hash">#DigitalLockers</a> <a href="https://twitter.com/hashtag/eSignFramework?src=hash">#eSignFramework</a> <a href="https://twitter.com/hashtag/BharatNet?src=hash">#BharatNet</a> <a href="https://twitter.com/hashtag/lockyourstay?src=hash">#lockyourstay</a>&#10;<a href="http://t.co/O0hGab2LXy">http://t.co/O0hGab2LXy</a></p>&mdash; Lock Your Stay (@@lockyourstay) <a href="https://twitter.com/lockyourstay/status/617408949881454592">July 4, 2015</a></blockquote>
+            <blockquote class="twitter-tweet" lang="en-gb"><p lang="en" dir="ltr">9 things that made Indians Happy in 2015 » <a href="https://t.co/Rcw1ykK0Dw">https://t.co/Rcw1ykK0Dw</a></p>&mdash; Lock Your Stay (@@lockyourstay) <a href="https://twitter.com/lockyourstay/status/681170330157584384">December 27, 2015</a></blockquote>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 twitter-cell">
-            <blockquote class="twitter-tweet" lang="en-gb"><p lang="und" dir="ltr">A friend in need.A friend indeed.&#10;<p></p><a href="https://twitter.com/hashtag/HappyFriendshipDay?src=hash">#HappyFriendshipDay</a> <a href="http://t.co/Us4TxFkZ77">pic.twitter.com/Us4TxFkZ77</a></p>&mdash; Lock Your Stay (@@lockyourstay) <a href="https://twitter.com/lockyourstay/status/627780380934828032">August 2, 2015</a></blockquote>
+            <blockquote class="twitter-tweet" lang="en-gb"><p lang="en" dir="ltr">Team <a href="https://twitter.com/hashtag/LockYourStay?src=hash">#LockYourStay</a> Wishes you all a Merry Christmas.. <a href="https://t.co/Quwii79MNN">pic.twitter.com/Quwii79MNN</a></p>&mdash; Lock Your Stay (@@lockyourstay) <a href="https://twitter.com/lockyourstay/status/680352588424851456">December 25, 2015</a></blockquote>
         </div>
     </div>
 
@@ -242,38 +247,38 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src='@Url.Content("~/Images/avatar-1.png")' class="home-testim-avatar" alt="Virang">
+                        <img src='@Url.Content("~/Images/testimonial/RohitMishra.jpg")' class="home-testim-avatar" alt="Rohit Mishra">
                         <div class="home-testim">
-                            <div class="home-testim-text">I never thought booking a pg would be so easy. Everything under a single window.</br> Hats off to lock your stay for their amazing work.</br></br></div>
-                            <div class="home-testim-name align-right">Virang</div>
+                            <div class="home-testim-text">Awesomely awesome.. Thanks for this.. !! &#x263A <br /> This has really helped me...!!</br></br></div>
+                            <div class="home-testim-name align-right">Rohit Mishra</div>
                         </div>
                     </div>
                     <div class="item">
-                        <img src='@Url.Content("~/Images/avatar-2.png")' class="home-testim-avatar" alt="Susmita">
+                        <img src='@Url.Content("~/Images/testimonial/KaustavGoswami.jpg")' class="home-testim-avatar" alt="Kaustav Goswami">
                         <div class="home-testim">
-                            <div class="home-testim-text">Thank you Lock your stay for this amazing website. booking an acoomodation in an unknown city was never so cool.</div>
-                            <div class="home-testim-name align-right">Susmita</div>
+                            <div class="home-testim-text">Spread the word of getting the one window Link, where you can see, compare and book(rather LOCK) your STAY.</div>
+                            <div class="home-testim-name align-right">Kaustav Goswami</div>
                         </div>
                     </div>
                     <div class="item">
-                        <img src='@Url.Content("~/Images/avatar-3.png")' class="home-testim-avatar" alt="Kaustav">
+                        <img src='@Url.Content("~/Images/testimonial/KaushikKannan.jpg")' class="home-testim-avatar" alt="Kaushik Kannan">
                         <div class="home-testim">
-                            <div class="home-testim-text">I was just about to book my stay in a hotel and go through the pg's I had found on the web the next day I land but then I came across LockYourStay. Thanks to lockyourstay, it saved my time and money and energy. I'm grateful to you guys.</div>
-                            <div class="home-testim-name align-right">Kaustav</div>
+                            <div class="home-testim-text">Gonna be really useful for students and bachelors studying or working in different states! Cool concept. looking forward to the launch date! &#x263A </div>
+                            <div class="home-testim-name align-right">Kaushik Kannan</div>
                         </div>
                     </div>
                     <div class="item">
-                        <img src='@Url.Content("~/Images/avatar-4.png")' class="home-testim-avatar" alt="Patari">
+                        <img src='@Url.Content("~/Images/testimonial/AbhijitDutta.jpg")' class="home-testim-avatar" alt="Abhijit Dutta">
                         <div class="home-testim">
                             <div class="home-testim-text">There's nothing better than this out there. It's just made finding an accomodation a lot simpler. I'd like to thank lockyourstay from the very bottom of my heart.</div>
-                            <div class="home-testim-name align-right">Patari</div>
+                            <div class="home-testim-name align-right">Abhijit Dutta</div>
                         </div>
                     </div>
                     <div class="item">
-                        <img src='@Url.Content("~/Images/avatar-5.png")' class="home-testim-avatar" alt="Anonymous">
+                        <img src='@Url.Content("~/Images/testimonial/VirangTrivedi.jpg")' class="home-testim-avatar" alt="Virang Trivedi">
                         <div class="home-testim">
                             <div class="home-testim-text">Now I know what to say to my friends who are moving in another city when they ask me how to find a pg/hostel there.</div>
-                            <div class="home-testim-name align-right">Anonymous</div>
+                            <div class="home-testim-name align-right">Virang Trivedi</div>
                         </div>
                     </div>
                 </div>
@@ -284,12 +289,12 @@
 
 <!-- End Main Content -->
 @section scripts{
-    <script>
+    @*<script>
     var getAreaListURL = '@Url.Action("getArea", "Search")';
     var searchURL = '@Url.Action("getHouses", "Search")';
-    </script>
-    <script src='@Url.Content("~/Scripts/jquery-ui.min.js")'></script>
-    <script>
+    </script>*@
+    @*<script src='@Url.Content("~/Scripts/jquery-ui.min.js")'></script>*@
+    @*<script>
         $("#txtArea").autocomplete({
             source: function (request, response) {
 
@@ -337,8 +342,9 @@
                 }
             })
 
-        });*@
-    </script>
+        });
+    </script>*@
 
-<script src='@Url.Content("~/Scripts/Shared/search.js")'></script>
+@*<script src='@Url.Content("~/Scripts/Shared/search.js")'></script>*@
+     
 }

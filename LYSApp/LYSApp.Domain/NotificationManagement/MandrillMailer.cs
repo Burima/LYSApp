@@ -12,18 +12,21 @@ using MN = MailChimp.Types.Mandrill;
 
 namespace LYSApp.Domain.NotificationManagement
 {
-    public class MandrillMailer
+    public class MandrillMailer : IMandrillMailer
     {
+
+        string key = ConfigurationManager.AppSettings["MandrillKey"];
         /// <summary>
         /// This function will add user to Mailchimp Subscription List
         /// </summary>
         /// <param name="emailId">EmailId of the user</param>
         /// <param name="firstName">First Name of the user</param>
         /// <param name="LastName">Last Name of the User</param>
+        /// <param name="isSubscribeOnly">Checks if this is only subscribtion . while registering we'll add user to list , but we'll send subscription mail to user..in that case it'll be false.</param>
         /// <returns></returns>
-        public bool SaveToMailChimpList(string emailId, string firstName, string LastName)
+        public string SaveToMailChimpList(string emailId, string firstName, string LastName,bool isSubscribeOnly)
         {
-            Boolean result = false;
+           
 
             MCApi api = new MCApi(ConfigurationManager.AppSettings["MailChimpApiKey"], false);
 
@@ -41,20 +44,42 @@ namespace LYSApp.Domain.NotificationManagement
                 List.Merges merges = new List.Merges();
                 merges.Add("FNAME", firstName);
                 merges.Add("LNAME", LastName);
-
-                result = api.ListSubscribe(listId, emailId, merges, so);
+                var uservailble = api.ListMemberInfo(listId, emailId);
+                if (uservailble.Data[0].Email==null)
+                {
+                    if (api.ListSubscribe(listId, emailId, merges, so))
+                    {
+                        //send mail to user
+                        if (isSubscribeOnly)
+                        {
+                            //send emailid in place of mail because name is empty in this case.
+                            NotifyUser(emailId, emailId, "Thanks for showing interest in LockYourStay!", "Thank you for subscribing Lockyourstay.We will keep you posted with all updates.", "Notify User");
+                        }
+                        return "Thank you for your subscription!";
+                    }
+                    else
+                    {
+                        return "Something went wrong! Please try again later.";
+                    }
+                }
+                else
+                {
+                    return "Email already exists!";
+                }
             }
-
-            return result;
+            else
+            {
+                //no list available
+                return "Something went wrong! Please try again later.";
+            }
+           
         }
-
-
 
 
         //email to reset password, Reset user, user activation
         public void SendEmailForUser(string emailID, string url, string templateName, string subject)
         {
-            var key = ConfigurationManager.AppSettings["MandrillKey"];
+           
             var m = new MandrillApi(key);
 
             //Mail settings for mandrill
@@ -79,7 +104,69 @@ namespace LYSApp.Domain.NotificationManagement
             //Send mail
             m.SendTemplate(templateName, templateContent, message);
         }
+        public void NotifyUser(string email,string name,string subject,string body,string templateName)
+        {
+            var m = new MandrillApi(key);
+            //Mail settings for mandrill
+            var message = new MN.Messages.Message();
+            message.Subject = subject;
+            message.FromEmail = ConfigurationManager.AppSettings["SupportEmailID"];
+            message.FromName = "LockYourStay";
+            message.To = new[] { new MN.Messages.Recipient(email, email) };
 
+            //mergevars for dynamic content in mandrill template
+            var globalMergeVars = new Mandrill.Merges();
+            globalMergeVars.Add("SUBJECT", message.Subject);
+            globalMergeVars.Add("NAME", name);
+            globalMergeVars.Add("BODY", body);
+
+            message.GlobalMergeVars = globalMergeVars; // common information for all receipient
+
+            //dynamic template content
+            var templateContent = new List<Mandrill.NameContentPair<string>>();
+            templateContent.Add(new Mandrill.NameContentPair<string>("SUBJECT", message.Subject));
+            templateContent.Add(new Mandrill.NameContentPair<string>("NAME", name));
+            templateContent.Add(new Mandrill.NameContentPair<string>("BODY", body));
+
+            //Send mail
+            m.SendTemplate(templateName, templateContent, message);
+        }
+
+        public void NotifySuperAdmin(string email,string subject, string body, string templateName)
+        {
+            var toList = ConfigurationManager.AppSettings["SuperAdminToEmails"].Split(';');
+            var recipientCount = toList.Count();
+            var count = 0;
+
+            MN.Messages.Recipient[] recipients = new MN.Messages.Recipient[recipientCount];
+            foreach (var to in toList)
+            {
+                recipients[count] = new MN.Messages.Recipient(to, to);
+                count++;
+            }
+            var m = new MandrillApi(key);
+            //Mail settings for mandrill
+            var message = new MN.Messages.Message();
+            message.Subject = subject;
+            message.FromEmail = ConfigurationManager.AppSettings["SupportEmailID"];
+            message.FromName = "LockYourStay";
+            message.To = recipients;
+
+            //mergevars for dynamic content in mandrill template
+            var globalMergeVars = new Mandrill.Merges();
+            globalMergeVars.Add("SUBJECT", message.Subject);
+            globalMergeVars.Add("BODY", body);
+
+            message.GlobalMergeVars = globalMergeVars; // common information for all receipient
+
+            //dynamic template content
+            var templateContent = new List<Mandrill.NameContentPair<string>>();
+            templateContent.Add(new Mandrill.NameContentPair<string>("SUBJECT", message.Subject));
+            templateContent.Add(new Mandrill.NameContentPair<string>("BODY", body));
+
+            //Send mail
+            m.SendTemplate(templateName, templateContent, message);
+        }
         
     }
 }

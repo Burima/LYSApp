@@ -29,7 +29,7 @@ namespace LYSApp.Web.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            zHomeController controller = new HomeController();
 
             // Act
             ViewResult result = controller.About() as ViewResult;

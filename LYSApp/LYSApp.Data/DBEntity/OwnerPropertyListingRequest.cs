@@ -10,16 +10,15 @@
 namespace LYSApp.Data.DBEntity
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class UserLogin
-    {
-        public string LoginProvider { get; set; }
-
-        [Key]
-        public string ProviderKey { get; set; }
-        public long UserID { get; set; }
+    using System.Collections.Generic;
     
-        public virtual User User { get; set; }
+    public partial class OwnerPropertyListingRequest
+    {
+        public int OwnerPropertyListingRequestID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
+        public string Address { get; set; }
     }
 }

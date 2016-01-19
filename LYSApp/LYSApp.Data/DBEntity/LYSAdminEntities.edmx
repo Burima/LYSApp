@@ -165,6 +165,17 @@
           <Property Name="BlockID" Type="int" Nullable="false" />
           <Property Name="HouseNo" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="OwnerPropertyListingRequests">
+          <Key>
+            <PropertyRef Name="OwnerPropertyListingRequestID" />
+          </Key>
+          <Property Name="OwnerPropertyListingRequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
         <EntityType Name="PGDetails">
           <Key>
             <PropertyRef Name="PGDetailID" />
@@ -600,6 +611,7 @@
           <EntitySet Name="HouseAmenities" EntityType="Self.HouseAmenities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HouseImages" EntityType="Self.HouseImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Houses" EntityType="Self.Houses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OwnerPropertyListingRequests" EntityType="Self.OwnerPropertyListingRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PGDetails" EntityType="Self.PGDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PGReviews" EntityType="Self.PGReviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -1232,6 +1244,7 @@
             <End Role="Apartment" EntitySet="Apartments" />
             <End Role="Block" EntitySet="Blocks" />
           </AssociationSet>
+          <EntitySet Name="OwnerPropertyListingRequests" EntityType="LYSAdminModel.OwnerPropertyListingRequest" />
         </EntityContainer>
         <EntityType Name="HouseAmenity">
           <Key>
@@ -1404,6 +1417,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="OwnerPropertyListingRequest">
+          <Key>
+            <PropertyRef Name="OwnerPropertyListingRequestID" />
+          </Key>
+          <Property Name="OwnerPropertyListingRequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1737,6 +1761,18 @@
                 <ScalarProperty Name="HouseNo" ColumnName="HouseNo" />
                 <ScalarProperty Name="ApartmentName" ColumnName="ApartmentName" />
                 <ScalarProperty Name="ApartmentID" ColumnName="ApartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OwnerPropertyListingRequests">
+            <EntityTypeMapping TypeName="LYSAdminModel.OwnerPropertyListingRequest">
+              <MappingFragment StoreEntitySet="OwnerPropertyListingRequests">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="OwnerPropertyListingRequestID" ColumnName="OwnerPropertyListingRequestID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

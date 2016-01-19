@@ -1,0 +1,72 @@
+﻿<script type="text/javascript">
+//START: Show & Hide process image
+var spinnerVisible = false;
+function showProgress(isPayment,text) {
+    if (!spinnerVisible) {
+        var spinner = "";
+        if (isPayment) {
+            spinner = $("#spinner_modal_transaction");
+        }
+        else if (isPayment==false && text != "") {
+            spinner = $("#spinner_modal_text");
+            spinner.find(".content").text(text);
+        }
+        else {
+            spinner = $("#spinner_modal_empty");
+        }
+        
+        $(spinner).modal({
+            show: true,
+            keyboard: false,
+            backdrop: 'static'
+        });
+        
+        spinnerVisible = true;
+    }
+}
+function hideProgress() {
+    if (spinnerVisible) {
+        $("#spinner_modal_transaction").modal("hide");
+        $("#spinner_modal_text").modal("hide");
+        $("#spinner_modal_empty").modal("hide");
+        spinnerVisible = false;
+    }
+}
+//END: Show & Hide process image
+</script>
+
+<div class='modal fade' id='spinner_modal_transaction'>
+    <div class='modal-dialog'>
+        <div class='modal-body text-center' style='background-color:#fff;border-radius:5px;float:left;'>
+            <div class='row'>
+                <div id='spinner1' class='col-lg-3 col-md-3 col-sm-3 col-xs-12'>
+                    <img src="@Url.Content("~/Images/spinner01.gif")" style="width:68%;max-width:100px;"/>
+                </div>
+                <div  class='col-lg-9 col-md-9 col-sm-9 col-xs-12 text-center' style='padding-top: 20px;'>Your order is being processed. This could take few seconds...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='modal fade' id='spinner_modal_text'>
+    <div class='modal-dialog'>
+        <div class='modal-body text-center' style='background-color:#fff;border-radius:5px;'>
+            <div class='row'>
+                <div id='spinner1' class='col-lg-3 col-md-3 col-sm-3 col-xs-12'>
+                    <img src="@Url.Content("~/Images/spinner01.gif")" style="width:68%;max-width:100px;"/>
+                </div>
+                <div  class='col-lg-9 col-md-9 col-sm-9 col-xs-12 text-center content' style='padding-top: 20px;'></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='modal fade' id='spinner_modal_empty'>
+    <div class='modal-dialog'>
+        <div class='modal-body text-center' style='background-color:#fff;border-radius:5px;'>
+            <div id='spinner1' style='margin:auto;float:none;'>
+                <img src="@Url.Content("~/Images/spinner01.gif")" style="width:68%;max-width:100px;"/>
+            </div>
+        </div>
+    </div>
+</div>
