@@ -187,6 +187,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Common\LYSConfig.cs" />
+    <Compile Include="Services\Common\RouteNames.cs" />
     <Compile Include="Services\Security\TripleDES.cs" />
     <Compile Include="Services\SessionManager.cs" />
     <Compile Include="Startup.cs" />

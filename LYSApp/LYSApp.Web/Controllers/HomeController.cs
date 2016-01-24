@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using LYSApp.Domain.NotificationManagement;
 using LYSApp.Model.ViewModel;
 using System.Text;
+using LYSApp.Web.Services.Common;
 
 namespace LYSApp.Web.Controllers
 {    
@@ -26,6 +27,7 @@ namespace LYSApp.Web.Controllers
             return View();
         }
 
+        [Route("About-Us", Name = RouteNames.AboutUs)]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -33,6 +35,7 @@ namespace LYSApp.Web.Controllers
             return View();
         }
 
+        [Route("Contact-Us", Name = RouteNames.ContactUs)]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -41,6 +44,7 @@ namespace LYSApp.Web.Controllers
         }
 
         [HttpPost]
+        [Route("Contact-Us", Name = RouteNames.ContactUsPost)]
         public ActionResult Contact(ContactViewModel model)
         {
             //Thank you mailer for user
@@ -51,19 +55,23 @@ namespace LYSApp.Web.Controllers
 
             return Content("Thank you for contacting LockYourStay.");
         }
+
+        [Route("Jobs", Name = RouteNames.Jobs)]
         public ActionResult Jobs()
         {
             return View();
         }
+
+        [Route("Terms-And-Privacy", Name = RouteNames.TermsAndPrivacy)]
         public ActionResult TermsAndCondition()
         {
             return View();
         }
 
         [HttpPost]
+        [Route("List-Your-Property", Name = RouteNames.ListYourPropertyPost)]
         public ActionResult ListYourProperty(OwnerPropertyListingRequestViewModel model)
-        {            
-            
+        {
                 //send user notification
                 mandrillMailer.NotifyUser(model.Email, model.FirstName + " " + model.LastName, "Thank you for choosing Lockyoustay for listing your property", "We have received request for listing your property.We have forwarded your request to our concern team and will update you soon.", "Notify User");
                 //send admin notification
@@ -78,12 +86,7 @@ namespace LYSApp.Web.Controllers
                 else
                 {
                     return Content("Something went wrong! Please contact support@lockyourstay.com.");
-                }
-                
-           
-                
-           
-           
+                }                
         }
     }
 }
