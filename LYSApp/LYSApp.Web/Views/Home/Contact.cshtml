@@ -59,7 +59,7 @@
 </div>
 @section scripts{
     <script>
-        var ContactURL = '@Url.Action("Contact", "Home")';
+    var ContactURL = '@Url.RouteUrl(LYSApp.Web.Services.Common.RouteNames.ContactUsPost)';
     </script>
     <script>
         $(document).ready(function () {

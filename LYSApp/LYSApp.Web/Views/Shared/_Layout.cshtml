@@ -273,11 +273,11 @@
         @Scripts.Render("~/bundles/lockyourstayGA")
     }
     <script>
-        var EmailSubscribeURL = '@Url.Action("EmailSubscribe","Account")';
-        var ForgotPasswordURL = '@Url.Action("ForgotPassword", "Account")';
-        var ListYourPropertyURL = '@Url.Action("ListYourProperty", "Home")';
-        var loginError = '@loginError'
-        var registerError='@registerError'
+    var EmailSubscribeURL = '@Url.Action("EmailSubscribe","Account")';
+    var ForgotPasswordURL = '@Url.Action("ForgotPassword", "Account")';
+    var ListYourPropertyURL = '@Url.RouteUrl(LYSApp.Web.Services.Common.RouteNames.ListYourPropertyPost)';
+    var loginError = '@loginError'
+    var registerError = '@registerError'
     </script>
     @Scripts.Render("~/bundles/layout")
     <!--custom scripts for childs-->
