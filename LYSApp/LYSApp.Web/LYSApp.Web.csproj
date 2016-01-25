@@ -421,6 +421,8 @@
     <Content Include="Views\Search\_FareDetailsPartial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Show_And_Hide_Progress.cshtml" />
+    <Content Include="Views\Shared\Partials\_ListYourProperty.cshtml" />
+    <Content Include="Views\Shared\Partials\_SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

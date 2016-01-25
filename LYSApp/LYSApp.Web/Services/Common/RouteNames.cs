@@ -14,6 +14,9 @@ namespace LYSApp.Web.Services.Common
         public const string Jobs = "Jobs";
         public const string TermsAndPrivacy = "TermsAndPrivacy";
         public const string ListYourPropertyPost = "ListYourPropertyPost";
+
+        //Account Controller
+        public const string Login = "Login";
         
     }
 }

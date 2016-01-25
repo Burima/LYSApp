@@ -58,6 +58,7 @@ namespace LYSApp.Web.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
+        [Route("Login",Name=RouteNames.Login)]
         public ActionResult Login(string returnUrl)
         {
          
