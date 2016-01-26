@@ -180,3 +180,6 @@ input[readonly] {
         /*border: 1px solid #ccc ;*/
     }
 /*-------------------- end list-your-property -------------------*/
+.dropdown-menu{
+    position : inherit;
+}

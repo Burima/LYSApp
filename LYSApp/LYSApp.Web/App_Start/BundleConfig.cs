@@ -50,8 +50,8 @@ namespace LYSApp.Web
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                    "~/Content/bootstrap.css",
+                    "~/Content/site.css"));
 
             // LockYourStay script
             bundles.Add(new ScriptBundle("~/bundles/lockyourstay").Include(
@@ -70,10 +70,10 @@ namespace LYSApp.Web
                      "~/Content/font-awesome.css",
                      "~/Content/simple-line-icons.css",
                      "~/Content/fullscreen-slider.css",
-                     "~/Content/bootstrap.css",
+                     //"~/Content/bootstrap.min.css",
                      "~/Content/app.css",
-                     "~/Content/lockyourstay.css",
-                     "~/Content/Custom/Shared/_Header.css"));
+                     "~/Content/lockyourstay.css"
+                     ));
 
             //css added in Index.cshtml --> Home page
             bundles.Add(new StyleBundle("~/Content/index").Include(

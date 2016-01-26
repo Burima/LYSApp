@@ -1,17 +1,17 @@
 ﻿$(document).ready(function () {
 
-    //if any error in log in
-    if (loginError != '') {
-        $('#signin span.errormessage').html(loginError);
-        $('#signin div.errorblock').removeClass('hidden');
-        $('#signin').modal('show');
-    }
+    ////if any error in log in
+    //if (loginError != '') {
+    //    $('#signin span.errormessage').html(loginError);
+    //    $('#signin div.errorblock').removeClass('hidden');
+    //    $('#signin').modal('show');
+    //}
 
-    if (registerError != '') {
-        $('#signup span.errormessage').html(registerError);
-        $('#signup div.errorblock').removeClass('hidden');
-        $('#signup').modal('show');
-    }
+    //if (registerError != '') {
+    //    $('#signup span.errormessage').html(registerError);
+    //    $('#signup div.errorblock').removeClass('hidden');
+    //    $('#signup').modal('show');
+    //}
     //set external login test as Sign UP/Sign In based on the modal header text
     $('.modal-body .action').each(function (index, element) {
         //alert($(this).closest('div.modal-content').find('h4').html());

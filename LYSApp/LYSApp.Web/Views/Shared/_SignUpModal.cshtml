@@ -1,0 +1,61 @@
+﻿@using LYSApp.Model;
+@model RegisterViewModel 
+
+<!-- Sign Up modal -->
+<div class="modal fade" id="signup" role="dialog" aria-labelledby="signupLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="signupLabel">Sign Up</h4>
+            </div>
+            <div class="modal-body">
+                <div class="errorblock form-group hidden">
+                    <div class="alert alert-success modal-alert">
+                        <div class="row no-margin">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <i class="fa fa-exclamation-circle"></i>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <span class="errormessage"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form", id = "form-SignUp", autocomplete = "off" }))
+                {
+
+                    @Html.AntiForgeryToken();
+
+                    <div class="form-group">
+                        @*<input type="text" id="registerFirstName" placeholder="First Name" class="form-control required charAlone" name="RegisterViewModel.FirstName">*@
+                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="text" id="registerLastName" placeholder="Last Name" class="form-control required charAlone" name="RegisterViewModel.LastName">*@
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="email" id="registerEmail" placeholder="Email Address" class="form-control required" name="RegisterViewModel.Email">*@
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email", tabIndex = "3" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="password" id="registerPassword" placeholder="Password" class="form-control required" name="RegisterViewModel.Password">*@
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", maxlength = "50", placeholder = "Password", tabIndex = "4" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="password" id="registerConfirmPassword" placeholder="Confirm Password" class="form-control required" name="RegisterViewModel.ConfirmPassword">*@
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", maxlength = "50", placeholder = "Confirm Password", tabIndex = "5" })
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group-justified">
+                            <input type="submit" class="btn btn-lg btn-green full-width" value="Sign Up">
+                        </div>
+                    </div>
+                }
+                <p class="help-block">Already a Lockyourstay member? <a class="modal-si text-green">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+</div> <!-- End Sign Up Modal -->

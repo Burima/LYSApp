@@ -209,7 +209,6 @@
     <Content Include="Content\Custom\Search\custom-jquery.steps.css" />
     <Content Include="Content\Custom\Search\Search.css" />
     <Content Include="Content\Custom\Search\shop.style.css" />
-    <Content Include="Content\Custom\Shared\_Header.css" />
     <Content Include="Content\Custom\User\profile.css" />
     <Content Include="Content\Custom\User\style.css" />
     <Content Include="Content\Custom\User\ViewProfile.css" />
@@ -421,11 +420,15 @@
     <Content Include="Views\Search\_FareDetailsPartial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Show_And_Hide_Progress.cshtml" />
-    <Content Include="Views\Shared\Partials\_ListYourProperty.cshtml" />
-    <Content Include="Views\Shared\Partials\_SignIn.cshtml" />
+    <Content Include="Views\Shared\_ListYourPropertyModal.cshtml" />
+    <Content Include="Views\Shared\_SignInModal.cshtml" />
+    <Content Include="Views\Shared\_SignUpModal.cshtml" />
+    <Content Include="Views\Shared\_ForgotPasswordModal.cshtml" />
+    <Content Include="Views\Shared\_MessageModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Custom\Shared\" />
     <Folder Include="Views\Payment\" />
   </ItemGroup>
   <ItemGroup>
