@@ -192,3 +192,5 @@ function showModalMessage(data) {
     //hide message modal after 5sec
     window.setTimeout(function () { $('#modal-message').modal('hide'); }, 5000);
 };
+
+

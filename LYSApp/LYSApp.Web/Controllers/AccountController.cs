@@ -57,6 +57,7 @@ namespace LYSApp.Web.Controllers
 
         //
         // GET: /Account/Login
+        [HttpGet]
         [AllowAnonymous]
         [Route("Login",Name=RouteNames.Login)]
         public ActionResult Login(string returnUrl)
@@ -71,25 +72,25 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(AccountViewModel model, string returnUrl)
+        [Route("Login", Name = RouteNames.LoginPost)]
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.LoginViewModel.Email, model.LoginViewModel.Password);
+                var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.LoginViewModel.RememberMe);
+                    await SignInAsync(user, model.RememberMe);
                     //sessionize user
                     SessionManager.SessionizeUser(user);
-                                     
-                    return RedirectToLocal(returnUrl);
+
+                    return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
                     
                     
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
-                    model.LoginViewModel.LoginError = "Invalid username or password.";
+                    ModelState.AddModelError("", "Invalid username or password.");                    
                 }
             }
 

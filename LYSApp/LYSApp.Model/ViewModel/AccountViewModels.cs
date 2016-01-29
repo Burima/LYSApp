@@ -52,8 +52,6 @@ namespace LYSApp.Model
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
-
-        public string LoginError { get; set; }
     }
 
     public class RegisterViewModel

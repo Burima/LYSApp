@@ -17,6 +17,7 @@ namespace LYSApp.Web.Services.Common
 
         //Account Controller
         public const string Login = "Login";
+        public const string LoginPost = "LoginPost";
         
     }
 }
