@@ -27,7 +27,7 @@ namespace LYSApp.Web.Controllers
         MandrillMailer mandrillMailer = new MandrillMailer();
         TripleDES tripleDES = new TripleDES();
 
-       
+
         public AccountController()
         {
         }
@@ -59,10 +59,10 @@ namespace LYSApp.Web.Controllers
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
-        [Route("Login",Name=RouteNames.Login)]
+        [Route("Login", Name = RouteNames.Login)]
         public ActionResult Login(string returnUrl)
         {
-         
+
             ViewBag.ReturnUrl = returnUrl;
             return View("Index");
         }
@@ -80,13 +80,20 @@ namespace LYSApp.Web.Controllers
                 var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
-                    //sessionize user
-                    SessionManager.SessionizeUser(user);
+                    //check role 
+                    if (UserManager.GetRoles(user.Id).FirstOrDefault().ToUpper() == LYSApp.Model.Constants.Constants.Roles.EndUser.ToString().ToUpper())
+                    {
+                        //sign in
+                        await SignInAsync(user, model.RememberMe);
+                        //sessionize user
+                        SessionManager.SessionizeUser(user);
 
-                    return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
-                    
-                    
+                        return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { Success = false, Error = "Unauthorized user!" }, JsonRequestBehavior.AllowGet);
+                    }
                 }
                 //else
                 //{
@@ -95,8 +102,8 @@ namespace LYSApp.Web.Controllers
                 //}
             }
 
-            return Json(new { Success = false, Error = "Invalid username or password." }, JsonRequestBehavior.AllowGet);          
-            
+            return Json(new { Success = false, Error = "Invalid username or password." }, JsonRequestBehavior.AllowGet);
+
         }
 
         //
@@ -112,50 +119,60 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(AccountViewModel model)
+        public async Task<JsonResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new User()
                 {
-                    FirstName = model.RegisterViewModel.FirstName,
-                    LastName = model.RegisterViewModel.LastName,
-                    UserName = model.RegisterViewModel.Email.ToUpper(),
-                    Email = model.RegisterViewModel.Email.ToUpper(),
-                    CreatedOn=DateTime.Now,
-                    LastUpdatedOn=DateTime.Now,
-                    Status=1,
-                    LockoutEndDateUtc=DateTime.Now.AddDays(60),
-                    LockoutEnabled=true
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    UserName = model.Email.ToLower(),
+                    Email = model.Email.ToLower(),
+                    CreatedOn = DateTime.Now,
+                    LastUpdatedOn = DateTime.Now,
+                    Status = 1,
+                    LockoutEndDateUtc = DateTime.Now.AddDays(60),
+                    LockoutEnabled = true
                 };
-                IdentityResult result = await UserManager.CreateAsync(user, model.RegisterViewModel.Password);
-                
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);
-                    //sessionize user
-                    SessionManager.SessionizeUser(user);
+                    //add role for user
+                    await UserManager.AddToRoleAsync(user.Id, LYSApp.Model.Constants.Constants.Roles.EndUser.ToString());
+
+                    //await SignInAsync(user, isPersistent: false);
+                    ////sessionize user
+                    //SessionManager.SessionizeUser(user);
+
                     //save to mailchimp subscription list
                     //enables for production only
                     if (LYSConfig.EnvironmentName == "Production")
                     {
-                        mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName,false);
+                        mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName, false);
                     }
 
                     //Send Activation emai
                     await SendAccountActivationMail(user);
 
-                    //return RedirectToAction("Index", "Home");
+                    return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    model.RegisterViewModel.RegisterError = result.Errors.FirstOrDefault();
                     AddErrors(result);
+                    //var errors = ModelState
+                    //    .Keys
+                    //    .SelectMany(key => this.ModelState[key].Errors)
+                    //    .ToList()
+                    //    .Select(a => a.ErrorMessage)
+                    //    .ToList();
+                    //return Json(new { Success = true, Errors = errors }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Success = false, Error = result.Errors.FirstOrDefault() }, JsonRequestBehavior.AllowGet);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            return View("Index",model);
+            return Json(new { Success = false, Errors = "Please enter vali data." }, JsonRequestBehavior.AllowGet);
         }
 
         //
@@ -163,7 +180,7 @@ namespace LYSApp.Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || userId==String.Empty || code == null ||  code==String.Empty)
+            if (userId == null || userId == String.Empty || code == null || code == String.Empty)
             {
                 return View("Error");
             }
@@ -179,16 +196,16 @@ namespace LYSApp.Web.Controllers
                 {
                     AddErrors(result);
                     ViewBag.Error = "Invalid Token! ";
-                   // return View();
+                    // return View();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //Incorrect Token
                 ViewBag.Error = "Invalid Token! ";
                 //return View();
             }
-            return View(); 
+            return View();
         }
 
         //
@@ -206,12 +223,12 @@ namespace LYSApp.Web.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(string email)
         {
-            if (ModelState.IsValid || email!=String.Empty)
+            if (ModelState.IsValid || email != String.Empty)
             {
                 var user = await UserManager.FindByNameAsync(email);
                 if (user == null)
                 {
-                    return Content("The email id "+email+" does not exist");
+                    return Content("The email id " + email + " does not exist");
                 }
                 else if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
@@ -221,7 +238,7 @@ namespace LYSApp.Web.Controllers
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId =tripleDES.Encrypt((user.Id).ToString()), code =tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = tripleDES.Encrypt((user.Id).ToString()), code = tripleDES.Encrypt(code) }, protocol: Request.Url.Scheme);
                 //send Reset Password link
                 mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Reset Your Password");
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
@@ -246,7 +263,7 @@ namespace LYSApp.Web.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string userId, string code)
         {
-            if (code == null || code==String.Empty || userId==null || userId==String.Empty)
+            if (code == null || code == String.Empty || userId == null || userId == String.Empty)
             {
                 return View("Error");
             }
@@ -255,7 +272,7 @@ namespace LYSApp.Web.Controllers
             {
                 Code = code,
                 UserID = userId
-            };    
+            };
             //TempData.Keep("Message");
             return View(accountViewModel);
         }
@@ -268,7 +285,7 @@ namespace LYSApp.Web.Controllers
         public async Task<ActionResult> ResetPassword(AccountViewModel model)
         {
             if (ModelState.IsValid)
-            {                
+            {
                 var user = await UserManager.FindByIdAsync(Convert.ToInt64(tripleDES.Decrypt(model.ResetPasswordViewModel.UserID).Trim()));
                 if (user == null)
                 {
@@ -282,8 +299,8 @@ namespace LYSApp.Web.Controllers
                 }
                 else
                 {
-                    TempData["Message"] =  result.Errors.FirstOrDefault();
-                    return RedirectToAction("ResetPassword", "Account", new { userId=model.ResetPasswordViewModel.UserID,code=model.ResetPasswordViewModel.Code });
+                    TempData["Message"] = result.Errors.FirstOrDefault();
+                    return RedirectToAction("ResetPassword", "Account", new { userId = model.ResetPasswordViewModel.UserID, code = model.ResetPasswordViewModel.Code });
                 }
             }
 
@@ -305,12 +322,12 @@ namespace LYSApp.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
-          
+
             ManageMessageId? message = null;
             var result = await UserManager.RemoveLoginAsync(long.Parse(User.Identity.GetUserId()), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
-                
+
                 var user = await UserManager.FindByIdAsync(long.Parse(User.Identity.GetUserId()));
                 await SignInAsync(user, isPersistent: false);
                 message = ManageMessageId.RemoveLoginSuccess;
@@ -408,9 +425,9 @@ namespace LYSApp.Web.Controllers
                         var user = await UserManager.FindByIdAsync(long.Parse(User.Identity.GetUserId()));
                         await SignInAsync(user, isPersistent: false);
                         ViewBag.StatusMessage = "Your password has been changed.";
-                           
+
                     }
-                   
+
                 }
             }
 
@@ -453,7 +470,7 @@ namespace LYSApp.Web.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                
+
                 return View("ExternalLoginConfirmation", new AccountViewModel { ExternalLoginConfirmationViewModel = new ExternalLoginConfirmationViewModel() { Email = loginInfo.Email } });
             }
         }
@@ -505,20 +522,20 @@ namespace LYSApp.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                
+
                 var user = new User()
                 {
                     FirstName = String.Empty,
                     LastName = String.Empty,
                     UserName = model.ExternalLoginConfirmationViewModel.Email.ToUpper(),
                     Email = model.ExternalLoginConfirmationViewModel.Email.ToUpper(),
-                    CreatedOn=DateTime.Now,
-                    LastUpdatedOn=DateTime.Now,
-                    Status=1,
-                    LockoutEndDateUtc=DateTime.Now.AddDays(60),
-                    LockoutEnabled=true
+                    CreatedOn = DateTime.Now,
+                    LastUpdatedOn = DateTime.Now,
+                    Status = 1,
+                    LockoutEndDateUtc = DateTime.Now.AddDays(60),
+                    LockoutEnabled = true
                 };
-                
+
                 IdentityResult result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -533,7 +550,7 @@ namespace LYSApp.Web.Controllers
                         //enables for production only
                         if (LYSConfig.EnvironmentName == "Production")
                         {
-                            mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName,false);
+                            mandrillMailer.SaveToMailChimpList(user.Email, user.FirstName, user.LastName, false);
                         }
 
                         //send Email Action emai
@@ -556,7 +573,7 @@ namespace LYSApp.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            SessionManager.DeSessionizeUser();            
+            SessionManager.DeSessionizeUser();
             return RedirectToAction("Index", "Account");
         }
 
@@ -574,14 +591,14 @@ namespace LYSApp.Web.Controllers
             var linkedAccounts = UserManager.GetLogins(long.Parse(User.Identity.GetUserId()));
             ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
             return (ActionResult)PartialView("_RemoveAccountPartial", linkedAccounts);
-        }          
+        }
 
         //Email Subscribe
         [AllowAnonymous]
         [HttpPost]
         public ActionResult EmailSubscribe(EmailSubscribeViewModel model)
         {
-              return Content(mandrillMailer.SaveToMailChimpList(model.Email, "", "",true));   
+            return Content(mandrillMailer.SaveToMailChimpList(model.Email, "", "", true));
         }
 
         protected override void Dispose(bool disposing)
@@ -617,7 +634,7 @@ namespace LYSApp.Web.Controllers
             catch (Exception ex)
             {
                 return false;
-            }            
+            }
         }
 
         /// <summary>
@@ -691,7 +708,7 @@ namespace LYSApp.Web.Controllers
         {
             if (Url.IsLocalUrl(returnUrl))
             {
-                return Redirect(returnUrl);                
+                return Redirect(returnUrl);
             }
             else
             {
@@ -729,5 +746,5 @@ namespace LYSApp.Web.Controllers
         }
         #endregion
 
-     }
+    }
 }
