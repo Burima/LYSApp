@@ -1,13 +1,6 @@
 ﻿@using LYSApp.Model
 @model LoginViewModel
-           <script>
-               function loginSuccess(response) {
-                   alert('s ' + response);
-               }
-               function loginFailed(response) {
-                   alert('f ' + response);
-               }
-           </script>
+           
 <!-- Sign In Modal -->
 <div class="modal fade" id="signin" role="dialog" aria-labelledby="signinLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -31,7 +24,7 @@
                 @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
 
                 @*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", id = "form-SignIn", autocomplete = "off" }))*@
-                @using (Ajax.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "loginSuccess", OnFailure = "loginFailed",HttpMethod="Post" }, new { role = "form", id = "form-SignIn", autocomplete = "off" }))
+                @using (Ajax.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "loginSuccess", OnFailure = "loginFailed",HttpMethod="Post"}, new { role = "form", id = "form-SignIn", autocomplete = "off" }))
                 {
 
                     @Html.AntiForgeryToken();

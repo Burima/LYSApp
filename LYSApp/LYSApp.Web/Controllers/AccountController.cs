@@ -73,7 +73,7 @@ namespace LYSApp.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [Route("Login", Name = RouteNames.LoginPost)]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<JsonResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -88,14 +88,15 @@ namespace LYSApp.Web.Controllers
                     
                     
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid username or password.");                    
-                }
+                //else
+                //{
+                //    ModelState.AddModelError("", "Invalid username or password.");
+                //    return Json(new { Success = false, error = "Invalid username or password." }, JsonRequestBehavior.AllowGet);
+                //}
             }
 
-            // If we got this far, something failed, redisplay form
-            return View("Index",model);
+            return Json(new { Success = false, Error = "Invalid username or password." }, JsonRequestBehavior.AllowGet);          
+            
         }
 
         //

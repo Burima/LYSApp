@@ -193,4 +193,14 @@ function showModalMessage(data) {
     window.setTimeout(function () { $('#modal-message').modal('hide'); }, 5000);
 };
 
-
+function loginSuccess(response) {
+    if (response.Success) {
+        window.location.href="/"
+    } else {
+        $('#signin span.errormessage').html(response.Error);
+            $('#signin div.errorblock').removeClass('hidden');            
+    }
+}
+function loginFailed(response) {
+    alert('f ' + response);
+}

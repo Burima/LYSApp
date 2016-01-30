@@ -349,6 +349,7 @@
     <Content Include="Scripts\jquery.slimscroll.min.js" />
     <Content Include="Scripts\jquery.tagsinput.min.js" />
     <Content Include="Scripts\jquery.touchSwipe.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.visible.js" />
     <Content Include="Scripts\json2.js" />
