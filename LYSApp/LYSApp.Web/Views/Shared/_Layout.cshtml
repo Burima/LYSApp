@@ -65,6 +65,7 @@
     @Scripts.Render("~/bundles/jqueryvisible")
     <script src='@Url.Content("~/Scripts/home.min.js")' type="text/javascript"></script>
     @Scripts.Render("~/bundles/validate")
+    @Scripts.Render("~/bundles/unobtrusive-ajax")
     @Scripts.Render("~/bundles/lockyourstay")
     @Html.Partial("_Show_And_Hide_Progress")
     @if (System.Configuration.ConfigurationManager.AppSettings.Get("EnvironmentName") == "Production")
@@ -79,7 +80,9 @@
     @*var loginError = '@loginError'
     var registerError = '@registerError'*@
     </script>
+      
     @Scripts.Render("~/bundles/layout")
+    
     <!--custom scripts for childs-->
     @RenderSection("scripts", false);
 </body>
