@@ -189,7 +189,7 @@ namespace LYSApp.Web.Controllers
                 }
             }
 
-            return Json(new { Success = false, Errors = "Please enter vali data." }, JsonRequestBehavior.AllowGet);
+            return Json(new { Success = false, Errors = "Please enter valid data." }, JsonRequestBehavior.AllowGet);
         }
 
         //
@@ -238,7 +238,7 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [Route("ForgotPassword",Name= RouteNames.ForgotPassword)]
+        [Route("ForgotPassword", Name = RouteNames.ForgotPasswordPost)]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid || model.Email != String.Empty)
@@ -252,7 +252,7 @@ namespace LYSApp.Web.Controllers
                 {
                     return Content("The email id " + model.Email + " is not confirmed.");
                 }
-                else if (UserManager.GetRoles(user.Id).FirstOrDefault().ToUpper() == LYSApp.Model.Constants.Constants.Roles.EndUser.ToString().ToUpper())
+                else if (UserManager.GetRoles(user.Id).FirstOrDefault().ToUpper() != LYSApp.Model.Constants.Constants.Roles.EndUser.ToString().ToUpper())
                 {
                     return Content("The email id " + model.Email + " is not authorized.");
                 }
@@ -272,31 +272,32 @@ namespace LYSApp.Web.Controllers
             return Content("Something went wrong! Please contact support@lockyourstay.com.");
         }
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
-        {
-            return View();
-        }
+        ////
+        //// GET: /Account/ForgotPasswordConfirmation
+        //[AllowAnonymous]
+        //public ActionResult ForgotPasswordConfirmation()
+        //{
+        //    return View();
+        //}
 
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
+        //[Route("ResetPassword/{userId}/{code}", Name = RouteNames.ResetPassword)]
         public ActionResult ResetPassword(string userId, string code)
         {
             if (code == null || code == String.Empty || userId == null || userId == String.Empty)
             {
                 return View("Error");
             }
-            AccountViewModel accountViewModel = new AccountViewModel();
-            accountViewModel.ResetPasswordViewModel = new ResetPasswordViewModel()
+
+            ResetPasswordViewModel model = new ResetPasswordViewModel()
             {
                 Code = code,
                 UserID = userId
             };
             //TempData.Keep("Message");
-            return View(accountViewModel);
+            return View(model);
         }
 
         //
@@ -304,30 +305,35 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(AccountViewModel model)
+        //[Route("ResetPassword", Name = RouteNames.ResetPasswordPost)]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByIdAsync(Convert.ToInt64(tripleDES.Decrypt(model.ResetPasswordViewModel.UserID).Trim()));
+                var user = await UserManager.FindByIdAsync(Convert.ToInt64(tripleDES.Decrypt(model.UserID).Trim()));
                 if (user == null)
                 {
-                    TempData["Message"] = "No user found! ";
-                    return RedirectToAction("ResetPassword", "Account", new { userId = model.ResetPasswordViewModel.UserID, code = model.ResetPasswordViewModel.Code });
+                    //TempData["Message"] = "No user found! ";
+                    //return RedirectToAction("ResetPassword",new { userId = model.UserID, code = model.Code });
+                    return Json(new { Success = false, Error = "No user found!" }, JsonRequestBehavior.AllowGet);
                 }
-                IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, tripleDES.Decrypt(model.ResetPasswordViewModel.Code.Trim()), model.ResetPasswordViewModel.Password);
+                else if (UserManager.GetRoles(user.Id).FirstOrDefault().ToUpper() != LYSApp.Model.Constants.Constants.Roles.EndUser.ToString().ToUpper())
+                {
+                    return Json(new { Success = false, Error = "Unauthorized user!" }, JsonRequestBehavior.AllowGet);
+                }
+                IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, tripleDES.Decrypt(model.Code.Trim()), model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("ResetPasswordConfirmation", "Account");
+                    return Json(new { Success = true, Error = "Password reset successfully. Please log in to continue." }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    TempData["Message"] = result.Errors.FirstOrDefault();
-                    return RedirectToAction("ResetPassword", "Account", new { userId = model.ResetPasswordViewModel.UserID, code = model.ResetPasswordViewModel.Code });
+                    //TempData["Message"] = result.Errors.FirstOrDefault();
+                    return Json(new { Success = false, Error = result.Errors.FirstOrDefault() }, JsonRequestBehavior.AllowGet);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return Json(new { Success = false, Error = "Something went Wrong! Please try again later." }, JsonRequestBehavior.AllowGet);
         }
 
         //

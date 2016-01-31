@@ -19,7 +19,9 @@ namespace LYSApp.Web.Services.Common
         public const string Login = "Login";
         public const string LoginPost = "LoginPost";
         public const string ResendAccountActivationMailForNewUserPost="ResendAccountActivationMailForNewUserPost";
-        public const string ForgotPassword = "ForgotPassword";
+        public const string ForgotPasswordPost = "ForgotPasswordPost";
+        //public const string ResetPassword = "ResetPassword";
+        //public const string ResetPasswordPost = "ResetPasswordPost";
         
     }
 }

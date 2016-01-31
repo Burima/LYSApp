@@ -48,11 +48,11 @@
 
     <!-- Footer -->
     @Html.Partial("_Footer")
-    @Html.Partial("_SignInModal")
-    @Html.Partial("_SignUpModal")
-    @Html.Partial("_EmailVerificationModal")
-    @Html.Partial("_ForgotPasswordModal")
-    @Html.Partial("_ListYourPropertyModal")
+    @Html.Partial("_SignInModal",null,new ViewDataDictionary())
+    @Html.Partial("_SignUpModal", null, new ViewDataDictionary())
+    @Html.Partial("_EmailVerificationModal", null, new ViewDataDictionary())
+    @Html.Partial("_ForgotPasswordModal", null, new ViewDataDictionary())
+    @Html.Partial("_ListYourPropertyModal", null, new ViewDataDictionary())
     @Html.Partial("_MessageModal")
 
     @Scripts.Render("~/bundles/jquery")

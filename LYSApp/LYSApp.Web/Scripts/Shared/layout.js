@@ -301,9 +301,30 @@ function forgotpasswordFailed(response) {
 
 /*----------------------------------- reset password ----------------------------*/
 function resetpasswordSuccess(response) {
-    
+    if (response.Success) {
+        $('#resetpassword span.errormessage').html(response.Error);
+        $('#resetpassword div.errorblock').removeClass('hidden');
+        window.setTimeout(function () {
+            //$(".alert-success").alert('close');
+        }, 5000);
+        $('#signin').modal('show');
+        //window.location.href = "/";
+    } else {
+        if (response.Error != undefined && response.Error != '') {
+            $('#resetpassword span.errormessage').html(response.Error);
+        } else {
+            $('#resetpassword span.errormessage').html("Something went wrong! Please try again.");
+        }
+        $('#resetpassword div.errorblock').removeClass('hidden');
+    }
 }
 function resetpasswordFailed(response) {
-    
+    if (response.Error != undefined && response.Error != '') {
+        $('#resetpassword span.errormessage').html(response.Error);
+    } else {
+        $('#resetpassword span.errormessage').html("Something went wrong! Please try again.");
+    }
+
+    $('#resetpassword div.errorblock').removeClass('hidden');
 }
 
