@@ -287,6 +287,7 @@ $('.modal-fp').click(function () {
     $('#signin').modal('hide');
     $('#forgotpassword').modal('show');
 });
+
 function forgotpasswordSuccess(response) {
     $('#forgotpassword').modal('hide');
     showModalMessage(response);
@@ -296,3 +297,13 @@ function forgotpasswordFailed(response) {
     $('#forgotpassword').modal('hide');
     showModalMessage("Something went wrong! Please contact support@lockyourstay.com.");
 }
+
+
+/*----------------------------------- reset password ----------------------------*/
+function resetpasswordSuccess(response) {
+    
+}
+function resetpasswordFailed(response) {
+    
+}
+
