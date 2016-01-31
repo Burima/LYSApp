@@ -426,6 +426,7 @@
     <Content Include="Views\Shared\_SignUpModal.cshtml" />
     <Content Include="Views\Shared\_ForgotPasswordModal.cshtml" />
     <Content Include="Views\Shared\_MessageModal.cshtml" />
+    <Content Include="Views\Shared\_EmailVerificationModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

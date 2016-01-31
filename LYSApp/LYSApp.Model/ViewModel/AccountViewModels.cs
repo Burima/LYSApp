@@ -75,8 +75,7 @@ namespace LYSApp.Model
         [Required]
         public string FirstName { get; set; }
 
-        public string LastName { get; set; }
-        public string RegisterError { get; set; }
+        public string LastName { get; set; }       
     }
 
     public class ResetPasswordViewModel
@@ -149,5 +148,14 @@ namespace LYSApp.Model
     public class EmailSubscribeViewModel
     {
         public string Email { get; set; }
+    }
+
+    public class EmailVerificationViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
     }
 }

@@ -62,7 +62,7 @@
         }
 
     });
-    
+
     //subscribe email function
     $('.btnSubscribe').click(function () {
         if ($('#form-Subscribe').valid()) {
@@ -166,13 +166,13 @@
                 data: JSON.stringify(model),
                 dataType: 'html',
                 contentType: "application/json",
-                success: function (data, textStatus, XMLHttpRequest) {                    
+                success: function (data, textStatus, XMLHttpRequest) {
                     hideProgress();
                     $('.btn-list-your-property').prop('disabled', false);
                     $('#form-list-your-property').find("input, textarea").val("");
                     showModalMessage(data);
                 },
-                error: function (xhr, status) {                    
+                error: function (xhr, status) {
                     hideProgress();
                     $('.btn-list-your-property').prop('disabled', false);
                     showModalMessage("Something went wrong! Please contact support@lockyourstay.com.");
@@ -193,14 +193,92 @@ function showModalMessage(data) {
     window.setTimeout(function () { $('#modal-message').modal('hide'); }, 5000);
 };
 
+/*--------------------------------- log in with ajax -----------------------------------------------*/
 function loginSuccess(response) {
     if (response.Success) {
-        window.location.href="/"
+        window.location.href = "/"
     } else {
-        $('#signin span.errormessage').html(response.Error);
-            $('#signin div.errorblock').removeClass('hidden');            
+        if(response.Error!=null && response.Error != undefined && response.Error != ''){//Eror not null
+            if (!response.EmailConfirmed) {//send user for email to resend modal
+                $('#signin span.errormessage').html(response.Error).delay(500);//show error
+                $('#modalEmailVerification #Email').val($('#form-SignIn #Email').val());//set resend email with recently signed up email
+                $('#form-SignIn').each(function () {
+                    this.reset();//reset form values
+                });
+                $('#signin').modal('hide');//hide sign in modal
+                $('#modalEmailVerification').modal('show');//show email resend modal
+            } else {//email confirmed but error occured
+                $('#signin span.errormessage').html(response.Error);
+                $('#signin div.errorblock').removeClass('hidden');
+            }
+        }
+        else {
+            $('#signin span.errormessage').html("Something went wrong! Please try again.");
+            $('#signin div.errorblock').removeClass('hidden');
+        }
+        
     }
 }
 function loginFailed(response) {
-    alert('f ' + response);
+    if (response.Error != undefined && response.Error != '') {
+        $('#signin span.errormessage').html(response.Error);       
+    }
+    else {
+        $('#signin span.errormessage').html("Something went wrong! Please try again.");
+    }
+    $('#signin div.errorblock').removeClass('hidden');
+   
+}
+
+/*--------------------------------- Sign Up with ajax -----------------------------------------------*/
+function signupSuccess(response) {
+    //alert(response.Error);
+    if (response.Success) {
+        $('#modalEmailVerification #Email').val(response.Email);//set resend email with recently signed up email
+        $('#form-SignUp').each(function () {
+            this.reset();//reset form values
+        });
+        $('#signup').modal('hide');//hide sign up modal
+        $('#modalEmailVerification').modal('show');//show email resend modal
+    } else {
+        if (response.Error != undefined && response.Error != '') {
+            $('#signup span.errormessage').html(response.Error);
+        } else {
+            $('#signup span.errormessage').html("Something went wrong! Please try again.");
+        }
+        $('#signup div.errorblock').removeClass('hidden');
+    }
+}
+function signupFailed(response) {
+    //alert('f' + response);
+    if (response.Error != undefined && response.Error != '') {
+        $('#signup span.errormessage').html(response.Error);
+    } else {
+        $('#signup span.errormessage').html("Something went wrong! Please try again.");
+    }
+
+    $('#signup div.errorblock').removeClass('hidden');
+}
+
+/* ----------------------------- Resend Email Verification ----------------------------*/
+function resendemailverificationSuccess(response) {
+    if (response.Success) {
+        $('#modalEmailVerification span.errormessage').html("Email send successfully.");
+    } else {
+        if (response.Error != undefined && response.Error != '') {
+            $('#modalEmailVerification span.errormessage').html(response.Error);
+        } else {
+            $('#modalEmailVerification span.errormessage').html("Something went wrong! Please try again.");
+        }        
+    }
+    $('#modalEmailVerification div.errorblock').removeClass('hidden');
+}
+function resendemailverificationFailed(response) {
+    if (response.Error != undefined && response.Error != '') {
+        $('#modalEmailVerification span.errormessage').html(response.Error);
+    } else {
+        $('#modalEmailVerification span.errormessage').html("Something went wrong! Please try again.");
+    }
+
+    $('#modalEmailVerification div.errorblock').removeClass('hidden');
 }

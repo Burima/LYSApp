@@ -75,32 +75,49 @@ namespace LYSApp.Web.Controllers
         [Route("Login", Name = RouteNames.LoginPost)]
         public async Task<JsonResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
-                if (user != null)
+                if (ModelState.IsValid)
                 {
-                    //check role 
-                    if (UserManager.GetRoles(user.Id).FirstOrDefault().ToUpper() == LYSApp.Model.Constants.Constants.Roles.EndUser.ToString().ToUpper())
-                    {
-                        //sign in
-                        await SignInAsync(user, model.RememberMe);
-                        //sessionize user
-                        SessionManager.SessionizeUser(user);
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
 
-                        return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
-                    }
-                    else
+                    if (user != null)
                     {
-                        return Json(new { Success = false, Error = "Unauthorized user!" }, JsonRequestBehavior.AllowGet);
+                        //check role 
+                        if (UserManager.GetRoles(user.Id).FirstOrDefault().ToUpper() == LYSApp.Model.Constants.Constants.Roles.EndUser.ToString().ToUpper())
+                        {
+                            if (user.EmailConfirmed)
+                            {
+                                //sign in
+                                await SignInAsync(user, model.RememberMe);
+                                //sessionize user
+                                SessionManager.SessionizeUser(user);
+
+                                return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+                            }
+                            else
+                            {
+                                return Json(new { Success = false, Error = "Email not verified!", EmailConfirmed = false }, JsonRequestBehavior.AllowGet);
+                            }
+
+                        }
+                        else
+                        {
+                            return Json(new { Success = false, Error = "Unauthorized user!" }, JsonRequestBehavior.AllowGet);
+                        }
                     }
+                    //else
+                    //{
+                    //    ModelState.AddModelError("", "Invalid username or password.");
+                    //    return Json(new { Success = false, error = "Invalid username or password." }, JsonRequestBehavior.AllowGet);
+                    //}
                 }
-                //else
-                //{
-                //    ModelState.AddModelError("", "Invalid username or password.");
-                //    return Json(new { Success = false, error = "Invalid username or password." }, JsonRequestBehavior.AllowGet);
-                //}
             }
+            catch (Exception ex)
+            {
+
+            }
+            
 
             return Json(new { Success = false, Error = "Invalid username or password." }, JsonRequestBehavior.AllowGet);
 
@@ -156,7 +173,7 @@ namespace LYSApp.Web.Controllers
                     //Send Activation emai
                     await SendAccountActivationMail(user);
 
-                    return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Success = true, Email=model.Email }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -655,6 +672,30 @@ namespace LYSApp.Web.Controllers
             }
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [Route("ResendAccountActivationMailForNewUser", Name = RouteNames.ResendAccountActivationMailForNewUserPost)]
+        public async Task<JsonResult> ResendAccountActivationMailForNewUser(EmailVerificationViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    await SendAccountActivationMail(user);
+
+                    return Json(new { Success = true}, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { Success = false, Message = model.Email + " does not exists!" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return Json(new { Success = false, Message ="Something went wrong! Please try again later. " }, JsonRequestBehavior.AllowGet);
+            
+        }
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

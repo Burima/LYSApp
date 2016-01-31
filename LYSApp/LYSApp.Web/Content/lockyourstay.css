@@ -146,40 +146,71 @@ a {
     padding: 15px 0px 0px 0px;
     min-height: 70px;
 }
-.modal-alert i{
-    font-size: 40px;
-}
-.modal-alert span{
-    display:block;
-}
+
+    .modal-alert i {
+        font-size: 40px;
+    }
+
+    .modal-alert span {
+        display: block;
+    }
 /*------ for all anchor which don't have any href-----------*/
-a{
-    cursor:pointer;
+a {
+    cursor: pointer;
 }
 
 /*------------- readonly input default cursor------------------*/
 input[readonly] {
-     cursor: initial !important;
+    cursor: initial !important;
 }
 /*------------- calender icon pointer cursor------------------*/
- .glyphicon-calendar{
-        cursor:pointer !important;
-    }
+.glyphicon-calendar {
+    cursor: pointer !important;
+}
 
- /*-------------------- input focus -------------------*/
- input:focus,select:focus,textarea :focus{
-     border:1px solid #1ab394 !important;
- }
+/*-------------------- input focus -------------------*/
+input:focus, select:focus, textarea :focus {
+    border: 1px solid #1ab394 !important;
+}
 /*-------------------- list-your-property -------------------*/
-  #form-list-your-property .form-group{
-        width:100% !important;
-        padding-bottom:2%;
-    }
-    #form-list-your-property .form-group input,textarea{
-        width:100% !important;
+#form-list-your-property .form-group {
+    width: 100% !important;
+    padding-bottom: 2%;
+}
+
+    #form-list-your-property .form-group input, textarea {
+        width: 100% !important;
         /*border: 1px solid #ccc ;*/
     }
 /*-------------------- end list-your-property -------------------*/
-.dropdown-menu{
-    position : inherit;
+.dropdown-menu {
+    position: inherit;
+}
+
+
+/*------------------------ Email Verification Modal */
+#modalEmailVerification .circle-outer {
+    padding-left: 76px;
+    padding: 5% 30%;
+}
+
+    #modalEmailVerification .circle-outer .circle-inner {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        border: 2px solid #a1a1a1;
+        text-align: center;
+        padding: 18%;
+    }
+
+        #modalEmailVerification .circle-outer .circle-inner i {
+            font-size: 50px;
+            padding-bottom: 4%;
+            font-weight: lighter;
+        }
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    #modalEmailVerification .circle-outer {
+        padding: 5% 40% ;
+    }
 }
