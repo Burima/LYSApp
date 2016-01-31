@@ -93,7 +93,7 @@ namespace LYSApp.Web.Controllers
                                 //sessionize user
                                 SessionManager.SessionizeUser(user);
 
-                                return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+                                return Json(new { Success = true, }, JsonRequestBehavior.AllowGet);
                             }
                             else
                             {
@@ -103,7 +103,7 @@ namespace LYSApp.Web.Controllers
                         }
                         else
                         {
-                            return Json(new { Success = false, Error = "Unauthorized user!" }, JsonRequestBehavior.AllowGet);
+                            return Json(new { Success = false, Error = "Unauthorized user!"}, JsonRequestBehavior.AllowGet);
                         }
                     }
                     //else
@@ -117,9 +117,9 @@ namespace LYSApp.Web.Controllers
             {
 
             }
-            
 
-            return Json(new { Success = false, Error = "Invalid username or password." }, JsonRequestBehavior.AllowGet);
+
+            return Json(new { Success = false, Error = "Invalid username or password."}, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -225,31 +225,32 @@ namespace LYSApp.Web.Controllers
             return View();
         }
 
-        //
-        // GET: /Account/ForgotPassword
-        [AllowAnonymous]
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
+        ////
+        //// GET: /Account/ForgotPassword
+        //[AllowAnonymous]
+        //public ActionResult ForgotPassword()
+        //{
+        //    return View();
+        //}
 
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(string email)
+        [ValidateAntiForgeryToken]
+        [Route("ForgotPassword",Name= RouteNames.ForgotPassword)]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid || email != String.Empty)
+            if (ModelState.IsValid || model.Email != String.Empty)
             {
-                var user = await UserManager.FindByNameAsync(email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null)
                 {
-                    return Content("The email id " + email + " does not exist");
+                    return Content("The email id " + model.Email + " does not exist");
                 }
-                else if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                else if (!user.EmailConfirmed)
                 {
-                    return Content("The email id " + email + " is not confirmed.");
+                    return Content("The email id " + model.Email + " is not confirmed.");
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -260,7 +261,7 @@ namespace LYSApp.Web.Controllers
                 mandrillMailer.SendEmailForUser(user.Email, callbackUrl, "Activate Your Account", "Reset Your Password");
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");                
-                return Content("A link to reset your password has been sent to " + email);
+                return Content("A link to reset your password has been sent to " + model.Email);
             }
 
             // If we got this far, something failed, redisplay form

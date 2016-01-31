@@ -31,37 +31,31 @@
     //message timeout
     // window.setTimeout(function () { $("#modal-message").alert('close'); }, 5000);
 
-    //forgot password modal
-    $('.modal-fp').click(function () {
-        $('#signin').modal('hide');
-        //get email id from sign in modal email field (if any)
-        $('#txtForgotPasswordEmail').val($('#LoginViewModel_Email').val());
-        $('#forgotpassword').modal('show');
-    });
+    
 
-    $('#btnForgotPassword').click(function () {
-        if ($('#form-ForgotPassword').valid()) {
-            var jmodel = { email: $("#txtForgotPasswordEmail").val() };
-            //alert(jmodel);
-            $.ajax({
-                url: ForgotPasswordURL,
-                type: 'POST',
-                data: jmodel,
-                dataType: 'html',
-                success: function (data, textStatus, XMLHttpRequest) {
-                    $('#forgotpassword').modal('hide');
-                    showModalMessage(data);
+    //$('#btnForgotPassword').click(function () {
+    //    if ($('#form-ForgotPassword').valid()) {
+    //        var jmodel = { email: $("#txtForgotPasswordEmail").val() };
+    //        //alert(jmodel);
+    //        $.ajax({
+    //            url: ForgotPasswordURL,
+    //            type: 'POST',
+    //            data: jmodel,
+    //            dataType: 'html',
+    //            success: function (data, textStatus, XMLHttpRequest) {
+    //                $('#forgotpassword').modal('hide');
+    //                showModalMessage(data);
 
-                },
-                error: function (xhr, status) {
-                    //alert('e')
-                }
-            })//ajax end
-        } else {
-            return false;
-        }
+    //            },
+    //            error: function (xhr, status) {
+    //                //alert('e')
+    //            }
+    //        })//ajax end
+    //    } else {
+    //        return false;
+    //    }
 
-    });
+    //});
 
     //subscribe email function
     $('.btnSubscribe').click(function () {
@@ -198,8 +192,8 @@ function loginSuccess(response) {
     if (response.Success) {
         window.location.href = "/"
     } else {
-        if(response.Error!=null && response.Error != undefined && response.Error != ''){//Eror not null
-            if (!response.EmailConfirmed) {//send user for email to resend modal
+        if (response.Error != null && response.Error != undefined && response.Error != '') {//Eror not null
+            if (response.EmailConfirmed != null && response.EmailConfirmed != undefined && !response.EmailConfirmed) {//send user for email to resend modal
                 $('#signin span.errormessage').html(response.Error).delay(500);//show error
                 $('#modalEmailVerification #Email').val($('#form-SignIn #Email').val());//set resend email with recently signed up email
                 $('#form-SignIn').each(function () {
@@ -216,18 +210,18 @@ function loginSuccess(response) {
             $('#signin span.errormessage').html("Something went wrong! Please try again.");
             $('#signin div.errorblock').removeClass('hidden');
         }
-        
+
     }
 }
 function loginFailed(response) {
     if (response.Error != undefined && response.Error != '') {
-        $('#signin span.errormessage').html(response.Error);       
+        $('#signin span.errormessage').html(response.Error);
     }
     else {
         $('#signin span.errormessage').html("Something went wrong! Please try again.");
     }
     $('#signin div.errorblock').removeClass('hidden');
-   
+
 }
 
 /*--------------------------------- Sign Up with ajax -----------------------------------------------*/
@@ -269,7 +263,7 @@ function resendemailverificationSuccess(response) {
             $('#modalEmailVerification span.errormessage').html(response.Error);
         } else {
             $('#modalEmailVerification span.errormessage').html("Something went wrong! Please try again.");
-        }        
+        }
     }
     $('#modalEmailVerification div.errorblock').removeClass('hidden');
 }
@@ -281,4 +275,24 @@ function resendemailverificationFailed(response) {
     }
 
     $('#modalEmailVerification div.errorblock').removeClass('hidden');
+}
+/*---------------------------- forgot password -----------------------------------*/
+//forgot password modal
+$('.modal-fp').click(function () {
+    //get email id from sign in modal email field (if any)
+    $('#form-ForgotPassword #Email').val($('#form-SignIn #Email').val());
+    $('#form-SignIn').each(function () {
+        this.reset();//reset form values
+    });
+    $('#signin').modal('hide');
+    $('#forgotpassword').modal('show');
+});
+function forgotpasswordSuccess(response) {
+    $('#forgotpassword').modal('hide');
+    showModalMessage(response);
+}
+
+function forgotpasswordFailed(response) {
+    $('#forgotpassword').modal('hide');
+    showModalMessage("Something went wrong! Please contact support@lockyourstay.com.");
 }
