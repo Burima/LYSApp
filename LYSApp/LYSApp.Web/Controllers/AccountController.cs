@@ -252,6 +252,10 @@ namespace LYSApp.Web.Controllers
                 {
                     return Content("The email id " + model.Email + " is not confirmed.");
                 }
+                else if (UserManager.GetRoles(user.Id).FirstOrDefault().ToUpper() == LYSApp.Model.Constants.Constants.Roles.EndUser.ToString().ToUpper())
+                {
+                    return Content("The email id " + model.Email + " is not authorized.");
+                }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
