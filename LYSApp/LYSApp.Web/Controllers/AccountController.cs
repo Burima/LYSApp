@@ -173,7 +173,7 @@ namespace LYSApp.Web.Controllers
                     //Send Activation emai
                     await SendAccountActivationMail(user);
 
-                    return Json(new { Success = true, Email=model.Email }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {

@@ -234,7 +234,7 @@ function loginFailed(response) {
 function signupSuccess(response) {
     //alert(response.Error);
     if (response.Success) {
-        $('#modalEmailVerification #Email').val(response.Email);//set resend email with recently signed up email
+        $('#modalEmailVerification #Email').val($('#form-SignUp #Email').val());//set resend email with recently signed up email
         $('#form-SignUp').each(function () {
             this.reset();//reset form values
         });
