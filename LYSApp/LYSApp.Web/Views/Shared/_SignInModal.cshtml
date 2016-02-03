@@ -24,7 +24,7 @@
                 @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
 
                 @*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", id = "form-SignIn", autocomplete = "off" }))*@
-                @using (Ajax.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "loginSuccess", OnFailure = "loginFailed",HttpMethod="Post"}, new { role = "form", id = "form-SignIn", autocomplete = "off" }))
+                @using (Ajax.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() {OnBegin="loginBegin", OnSuccess = "loginSuccess", OnFailure = "loginFailed",HttpMethod="Post"}, new { role = "form", id = "form-SignIn", autocomplete = "off" }))
                 {
 
                     @Html.AntiForgeryToken();

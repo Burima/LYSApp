@@ -188,7 +188,13 @@ function showModalMessage(data) {
 };
 
 /*--------------------------------- log in with ajax -----------------------------------------------*/
+function loginBegin() {
+    $('#spinner_modal_empty .modal-body').css('top', '182px').css('left', '92px');
+    showProgress(false, "");
+    //alert($(this).find('input[type="submit"]'));
+}
 function loginSuccess(response) {
+    hideProgress();
     if (response.Success) {
         window.location.href = "/"
     } else {
@@ -214,6 +220,7 @@ function loginSuccess(response) {
     }
 }
 function loginFailed(response) {
+    hideProgress();
     if (response.Error != undefined && response.Error != '') {
         $('#signin span.errormessage').html(response.Error);
     }
@@ -225,7 +232,12 @@ function loginFailed(response) {
 }
 
 /*--------------------------------- Sign Up with ajax -----------------------------------------------*/
+function signupBegin() {
+    $('#spinner_modal_empty .modal-body').css('top', '236px').css('left', '80px');
+    showProgress(false, "");
+}
 function signupSuccess(response) {
+    hideProgress();
     //alert(response.Error);
     if (response.Success) {
         $('#modalEmailVerification #Email').val($('#form-SignUp #Email').val());//set resend email with recently signed up email
@@ -244,6 +256,7 @@ function signupSuccess(response) {
     }
 }
 function signupFailed(response) {
+    hideProgress();
     //alert('f' + response);
     if (response.Error != undefined && response.Error != '') {
         $('#signup span.errormessage').html(response.Error);
@@ -255,7 +268,13 @@ function signupFailed(response) {
 }
 
 /* ----------------------------- Resend Email Verification ----------------------------*/
+function resendemailverificationBegin() {
+    $('#spinner_modal_empty .modal-body').css('top', '58px').css('left','90px');
+    showProgress(false, "");
+}
+
 function resendemailverificationSuccess(response) {
+    hideProgress();
     if (response.Success) {
         $('#modalEmailVerification span.errormessage').html("Email send successfully.");
     } else {
@@ -268,6 +287,7 @@ function resendemailverificationSuccess(response) {
     $('#modalEmailVerification div.errorblock').removeClass('hidden');
 }
 function resendemailverificationFailed(response) {
+    hideProgress();
     if (response.Error != undefined && response.Error != '') {
         $('#modalEmailVerification span.errormessage').html(response.Error);
     } else {
@@ -288,19 +308,32 @@ $('.modal-fp').click(function () {
     $('#forgotpassword').modal('show');
 });
 
+function forgotpasswordBegin() {
+    $('#spinner_modal_empty .modal-body').css('top', '38px').css('left', '80px');
+    showProgress(false, "");
+}
+
 function forgotpasswordSuccess(response) {
+    hideProgress();
     $('#forgotpassword').modal('hide');
     showModalMessage(response);
 }
 
 function forgotpasswordFailed(response) {
+    hideProgress();
     $('#forgotpassword').modal('hide');
     showModalMessage("Something went wrong! Please contact support@lockyourstay.com.");
 }
 
 
 /*----------------------------------- reset password ----------------------------*/
+function resetpasswordBegin() {
+    $('#spinner_modal_empty .modal-body').css('top', '105px').css('left', '80px');
+    showProgress(false, "");
+}
+
 function resetpasswordSuccess(response) {
+    hideProgress();
     if (response.Success) {
         $('#resetpassword span.errormessage').html(response.Error);
         $('#resetpassword div.errorblock').removeClass('hidden');
@@ -319,6 +352,7 @@ function resetpasswordSuccess(response) {
     }
 }
 function resetpasswordFailed(response) {
+    hideProgress();
     if (response.Error != undefined && response.Error != '') {
         $('#resetpassword span.errormessage').html(response.Error);
     } else {

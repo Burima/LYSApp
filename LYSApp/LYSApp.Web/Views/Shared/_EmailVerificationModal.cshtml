@@ -9,7 +9,7 @@
                 </div>*@
             <div class="modal-body">
                 @*<form role="form" id="form-EmailVerification">*@
-                @using (Ajax.BeginForm("ResendAccountActivationMailForNewUser", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "resendemailverificationSuccess", OnFailure = "resendemailverificationFailed", HttpMethod = "Post" }, new { role = "form", id = "form-ResendAccountActivationMailForNewUser", autocomplete = "off" }))
+                @using (Ajax.BeginForm("ResendAccountActivationMailForNewUser", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnBegin = "resendemailverificationBegin", OnSuccess = "resendemailverificationSuccess", OnFailure = "resendemailverificationFailed", HttpMethod = "Post" }, new { role = "form", id = "form-ResendAccountActivationMailForNewUser", autocomplete = "off" }))
                 {
                     @Html.AntiForgeryToken()
                     <div class="errorblock form-group hidden">
