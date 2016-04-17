@@ -323,6 +323,7 @@
     <Content Include="fonts\Simple-Line-Icons.ttf" />
     <Content Include="fonts\Simple-Line-Icons.woff" />
     <None Include="Properties\PublishProfiles\LYSApp.pubxml" />
+    <None Include="Properties\PublishProfiles\MVP2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
     <Content Include="Scripts\clndr.js" />

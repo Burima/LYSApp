@@ -118,7 +118,7 @@ namespace LYSApp.Domain.UserManagement
             IList<int> houseIDList = (from r in roomRepository
                                       where roomIDList.Contains(r.RoomID)
                                      select r.HouseID).ToList();
-            return houseIDList.First();
+            return houseIDList.Count>0? houseIDList.FirstOrDefault():0;
         }
 
         public int UpdateProfilePicture(long UserID, string ProfilePicture)

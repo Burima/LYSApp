@@ -74,14 +74,15 @@
 <!--/wrapper-->
 @section scripts{
     <script>
-        var CropImageUrl = '@Url.Action("CropImage", "User")';
-        document.getElementById("fileProfile").onchange = function () {
+    var CropImageUrl = '@Url.Action("CropImage", "User")';
+    var GenerateVerificationCodeUrl = '@Url.Action("GeneratePhoneVerificationCode", "Account")';
+    document.getElementById("fileProfile").onchange = function () {
 
-            $("#photoFilePath").html(this.value.split('\\').pop());
-            $("#photoFilePath").attr("title", this.value.split('\\').pop());
-            $("#hdnFileName").val('@Model.UserID' + '_' + this.value.split('\\').pop());
+        $("#photoFilePath").html(this.value.split('\\').pop());
+        $("#photoFilePath").attr("title", this.value.split('\\').pop());
+        $("#hdnFileName").val('@Model.UserID' + '_' + this.value.split('\\').pop());
 
-        };
+    };
     </script>
 <script src='@Url.Content("~/Scripts/Custom/User/ViewProfile.js")'></script>
 <script src='@Url.Content("~/Scripts/Custom/User/jquery.Jcrop.min.js")'></script>

@@ -2,24 +2,42 @@
 
 @*---Mobile Verification Modal---*@
 <div id="divMobileVerification" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content bounceInRight">
             <div class="modal-header">
                 <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Verify Mobile Number</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
+                @*<div class="row">
                     <div class="col-md-10">
                         Verification code has been sent to your mobile number
                     </div>
                     <div class="col-md-10">
                         <input type="text" id="textVerficationCode" placeholder="Enter code" class="form-control" />
                     </div>
+                </div>*@
+                <div class="row text-left">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <div id="login-alert" style=" padding-bottom:1%;">Phone Number Verifiation Failed. Please Try Again.</div>
+                        <ul class="form-list">
+                            <li>
+                                <label>Phone Number</label>
+                                <br>
+                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "required", maxlength = "20", placeholder = "Phone Number", tabIndex = "1", @id = "txtPhoneNumberModal" })
+                                <div id="spn-phone-verification" class="required_label"><a onclick="fnGenerateVerificationCode(this);" style="cursor:pointer;">Verify Phone Number</a></div>
+                            </li>
+                            <li>
+                                <label>Verification Code</label>
+                                <br>
+                                @Html.TextBoxFor(model => model.MobileVerificationCode, new { @class = "required", maxlength = "20", placeholder = "Verification Code", tabIndex = "2", @id = "txtVerificationCodeModal" })
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <input class="btn btn-primary" id="btnVerfiy" type="button" aria-hidden="true" value="Verify" />
+                <input class="btn btn-primary" id="btnVerifyMobile" type="button" aria-hidden="true" value="Verify" />
             </div>
         </div>
     </div>
@@ -102,7 +120,7 @@
             @*---Mobile Number---*@
             <div class="row">
                 <div class="col-md-12">
-                    Phone Number
+                    <strong>Phone Number</strong> 
                 </div>
                 <div class="col-md-12">
                     @if (Model.PhoneNumberConfirmed)
@@ -115,10 +133,10 @@
                         <br />
                         if (Model.PhoneNumber != null)
                          {
-                             <p>Your mobile number @Model.PhoneNumber is not verified.Please click the <a  id="linkVerify">link</a> to get verification message</p>
+                             <p>Your mobile number @Model.PhoneNumber is not verified.Please click <a class="linkVerifyMobileNumber">here</a> to verify.</p>
                          }else
                          {
-                             <p>No mobile number is added</p>
+                             <p>You have not provided any mobile number yet. Please <a class="linkVerifyMobileNumber">here</a>to add a mobile number.</p>
                          }
                     }
                 </div>
@@ -127,23 +145,22 @@
             @*---Email ID---*@
             <div class="row row-padding-top-5">
                 <div class="col-md-12">
-                    Email Address
+                  <strong>Email Address</strong>  
                 </div>
                 <div class="col-md-12">
-                    @if (@Model.EmailConfirmed)
+                    @if (Model.EmailConfirmed)
                     {
-                        <p>Your Email ID @Model.Email is verified successfully</p>
+                        <p>Your Email ID @Model.Email is verified successfully  <i class="fa fa-check-circle default-color" aria-hidden="true"></i></p>
                     }
                     else
                     {
-                        <p>Make it easier to communicate with a verified Email ID.Verify your email id to get attractive offers and updates from our side.
-                            <br />
-                            <br />
+                        <p>
                             Your email id @Model.Email is not verified yet.Please click <a  id="linkVerifyEmail">here</a> to verify your email id.<br />
                             You will recieve message from <b><i>LockYourStay</i></b>.With just one click on the link given in the mail you can verify.
                             <br />
                             <br />
-                            Cant find our message? Please check spam folder or <a  id="linkVerifyEmail">Resend Confirmtion Email</a> </p>
+                            Cant find our message? Please check spam folder or <a  id="linkVerifyEmail">Resend Confirmtion Email</a>
+                         </p>
                     }
                    
                 </div>
@@ -152,7 +169,7 @@
             @*---Change Password---*@
             <div class="row row-padding-top-5">
                 <div class="col-md-12">
-                    Password
+                   <strong>Password</strong> 
                 </div>
                 <div class="col-md-9">
                     To change your current password please click <a  id="linkChangePassword">here</a>
@@ -171,7 +188,7 @@
     var mobileVerificationURL = '@Url.Action("Verification", "User")';
     var emailVerificationURL = '@Url.Action("SendAccountActivationMailForExistingUser", "Account")';
     var passwordChangeURL = '@Url.Action("Manage", "Account")'
-    $('#linkVerify').click(function () {
+    $('.linkVerifyMobileNumber').click(function () {
         $("#divMobileVerification").modal('show');
     });
 
@@ -199,4 +216,37 @@
         alert(@ViewBag.StatusMessage);
     }
 
+
+    //Generate Verification code
+    function fnGenerateVerificationCode(elem) {
+        if ($("#txtPhoneNumberModal").val() != "") {
+            $("#txtPhoneNumberModal").css("border", "none");
+
+            $("#spn-phone-verification").html("Please wait...")
+
+            $.ajax({
+                url: GenerateVerificationCodeUrl,
+                cache: false,
+                data: { 'PhoneNumber': $("#txtPhoneNumberModal").val(), "UserName": $("#hdnUserName").val() },
+                type: 'POST',
+                success: function (responseData) {
+                    if (responseData == "invalid")
+                        $("#spn-phone-verification").html("Phone number already exists, <a onclick='fnGenerateVerificationCode(this);' style='cursor:pointer;color:rgb(232, 163, 65);'>try again</a>.");
+                    else if (responseData == "exception_logged")
+                        $("#spn-phone-verification").html("We couldn't send message to you, please <a onclick='fnGenerateVerificationCode(this);' style='cursor:pointer;color:rgb(232, 163, 65);'>try again</a>.");
+                    else if (responseData != "")
+                        $("#spn-phone-verification").html("Verification code has been sent to your phone number. If you havn't received, <a onclick='fnGenerateVerificationCode(this);' style='cursor:pointer;color:rgb(232, 163, 65);'>try again</a>.");
+                    else
+                        $("#spn-phone-verification").html("Not a valid phone number, <a onclick='fnGenerateVerificationCode(this);' style='cursor:pointer;color:rgb(232, 163, 65);'>try again</a>.");
+                },
+                error: function (response) {
+                    $("#spn-phone-verification").html("Error! Please, <a onclick='fnGenerateVerificationCode(this);' style='cursor:pointer;color:rgb(232, 163, 65);'>try again</a>.");
+                }
+            });
+        }
+        else {
+            $("#txtPhoneNumberModal").css("border", "solid 1px red");
+
+        }
+    }
 </script>

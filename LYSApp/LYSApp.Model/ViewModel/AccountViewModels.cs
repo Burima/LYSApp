@@ -144,6 +144,8 @@ namespace LYSApp.Model
         public IList<PGReview> pgReviews { get; set; }
         public HouseReviewModel HouseReviewModel { get; set; }
         public ManageUserViewModel ManageUserViewModel { get; set; }
+
+        public Nullable<string> PhoneVerificationCode { get; set; }
     }
     public class EmailSubscribeViewModel
     {

@@ -16,6 +16,7 @@ using LYSApp.Web.Services.Security;
 using System.Configuration;
 using LYSApp.Web.Services.Common;
 using LYSApp.Web.Services;
+using LYSApp.Domain.SMSNotificationManagement;
 
 namespace LYSApp.Web.Controllers
 {
@@ -23,13 +24,15 @@ namespace LYSApp.Web.Controllers
     public class AccountController : Controller
     {
         private UserManager _userManager;
+        private ISMSNotificationManagement smsNotificationManagement;
         AccountViewModel accountViewModel = new AccountViewModel();
         MandrillMailer mandrillMailer = new MandrillMailer();
         TripleDES tripleDES = new TripleDES();
 
 
-        public AccountController()
+        public AccountController(SMSNotificationManagement smsNotificationManagement)
         {
+            this.smsNotificationManagement = smsNotificationManagement;
         }
 
         public AccountController(UserManager userManager)
@@ -707,6 +710,15 @@ namespace LYSApp.Web.Controllers
             return Json(new { Success = false, Message ="Something went wrong! Please try again later. " }, JsonRequestBehavior.AllowGet);
             
         }
+
+        [HttpPost]
+        public string GenerateVerificationCode(string PhoneNumber)
+        {
+            return smsNotificationManagement.SendPhoneVerificationCode(PhoneNumber, SessionManager.GetSessionUser().Id);
+        }
+
+
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

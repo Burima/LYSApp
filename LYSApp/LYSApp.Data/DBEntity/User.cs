@@ -47,7 +47,7 @@ namespace LYSApp.Data.DBEntity
         public int AccessFailedCount { get; set; }
         public int Status { get; set; }
         public Nullable<long> CreatedBy { get; set; }
-    
+        public Nullable<string> PhoneVerificationCode { get; set; }
         public virtual ICollection<Bed> Beds { get; set; }
         public virtual ICollection<PGDetail> PGDetails { get; set; }
         public virtual ICollection<PGReview> PGReviews { get; set; }

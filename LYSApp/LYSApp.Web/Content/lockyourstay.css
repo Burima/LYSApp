@@ -222,3 +222,8 @@ input:focus, select:focus, textarea :focus {
 #form-ResetPassword .alert .errormessage{
     margin:0% 1% 0% 1%;
 }
+
+
+.default-color{
+    color: rgb(14, 170, 166);
+}

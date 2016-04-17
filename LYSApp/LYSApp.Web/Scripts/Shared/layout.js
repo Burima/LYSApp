@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    $(".Password").attr('data-toggle', 'popover').attr('data-placement', 'top').attr('title', 'Your Password must have:').attr('data-content', '<span style="text-align:left;"> Minimum should be 8 characters <br/>At least one capital letter and number <br/>Special Characters !@@#$%^&*</span> ').popover({ trigger: 'hover', html: true });
 
     ////if any error in log in
     //if (loginError != '') {

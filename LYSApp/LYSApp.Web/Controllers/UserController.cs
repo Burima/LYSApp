@@ -11,16 +11,28 @@ using LYSApp.Web.Services;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using LYSApp.Web.Utilities;
+using Microsoft.AspNet.Identity.Owin;
+using System.Threading.Tasks;
 
 namespace LYSApp.Web.Controllers
 {
     [LYSUserAuthorize]
     public class UserController : Controller
     {
-
+        private UserManager _userManager;
         private IUserManagement userManagement;
         UserViewModel userViewModel = new UserViewModel();
-       
+        public UserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         
         public UserController(UserManagement userManagement)
         {
@@ -28,10 +40,10 @@ namespace LYSApp.Web.Controllers
         }
 
         // GET: User
-        public ActionResult ViewProfile()
+        public async Task<ActionResult> ViewProfile()
         {
-           
-            var user = SessionManager.GetSessionUser();
+
+            var user = await UserManager.FindByIdAsync(SessionManager.GetSessionUser().Id);
             if (user != null)
             {
                 userViewModel.ManageUserViewModel = new ManageUserViewModel();
