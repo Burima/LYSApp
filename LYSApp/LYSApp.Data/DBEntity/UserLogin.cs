@@ -10,12 +10,11 @@
 namespace LYSApp.Data.DBEntity
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
     public partial class UserLogin
     {
         public string LoginProvider { get; set; }
-
         [Key]
         public string ProviderKey { get; set; }
         public long UserID { get; set; }

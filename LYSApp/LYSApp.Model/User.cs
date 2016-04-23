@@ -103,12 +103,13 @@ namespace LYSApp.Model
 
        public int Status { get; set; }
        public Nullable<long> CreatedBy { get; set; }
+       public string PhoneVerificationCode { get; set; }
 
        public virtual ICollection<Bed> Beds { get; set; }
        public virtual ICollection<PGDetail> PGDetails { get; set; }
        public virtual ICollection<PGReview> PGReviews { get; set; }
        public virtual ICollection<Transaction> Transactions { get; set; }
-         public virtual ICollection<UserDetail> UserDetails { get; set; }
+       public virtual ICollection<UserDetail> UserDetails { get; set; }
  
  
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager userManager)

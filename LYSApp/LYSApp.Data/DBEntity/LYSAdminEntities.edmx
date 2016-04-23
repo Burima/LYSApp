@@ -4,25 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LYSAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Apartments">
-          <Key>
-            <PropertyRef Name="ApartmentID" />
-          </Key>
-          <Property Name="ApartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ApartmentName" Type="varchar" MaxLength="50" />
-          <Property Name="HouseNo" Type="varchar" MaxLength="50" />
-          <Property Name="Description" Type="varchar" MaxLength="500" />
-          <Property Name="Status" Type="bit" />
-          <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="LastUpdatedOn" Type="datetime" />
-          <Property Name="IsDeleted" Type="bit" />
-          <Property Name="DeletedBy" Type="int" />
-          <Property Name="DeletedOn" Type="datetime" />
-          <Property Name="CreatedBy" Type="bigint" />
-          <Property Name="PGDetailID" Type="int" Nullable="false" />
-          <Property Name="IsDefault" Type="bit" Nullable="false" />
-        </EntityType>
+      <Schema Namespace="LYSAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Areas">
           <Key>
             <PropertyRef Name="AreaID" />
@@ -47,23 +29,6 @@
           <Property Name="StatusUpdateDate" Type="datetime" />
           <Property Name="BookingFromDate" Type="datetime" />
           <Property Name="BookingToDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Blocks">
-          <Key>
-            <PropertyRef Name="BlockID" />
-          </Key>
-          <Property Name="BlockID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BlockName" Type="varchar" MaxLength="50" />
-          <Property Name="Description" Type="varchar" MaxLength="500" />
-          <Property Name="Status" Type="bit" />
-          <Property Name="ApartmentID" Type="int" />
-          <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="LastUpdatedOn" Type="datetime" />
-          <Property Name="isDeleted" Type="bit" />
-          <Property Name="DeletedBy" Type="int" />
-          <Property Name="DeletedOn" Type="datetime" />
-          <Property Name="CreatedBy" Type="bigint" />
-          <Property Name="IsDefault" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Cities">
           <Key>
@@ -162,8 +127,8 @@
           <Property Name="Gender" Type="int" />
           <Property Name="NoOfBathrooms" Type="int" />
           <Property Name="NoOfBalconnies" Type="int" />
-          <Property Name="BlockID" Type="int" Nullable="false" />
           <Property Name="HouseNo" Type="varchar" MaxLength="50" />
+          <Property Name="PGDetailID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OwnerPropertyListingRequests">
           <Key>
@@ -328,6 +293,7 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="PhoneVerificationCode" Type="nvarchar" MaxLength="6" />
         </EntityType>
         <Association Name="FK__HouseAmenities__HouseID">
           <End Role="Houses" Type="Self.Houses" Multiplicity="1" />
@@ -338,18 +304,6 @@
             </Principal>
             <Dependent Role="HouseAmenities">
               <PropertyRef Name="HouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Apartments_PGDetailID">
-          <End Role="PGDetails" Type="Self.PGDetails" Multiplicity="1" />
-          <End Role="Apartments" Type="Self.Apartments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PGDetails">
-              <PropertyRef Name="PGDetailID" />
-            </Principal>
-            <Dependent Role="Apartments">
-              <PropertyRef Name="PGDetailID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -386,18 +340,6 @@
             </Principal>
             <Dependent Role="Beds">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Blocks_ApartmentID">
-          <End Role="Apartments" Type="Self.Apartments" Multiplicity="0..1" />
-          <End Role="Blocks" Type="Self.Blocks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Apartments">
-              <PropertyRef Name="ApartmentID" />
-            </Principal>
-            <Dependent Role="Blocks">
-              <PropertyRef Name="ApartmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -481,15 +423,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Houses_BlockID">
-          <End Role="Blocks" Type="Self.Blocks" Multiplicity="1" />
+        <Association Name="FK_Houses_PGDetailID">
+          <End Role="PGDetails" Type="Self.PGDetails" Multiplicity="1" />
           <End Role="Houses" Type="Self.Houses" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Blocks">
-              <PropertyRef Name="BlockID" />
+            <Principal Role="PGDetails">
+              <PropertyRef Name="PGDetailID" />
             </Principal>
             <Dependent Role="Houses">
-              <PropertyRef Name="BlockID" />
+              <PropertyRef Name="PGDetailID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -602,10 +544,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="LYSAdminModelStoreContainer">
-          <EntitySet Name="Apartments" EntityType="Self.Apartments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Beds" EntityType="Self.Beds" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Blocks" EntityType="Self.Blocks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HouseAmenities" EntityType="Self.HouseAmenities" Schema="dbo" store:Type="Tables" />
@@ -627,10 +567,6 @@
             <End Role="Houses" EntitySet="Houses" />
             <End Role="HouseAmenities" EntitySet="HouseAmenities" />
           </AssociationSet>
-          <AssociationSet Name="FK_Apartments_PGDetailID" Association="Self.FK_Apartments_PGDetailID">
-            <End Role="PGDetails" EntitySet="PGDetails" />
-            <End Role="Apartments" EntitySet="Apartments" />
-          </AssociationSet>
           <AssociationSet Name="FK_Areas_CityID" Association="Self.FK_Areas_CityID">
             <End Role="Cities" EntitySet="Cities" />
             <End Role="Areas" EntitySet="Areas" />
@@ -642,10 +578,6 @@
           <AssociationSet Name="FK_Beds_UserID" Association="Self.FK_Beds_UserID">
             <End Role="Users" EntitySet="Users" />
             <End Role="Beds" EntitySet="Beds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Blocks_ApartmentID" Association="Self.FK_Blocks_ApartmentID">
-            <End Role="Apartments" EntitySet="Apartments" />
-            <End Role="Blocks" EntitySet="Blocks" />
           </AssociationSet>
           <AssociationSet Name="FK_Cities_CountryID" Association="Self.FK_Cities_CountryID">
             <End Role="Countries" EntitySet="Countries" />
@@ -671,8 +603,8 @@
             <End Role="Houses" EntitySet="Houses" />
             <End Role="HouseImages" EntitySet="HouseImages" />
           </AssociationSet>
-          <AssociationSet Name="FK_Houses_BlockID" Association="Self.FK_Houses_BlockID">
-            <End Role="Blocks" EntitySet="Blocks" />
+          <AssociationSet Name="FK_Houses_PGDetailID" Association="Self.FK_Houses_PGDetailID">
+            <End Role="PGDetails" EntitySet="PGDetails" />
             <End Role="Houses" EntitySet="Houses" />
           </AssociationSet>
           <AssociationSet Name="FK_PGDetails_AreaID" Association="Self.FK_PGDetails_AreaID">
@@ -712,7 +644,8 @@
             <End Role="UserDetails" EntitySet="UserDetails" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LYSAdminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -768,6 +701,58 @@
           <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Cities" Relationship="Self.FK_Cities_CountryID" FromRole="Countries" ToRole="Cities" />
         </EntityType>
+        <EntityType Name="HouseAmenity">
+          <Key>
+            <PropertyRef Name="HouseAmenityID" />
+          </Key>
+          <Property Name="HouseAmenityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HouseID" Type="Int32" Nullable="false" />
+          <Property Name="AC" Type="Boolean" Nullable="false" />
+          <Property Name="Fridge" Type="Boolean" Nullable="false" />
+          <Property Name="Wifi" Type="Boolean" Nullable="false" />
+          <Property Name="Washingmachine" Type="Boolean" Nullable="false" />
+          <Property Name="AttachBathrooms" Type="Boolean" Nullable="false" />
+          <Property Name="KitchenFacilityWithGas" Type="Boolean" Nullable="false" />
+          <Property Name="CommonTV" Type="Boolean" Nullable="false" />
+          <Property Name="IndividualTV" Type="Boolean" Nullable="false" />
+          <Property Name="LCDTVCableConnection" Type="Boolean" Nullable="false" />
+          <Property Name="Wardrobes" Type="Boolean" Nullable="false" />
+          <Property Name="IntercomFacility" Type="Boolean" Nullable="false" />
+          <Property Name="IroningWashingServices" Type="Boolean" Nullable="false" />
+          <Property Name="LunchGiven" Type="Boolean" Nullable="false" />
+          <Property Name="BreakFastGiven" Type="Boolean" Nullable="false" />
+          <Property Name="DinnerGiven" Type="Boolean" Nullable="false" />
+          <Property Name="WaterSupply" Type="Boolean" Nullable="false" />
+          <Property Name="HotColdWaterSupply" Type="Boolean" Nullable="false" />
+          <Property Name="MineralDrinkingWater" Type="Boolean" Nullable="false" />
+          <Property Name="Aquaguard" Type="Boolean" Nullable="false" />
+          <Property Name="Housekeeping" Type="Boolean" Nullable="false" />
+          <Property Name="RoomService" Type="Boolean" Nullable="false" />
+          <Property Name="Newspaper" Type="Boolean" Nullable="false" />
+          <Property Name="TwoWheelerOpenParking" Type="Boolean" Nullable="false" />
+          <Property Name="TwoWheelerCloseParking" Type="Boolean" Nullable="false" />
+          <Property Name="FourWheelerOpenParking" Type="Boolean" Nullable="false" />
+          <Property Name="FourWheelerCloseParking" Type="Boolean" Nullable="false" />
+          <Property Name="Lockers" Type="Boolean" Nullable="false" />
+          <Property Name="GYM" Type="Boolean" Nullable="false" />
+          <Property Name="Lift" Type="Boolean" Nullable="false" />
+          <Property Name="Playground" Type="Boolean" Nullable="false" />
+          <Property Name="Clubhouse" Type="Boolean" Nullable="false" />
+          <Property Name="Partyhall" Type="Boolean" Nullable="false" />
+          <Property Name="Security" Type="Boolean" Nullable="false" />
+          <Property Name="SwimmingPool" Type="Boolean" Nullable="false" />
+          <Property Name="VideoSurveillance" Type="Boolean" Nullable="false" />
+          <Property Name="Powerbackup" Type="Boolean" Nullable="false" />
+          <Property Name="EmergencyMedicalServices" Type="Boolean" Nullable="false" />
+          <Property Name="NonVegAllowed" Type="Boolean" Nullable="false" />
+          <Property Name="GuardianEntry" Type="Boolean" Nullable="false" />
+          <Property Name="NoSmoking" Type="Boolean" Nullable="false" />
+          <Property Name="NoDrinking" Type="Boolean" Nullable="false" />
+          <Property Name="NoBoysEntry" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="House" Relationship="Self.FK__HouseAmenities__HouseID" FromRole="HouseAmenities" ToRole="Houses" />
+        </EntityType>
         <EntityType Name="HouseImage">
           <Key>
             <PropertyRef Name="HouseImageID" />
@@ -796,12 +781,23 @@
           <Property Name="Gender" Type="Int32" />
           <Property Name="NoOfBathrooms" Type="Int32" />
           <Property Name="NoOfBalconnies" Type="Int32" />
-          <Property Name="BlockID" Type="Int32" Nullable="false" />
           <Property Name="HouseNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PGDetailID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HouseAmenities" Relationship="Self.FK__HouseAmenities__HouseID" FromRole="Houses" ToRole="HouseAmenities" />
           <NavigationProperty Name="HouseImages" Relationship="Self.FK_HouseImages_HouseID" FromRole="Houses" ToRole="HouseImages" />
+          <NavigationProperty Name="PGDetail" Relationship="Self.FK_Houses_PGDetailID" FromRole="Houses" ToRole="PGDetails" />
           <NavigationProperty Name="Rooms" Relationship="Self.FK_Rooms_HouseID" FromRole="Houses" ToRole="Rooms" />
-          <NavigationProperty Name="HouseAmenities" Relationship="LYSAdminModel.FK__HouseAmenities__HouseID" FromRole="House" ToRole="HouseAmenity" />
-          <NavigationProperty Name="Block" Relationship="LYSAdminModel.FK_Houses_BlockID" FromRole="House" ToRole="Block" />
+        </EntityType>
+        <EntityType Name="OwnerPropertyListingRequest">
+          <Key>
+            <PropertyRef Name="OwnerPropertyListingRequestID" />
+          </Key>
+          <Property Name="OwnerPropertyListingRequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="PGDetail">
           <Key>
@@ -824,9 +820,9 @@
           <Property Name="LastUpdatedOn" Type="DateTime" Precision="0" />
           <Property Name="DeletedOn" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Area" Relationship="Self.FK_PGDetails_AreaID" FromRole="PGDetails" ToRole="Areas" />
+          <NavigationProperty Name="Houses" Relationship="Self.FK_Houses_PGDetailID" FromRole="PGDetails" ToRole="Houses" />
           <NavigationProperty Name="User" Relationship="Self.FK_PGDetails_UserID" FromRole="PGDetails" ToRole="Users" />
           <NavigationProperty Name="PGReviews" Relationship="Self.FK_PGReviews_PGDetailID" FromRole="PGDetails" ToRole="PGReviews" />
-          <NavigationProperty Name="Apartments" Relationship="LYSAdminModel.FK_Apartments_PGDetailID" FromRole="PGDetail" ToRole="Apartment" />
         </EntityType>
         <EntityType Name="PGReview">
           <Key>
@@ -907,6 +903,26 @@
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_UserClaim_dbo_User_UserID" FromRole="UserClaims" ToRole="Users" />
         </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserDetailID" />
+          </Key>
+          <Property Name="UserDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="PresentAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GovtIDType" Type="Int32" Nullable="false" />
+          <Property Name="GovtID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserProfession" Type="Int32" Nullable="false" />
+          <Property Name="CurrentEmployer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OfficeLocation" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="HighestEducation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InstitutionName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserDetails_UserID" FromRole="UserDetails" ToRole="Users" />
+        </EntityType>
         <EntityType Name="UserLogin">
           <Key>
             <PropertyRef Name="LoginProvider" />
@@ -943,14 +959,15 @@
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="PhoneVerificationCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Beds" Relationship="Self.FK_Beds_UserID" FromRole="Users" ToRole="Beds" />
           <NavigationProperty Name="PGDetails" Relationship="Self.FK_PGDetails_UserID" FromRole="Users" ToRole="PGDetails" />
           <NavigationProperty Name="PGReviews" Relationship="Self.FK_PGReviews_UserID" FromRole="Users" ToRole="PGReviews" />
           <NavigationProperty Name="Transactions" Relationship="Self.FK_Transactions_UserID" FromRole="Users" ToRole="Transactions" />
           <NavigationProperty Name="UserClaims" Relationship="Self.FK_dbo_UserClaim_dbo_User_UserID" FromRole="Users" ToRole="UserClaims" />
+          <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_UserID" FromRole="Users" ToRole="UserDetails" />
           <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_UserLogin_dbo_User_UserID" FromRole="Users" ToRole="UserLogins" />
           <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
-          <NavigationProperty Name="UserDetails" Relationship="LYSAdminModel.FK_UserDetails_UserID" FromRole="User" ToRole="UserDetail" />
         </EntityType>
         <Association Name="FK_Areas_CityID">
           <End Role="Cities" Type="Self.City" Multiplicity="0..1" />
@@ -1024,6 +1041,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__HouseAmenities__HouseID">
+          <End Role="Houses" Type="Self.House" Multiplicity="1" />
+          <End Role="HouseAmenities" Type="Self.HouseAmenity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Houses">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="HouseAmenities">
+              <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HouseImages_HouseID">
           <End Role="Houses" Type="Self.House" Multiplicity="1" />
           <End Role="HouseImages" Type="Self.HouseImage" Multiplicity="*" />
@@ -1033,6 +1062,18 @@
             </Principal>
             <Dependent Role="HouseImages">
               <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Houses_PGDetailID">
+          <End Role="PGDetails" Type="Self.PGDetail" Multiplicity="1" />
+          <End Role="Houses" Type="Self.House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PGDetails">
+              <PropertyRef Name="PGDetailID" />
+            </Principal>
+            <Dependent Role="Houses">
+              <PropertyRef Name="PGDetailID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1122,6 +1163,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserDetails_UserID">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserDetails">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_UserLogin_dbo_User_UserID">
           <End Role="Users" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1145,8 +1198,10 @@
           <EntitySet Name="Beds" EntityType="Self.Bed" />
           <EntitySet Name="Cities" EntityType="Self.City" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="HouseAmenities" EntityType="Self.HouseAmenity" />
           <EntitySet Name="HouseImages" EntityType="Self.HouseImage" />
           <EntitySet Name="Houses" EntityType="Self.House" />
+          <EntitySet Name="OwnerPropertyListingRequests" EntityType="Self.OwnerPropertyListingRequest" />
           <EntitySet Name="PGDetails" EntityType="Self.PGDetail" />
           <EntitySet Name="PGReviews" EntityType="Self.PGReview" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
@@ -1154,6 +1209,7 @@
           <EntitySet Name="Transactions" EntityType="Self.Transaction" />
           <EntitySet Name="TransactionStatuses" EntityType="Self.TransactionStatus" />
           <EntitySet Name="UserClaims" EntityType="Self.UserClaim" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
           <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK_Areas_CityID" Association="Self.FK_Areas_CityID">
@@ -1180,9 +1236,17 @@
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Cities" EntitySet="Cities" />
           </AssociationSet>
+          <AssociationSet Name="FK__HouseAmenities__HouseID" Association="Self.FK__HouseAmenities__HouseID">
+            <End Role="Houses" EntitySet="Houses" />
+            <End Role="HouseAmenities" EntitySet="HouseAmenities" />
+          </AssociationSet>
           <AssociationSet Name="FK_HouseImages_HouseID" Association="Self.FK_HouseImages_HouseID">
             <End Role="Houses" EntitySet="Houses" />
             <End Role="HouseImages" EntitySet="HouseImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Houses_PGDetailID" Association="Self.FK_Houses_PGDetailID">
+            <End Role="PGDetails" EntitySet="PGDetails" />
+            <End Role="Houses" EntitySet="Houses" />
           </AssociationSet>
           <AssociationSet Name="FK_Rooms_HouseID" Association="Self.FK_Rooms_HouseID">
             <End Role="Houses" EntitySet="Houses" />
@@ -1212,6 +1276,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserClaims" EntitySet="UserClaims" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserDetails_UserID" Association="Self.FK_UserDetails_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserDetails" EntitySet="UserDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_UserLogin_dbo_User_UserID" Association="Self.FK_dbo_UserLogin_dbo_User_UserID">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserLogins" EntitySet="UserLogins" />
@@ -1220,214 +1288,7 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="HouseAmenities" EntityType="LYSAdminModel.HouseAmenity" />
-          <EntitySet Name="UserDetails" EntityType="LYSAdminModel.UserDetail" />
-          <AssociationSet Name="FK__HouseAmenities__HouseID" Association="LYSAdminModel.FK__HouseAmenities__HouseID">
-            <End Role="House" EntitySet="Houses" />
-            <End Role="HouseAmenity" EntitySet="HouseAmenities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserDetails_UserID" Association="LYSAdminModel.FK_UserDetails_UserID">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserDetail" EntitySet="UserDetails" />
-          </AssociationSet>
-          <EntitySet Name="Blocks" EntityType="LYSAdminModel.Block" />
-          <AssociationSet Name="FK_Houses_BlockID" Association="LYSAdminModel.FK_Houses_BlockID">
-            <End Role="Block" EntitySet="Blocks" />
-            <End Role="House" EntitySet="Houses" />
-          </AssociationSet>
-          <EntitySet Name="Apartments" EntityType="LYSAdminModel.Apartment" />
-          <AssociationSet Name="FK_Apartments_PGDetailID" Association="LYSAdminModel.FK_Apartments_PGDetailID">
-            <End Role="PGDetail" EntitySet="PGDetails" />
-            <End Role="Apartment" EntitySet="Apartments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Blocks_ApartmentID" Association="LYSAdminModel.FK_Blocks_ApartmentID">
-            <End Role="Apartment" EntitySet="Apartments" />
-            <End Role="Block" EntitySet="Blocks" />
-          </AssociationSet>
-          <EntitySet Name="OwnerPropertyListingRequests" EntityType="LYSAdminModel.OwnerPropertyListingRequest" />
         </EntityContainer>
-        <EntityType Name="HouseAmenity">
-          <Key>
-            <PropertyRef Name="HouseAmenityID" />
-          </Key>
-          <Property Name="HouseAmenityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HouseID" Type="Int32" Nullable="false" />
-          <Property Name="AC" Type="Boolean" Nullable="false" />
-          <Property Name="Fridge" Type="Boolean" Nullable="false" />
-          <Property Name="Wifi" Type="Boolean" Nullable="false" />
-          <Property Name="Washingmachine" Type="Boolean" Nullable="false" />
-          <Property Name="AttachBathrooms" Type="Boolean" Nullable="false" />
-          <Property Name="KitchenFacilityWithGas" Type="Boolean" Nullable="false" />
-          <Property Name="CommonTV" Type="Boolean" Nullable="false" />
-          <Property Name="IndividualTV" Type="Boolean" Nullable="false" />
-          <Property Name="LCDTVCableConnection" Type="Boolean" Nullable="false" />
-          <Property Name="Wardrobes" Type="Boolean" Nullable="false" />
-          <Property Name="IntercomFacility" Type="Boolean" Nullable="false" />
-          <Property Name="IroningWashingServices" Type="Boolean" Nullable="false" />
-          <Property Name="LunchGiven" Type="Boolean" Nullable="false" />
-          <Property Name="BreakFastGiven" Type="Boolean" Nullable="false" />
-          <Property Name="DinnerGiven" Type="Boolean" Nullable="false" />
-          <Property Name="WaterSupply" Type="Boolean" Nullable="false" />
-          <Property Name="HotColdWaterSupply" Type="Boolean" Nullable="false" />
-          <Property Name="MineralDrinkingWater" Type="Boolean" Nullable="false" />
-          <Property Name="Aquaguard" Type="Boolean" Nullable="false" />
-          <Property Name="Housekeeping" Type="Boolean" Nullable="false" />
-          <Property Name="RoomService" Type="Boolean" Nullable="false" />
-          <Property Name="Newspaper" Type="Boolean" Nullable="false" />
-          <Property Name="TwoWheelerOpenParking" Type="Boolean" Nullable="false" />
-          <Property Name="TwoWheelerCloseParking" Type="Boolean" Nullable="false" />
-          <Property Name="FourWheelerOpenParking" Type="Boolean" Nullable="false" />
-          <Property Name="FourWheelerCloseParking" Type="Boolean" Nullable="false" />
-          <Property Name="Lockers" Type="Boolean" Nullable="false" />
-          <Property Name="GYM" Type="Boolean" Nullable="false" />
-          <Property Name="Lift" Type="Boolean" Nullable="false" />
-          <Property Name="Playground" Type="Boolean" Nullable="false" />
-          <Property Name="Clubhouse" Type="Boolean" Nullable="false" />
-          <Property Name="Partyhall" Type="Boolean" Nullable="false" />
-          <Property Name="Security" Type="Boolean" Nullable="false" />
-          <Property Name="SwimmingPool" Type="Boolean" Nullable="false" />
-          <Property Name="VideoSurveillance" Type="Boolean" Nullable="false" />
-          <Property Name="Powerbackup" Type="Boolean" Nullable="false" />
-          <Property Name="EmergencyMedicalServices" Type="Boolean" Nullable="false" />
-          <Property Name="NonVegAllowed" Type="Boolean" Nullable="false" />
-          <Property Name="GuardianEntry" Type="Boolean" Nullable="false" />
-          <Property Name="NoSmoking" Type="Boolean" Nullable="false" />
-          <Property Name="NoDrinking" Type="Boolean" Nullable="false" />
-          <Property Name="NoBoysEntry" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="House" Relationship="LYSAdminModel.FK__HouseAmenities__HouseID" FromRole="HouseAmenity" ToRole="House" />
-        </EntityType>
-        <EntityType Name="UserDetail">
-          <Key>
-            <PropertyRef Name="UserDetailID" />
-          </Key>
-          <Property Name="UserDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int64" Nullable="false" />
-          <Property Name="PresentAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PermanentAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="GovtIDType" Type="Int32" Nullable="false" />
-          <Property Name="GovtID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UserProfession" Type="Int32" Nullable="false" />
-          <Property Name="CurrentEmployer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OfficeLocation" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="HighestEducation" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="InstitutionName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="User" Relationship="LYSAdminModel.FK_UserDetails_UserID" FromRole="UserDetail" ToRole="User" />
-        </EntityType>
-        <Association Name="FK__HouseAmenities__HouseID">
-          <End Type="LYSAdminModel.House" Role="House" Multiplicity="1" />
-          <End Type="LYSAdminModel.HouseAmenity" Role="HouseAmenity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="House">
-              <PropertyRef Name="HouseID" />
-            </Principal>
-            <Dependent Role="HouseAmenity">
-              <PropertyRef Name="HouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserDetails_UserID">
-          <End Type="LYSAdminModel.User" Role="User" Multiplicity="1" />
-          <End Type="LYSAdminModel.UserDetail" Role="UserDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="UserDetail">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Block">
-          <Key>
-            <PropertyRef Name="BlockID" />
-          </Key>
-          <Property Name="BlockID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BlockName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="ApartmentID" Type="Int32" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="isDeleted" Type="Boolean" />
-          <Property Name="DeletedBy" Type="Int32" />
-          <Property Name="DeletedOn" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int64" />
-          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Houses" Relationship="LYSAdminModel.FK_Houses_BlockID" FromRole="Block" ToRole="House" />
-          <NavigationProperty Name="Apartment" Relationship="LYSAdminModel.FK_Blocks_ApartmentID" FromRole="Block" ToRole="Apartment" />
-        </EntityType>
-        <Association Name="FK_Houses_BlockID">
-          <End Type="LYSAdminModel.Block" Role="Block" Multiplicity="1" />
-          <End Type="LYSAdminModel.House" Role="House" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Block">
-              <PropertyRef Name="BlockID" />
-            </Principal>
-            <Dependent Role="House">
-              <PropertyRef Name="BlockID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Apartment">
-          <Key>
-            <PropertyRef Name="ApartmentID" />
-          </Key>
-          <Property Name="ApartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="HouseNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="DeletedBy" Type="Int32" />
-          <Property Name="DeletedOn" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int64" />
-          <Property Name="PGDetailID" Type="Int32" Nullable="false" />
-          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="PGDetail" Relationship="LYSAdminModel.FK_Apartments_PGDetailID" FromRole="Apartment" ToRole="PGDetail" />
-          <NavigationProperty Name="Blocks" Relationship="LYSAdminModel.FK_Blocks_ApartmentID" FromRole="Apartment" ToRole="Block" />
-        </EntityType>
-        <Association Name="FK_Apartments_PGDetailID">
-          <End Type="LYSAdminModel.PGDetail" Role="PGDetail" Multiplicity="1" />
-          <End Type="LYSAdminModel.Apartment" Role="Apartment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PGDetail">
-              <PropertyRef Name="PGDetailID" />
-            </Principal>
-            <Dependent Role="Apartment">
-              <PropertyRef Name="PGDetailID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Blocks_ApartmentID">
-          <End Type="LYSAdminModel.Apartment" Role="Apartment" Multiplicity="0..1" />
-          <End Type="LYSAdminModel.Block" Role="Block" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Apartment">
-              <PropertyRef Name="ApartmentID" />
-            </Principal>
-            <Dependent Role="Block">
-              <PropertyRef Name="ApartmentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="OwnerPropertyListingRequest">
-          <Key>
-            <PropertyRef Name="OwnerPropertyListingRequestID" />
-          </Key>
-          <Property Name="OwnerPropertyListingRequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1482,6 +1343,58 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="HouseAmenities">
+            <EntityTypeMapping TypeName="LYSAdminModel.HouseAmenity">
+              <MappingFragment StoreEntitySet="HouseAmenities">
+                <ScalarProperty Name="HouseAmenityID" ColumnName="HouseAmenityID" />
+                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
+                <ScalarProperty Name="AC" ColumnName="AC" />
+                <ScalarProperty Name="Fridge" ColumnName="Fridge" />
+                <ScalarProperty Name="Wifi" ColumnName="Wifi" />
+                <ScalarProperty Name="Washingmachine" ColumnName="Washingmachine" />
+                <ScalarProperty Name="AttachBathrooms" ColumnName="AttachBathrooms" />
+                <ScalarProperty Name="KitchenFacilityWithGas" ColumnName="KitchenFacilityWithGas" />
+                <ScalarProperty Name="CommonTV" ColumnName="CommonTV" />
+                <ScalarProperty Name="IndividualTV" ColumnName="IndividualTV" />
+                <ScalarProperty Name="LCDTVCableConnection" ColumnName="LCDTVCableConnection" />
+                <ScalarProperty Name="Wardrobes" ColumnName="Wardrobes" />
+                <ScalarProperty Name="IntercomFacility" ColumnName="IntercomFacility" />
+                <ScalarProperty Name="IroningWashingServices" ColumnName="IroningWashingServices" />
+                <ScalarProperty Name="LunchGiven" ColumnName="LunchGiven" />
+                <ScalarProperty Name="BreakFastGiven" ColumnName="BreakFastGiven" />
+                <ScalarProperty Name="DinnerGiven" ColumnName="DinnerGiven" />
+                <ScalarProperty Name="WaterSupply" ColumnName="WaterSupply" />
+                <ScalarProperty Name="HotColdWaterSupply" ColumnName="HotColdWaterSupply" />
+                <ScalarProperty Name="MineralDrinkingWater" ColumnName="MineralDrinkingWater" />
+                <ScalarProperty Name="Aquaguard" ColumnName="Aquaguard" />
+                <ScalarProperty Name="Housekeeping" ColumnName="Housekeeping" />
+                <ScalarProperty Name="RoomService" ColumnName="RoomService" />
+                <ScalarProperty Name="Newspaper" ColumnName="Newspaper" />
+                <ScalarProperty Name="TwoWheelerOpenParking" ColumnName="TwoWheelerOpenParking" />
+                <ScalarProperty Name="TwoWheelerCloseParking" ColumnName="TwoWheelerCloseParking" />
+                <ScalarProperty Name="FourWheelerOpenParking" ColumnName="FourWheelerOpenParking" />
+                <ScalarProperty Name="FourWheelerCloseParking" ColumnName="FourWheelerCloseParking" />
+                <ScalarProperty Name="Lockers" ColumnName="Lockers" />
+                <ScalarProperty Name="GYM" ColumnName="GYM" />
+                <ScalarProperty Name="Lift" ColumnName="Lift" />
+                <ScalarProperty Name="Playground" ColumnName="Playground" />
+                <ScalarProperty Name="Clubhouse" ColumnName="Clubhouse" />
+                <ScalarProperty Name="Partyhall" ColumnName="Partyhall" />
+                <ScalarProperty Name="Security" ColumnName="Security" />
+                <ScalarProperty Name="SwimmingPool" ColumnName="SwimmingPool" />
+                <ScalarProperty Name="VideoSurveillance" ColumnName="VideoSurveillance" />
+                <ScalarProperty Name="Powerbackup" ColumnName="Powerbackup" />
+                <ScalarProperty Name="EmergencyMedicalServices" ColumnName="EmergencyMedicalServices" />
+                <ScalarProperty Name="NonVegAllowed" ColumnName="NonVegAllowed" />
+                <ScalarProperty Name="GuardianEntry" ColumnName="GuardianEntry" />
+                <ScalarProperty Name="NoSmoking" ColumnName="NoSmoking" />
+                <ScalarProperty Name="NoDrinking" ColumnName="NoDrinking" />
+                <ScalarProperty Name="NoBoysEntry" ColumnName="NoBoysEntry" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="HouseImages">
             <EntityTypeMapping TypeName="LYSAdminModel.HouseImage">
               <MappingFragment StoreEntitySet="HouseImages">
@@ -1509,8 +1422,20 @@
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="NoOfBathrooms" ColumnName="NoOfBathrooms" />
                 <ScalarProperty Name="NoOfBalconnies" ColumnName="NoOfBalconnies" />
-                <ScalarProperty Name="BlockID" ColumnName="BlockID" />
                 <ScalarProperty Name="HouseNo" ColumnName="HouseNo" />
+                <ScalarProperty Name="PGDetailID" ColumnName="PGDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OwnerPropertyListingRequests">
+            <EntityTypeMapping TypeName="LYSAdminModel.OwnerPropertyListingRequest">
+              <MappingFragment StoreEntitySet="OwnerPropertyListingRequests">
+                <ScalarProperty Name="OwnerPropertyListingRequestID" ColumnName="OwnerPropertyListingRequestID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1611,6 +1536,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="LYSAdminModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="UserDetailID" ColumnName="UserDetailID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="GovtIDType" ColumnName="GovtIDType" />
+                <ScalarProperty Name="GovtID" ColumnName="GovtID" />
+                <ScalarProperty Name="UserProfession" ColumnName="UserProfession" />
+                <ScalarProperty Name="CurrentEmployer" ColumnName="CurrentEmployer" />
+                <ScalarProperty Name="OfficeLocation" ColumnName="OfficeLocation" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="HighestEducation" ColumnName="HighestEducation" />
+                <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserLogins">
             <EntityTypeMapping TypeName="LYSAdminModel.UserLogin">
               <MappingFragment StoreEntitySet="UserLogins">
@@ -1644,6 +1589,7 @@
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PhoneVerificationCode" ColumnName="PhoneVerificationCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1655,127 +1601,6 @@
               <ScalarProperty Name="UserID" ColumnName="UserID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="HouseAmenities">
-            <EntityTypeMapping TypeName="LYSAdminModel.HouseAmenity">
-              <MappingFragment StoreEntitySet="HouseAmenities">
-                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="NoBoysEntry" ColumnName="NoBoysEntry" />
-                <ScalarProperty Name="NoDrinking" ColumnName="NoDrinking" />
-                <ScalarProperty Name="NoSmoking" ColumnName="NoSmoking" />
-                <ScalarProperty Name="GuardianEntry" ColumnName="GuardianEntry" />
-                <ScalarProperty Name="NonVegAllowed" ColumnName="NonVegAllowed" />
-                <ScalarProperty Name="EmergencyMedicalServices" ColumnName="EmergencyMedicalServices" />
-                <ScalarProperty Name="Powerbackup" ColumnName="Powerbackup" />
-                <ScalarProperty Name="VideoSurveillance" ColumnName="VideoSurveillance" />
-                <ScalarProperty Name="SwimmingPool" ColumnName="SwimmingPool" />
-                <ScalarProperty Name="Security" ColumnName="Security" />
-                <ScalarProperty Name="Partyhall" ColumnName="Partyhall" />
-                <ScalarProperty Name="Clubhouse" ColumnName="Clubhouse" />
-                <ScalarProperty Name="Playground" ColumnName="Playground" />
-                <ScalarProperty Name="Lift" ColumnName="Lift" />
-                <ScalarProperty Name="GYM" ColumnName="GYM" />
-                <ScalarProperty Name="Lockers" ColumnName="Lockers" />
-                <ScalarProperty Name="FourWheelerCloseParking" ColumnName="FourWheelerCloseParking" />
-                <ScalarProperty Name="FourWheelerOpenParking" ColumnName="FourWheelerOpenParking" />
-                <ScalarProperty Name="TwoWheelerCloseParking" ColumnName="TwoWheelerCloseParking" />
-                <ScalarProperty Name="TwoWheelerOpenParking" ColumnName="TwoWheelerOpenParking" />
-                <ScalarProperty Name="Newspaper" ColumnName="Newspaper" />
-                <ScalarProperty Name="RoomService" ColumnName="RoomService" />
-                <ScalarProperty Name="Housekeeping" ColumnName="Housekeeping" />
-                <ScalarProperty Name="Aquaguard" ColumnName="Aquaguard" />
-                <ScalarProperty Name="MineralDrinkingWater" ColumnName="MineralDrinkingWater" />
-                <ScalarProperty Name="HotColdWaterSupply" ColumnName="HotColdWaterSupply" />
-                <ScalarProperty Name="WaterSupply" ColumnName="WaterSupply" />
-                <ScalarProperty Name="DinnerGiven" ColumnName="DinnerGiven" />
-                <ScalarProperty Name="BreakFastGiven" ColumnName="BreakFastGiven" />
-                <ScalarProperty Name="LunchGiven" ColumnName="LunchGiven" />
-                <ScalarProperty Name="IroningWashingServices" ColumnName="IroningWashingServices" />
-                <ScalarProperty Name="IntercomFacility" ColumnName="IntercomFacility" />
-                <ScalarProperty Name="Wardrobes" ColumnName="Wardrobes" />
-                <ScalarProperty Name="LCDTVCableConnection" ColumnName="LCDTVCableConnection" />
-                <ScalarProperty Name="IndividualTV" ColumnName="IndividualTV" />
-                <ScalarProperty Name="CommonTV" ColumnName="CommonTV" />
-                <ScalarProperty Name="KitchenFacilityWithGas" ColumnName="KitchenFacilityWithGas" />
-                <ScalarProperty Name="AttachBathrooms" ColumnName="AttachBathrooms" />
-                <ScalarProperty Name="Washingmachine" ColumnName="Washingmachine" />
-                <ScalarProperty Name="Wifi" ColumnName="Wifi" />
-                <ScalarProperty Name="Fridge" ColumnName="Fridge" />
-                <ScalarProperty Name="AC" ColumnName="AC" />
-                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
-                <ScalarProperty Name="HouseAmenityID" ColumnName="HouseAmenityID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="LYSAdminModel.UserDetail">
-              <MappingFragment StoreEntitySet="UserDetails">
-                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
-                <ScalarProperty Name="HighestEducation" ColumnName="HighestEducation" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="OfficeLocation" ColumnName="OfficeLocation" />
-                <ScalarProperty Name="CurrentEmployer" ColumnName="CurrentEmployer" />
-                <ScalarProperty Name="UserProfession" ColumnName="UserProfession" />
-                <ScalarProperty Name="GovtID" ColumnName="GovtID" />
-                <ScalarProperty Name="GovtIDType" ColumnName="GovtIDType" />
-                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
-                <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="UserDetailID" ColumnName="UserDetailID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Blocks">
-            <EntityTypeMapping TypeName="LYSAdminModel.Block">
-              <MappingFragment StoreEntitySet="Blocks">
-                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
-                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ApartmentID" ColumnName="ApartmentID" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="BlockName" ColumnName="BlockName" />
-                <ScalarProperty Name="BlockID" ColumnName="BlockID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Apartments">
-            <EntityTypeMapping TypeName="LYSAdminModel.Apartment">
-              <MappingFragment StoreEntitySet="Apartments">
-                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
-                <ScalarProperty Name="PGDetailID" ColumnName="PGDetailID" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="HouseNo" ColumnName="HouseNo" />
-                <ScalarProperty Name="ApartmentName" ColumnName="ApartmentName" />
-                <ScalarProperty Name="ApartmentID" ColumnName="ApartmentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OwnerPropertyListingRequests">
-            <EntityTypeMapping TypeName="LYSAdminModel.OwnerPropertyListingRequest">
-              <MappingFragment StoreEntitySet="OwnerPropertyListingRequests">
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="OwnerPropertyListingRequestID" ColumnName="OwnerPropertyListingRequestID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

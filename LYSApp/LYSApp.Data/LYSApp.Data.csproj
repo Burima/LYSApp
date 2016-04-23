@@ -54,16 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBEntity\Apartment.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBEntity\Area.cs">
       <DependentUpon>LYSAdminEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\Bed.cs">
-      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntity\Block.cs">
       <DependentUpon>LYSAdminEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\City.cs">

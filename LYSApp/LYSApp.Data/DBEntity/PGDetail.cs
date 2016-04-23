@@ -16,8 +16,8 @@ namespace LYSApp.Data.DBEntity
     {
         public PGDetail()
         {
+            this.Houses = new HashSet<House>();
             this.PGReviews = new HashSet<PGReview>();
-            this.Apartments = new HashSet<Apartment>();
         }
     
         public int PGDetailID { get; set; }
@@ -38,8 +38,8 @@ namespace LYSApp.Data.DBEntity
         public Nullable<System.DateTime> DeletedOn { get; set; }
     
         public virtual Area Area { get; set; }
+        public virtual ICollection<House> Houses { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<PGReview> PGReviews { get; set; }
-        public virtual ICollection<Apartment> Apartments { get; set; }
     }
 }
