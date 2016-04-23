@@ -20,8 +20,6 @@ namespace LYSApp.Domain.SearchManagement
         private IBaseRepository<Data.DBEntity.Area> areaRepository = null;
         private IBaseRepository<Data.DBEntity.PGDetail> pgDetailRepository = null;
         private IBaseRepository<Data.DBEntity.PGReview> pgReviewsRepository = null;
-        private IBaseRepository<Data.DBEntity.Apartment> apartmentRepository = null;
-        private IBaseRepository<Data.DBEntity.Block> blockRepository = null;
         private IBaseRepository<Data.DBEntity.House> houseRepository = null;
         private IBaseRepository<Data.DBEntity.HouseAmenity> houseAmenitiesRepository = null;
         private IBaseRepository<Data.DBEntity.HouseImage> houseImageRepository = null;
@@ -35,9 +33,6 @@ namespace LYSApp.Domain.SearchManagement
             areaRepository = new BaseRepository<Data.DBEntity.Area>(unitOfWork);            
             pgDetailRepository = new BaseRepository<Data.DBEntity.PGDetail>(unitOfWork);
             pgReviewsRepository = new BaseRepository<Data.DBEntity.PGReview>(unitOfWork);
-            apartmentRepository = new BaseRepository<Data.DBEntity.Apartment>(unitOfWork);
-            blockRepository = new BaseRepository<Data.DBEntity.Block>(unitOfWork);           
-            houseRepository = new BaseRepository<Data.DBEntity.House>(unitOfWork);
             houseImageRepository = new BaseRepository<Data.DBEntity.HouseImage>(unitOfWork);
             houseAmenitiesRepository = new BaseRepository<Data.DBEntity.HouseAmenity>(unitOfWork);
             roomRepository = new BaseRepository<Data.DBEntity.Room>(unitOfWork);
@@ -57,15 +52,10 @@ namespace LYSApp.Domain.SearchManagement
         {
            
             var modelPGs = (from pg in pgDetailRepository.Get()
-                            join a in apartmentRepository.Get() on pg.PGDetailID equals a.PGDetailID
-                            join blk in blockRepository.Get() on a.ApartmentID equals blk.ApartmentID
-                            join h in houseRepository.Get() on blk.BlockID equals h.BlockID
+                            join h in houseRepository.Get() on pg.PGDetailID equals h.PGDetailID
                             join r in roomRepository.Get() on h.HouseID equals r.HouseID
                             join b in bedRepository.Get() on r.RoomID equals b.RoomID
-                            where pg.AreaID == searchViewModel.AreaID && blk.BlockID>0//selected area
-                            //      h.Status!=null && h.Status==true && h.Gender==searchViewModel.Gender &&//status active for House
-                            //      r.Status!=null && r.Status==true && //Status active for Room
-                            //      b.Status != null && b.Status == true && b.BedStatus == (int)Constants.Bed_Status.Vacant && ((b.UserID==0)||(((DateTime)b.BookingToDate-searchViewModel.BookingFromDate).Days>=30))//Status active for Bed and bed is empty (zero)
+                            where pg.AreaID == searchViewModel.AreaID //&& blk.BlockID>0//selected area
                             //group pg by pg.PGDetailID into pg
                             select new SearchResultViewModel
                             {
@@ -81,11 +71,10 @@ namespace LYSApp.Domain.SearchManagement
                                                  PGDetailID = pg.PGDetailID,
                                                  Rating = review.Rating,
                                              }).ToList(),//get all ratings                            
-                                MinimumRentHouse = (from p in blk.Houses//order house with minimum MonthlRent first
+                                MinimumRentHouse = (from p in pg.Houses//order house with minimum MonthlRent first
                                                     select new Model.House
                                                     {
-                                                        BlockID = p.BlockID,
-                                                        //PGDetailID = p.PGDetailID,
+                                                       
                                                         HouseAmenities = (from amenity in p.HouseAmenities
                                                                           select new LYSApp.Model.HouseAmenity
                                                                           {
@@ -147,11 +136,9 @@ namespace LYSApp.Domain.SearchManagement
         /// <returns>List of Houses of the PG selected</returns>
         public PropertyDetailsViewModel GetPropertyDetails(int PGDetailsID, SearchViewModel searchViewModel)
         {
-            
+
             var propertyDetailsViewModel = (from pg in pgDetailRepository.Get()
-                                            join a in apartmentRepository.Get() on pg.PGDetailID equals a.PGDetailID
-                                            join x in blockRepository.Get() on a.ApartmentID equals x.ApartmentID
-                                            join h in houseRepository.Get() on x.BlockID equals h.BlockID
+                                            join h in houseRepository.Get() on pg.PGDetailID equals h.PGDetailID
                                             join r in roomRepository.Get() on h.HouseID equals r.HouseID
                                             join b in bedRepository.Get() on r.RoomID equals b.RoomID
                                             join pgreview in pgReviewsRepository.Get() on pg.PGDetailID equals pgreview.PGDetailID
@@ -173,7 +160,7 @@ namespace LYSApp.Domain.SearchManagement
                                                                  Comments = review.Comments,
                                                                  Rating = review.Rating
                                                              }).ToList(),
-                                                HouseList = (from p in x.Houses
+                                                HouseList = (from p in pg.Houses
                                                              select new Model.House
                                                              {
                                                                  HouseID = p.HouseID,
@@ -257,11 +244,9 @@ namespace LYSApp.Domain.SearchManagement
 
         public BookingDetailsViewModel GetBookingDetails(int RoomID)
         {
-           
+
             BookingDetailsViewModel BookingDetailsViewModel = (from pg in pgDetailRepository.Get()
-                                                                join a in apartmentRepository.Get() on pg.PGDetailID equals a.PGDetailID
-                                                                join x in blockRepository.Get() on a.ApartmentID equals x.ApartmentID
-                                                                join h in houseRepository.Get() on x.BlockID equals h.BlockID
+                                                               join h in houseRepository.Get() on pg.PGDetailID equals h.PGDetailID
                                                                join r in roomRepository.Get() on h.HouseID equals r.HouseID
                                                                where r.RoomID == RoomID
 
