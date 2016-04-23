@@ -145,7 +145,7 @@ namespace LYSApp.Model
         public HouseReviewModel HouseReviewModel { get; set; }
         public ManageUserViewModel ManageUserViewModel { get; set; }
 
-        public Nullable<string> PhoneVerificationCode { get; set; }
+        public string PhoneVerificationCode { get; set; }
     }
     public class EmailSubscribeViewModel
     {

@@ -2,38 +2,30 @@
 
 @*---Mobile Verification Modal---*@
 <div id="divMobileVerification" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-md">
         <div class="modal-content bounceInRight">
             <div class="modal-header">
                 <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Verify Mobile Number</h4>
             </div>
             <div class="modal-body">
-                @*<div class="row">
-                    <div class="col-md-10">
-                        Verification code has been sent to your mobile number
-                    </div>
-                    <div class="col-md-10">
-                        <input type="text" id="textVerficationCode" placeholder="Enter code" class="form-control" />
-                    </div>
-                </div>*@
                 <div class="row text-left">
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <div class="col-xs-12">
                         <div id="login-alert" style=" padding-bottom:1%;">Phone Number Verifiation Failed. Please Try Again.</div>
-                        <ul class="form-list">
-                            <li>
-                                <label>Phone Number</label>
-                                <br>
-                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "required", maxlength = "20", placeholder = "Phone Number", tabIndex = "1", @id = "txtPhoneNumberModal" })
-                                <div id="spn-phone-verification" class="required_label"><a onclick="fnGenerateVerificationCode(this);" style="cursor:pointer;">Verify Phone Number</a></div>
-                            </li>
-                            <li>
-                                <label>Verification Code</label>
-                                <br>
-                                @Html.TextBoxFor(model => model.MobileVerificationCode, new { @class = "required", maxlength = "20", placeholder = "Verification Code", tabIndex = "2", @id = "txtVerificationCodeModal" })
-                            </li>
-                        </ul>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">+91</div>
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "required form-control ", maxlength = "20", placeholder = "Phone Number", tabIndex = "1", @id = "txtPhoneNumberModal" })
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div id="spn-phone-verification" class="required_label"><a class="pull-right" onclick="fnGenerateVerificationCode(this);" style="cursor:pointer;">Verify Phone Number</a></div>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.PhoneVerificationCode, new { @class = "required form-control", maxlength = "20", placeholder = "Verification Code", tabIndex = "2", @id = "txtVerificationCodeModal" })
                 </div>
             </div>
             <div class="modal-footer">
@@ -64,15 +56,15 @@
 
 @*---Change Password*@
 
-    <div id="divChangePassword" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content bounceInRight">
-                <div class="modal-header">
-                    <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Change Password</h4>
-                </div>
-                @using (Ajax.BeginForm("ChangePassword", "Account", FormMethod.Post, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnPasswordChange", OnFailure = "OnPasswordChange" }))
-                {
+<div id="divChangePassword" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bounceInRight">
+            <div class="modal-header">
+                <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Change Password</h4>
+            </div>
+            @using (Ajax.BeginForm("ChangePassword", "Account", FormMethod.Post, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnPasswordChange", OnFailure = "OnPasswordChange" }))
+            {
                 @Html.AntiForgeryToken()
                 <div class="modal-body">
                     <div class="row">
@@ -80,7 +72,7 @@
                             Current Password
                         </div>
                         <div class="col-md-9">
-                           @Html.PasswordFor(model => model.ManageUserViewModel.OldPassword, new { @class = "form-control", placeholder = "Current Password" })
+                            @Html.PasswordFor(model => model.ManageUserViewModel.OldPassword, new { @class = "form-control", placeholder = "Current Password" })
                         </div>
                     </div>
 
@@ -105,10 +97,10 @@
                 <div class="modal-footer">
                     <input class="btn btn-green" id="btnChange" type="submit" aria-hidden="true" value="Change" />
                 </div>
-                }
-            </div>
+            }
         </div>
     </div>
+</div>
 
 @*---Content---*@
 <div class="col-md-9">
@@ -120,32 +112,36 @@
             @*---Mobile Number---*@
             <div class="row">
                 <div class="col-md-12">
-                    <strong>Phone Number</strong> 
+                    <strong>Phone Number</strong>
                 </div>
                 <div class="col-md-12">
                     @if (Model.PhoneNumberConfirmed)
                     {
                         <p>Your mobile number @Model.PhoneNumber is verfied</p>
-                    }else
+                    }
+                    else
                     {
-                        <p>Make it easier to communicate with a verified phone number. We’ll send you a code by SMS or read it to you over the phone. 
-                        Enter the code below to confirm that you’re the person on the other end.</p>
+                        <p>
+                            Make it easier to communicate with a verified phone number. We’ll send you a code by SMS or read it to you over the phone.
+                            Enter the code below to confirm that you’re the person on the other end.
+                        </p>
                         <br />
                         if (Model.PhoneNumber != null)
-                         {
-                             <p>Your mobile number @Model.PhoneNumber is not verified.Please click <a class="linkVerifyMobileNumber">here</a> to verify.</p>
-                         }else
-                         {
-                             <p>You have not provided any mobile number yet. Please <a class="linkVerifyMobileNumber">here</a>to add a mobile number.</p>
-                         }
+                        {
+                            <p>Your mobile number @Model.PhoneNumber is not verified.Please click <a class="linkVerifyMobileNumber">here</a> to verify.</p>
+                        }
+                        else
+                        {
+                            <p>You have not provided any mobile number yet. Please <a class="linkVerifyMobileNumber">here</a>to add a mobile number.</p>
+                        }
                     }
                 </div>
-                
+
             </div>
             @*---Email ID---*@
             <div class="row row-padding-top-5">
                 <div class="col-md-12">
-                  <strong>Email Address</strong>  
+                    <strong>Email Address</strong>
                 </div>
                 <div class="col-md-12">
                     @if (Model.EmailConfirmed)
@@ -155,24 +151,24 @@
                     else
                     {
                         <p>
-                            Your email id @Model.Email is not verified yet.Please click <a  id="linkVerifyEmail">here</a> to verify your email id.<br />
+                            Your email id @Model.Email is not verified yet.Please click <a id="linkVerifyEmail">here</a> to verify your email id.<br />
                             You will recieve message from <b><i>LockYourStay</i></b>.With just one click on the link given in the mail you can verify.
                             <br />
                             <br />
-                            Cant find our message? Please check spam folder or <a  id="linkVerifyEmail">Resend Confirmtion Email</a>
-                         </p>
+                            Cant find our message? Please check spam folder or <a id="linkVerifyEmail">Resend Confirmtion Email</a>
+                        </p>
                     }
-                   
+
                 </div>
-               
+
             </div>
             @*---Change Password---*@
             <div class="row row-padding-top-5">
                 <div class="col-md-12">
-                   <strong>Password</strong> 
+                    <strong>Password</strong>
                 </div>
                 <div class="col-md-9">
-                    To change your current password please click <a  id="linkChangePassword">here</a>
+                    To change your current password please click <a id="linkChangePassword">here</a>
                 </div>
             </div>
         </div>
@@ -210,7 +206,7 @@
         $("#divChangePassword").modal('show');
     });
 
-   
+
     function OnPasswordChange() {
         $("#divChangePassword").modal('hide');
         alert(@ViewBag.StatusMessage);
@@ -223,13 +219,14 @@
             $("#txtPhoneNumberModal").css("border", "none");
 
             $("#spn-phone-verification").html("Please wait...")
-
+           
             $.ajax({
                 url: GenerateVerificationCodeUrl,
                 cache: false,
-                data: { 'PhoneNumber': $("#txtPhoneNumberModal").val(), "UserName": $("#hdnUserName").val() },
+                data: { 'PhoneNumber': $("#txtPhoneNumberModal").val() },
                 type: 'POST',
                 success: function (responseData) {
+                    console.log(responseData);
                     if (responseData == "invalid")
                         $("#spn-phone-verification").html("Phone number already exists, <a onclick='fnGenerateVerificationCode(this);' style='cursor:pointer;color:rgb(232, 163, 65);'>try again</a>.");
                     else if (responseData == "exception_logged")

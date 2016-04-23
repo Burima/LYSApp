@@ -1,23 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="LYSAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Apartments">
-    <Key>
-      <PropertyRef Name="ApartmentID" />
-    </Key>
-    <Property Name="ApartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ApartmentName" Type="varchar" MaxLength="50" />
-    <Property Name="HouseNo" Type="varchar" MaxLength="50" />
-    <Property Name="Description" Type="varchar" MaxLength="500" />
-    <Property Name="Status" Type="bit" />
-    <Property Name="CreatedOn" Type="datetime" />
-    <Property Name="LastUpdatedOn" Type="datetime" />
-    <Property Name="IsDeleted" Type="bit" />
-    <Property Name="DeletedBy" Type="int" />
-    <Property Name="DeletedOn" Type="datetime" />
-    <Property Name="CreatedBy" Type="bigint" />
-    <Property Name="PGDetailID" Type="int" Nullable="false" />
-    <Property Name="IsDefault" Type="bit" Nullable="false" />
-  </EntityType>
   <EntityType Name="Areas">
     <Key>
       <PropertyRef Name="AreaID" />
@@ -42,23 +24,6 @@
     <Property Name="StatusUpdateDate" Type="datetime" />
     <Property Name="BookingFromDate" Type="datetime" />
     <Property Name="BookingToDate" Type="datetime" />
-  </EntityType>
-  <EntityType Name="Blocks">
-    <Key>
-      <PropertyRef Name="BlockID" />
-    </Key>
-    <Property Name="BlockID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BlockName" Type="varchar" MaxLength="50" />
-    <Property Name="Description" Type="varchar" MaxLength="500" />
-    <Property Name="Status" Type="bit" />
-    <Property Name="ApartmentID" Type="int" />
-    <Property Name="CreatedOn" Type="datetime" />
-    <Property Name="LastUpdatedOn" Type="datetime" />
-    <Property Name="isDeleted" Type="bit" />
-    <Property Name="DeletedBy" Type="int" />
-    <Property Name="DeletedOn" Type="datetime" />
-    <Property Name="CreatedBy" Type="bigint" />
-    <Property Name="IsDefault" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Cities">
     <Key>
@@ -157,8 +122,8 @@
     <Property Name="Gender" Type="int" />
     <Property Name="NoOfBathrooms" Type="int" />
     <Property Name="NoOfBalconnies" Type="int" />
-    <Property Name="BlockID" Type="int" Nullable="false" />
     <Property Name="HouseNo" Type="varchar" MaxLength="50" />
+    <Property Name="PGDetailID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="OwnerPropertyListingRequests">
     <Key>
@@ -323,6 +288,7 @@
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
     <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="PhoneVerificationCode" Type="nvarchar" MaxLength="6" />
   </EntityType>
   <Association Name="FK__HouseAmenities__HouseID">
     <End Role="Houses" Type="Self.Houses" Multiplicity="1" />
@@ -333,18 +299,6 @@
       </Principal>
       <Dependent Role="HouseAmenities">
         <PropertyRef Name="HouseID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Apartments_PGDetailID">
-    <End Role="PGDetails" Type="Self.PGDetails" Multiplicity="1" />
-    <End Role="Apartments" Type="Self.Apartments" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PGDetails">
-        <PropertyRef Name="PGDetailID" />
-      </Principal>
-      <Dependent Role="Apartments">
-        <PropertyRef Name="PGDetailID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -381,18 +335,6 @@
       </Principal>
       <Dependent Role="Beds">
         <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Blocks_ApartmentID">
-    <End Role="Apartments" Type="Self.Apartments" Multiplicity="0..1" />
-    <End Role="Blocks" Type="Self.Blocks" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Apartments">
-        <PropertyRef Name="ApartmentID" />
-      </Principal>
-      <Dependent Role="Blocks">
-        <PropertyRef Name="ApartmentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -476,15 +418,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Houses_BlockID">
-    <End Role="Blocks" Type="Self.Blocks" Multiplicity="1" />
+  <Association Name="FK_Houses_PGDetailID">
+    <End Role="PGDetails" Type="Self.PGDetails" Multiplicity="1" />
     <End Role="Houses" Type="Self.Houses" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Blocks">
-        <PropertyRef Name="BlockID" />
+      <Principal Role="PGDetails">
+        <PropertyRef Name="PGDetailID" />
       </Principal>
       <Dependent Role="Houses">
-        <PropertyRef Name="BlockID" />
+        <PropertyRef Name="PGDetailID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -597,10 +539,8 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="LYSAdminModelStoreContainer">
-    <EntitySet Name="Apartments" EntityType="Self.Apartments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Beds" EntityType="Self.Beds" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Blocks" EntityType="Self.Blocks" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HouseAmenities" EntityType="Self.HouseAmenities" Schema="dbo" store:Type="Tables" />
@@ -622,10 +562,6 @@
       <End Role="Houses" EntitySet="Houses" />
       <End Role="HouseAmenities" EntitySet="HouseAmenities" />
     </AssociationSet>
-    <AssociationSet Name="FK_Apartments_PGDetailID" Association="Self.FK_Apartments_PGDetailID">
-      <End Role="PGDetails" EntitySet="PGDetails" />
-      <End Role="Apartments" EntitySet="Apartments" />
-    </AssociationSet>
     <AssociationSet Name="FK_Areas_CityID" Association="Self.FK_Areas_CityID">
       <End Role="Cities" EntitySet="Cities" />
       <End Role="Areas" EntitySet="Areas" />
@@ -637,10 +573,6 @@
     <AssociationSet Name="FK_Beds_UserID" Association="Self.FK_Beds_UserID">
       <End Role="Users" EntitySet="Users" />
       <End Role="Beds" EntitySet="Beds" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Blocks_ApartmentID" Association="Self.FK_Blocks_ApartmentID">
-      <End Role="Apartments" EntitySet="Apartments" />
-      <End Role="Blocks" EntitySet="Blocks" />
     </AssociationSet>
     <AssociationSet Name="FK_Cities_CountryID" Association="Self.FK_Cities_CountryID">
       <End Role="Countries" EntitySet="Countries" />
@@ -666,8 +598,8 @@
       <End Role="Houses" EntitySet="Houses" />
       <End Role="HouseImages" EntitySet="HouseImages" />
     </AssociationSet>
-    <AssociationSet Name="FK_Houses_BlockID" Association="Self.FK_Houses_BlockID">
-      <End Role="Blocks" EntitySet="Blocks" />
+    <AssociationSet Name="FK_Houses_PGDetailID" Association="Self.FK_Houses_PGDetailID">
+      <End Role="PGDetails" EntitySet="PGDetails" />
       <End Role="Houses" EntitySet="Houses" />
     </AssociationSet>
     <AssociationSet Name="FK_PGDetails_AreaID" Association="Self.FK_PGDetails_AreaID">

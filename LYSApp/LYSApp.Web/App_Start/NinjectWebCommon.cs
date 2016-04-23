@@ -13,6 +13,7 @@ namespace LYSApp.Web.App_Start
     using LYSApp.Domain.UserManagement;
     using LYSApp.Domain.OwnerPropertyListingRequestManagement;
     using LYSApp.Domain.NotificationManagement;
+    using LYSApp.Domain.SMSNotificationManagement;    
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -63,11 +64,14 @@ namespace LYSApp.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+           
+            //domain
             kernel.Bind<IUserManagement>().To<UserManagement>();
             kernel.Bind<IOwnerPropertyListingRequestManagement>().To<OwnerPropertyListingRequestManagement>();
 
             //notification management
-            kernel.Bind<IMandrillMailer>().To<MandrillMailer>();            
+            kernel.Bind<IMandrillMailer>().To<MandrillMailer>();
+           // kernel.Bind<ISMSNotificationManagement>().To<SMSNotificationManagement>();
         }        
     }
 }

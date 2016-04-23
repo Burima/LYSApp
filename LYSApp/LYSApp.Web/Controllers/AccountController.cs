@@ -24,20 +24,20 @@ namespace LYSApp.Web.Controllers
     public class AccountController : Controller
     {
         private UserManager _userManager;
-        private ISMSNotificationManagement smsNotificationManagement;
+        private SMSNotificationManagement smsNotificationManagement=new SMSNotificationManagement();
         AccountViewModel accountViewModel = new AccountViewModel();
         MandrillMailer mandrillMailer = new MandrillMailer();
         TripleDES tripleDES = new TripleDES();
 
-
-        public AccountController(SMSNotificationManagement smsNotificationManagement)
+        //don't remove parameterless constructor
+        public AccountController()
         {
-            this.smsNotificationManagement = smsNotificationManagement;
-        }
 
+        }
         public AccountController(UserManager userManager)
         {
             UserManager = userManager;
+            //this.smsNotificationManagement = new SMSNotificationManagement();
         }
 
         public UserManager UserManager
@@ -712,9 +712,9 @@ namespace LYSApp.Web.Controllers
         }
 
         [HttpPost]
-        public string GenerateVerificationCode(string PhoneNumber)
+        public ActionResult GeneratePhoneVerificationCode(string PhoneNumber)
         {
-            return smsNotificationManagement.SendPhoneVerificationCode(PhoneNumber, SessionManager.GetSessionUser().Id);
+            return Content(smsNotificationManagement.SendPhoneVerificationCode(PhoneNumber, SessionManager.GetSessionUser().Id));
         }
 
 

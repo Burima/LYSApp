@@ -81,7 +81,7 @@
         $("#photoFilePath").html(this.value.split('\\').pop());
         $("#photoFilePath").attr("title", this.value.split('\\').pop());
         $("#hdnFileName").val('@Model.UserID' + '_' + this.value.split('\\').pop());
-
+        
     };
     </script>
 <script src='@Url.Content("~/Scripts/Custom/User/ViewProfile.js")'></script>
