@@ -17,6 +17,7 @@ using System.Configuration;
 using LYSApp.Web.Services.Common;
 using LYSApp.Web.Services;
 using LYSApp.Domain.SMSNotificationManagement;
+using LYSApp.Domain.PhoneVerificationCodeManagement;
 
 namespace LYSApp.Web.Controllers
 {
@@ -25,6 +26,7 @@ namespace LYSApp.Web.Controllers
     {
         private UserManager _userManager;
         private SMSNotificationManagement smsNotificationManagement=new SMSNotificationManagement();
+        private PhoneVerificationCodeManagement phoneVerificationCodeManagement = new PhoneVerificationCodeManagement();
         AccountViewModel accountViewModel = new AccountViewModel();
         MandrillMailer mandrillMailer = new MandrillMailer();
         TripleDES tripleDES = new TripleDES();
@@ -714,9 +716,28 @@ namespace LYSApp.Web.Controllers
         [HttpPost]
         public ActionResult GeneratePhoneVerificationCode(string PhoneNumber)
         {
+            //convert to Indian number by adding ISD code
+            PhoneNumber = "+91" + PhoneNumber;
             return Content(smsNotificationManagement.SendPhoneVerificationCode(PhoneNumber, SessionManager.GetSessionUser().Id));
         }
 
+        [HttpPost]
+        public ActionResult VerifyPhoneNumber(string PhoneNumber, string VerificationCode)
+        {
+            var phoneVerificationCode = phoneVerificationCodeManagement.GetPhoneVerificationCode(PhoneNumber, VerificationCode, SessionManager.GetSessionUser().Id);
+            if (phoneVerificationCode != null)
+            {
+                //update user
+                var user = SessionManager.GetSessionUser();
+                user.PhoneNumberConfirmed = true;
+                UserManager.Update(user);               
+                return Content("Success");
+            }
+            else
+            {
+                return Content("Failed");
+            }
+        }
 
 
         #region Helpers

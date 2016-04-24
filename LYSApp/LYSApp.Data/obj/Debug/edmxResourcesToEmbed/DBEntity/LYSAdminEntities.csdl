@@ -319,6 +319,7 @@
     <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_UserID" FromRole="Users" ToRole="UserDetails" />
     <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_UserLogin_dbo_User_UserID" FromRole="Users" ToRole="UserLogins" />
     <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
+    <NavigationProperty Name="PhoneVerificationCodes" Relationship="LYSAdminModel.DF_PhoneVerificationCode_UserID" FromRole="User" ToRole="PhoneVerificationCode" />
   </EntityType>
   <Association Name="FK_Areas_CityID">
     <End Role="Cities" Type="Self.City" Multiplicity="0..1" />
@@ -639,5 +640,35 @@
       <End Role="Roles" EntitySet="Roles" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
+    <EntitySet Name="PhoneVerificationCodes" EntityType="LYSAdminModel.PhoneVerificationCode" />
+    <AssociationSet Name="DF_PhoneVerificationCode_UserID" Association="LYSAdminModel.DF_PhoneVerificationCode_UserID">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PhoneVerificationCode" EntitySet="PhoneVerificationCodes" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="PhoneVerificationCode">
+    <Key>
+      <PropertyRef Name="PhoneVerificationCodeID" />
+    </Key>
+    <Property Name="PhoneVerificationCodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="VerificationCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Sid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsValid" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="User" Relationship="LYSAdminModel.DF_PhoneVerificationCode_UserID" FromRole="PhoneVerificationCode" ToRole="User" />
+  </EntityType>
+  <Association Name="DF_PhoneVerificationCode_UserID">
+    <End Type="LYSAdminModel.User" Role="User" Multiplicity="1" />
+    <End Type="LYSAdminModel.PhoneVerificationCode" Role="PhoneVerificationCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="PhoneVerificationCode">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -307,5 +307,18 @@
         <ScalarProperty Name="UserID" ColumnName="UserID" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="PhoneVerificationCodes">
+      <EntityTypeMapping TypeName="LYSAdminModel.PhoneVerificationCode">
+        <MappingFragment StoreEntitySet="PhoneVerificationCodes">
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="VerificationCode" ColumnName="VerificationCode" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PhoneVerificationCodeID" ColumnName="PhoneVerificationCodeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

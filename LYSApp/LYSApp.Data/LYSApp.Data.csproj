@@ -99,6 +99,9 @@
     <Compile Include="DBEntity\PGReview.cs">
       <DependentUpon>LYSAdminEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntity\PhoneVerificationCode.cs">
+      <DependentUpon>LYSAdminEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntity\Role.cs">
       <DependentUpon>LYSAdminEntities.tt</DependentUpon>
     </Compile>

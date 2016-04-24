@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">+91</div>
-                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "required form-control ", maxlength = "20", placeholder = "Phone Number", tabIndex = "1", @id = "txtPhoneNumberModal" })
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "required form-control ", maxlength = "20", placeholder = "Phone Number", tabIndex = "1", @id = "txtPhoneNumberModal", @style = "border:1px solid #dfdfdf !important;" })
                         </div>
                     </div>
                 <div class="form-group">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <input class="btn btn-primary" id="btnVerifyMobile" type="button" aria-hidden="true" value="Verify" />
+                <input class="btn btn-primary" id="btnVerifyPhoneNumber" type="button" aria-hidden="true" value="Verify" />
             </div>
         </div>
     </div>
@@ -128,11 +128,11 @@
                         <br />
                         if (Model.PhoneNumber != null)
                         {
-                            <p>Your mobile number @Model.PhoneNumber is not verified.Please click <a class="linkVerifyMobileNumber">here</a> to verify.</p>
+                            <p>Your mobile number @Model.PhoneNumber is not verified.Please click <a class="linkVerifyMobileNumber"><strong>here</strong></a> to verify.</p>
                         }
                         else
                         {
-                            <p>You have not provided any mobile number yet. Please <a class="linkVerifyMobileNumber">here</a>to add a mobile number.</p>
+                            <p>You have not provided any mobile number yet. Please <a class="linkVerifyMobileNumber"><strong>here</strong></a>to add a mobile number.</p>
                         }
                     }
                 </div>
@@ -151,11 +151,11 @@
                     else
                     {
                         <p>
-                            Your email id @Model.Email is not verified yet.Please click <a id="linkVerifyEmail">here</a> to verify your email id.<br />
+                            Your email id @Model.Email is not verified yet.Please click <a id="linkVerifyEmail"><strong>here</strong></a> to verify your email id.<br />
                             You will recieve message from <b><i>LockYourStay</i></b>.With just one click on the link given in the mail you can verify.
                             <br />
                             <br />
-                            Cant find our message? Please check spam folder or <a id="linkVerifyEmail">Resend Confirmtion Email</a>
+                            Cant find our message? Please check spam folder or <a id="linkVerifyEmail"><strong>Resend Confirmtion Email</strong></a>
                         </p>
                     }
 
@@ -168,7 +168,7 @@
                     <strong>Password</strong>
                 </div>
                 <div class="col-md-9">
-                    To change your current password please click <a id="linkChangePassword">here</a>
+                    To change your current password please click <a id="linkChangePassword"><strong>here</strong></a>
                 </div>
             </div>
         </div>
@@ -244,6 +244,52 @@
         else {
             $("#txtPhoneNumberModal").css("border", "solid 1px red");
 
+        }
+    }
+
+    $('#btnVerifyPhoneNumber').click(function () {
+        fnVerifyPhone(this);
+    });
+
+    //Verify Phone Number 
+    function fnVerifyPhone(e) {
+        if ($("#txtPhoneNumberModal").val() != "") {
+            if ($("#txtVerificationCodeModal").val() != "") {
+                var jmodel = { PhoneNumber: $("#txtPhoneNumberModal").val(), VerificationCode: $("#txtVerificationCodeModal").val() };
+                $.ajax({
+                    url: VerifyPhoneNumberUrl,
+                    type: 'POST',
+                    data: jmodel,
+                    dataType: 'html',
+                    success: function (responseData) {
+                        if (responseData.toUpperCase() == "SUCCESS") {
+                            $('#login-alert').html("Thank You For Verifying Your Phone Number");
+                            $('#login-alert').show();
+                            setTimeout(function () {
+                                location.href = SummaryUrl;
+                            }, 3000);
+
+                        }
+                        else if (responseData.toUpperCase() == "FAILED") {
+                            $('#login-alert').html("Failed! Invalid Verification Code.");
+                            $('#login-alert').show();
+                        }
+
+                    },
+                    error: function (response) {
+                        $('#login-alert').html("Error! Please Try Again");
+                        $('#login-alert').show();
+                    }
+                });
+
+            }
+            else {
+                $("#txtVerificationCodeModal").css("border", "solid 1px red");
+            }
+
+        }
+        else {
+            $("#txtPhoneNumberModal").css("border", "solid 1px red");
         }
     }
 </script>

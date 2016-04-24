@@ -24,6 +24,7 @@ namespace LYSApp.Data.DBEntity
             this.UserDetails = new HashSet<UserDetail>();
             this.UserLogins = new HashSet<UserLogin>();
             this.Roles = new HashSet<Role>();
+            this.PhoneVerificationCodes = new HashSet<PhoneVerificationCode>();
         }
     
         public long UserID { get; set; }
@@ -57,5 +58,6 @@ namespace LYSApp.Data.DBEntity
         public virtual ICollection<UserDetail> UserDetails { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<PhoneVerificationCode> PhoneVerificationCodes { get; set; }
     }
 }

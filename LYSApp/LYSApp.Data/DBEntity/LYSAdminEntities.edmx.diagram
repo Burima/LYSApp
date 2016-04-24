@@ -42,6 +42,8 @@
         <AssociationConnector Association="LYSAdminModel.FK_UserDetails_UserID" ManuallyRouted="false" />
         <AssociationConnector Association="LYSAdminModel.FK_dbo_UserLogin_dbo_User_UserID" ManuallyRouted="false" />
         <AssociationConnector Association="LYSAdminModel.UserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LYSAdminModel.PhoneVerificationCode" Width="1.5" PointX="5.25" PointY="29.25" />
+        <AssociationConnector Association="LYSAdminModel.DF_PhoneVerificationCode_UserID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

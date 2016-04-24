@@ -86,6 +86,7 @@
     <Compile Include="HouseAmenity.cs" />
     <Compile Include="HouseImage.cs" />
     <Compile Include="PGReview.cs" />
+    <Compile Include="PhoneVerificationCode.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="TransactionStatus.cs" />

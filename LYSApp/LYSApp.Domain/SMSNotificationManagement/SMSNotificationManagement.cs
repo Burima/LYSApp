@@ -16,45 +16,49 @@ namespace LYSApp.Domain.SMSNotificationManagement
         private readonly string _AuthToken;
         private readonly string _Sendnumber;
         private IUnitOfWork unitOfWork = null;
-        private IBaseRepository<Data.DBEntity.User> userRepository = null;
+        private IBaseRepository<Data.DBEntity.PhoneVerificationCode> phoneVerificationCodeRepository = null;
         public SMSNotificationManagement()
         {
             _AccountSid = ConfigurationManager.AppSettings["Twilio:AccountSID"];
             _AuthToken = ConfigurationManager.AppSettings["Twilio:AuthToken"];
             _Sendnumber = ConfigurationManager.AppSettings["Twilio:SendNumber"];
             unitOfWork = new UnitOfWork();
-            userRepository = new BaseRepository<Data.DBEntity.User>(unitOfWork);//Initializing userRepository through BaseRepository
+            phoneVerificationCodeRepository = new BaseRepository<Data.DBEntity.PhoneVerificationCode>(unitOfWork);//Initializing userRepository through BaseRepository
         }
+
+        //need to move this to Facade after MVP2
+        //due to short span of time hacked it here
         public string SendPhoneVerificationCode(string PhoneNumber,long UserID)
         {
             try
             {
                     // Step 1:
-                    string guid = Guid.NewGuid().ToString("N").Substring(0, 6);
+                    string guid = Guid.NewGuid().GetHashCode().ToString().Substring(0, 6);
 
                     var twilio = new TwilioRestClient(_AccountSid, _AuthToken);
                     var message = twilio.SendSmsMessage(_Sendnumber, PhoneNumber, "Ahoy from Lockyourstay! Your Phone verification code is " + guid +".");
                     string sId = message.Sid;
 
-                    // Step 2:
-                    var usersHavingSamePhoneNumber = GetUsersByPhoneNumber(PhoneNumber);
-                    if (usersHavingSamePhoneNumber != null && usersHavingSamePhoneNumber.Count>0)
+                    // Step 2: Make all the valid phone number as invail which matches the incoming phone number
+                    var PhoneNumbers = phoneVerificationCodeRepository.Where(x => x.PhoneNumber == PhoneNumber && x.IsValid == true && x.UserID==UserID).ToList();
+                    if (PhoneNumbers != null && PhoneNumbers.Count > 0)
                     {
-                        foreach (var user in usersHavingSamePhoneNumber)
+                        foreach (var phoneNumber in PhoneNumbers)
                         {
-                            //user.PhoneNumber = null;
-                            user.PhoneNumberConfirmed = false;
-                            UpdateUser(user);
+                            phoneNumber.IsValid = false;
+                            phoneVerificationCodeRepository.Update(phoneNumber);
                         }
                     }
 
-                    // Step 3:   Update User table with new phone number and verification code         
-                    var dbUser = userRepository.Get(x => x.UserID == UserID).FirstOrDefault();
-                    dbUser.PhoneNumber = PhoneNumber;
-                    dbUser.PhoneVerificationCode = guid;
-                    UpdateUser(dbUser);
-
-                    //Check User phonenumber is available for someother users
+                    // Step 3:  insert phone verification code in db        
+                    var dbPhoneVerificationCode = new Data.DBEntity.PhoneVerificationCode();
+                    dbPhoneVerificationCode.PhoneNumber = PhoneNumber;
+                    dbPhoneVerificationCode.VerificationCode = guid;
+                    dbPhoneVerificationCode.IsValid = true;
+                    dbPhoneVerificationCode.UserID = UserID;
+                    dbPhoneVerificationCode.CreatedOn = DateTime.Now;
+                    dbPhoneVerificationCode.Sid = sId;
+                    phoneVerificationCodeRepository.Insert(dbPhoneVerificationCode);                  
 
                     return sId;
                 
@@ -66,18 +70,18 @@ namespace LYSApp.Domain.SMSNotificationManagement
             }
         }
 
-        public IList<Data.DBEntity.User> GetUsersByPhoneNumber(string PhoneNumber)
-        {
-            return userRepository.Get(x => x.PhoneNumber == PhoneNumber).ToList();
-        }
+        //public IList<Data.DBEntity.User> GetUsersByPhoneNumber(string PhoneNumber)
+        //{
+        //    return userRepository.Get(x => x.PhoneNumber == PhoneNumber).ToList();
+        //}
 
-        //update user from management only
-        public int UpdateUser(Data.DBEntity.User user)
-        {
-            //getting the lates data from DB
-            userRepository.Update(user);
+        ////update user from management only
+        //public int UpdateUser(Data.DBEntity.User user)
+        //{
+        //    //getting the lates data from DB
+        //    userRepository.Update(user);
 
-            return unitOfWork.SaveChanges();
-        }
+        //    return unitOfWork.SaveChanges();
+        //}
     }
 }

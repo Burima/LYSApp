@@ -168,6 +168,18 @@
     <Property Name="CommentTime" Type="datetime" />
     <Property Name="PGDetailID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="PhoneVerificationCodes">
+    <Key>
+      <PropertyRef Name="PhoneVerificationCodeID" />
+    </Key>
+    <Property Name="PhoneVerificationCodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="VerificationCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Sid" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsValid" Type="bit" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="Roles">
     <Key>
       <PropertyRef Name="RoleID" />
@@ -290,6 +302,18 @@
     <Property Name="CreatedBy" Type="bigint" />
     <Property Name="PhoneVerificationCode" Type="nvarchar" MaxLength="6" />
   </EntityType>
+  <Association Name="DF_PhoneVerificationCode_UserID">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="PhoneVerificationCodes" Type="Self.PhoneVerificationCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="PhoneVerificationCodes">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__HouseAmenities__HouseID">
     <End Role="Houses" Type="Self.Houses" Multiplicity="1" />
     <End Role="HouseAmenities" Type="Self.HouseAmenities" Multiplicity="*" />
@@ -549,6 +573,7 @@
     <EntitySet Name="OwnerPropertyListingRequests" EntityType="Self.OwnerPropertyListingRequests" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PGDetails" EntityType="Self.PGDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PGReviews" EntityType="Self.PGReviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhoneVerificationCodes" EntityType="Self.PhoneVerificationCodes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
@@ -558,6 +583,10 @@
     <EntitySet Name="UserLogins" EntityType="Self.UserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="DF_PhoneVerificationCode_UserID" Association="Self.DF_PhoneVerificationCode_UserID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PhoneVerificationCodes" EntitySet="PhoneVerificationCodes" />
+    </AssociationSet>
     <AssociationSet Name="FK__HouseAmenities__HouseID" Association="Self.FK__HouseAmenities__HouseID">
       <End Role="Houses" EntitySet="Houses" />
       <End Role="HouseAmenities" EntitySet="HouseAmenities" />
