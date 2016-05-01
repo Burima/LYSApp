@@ -130,3 +130,11 @@
     background: url(../../../Images/signup-lite-dropdown.png) right 7px top 12px no-repeat #fff;
 }
 /*end search form*/
+
+/*-------------------- responsive issue reported by Raquib ------------------------------------------- */
+@media all and (min-width:0px) and (max-width: 320px) {
+  .s-main{
+      font-size: 16px !important;
+    line-height: 18px !important;
+  }
+}
