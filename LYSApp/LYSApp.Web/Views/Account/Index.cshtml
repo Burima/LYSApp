@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Home";   
 }
-@*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">*@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 @Styles.Render("~/Content/index")
 
 <!-- Hero -->
@@ -28,7 +28,7 @@
     </div>
 
    <!-- Search -->
-   @*@Html.Partial("_SearchPartial", new LYSApp.Model.SearchViewModel {AreaID=0})*@
+   @Html.Partial("_SearchPartial", new LYSApp.Model.SearchViewModel {AreaID=0})
    <!-- end Search -->
 </div> <!-- End Hero-->
 
@@ -289,12 +289,12 @@
 
 <!-- End Main Content -->
 @section scripts{
-    @*<script>
+    <script>
     var getAreaListURL = '@Url.Action("getArea", "Search")';
     var searchURL = '@Url.Action("getHouses", "Search")';
-    </script>*@
-    @*<script src='@Url.Content("~/Scripts/jquery-ui.min.js")'></script>*@
-    @*<script>
+    </script>
+    <script src='@Url.Content("~/Scripts/jquery-ui.min.js")'></script>
+    <script>
         $("#txtArea").autocomplete({
             source: function (request, response) {
 
@@ -305,7 +305,9 @@
                         term: request.term
                     },
                     success: function (res) {
-                       res = JSON.parse(res);
+                        //alert(res);
+                        res = JSON.parse(res);
+                        
                        return response($.map(res, function (data, id) {
                             return {
                                 label: data.AreaName + "," + data.CityName,
@@ -342,9 +344,9 @@
                 }
             })
 
-        });
-    </script>*@
+        });*@
+    </script>
 
-@*<script src='@Url.Content("~/Scripts/Shared/search.js")'></script>*@
+<script src='@Url.Content("~/Scripts/Shared/search.js")'></script>
      
 }

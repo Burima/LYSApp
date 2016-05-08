@@ -10,10 +10,10 @@ namespace LYSApp.Web
     {
         public static void GetStaticContents()
         {
-            //StaticContentManagement staticContentManagement = new StaticContentManagement();
+            StaticContentManagement staticContentManagement = new StaticContentManagement();
             //storing all Cities and Areas in Application variable
-            //HttpContext.Current.Application["Cities"] = staticContentManagement.GetAllCities();
-            //HttpContext.Current.Application["Areas"] = staticContentManagement.GetAllAreas();
+            HttpContext.Current.Application["Cities"] = staticContentManagement.GetAllCities();
+            HttpContext.Current.Application["Areas"] = staticContentManagement.GetAllAreas();
         }
 
     }
